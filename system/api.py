@@ -1,6 +1,6 @@
-from baseline import generator_factory
+from system.baseline import generator_factory
 from system.cross_validation import cross_validate
-from system.reflection.py import reflect
+from system.reflection import reflect
 from typing import Union, Any
 RUN_TYPE = ["baseline", "cross_validation", "reflection"]
 
@@ -24,6 +24,7 @@ def run_pipeline(models: Union[str, list[str], dict[str, Any]], context: str, ru
         if not isinstance(models, str):
             raise ValueError("baseline requires a single model name as string")
         generator = generator_factory(models, verbose)
+        # TODO GV: there is a mismatch between the inputs here and the expected inputs from the __call__ of the baseline generator
         results, stats = generator(context)
         return results, stats
     elif run_type == "cross_validation":
