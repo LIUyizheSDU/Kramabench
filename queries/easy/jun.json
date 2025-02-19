@@ -1,0 +1,29 @@
+[
+    {
+        "query": " Based on the charges associated with the Allergan acquisition integration plan, what was the total cost incurred by the company in 2023, and how does it compare to the costs in 2022?",
+        "answer": "2023 charges are lower than 2022 charges by $251 millions.",
+        "tags": [
+            "Factual"
+        ],
+        "data_sources": [ "" ],
+        "data_modalities": [ "" ],
+        "subqueries": [{
+            "query": "What were the total charges associated with the Allergan acquisition integration plan in 2023?",
+            "answer": "The total charges in 2023 were $288 millions",
+            "tags": [
+                "Factual"
+            ],
+            "data_sources": [ "" ],
+            "data_modalities": [ "" ],
+        },
+        {
+            "query": "What were the total charges associated with the Allergan acquisition integration plan in 2023?",
+            "answer": "The total charges in 2022 were $539 millions",
+            "tags": [
+                "Factual"
+            ],
+            "data_sources": [ "" ],
+            "data_modalities": [ "" ]
+        }]
+    }
+]
