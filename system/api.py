@@ -1,5 +1,6 @@
 from baseline import generator_factory
 from system.cross_validation import cross_validate
+from system.reflection.py import reflect
 from typing import Union, Any
 RUN_TYPE = ["baseline", "cross_validation", "reflection"]
 
@@ -28,7 +29,7 @@ def run_pipeline(models: Union[str, list[str], dict[str, Any]], context: str, ru
     elif run_type == "cross_validation":
         return cross_validate(models, context, verbose)
     elif run_type == "reflection":
-        pass
+        return reflect(models, context, verbose)
     else:
         raise ValueError(f"Invalid run type: {run_type}")
 
