@@ -6,9 +6,10 @@ import os
 from typing import Dict
 
 class System:
-    def __init__(self, system_name: str, *args, **kwargs):
+    def __init__(self, system_name: str, verbose=False, *args, **kwargs):
         self.name = system_name
         self.dataset_directory = None # TODO(user): Update me
+        self.verbose = verbose
 
     def process_dataset(self, dataset_directory: str | os.PathLike) -> None:
         """
