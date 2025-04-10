@@ -56,19 +56,28 @@ class BaselineLLMSystem(System):
         self.llm = Generator(model, verbose=self.verbose)
 
         # Initialize directories for output and intermediate files
+        if variance := kwargs.get('variance'):
+            self.variance = variance
+        else: self.variance = "one_shot" # Default variance
+        # variance has to be one_shot or few_shot
+        assert self.variance in ["one_shot", "few_shot"], f"Invalid variance: {self.variance}. Must be one_shot or few_shot."
+        
+        if verbose := kwargs.get('verbose'):
+            self.verbose = verbose
+        else: self.verbose = False # Default verbosity
+        # Set the output directory
         if output_dir := kwargs.get('output_dir'):
             self.output_dir = output_dir
-        else: self.output_dir = os.path.join(os.getcwd(), 'testresults/run1') # Default output directory
+        else: self.output_dir = os.path.join(os.getcwd(), 'testresults') # Default output directory
         self.question_output_dir = None # to be set in run()
         self.question_intermediate_dir = None # to be set in run()
     
-    def _init_output_dir(self, output_dir:str, query_id:str) -> None:
+    def _init_output_dir(self, query_id:str) -> None:
         """
         Initialize the output directory for the question.
         :param question: Question object
         """
-        self.output_dir = output_dir
-        question_output_dir = os.path.join(self.output_dir, query_id)
+        question_output_dir = os.path.join(self.output_dir, self.variance, query_id)
         if not os.path.exists(question_output_dir):
             os.makedirs(question_output_dir)
         self.question_output_dir = question_output_dir
@@ -276,7 +285,7 @@ class BaselineLLMSystem(System):
         """
         This function demonstrates a simple one-shot LLM approach to solve the LLMDS benchmark.
         """
-        self._init_output_dir(os.path.join(self.output_dir, 'one_shot'), query_id)
+        self._init_output_dir(query_id)
             
         # Generate the prompt
         prompt = self.generate_prompt(query)
@@ -306,7 +315,7 @@ class BaselineLLMSystem(System):
         """
         This function demonstrates a simple few-shot LLM approach to solve the LLMDS benchmark.
         """
-        self._init_output_dir(os.path.join(self.output_dir, 'few_shot'), query_id)
+        self._init_output_dir(query_id)
 
         # Generate the prompt
         prompt = self.generate_prompt(query)
@@ -359,7 +368,10 @@ class BaselineLLMSystem(System):
         The query should be in natural language, and the response can be in either natural language or JSON format.
         """
         # TODO: Implement the logic to handle different types of queries
-        results = self.run_few_shot(query, query_id)
+        if self.variance == "one_shot":
+            results = self.run_one_shot(query, query_id)
+        elif self.variance == "few_shot":
+            results = self.run_few_shot(query, query_id)
         return results
 
 def main():
@@ -384,7 +396,8 @@ def main():
     ]
     
     # Process each question
-    baseline_llm = BaselineLLMSystem(model="gpt-4o")
+    out_dir = os.path.join(current_dir, "../testresults/run2")
+    baseline_llm = BaselineLLMSystem(model="gpt-4o", output_dir=out_dir, variance="few_shot", verbose=True)
     # Process the dataset
     baseline_llm.process_dataset(questions[0]["dataset_directory"])
     for question in questions:
