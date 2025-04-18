@@ -1,0 +1,110 @@
+[
+    {
+        "id": "q1-ap-forecast-error",
+        "query": "What is the estimation error, in terms of MAE, of NOAA SWPC's 3-day forecast of AP from March 9, 2025 for the period March 10-12, 2025?",
+        "answer": 15.00,
+        "answer_type": "number",
+        "data_sources": [
+            "../data_local/geomag_forecast/0309geomag_forecast.txt",
+            "../data_local/geomag_forecast/0311geomag_forecast.txt",
+            "../data_local/geomag_forecast/0312geomag_forecast.txt",
+            "../data_local/geomag_forecast/0313geomag_forecast.txt"
+        ],
+        "subtasks": [
+            {"id": "q1-1", "query": "Extract forecasted Ap", "answer": "[25, 20, 12]", "answer_type": "list"},
+            {"id": "q1-2", "query": "Extract observed Ap", "answer": "[10, 10, 32]", "answer_type": "list"},
+            {"id": "q1-3", "query": "Calculate MAE", "answer": 15.00, "answer_type": "number"}
+        ]
+    },
+    {
+        "id": "q2-swarm-peak-density",
+        "query": "Calculate the ratio of peak atmospheric mass density experienced by Swarm A satellite during Feb 2014 (wu016 file) vs July 2018 (wu545 file).",
+        "answer": 7.52,
+        "answer_type": "number",
+        "data_sources": [
+            "../data_local/STORM-AI/warmup/v2/Sat_Density/swarma-wu016-20140314_to_20140317.csv",
+            "../data_local/STORM-AI/warmup/v2/Sat_Density/swarma-wu545-20180718_to_20180721.csv"
+        ],
+        "subtasks": [
+            {"id": "q2-1", "query": "Find peak density 2014", "answer": 1.329e-12, "answer_type": "number"},
+            {"id": "q2-2", "query": "Find peak density 2018", "answer": 1.767e-13, "answer_type": "number"},
+            {"id": "q2-3", "query": "Calculate ratio (Peak 2014 / Peak 2018)", "answer": 7.52, "answer_type": "number"}
+        ]
+    },
+    {
+        "id": "q3-swarm-avg-density",
+        "query": "Using Swarm Alpha satellite data, find the average atmospheric density (kg/m³) measured between 400km and 450km altitude during 2015.",
+        "answer": 8.035e-13,
+        "answer_type": "number",
+        "data_sources": [
+            "../data_local/STORM-AI/warmup/v2/wu001_to_wu715-initial_states.csv",
+            "../data_local/STORM-AI/warmup/v2/Sat_Density/swarma-*2015*.csv (multiple files)"
+        ],
+        "subtasks": [
+            {"id": "q3-1", "query": "Load initial states (altitude)", "answer": "DataFrame", "answer_type": "intermediate"},
+            {"id": "q3-2", "query": "Load and concatenate 2015 density data", "answer": "DataFrame", "answer_type": "intermediate"},
+            {"id": "q3-3", "query": "Merge data and filter altitude 400-450km", "answer": "DataFrame", "answer_type": "intermediate"},
+            {"id": "q3-4", "query": "Calculate mean density", "answer": 8.035e-13, "answer_type": "number"}
+        ]
+    },
+    {
+        "id": "q4-solar-cycle",
+        "query": "Determine the approximate period of solar activity cycles and identify the top five years of minimum and maximum activity between 1960 and 2020 using historical yearly mean sunspot numbers.",
+        "answer": {
+            "average_period_years": 11.00,
+            "maxima_years": [
+                {"year": 1968, "ssn": 150.0}, {"year": 1979, "ssn": 220.1}, {"year": 1989, "ssn": 211.1},
+                {"year": 2000, "ssn": 173.9}, {"year": 2014, "ssn": 113.3}
+            ],
+            "minima_years": [
+                {"year": 1964, "ssn": 15.0}, {"year": 1976, "ssn": 18.4}, {"year": 1986, "ssn": 14.8},
+                {"year": 1996, "ssn": 11.6}, {"year": 2008, "ssn": 4.2}
+            ]
+        },
+        "answer_type": "object",
+        "data_sources": ["../data/SILSO/SN_y_tot_V2.0.csv"],
+        "subtasks": [
+             {"id": "q4-1", "query": "Load and filter data 1960-2020", "answer": "DataFrame", "answer_type": "intermediate"},
+             {"id": "q4-2", "query": "Find maxima (peaks)", "answer": "List of years/values", "answer_type": "list"},
+             {"id": "q4-3", "query": "Find minima (troughs)", "answer": "List of years/values", "answer_type": "list"},
+             {"id": "q4-4", "query": "Calculate average period", "answer": 11.00, "answer_type": "number"}
+        ]
+    },
+    {
+        "id": "q5-maneuver-count",
+        "query": "Estimate the total count of satellite maneuvers (delta_a > 100m within 12h) for satellite 48445 during 2024 using TLE history.",
+        "answer": 20,
+        "answer_type": "number",
+        "data_sources": ["astro_q5/48445.tle"],
+        "subtasks": [
+            {"id": "q5-1", "query": "Read TLE file", "answer": "List of TLE pairs", "answer_type": "intermediate"},
+            {"id": "q5-2", "query": "Calculate semi-major axis for each epoch", "answer": "List of values/epochs", "answer_type": "intermediate"},
+            {"id": "q5-3", "query": "Iterate and detect changes exceeding threshold within time window", "answer": "List of maneuvers", "answer_type": "intermediate"},
+            {"id": "q5-4", "query": "Count detected maneuvers", "answer": 20, "answer_type": "number"}
+        ]
+    },
+    {
+        "id": "q6-starlink-decay",
+        "query": "Using TLE data fetched for Starlink satellites 58214 & 58600, calcualte the average rate of altitude decay (km/day) for the Gannon storm (May 10-13, 2024) and the preceding quiet period (May 1-4, 2024).",
+        "answer": {
+            "individual_rates": [
+                {"norad_id": "58214", "quiet_rate_km_day": 0.0193, "storm_rate_km_day": -0.0020},
+                {"norad_id": "58600", "quiet_rate_km_day": 0.0129, "storm_rate_km_day": 0.0275}
+            ],
+            "average_quiet_rate_km_day": 0.0161,
+            "average_storm_rate_km_day": 0.0128
+        },
+        "answer_type": "object",
+        "data_sources": [
+            "../data_local/space-track/58214.csv",
+            "../data_local/space-track/58214_20250418_685825603.csv",
+            "../data_local/space-track/58600.csv",
+            "../data_local/space-track/58600_20250418_2069291596.csv"
+        ],
+        "subtasks": [
+             {"id": "q6-1", "query": "Read CSV files for relevant satellites/periods", "answer": "DataFrames/Lists", "answer_type": "intermediate"},
+             {"id": "q6-2", "query": "Calculate individual quiet/storm rates", "answer": "List of rates", "answer_type": "intermediate"},
+             {"id": "q6-3", "query": "Calculate average rates", "answer": "Two numbers", "answer_type": "intermediate"}
+        ]
+    }
+]

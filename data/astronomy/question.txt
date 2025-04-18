@@ -1,10 +1,30 @@
 Easy
-1. What is the estimation error, in terms of MSE, of NOAA SWPC's 3-day forecast of AP during March 10, 2025 to March 12, 2025? Use omni_5min2025.asc as groundtruth and  (numerical)
-2. [Done] Compare and visualize the temporal variation in atmospheric mass density experienced by the two SWARM A satellite (one in Feb 2014 using swarma-wu016-20140314_to_20140317.csv and one in July 2018 using swarma-wu545-20180718_to_20180721.csv) during two distinct 3-day periods separated by several years.
+1. [Done] What is the estimation error, in terms of MSE, of NOAA SWPC's 3-day forecast of AP during March 10, 2025 to March 12, 2025? Use omni_5min2025.asc as groundtruth and  (numerical)
+    15.00
+2. [Done] Calculate the ratio of peak atmospheric mass density experienced by the two SWARM A satellite (one in Feb 2014 using swarma-wu016-20140314_to_20140317.csv and one in July 2018 using swarma-wu545-20180718_to_20180721.csv) during two distinct 3-day periods separated by several years.
+   7.5 : 1
+
 3. Using Swarm Alpha satellite data, find the average atmospheric density measured between 400km and 450km altitude during May 11, 2024 (00:00 to 23:59 UTC). (numerical)
-4. [Done] Determine the approximate period of solar activity cycles and identify the years of minimum and maximum activity between 1960 and 2020 using historical yearly mean sunspot numbers (numerical)
+    8.593e+30  kg/m³
+4. [Done] Read the solar activity cycles and identify the top five years of minimum and maximum activity between 1960 and 2020 using historical yearly mean sunspot numbers (numerical)
+    max: 
+        - 1968 (Mean SSN: 150.0)
+        - 1979 (Mean SSN: 220.1)
+        - 1989 (Mean SSN: 211.1)
+        - 2000 (Mean SSN: 173.9)
+        - 2014 (Mean SSN: 113.3)
+    min:
+        - 1964 (Mean SSN: 15.0)
+        - 1976 (Mean SSN: 18.4)
+        - 1986 (Mean SSN: 14.8)
+        - 1996 (Mean SSN: 11.6)
+        - 2008 (Mean SSN: 4.2)
+
 5. Acquire the total count of satellite maneuver in May 14 2024 for a set of starlink satellites, using TLE history.
-6. Using TLE data fetched for 3 specific Starlink satellites (provide NORAD IDs 58214, 58600, 59049), determine the average rate of altitude decay (km/day) during the Gannon storm (May 10-13, 2024) and compare it to a preceding quiet period (May 1-4, 2024). (numerical comparison)
+    20
+6. Using TLE data fetched for 2 specific Starlink satellites (provide NORAD IDs 58214, 58600), determine the average rate of altitude decay (km/day) during the Gannon storm (May 10-13, 2024) and a preceding quiet period (May 1-4, 2024) (numerical)
+    1. 58214: Quiet Rate = +0.0193 km/day, Storm Rate = -0.0020 km/day, 58600: Quiet Rate = +0.0129 km/day, Storm Rate = +0.0275 km/day. 
+    2. Average Quiet Period Rate: (+0.0193 + 0.0129) / 2 = +0.0161 km/day, Average Storm Period Rate: (-0.0020 + 0.0275) / 2 = +0.0128 km/day
 
 Hard
 
