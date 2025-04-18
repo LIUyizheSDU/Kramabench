@@ -71,18 +71,15 @@ class Success(Metric):
     def __call__(self, predicted: str, target: str):
         return int(predicted == target)
 
-def metric_factory(metric: str = None):
-    if metric == "Precision":
-        return Precision()
-    elif metric == "Recall":
-        return Recall()
-    elif metric == "F1":
-        return F1()
-    elif metric == "BLEU":
-        return BleuScore()
-    elif metric == "ROUGE":
-        return RougeScore()
-    elif metric == "Success":
-        return Success()
-    else:
-        raise ValueError(f"Metric {metric} not found")
+def metric_factory(metric_name: str):
+    metrics = {
+        "Precision": Precision,
+        "Recall": Recall,
+        "F1": F1,
+        "BLEU": BleuScore,
+        "ROUGE": RougeScore,
+        "Success": Success,
+    }
+    if metric_name not in metrics:
+        raise ValueError(f"Metric '{metric_name}' not found.")
+    return metrics[metric_name]()
