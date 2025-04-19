@@ -1,13 +1,13 @@
 import json
 import logging
-import math
-from nltk.translate.bleu_score import sentence_bleu
 import os
 import re
 from rouge_score import rouge_scorer
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
+
 
 from benchmark_api import System
+from benchmark.metrics import metric_factory
 
 class Executor:
     def __init__(
@@ -124,60 +124,38 @@ class Evaluator:
         return re.sub(r'[^a-z0-9]', '', s.lower())
 
     def evaluate_response_with_metric(self, system_response: str, target_answer: str | int | float, metric_name: str) -> float:
-        # Evaluate a response with a given metric
-        # Returns (aggregate score, [list of scores for each response item])
+        """
+        Evaluate a single system response against a target answer using the specified metric.
+
+        Args:
+            system_response (str): JSON string containing system's response.
+            target_answer (str | int | float): The expected correct answer.
+            metric_name (str): Name of the metric to use for evaluation.
+
+        Returns:
+            float: Computed score.
+        """
         try:
             system_response_dict = json.loads(system_response)
             system_answer = system_response_dict["answer"]
         except Exception as e:
             # TODO: Add verbose control flag to log the json marshalling failure and clean up trace logging
-            print(f"evaluate_response_with_metric: failed to marshal system response into json: {e}.")
-            return 0
+            print(f"evaluate_response_with_metric: failed to parse system response as JSON: {e}.")
+            return 0.0
 
-        if metric_name == "mean_relative_absolute_error":
-            try:
-                return math.abs((float(system_answer) - float(target_answer)) / float(target_answer))
-            except Exception as e:
-                logging.error(f"evaluate_answer_with_metric: mean_relative_absolute_error compute error: {e}")
-                return -1
-        elif metric_name == "mean_absolute_error":
-            try:
-                return math.abs(float(system_answer) - float(target_answer))
-            except Exception as e:
-                logging.error(f"evaluate_answer_with_metric: mean_absolute_error compute error: {e}")
-                return -1
-        elif metric_name == "mean_squared_error":
-            try:
-                return math.abs((float(system_answer) - float(target_answer)) * float(system_answer) - float(target_answer))
-            except Exception as e:
-                logging.error(f"evaluate_answer_with_metric: mean_squared_error compute error: {e}")
-                return -1
-        elif metric_name == "bleu":
-            try:
-                return sentence_bleu(target_answer.strip().split(), system_answer.strip().split())
-            except Exception as e:
-                logging.error(f"evaluate_answer_with_metric: bleu compute error: {e}")
-                return -1
-        elif metric_name == "rouge":
-            try:
-                return self.rouge_score_engine(target_answer, system_answer)[0]
-            except Exception as e:
-                logging.error(f"evaluate_answer_with_metric: bleu compute error: {e}")
-                return -1
-        elif metric_name == "llm":
-            logging.error("evaluate_answer_with_metric: llm evaluation not yet implemented")
-            return -1
-        elif metric_name == "f1":
-            logging.error("evaluate_answer_with_metric: f1 evaluation not yet implemented")
-            return -1
-        elif metric_name == "precision":
-            logging.error("evaluate_answer_with_metric: precision evaluation not yet implemented")
-            return -1
-        elif metric_name == "recall":
-            logging.error("evaluate_answer_with_metric: recall evaluation not yet implemented")
-            return -1
-        logging.error(f"evaluate_answer_with_metric: unrecognized metric {metric_name}")
-        return -1
+        # Cast system answer and target answer to strings since all metrics in the
+        # metric factory use this signature
+        system_answer = str(system_answer).strip()
+        target_answer = str(target_answer).strip()
+
+        try:
+            metric = metric_factory(metric_name)
+            score = metric(predicted=system_answer, target=target_answer)
+        except Exception as e:
+            print(f"evaluate_response_with_metric: failed to compute metric {metric_name}: {e}.")
+            score = 0.0
+
+        return score
 
     def _evaluate_result_for_task(self, response: Dict[str, Any], task: Dict[str, Any]):
         """
@@ -231,6 +209,7 @@ class Benchmark:
             workload_path: str | os.PathLike,
             verbose: bool = False
         ):
+        # Returns raw results from the system and evaluation results
         self.system.process_dataset(dataset_directory)
         executor = Executor(
             system=self.system,
@@ -239,10 +218,11 @@ class Benchmark:
             verbose=verbose
         )
         results = executor.run_workload(cache_system_output=self.cache_system_output)
+        print("Evaluating results...")
         evaluator = Evaluator(
             workload_path=workload_path,
             task_fixture_directory=self.task_fixture_directory,
             results_directory=results_directory
         )
-        evaluator.evaluat_results(results)
+        return results, evaluator.evaluate_results(results)
 
