@@ -5,7 +5,7 @@
     },
     {
         "name": "string_approximate",
-        "prompt": ["bleu", "rouge", "llm"]
+        "metrics": ["bleu", "rouge", "llm"]
     },
     {
         "name": "exact",

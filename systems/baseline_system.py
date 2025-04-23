@@ -1,5 +1,7 @@
 import sys
 sys.path.append('./')
+from typeguard import typechecked
+
 from systems.generator_util import Generator, pdf_to_text
 from benchmark.benchmark_api import System
 from utils.baseline_utils import * 
@@ -65,6 +67,7 @@ class BaselineLLMSystem(System):
         if verbose := kwargs.get('verbose'):
             self.verbose = verbose
         else: self.verbose = False # Default verbosity
+        self.debug = False
         # Set the output directory
         if output_dir := kwargs.get('output_dir'):
             self.output_dir = output_dir
@@ -164,7 +167,8 @@ class BaselineLLMSystem(System):
         prompt_fp = os.path.join(self.question_output_dir, f"prompt.txt")
         with open(prompt_fp, 'w') as f:
             f.write(prompt)
-        print(f"{self.name}: Prompt saved to {prompt_fp}")
+        if self.verbose:
+            print(f"{self.name}: Prompt saved to {prompt_fp}")
         return prompt
     
     def extract_response(self, response, try_number:int):
@@ -179,7 +183,8 @@ class BaselineLLMSystem(System):
         response_fp = os.path.join(self.question_output_dir, f"initial_response.txt")
         with open(response_fp, 'w') as f:
             f.write(response)
-        print(f"{self.name}: Response saved to {response_fp}")
+        if self.verbose:
+            print(f"{self.name}: Response saved to {response_fp}")
 
         # Assume the step-by-step plan is fixed after the first try
         if try_number == 0:
@@ -190,7 +195,8 @@ class BaselineLLMSystem(System):
             json_fp = os.path.join(self.question_output_dir, f"answer.json")
             with open(json_fp, 'w') as f:
                 f.write(json_response)
-            print(f"{self.name}: JSON response saved to {json_fp}")
+            if self.verbose:
+                print(f"{self.name}: JSON response saved to {json_fp}")
         
         # Extract the code from the response
         code = extract_code(response, pattern=r'```python(.*?)```')
@@ -199,7 +205,8 @@ class BaselineLLMSystem(System):
         code_fp = os.path.join(self.question_output_dir, '_intermediate', f"pipeline-{try_number}.py") #{question.id}-{try_number}
         with open(code_fp, 'w') as f:
             f.write(code)
-        print(f"{self.name}: Code saved to {code_fp}")
+        if self.verbose:
+            print(f"{self.name}: Code saved to {code_fp}")
 
         return json_fp, code_fp
     
@@ -272,15 +279,24 @@ class BaselineLLMSystem(System):
                 if subtask_id in output:
                     subtask['answer'] = output[subtask_id]
                 else: subtask['answer'] = "Warning: No answer found in the Python pipeline."
+        
+        overall_answer = {"system_subtasks_responses": []}
+        for step in answer:
+            if step["id"] == "main-task":
+                overall_answer |= step
+            else:
+                overall_answer["system_subtasks_responses"].append(step)
 
         # Save the updated JSON answer
         with open(json_fp, 'w') as f:
             # Clean NaN values to null for strict JSON compliance
-            answer = clean_nan(answer)
-            json.dump(answer, f, indent=4)
-        print(f"{self.name}: Updated JSON answer saved to {json_fp}")
-        return answer
+            overall_answer = clean_nan(overall_answer)
+            json.dump(overall_answer, f, indent=4)
+        if self.verbose:
+            print(f"{self.name}: Updated JSON answer saved to {json_fp}")
+        return overall_answer
     
+    @typechecked
     def run_one_shot(self, query:str, query_id:str) -> Dict[str, str | Dict | List]:
         """
         This function demonstrates a simple one-shot LLM approach to solve the LLMDS benchmark.
@@ -289,7 +305,7 @@ class BaselineLLMSystem(System):
             
         # Generate the prompt
         prompt = self.generate_prompt(query)
-        if self.verbose:
+        if self.debug:
             print(f"{self.name}: Prompt:", prompt)
 
         # Get the model's response
@@ -298,7 +314,7 @@ class BaselineLLMSystem(System):
             {"role": "user", "content": prompt}
         ]
         response = call_gpt(messages)
-        if self.verbose:
+        if self.debug:
             print(f"{self.name}: Response:", response)
 
         # Process the response
@@ -313,7 +329,8 @@ class BaselineLLMSystem(System):
 
         return answer
     
-    def run_few_shot(self, query:str, query_id:str) -> Dict[str, str | Dict | List]:
+    @typechecked
+    def run_few_shot(self, query: str, query_id: str) -> Dict[str, str | Dict | List]:
         """
         This function demonstrates a simple few-shot LLM approach to solve the LLMDS benchmark.
         """
@@ -321,7 +338,7 @@ class BaselineLLMSystem(System):
 
         # Generate the prompt
         prompt = self.generate_prompt(query)
-        if self.verbose:
+        if self.debug:
             print(f"{self.name}: Prompt:", prompt)
 
         messages=[
@@ -332,7 +349,7 @@ class BaselineLLMSystem(System):
             messages.append({"role": "user", "content": prompt})
             # Get the model's response
             response = call_gpt(messages)
-            if self.verbose:
+            if self.debug:
                 print(f"{self.name}: Response:", response)
             messages.append({"role": "assistant", "content": response})
 
@@ -365,8 +382,9 @@ class BaselineLLMSystem(System):
         for file in os.listdir(dataset_directory):
             if file.endswith(".csv"):
                 self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file), engine='python', on_bad_lines='warn')
-
-    def serve_query(self, query: str, query_id:str="default_name-0") -> dict | str:
+    
+    @typechecked
+    def serve_query(self, query: str, query_id:str="default_name-0") -> Dict:
         """
         Serve a query using the LLM.
         The query should be in natural language, and the response can be in either natural language or JSON format.
@@ -405,8 +423,7 @@ def main():
     # Process the dataset
     baseline_llm.process_dataset(questions[0]["dataset_directory"])
     for question in questions:
-        if self.verbose:
-            print(f"Processing question: {question['id']}")
+        print(f"Processing question: {question['id']}")
         # For debugging purposes, also input question.id
         response = baseline_llm.serve_query(question["query"], question["id"])
 

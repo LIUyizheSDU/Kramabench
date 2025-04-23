@@ -27,7 +27,7 @@ class System:
         """
         raise NotImplementedError("System must implement the proess_dataset method.")
     
-    def serve_query(self, query: str) -> Dict | str:
+    def serve_query(self, query: str, query_id: str) -> Dict:
         """
         `query` contains the task that the implementation is to perform in natural language
         in English. The system may be instructed to generate responses in natural language or
