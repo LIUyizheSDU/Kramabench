@@ -1,5 +1,12 @@
+import math
+
 import nltk
 from rouge_score import rouge_scorer
+
+def percentage_to_float(percentage_string):
+    cleaned_string = percentage_string.strip("%")
+    float_value = float(cleaned_string) / 100
+    return float_value
 
 class Metric:
     name = "Metric"
@@ -12,7 +19,7 @@ class Metric:
 
 
 class Accuracy(Metric):
-    name = "Accuracy"
+    name = "accuracy"
 
     def __call__(self, predicted: str, target: str):
         return 0.0
@@ -20,7 +27,7 @@ class Accuracy(Metric):
 
 
 class Precision(Metric):
-    name = "Precision"
+    name = "precision"
 
     def __call__(self, predicted: str, target: str):
         # Figure out how to compute precision of individual queries
@@ -29,7 +36,7 @@ class Precision(Metric):
 
 
 class Recall(Metric):
-    name = "Recall"
+    name = "recall"
 
     def __call__(self, predicted: str, target: str):
         return 0.0
@@ -37,15 +44,39 @@ class Recall(Metric):
 
 
 class F1(Metric):
-    name = "F1"
+    name = "f1"
 
     def __call__(self, predicted: str, target: str):
         return 0.0
         # return f1_score(predicted["answer"], target["answer"])
 
+class MeanSquaredError(Metric):
+    # This method computes the squared error. The evaluation script is responsible for aggregating.
+    name = "mean_squared_error"
+
+    def __call__(self, predicted: str | int | float, target: str | int | float):
+        # TODO: account for percentage
+        return (float(predicted) - float(target)) * (float(predicted) - float(target))
+    
+class MeanAbsoluteError(Metric):
+    # This method computes the squared error. The evaluation script is responsible for aggregating.
+    name = "mean_absolute_error"
+
+    def __call__(self, predicted: str | int | float, target: str | int | float):
+        # TODO: account for percentage
+        return abs(float(predicted) - float(target))
+
+class MeanRelativeAbsoluteError(Metric):
+    # This method computes the squared error. The evaluation script is responsible for aggregating.
+    name = "mean_relative_absolute_error"
+
+    def __call__(self, predicted: str | int | float, target: str | int | float):
+        # TODO: account for percentage
+        return abs(float(predicted) - float(target)) / float(target)
+
 
 class BleuScore(Metric):
-    name = "BLEU"
+    name = "bleu"
 
     def __call__(self, predicted: str, target: str):
         BLEUscore = nltk.translate.bleu_score.sentence_bleu([target], predicted)
@@ -53,7 +84,7 @@ class BleuScore(Metric):
 
 
 class RougeScore(Metric):
-    name = "ROUGE"
+    name = "rouge"
 
     def __call__(self, predicted: str, target: str):
         # Using Rouge-1, the overlap of words
@@ -66,19 +97,22 @@ class RougeScore(Metric):
 
 
 class Success(Metric):
-    name = "Success"
+    name = "success"
 
     def __call__(self, predicted: str, target: str):
         return int(predicted == target)
 
 def metric_factory(metric_name: str):
     metrics = {
-        "Precision": Precision,
-        "Recall": Recall,
-        "F1": F1,
-        "BLEU": BleuScore,
-        "ROUGE": RougeScore,
-        "Success": Success,
+        "precision": Precision,
+        "recall": Recall,
+        "f1": F1,
+        "bleu": BleuScore,
+        "rouge": RougeScore,
+        "success": Success,
+        "mean_squared_error": MeanSquaredError,
+        "mean_absolute_error": MeanAbsoluteError,
+        "mean_relative_absolute_error": MeanRelativeAbsoluteError,
     }
     if metric_name not in metrics:
         raise ValueError(f"Metric '{metric_name}' not found.")
