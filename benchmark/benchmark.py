@@ -1,8 +1,13 @@
 import json
+import logging
 import os
+import re
+from rouge_score import rouge_scorer
 from typing import Any, Dict, List
 
+
 from benchmark_api import System
+from benchmark.metrics import metric_factory
 
 class Executor:
     def __init__(
@@ -47,7 +52,7 @@ class Executor:
         response["subresponses"] = []
         for subtask in task["subtasks"]:
             subresponse = self.run_task(subtask)
-            response["subresponse"].append(subresponse)
+            response["subresponses"].append(subresponse)
         return response
     
     def run_next_task(self):
@@ -80,10 +85,12 @@ class Executor:
             results.append(result)
         
         if cache_system_output:
-            # TODO(SylviaZiyuZhang): implement me
+            #TODO: implement me
+            logging.warning("Executor.run_workload not implemented.")
             pass
 
         return results
+
 
 class Evaluator:
     def __init__(
@@ -107,17 +114,80 @@ class Evaluator:
             self.input_type_fixtures = json.load(f)
         with open(task_fixture_directory/'output_type_fixtures.json') as f:
             self.output_type_fixtures = json.load(f)
+        with open(task_fixture_directory/'answer_type_fixtures.json') as f:
+            self.answer_type_fixtures = json.load(f)
+        
+        self.rouge_score_engine = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
     
-    def evaluate_results_on_metric(responses: List[Dict[str, Any]], metric_name: str):
-        # TODO: implement me
-        pass
+    def _normalize_string(s: str) -> str:
+        """Normalize a string by removing spaces, punctuation, and making it lowercase."""
+        return re.sub(r'[^a-z0-9]', '', s.lower())
 
-    def evaluat_results(responses: List[Dict[str, Any]]):
+    def evaluate_response_with_metric(self, system_response: str, target_answer: str | int | float, metric_name: str) -> float:
+        """
+        Evaluate a single system response against a target answer using the specified metric.
+
+        Args:
+            system_response (str): JSON string containing system's response.
+            target_answer (str | int | float): The expected correct answer.
+            metric_name (str): Name of the metric to use for evaluation.
+
+        Returns:
+            float: Computed score.
+        """
+        try:
+            system_response_dict = json.loads(system_response)
+            system_answer = system_response_dict["answer"]
+        except Exception as e:
+            # TODO: Add verbose control flag to log the json marshalling failure and clean up trace logging
+            print(f"evaluate_response_with_metric: failed to parse system response as JSON: {e}.")
+            return 0.0
+
+        # Cast system answer and target answer to strings since all metrics in the
+        # metric factory use this signature
+        system_answer = str(system_answer).strip()
+        target_answer = str(target_answer).strip()
+
+        try:
+            metric = metric_factory(metric_name)
+            score = metric(predicted=system_answer, target=target_answer)
+        except Exception as e:
+            print(f"evaluate_response_with_metric: failed to compute metric {metric_name}: {e}.")
+            score = 0.0
+
+        return score
+
+    def _evaluate_result_for_task(self, response: Dict[str, Any], task: Dict[str, Any]):
+        """
+        Evaluate results on all applicable metrics as specified in the task fixture for a 
+        task in the workload.
+        The caller should format the responses in the same structure as the workload.
+        """
+        all_evaluation_results = []
+        target_metrics = self.answer_type_fixtures[task['answer_type']]
+        system_answer = response["answer"]
+        assert(task["id"] == response["task_id"])
+        evaluation_result = {"task_id": task["id"]}
+        for metric in target_metrics:
+            score = self.evaluate_response_with_metric(system_answer, task["model_output"], metric)
+            evaluation_result[metric] = score
+        all_evaluation_results.append(evaluation_result)
+        for i, subtask in enumerate(task["subtasks"]):
+            subtask_result = self._evaluate_result_for_task(response["subresponses"][i], subtask)
+            all_evaluation_results.append(subtask_result)
+        
+        return all_evaluation_results
+
+    def evaluate_results(self, responses: List[Dict[str, Any]]):
         """
         Evaluate results on all applicable metrics as specified in the task fixtures.
+        The caller should format the responses in the same structure as the workload.
         """
-        # TODO: implement me
-        pass
+        all_evaluation_results = []
+        for task_idx, task in enumerate(self.workload):
+            evaluation_results = self._evaluate_result_for_task(responses[task_idx], task)
+            all_evaluation_results.append(evaluation_results)
+        return all_evaluation_results
 
 class Benchmark:
     def __init__ (
@@ -139,6 +209,7 @@ class Benchmark:
             workload_path: str | os.PathLike,
             verbose: bool = False
         ):
+        # Returns raw results from the system and evaluation results
         self.system.process_dataset(dataset_directory)
         executor = Executor(
             system=self.system,
@@ -147,10 +218,11 @@ class Benchmark:
             verbose=verbose
         )
         results = executor.run_workload(cache_system_output=self.cache_system_output)
+        print("Evaluating results...")
         evaluator = Evaluator(
             workload_path=workload_path,
             task_fixture_directory=self.task_fixture_directory,
             results_directory=results_directory
         )
-        evaluator.evaluat_results(results)
+        return results, evaluator.evaluate_results(results)
 

@@ -1,0 +1,38 @@
+{
+    "id": "environment-easy-1",
+    "query": "How many bacterial exceedances are sampled?",
+    "answer": 7641,
+    "answer_type": "number",
+    "data_sources": [
+        "water-body-testing-2018.csv"
+    ],
+    "subtasks": [
+        {
+            "id": "environment-easy-1-1",
+            "query": "environment-easy-1-1",
+            "answer": 7641,
+            "answer_type": "number",
+            "data_sources": [
+                "water-body-testing-2018.csv"
+            ]
+        },
+        {
+            "id": "environment-easy-1-2",
+            "query": "environment-easy-1-2",
+            "answer": 7641,
+            "answer_type": "number",
+            "data_sources": [
+                "water-body-testing-2018.csv"
+            ]
+        },
+        {
+            "id": "environment-easy-1-3",
+            "query": "environment-easy-1-3",
+            "answer": 7641,
+            "answer_type": "number",
+            "data_sources": [
+                "water-body-testing-2018.csv"
+            ]
+        }
+    ]
+}

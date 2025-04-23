@@ -1,0 +1,18 @@
+[
+    {
+        "name": "numeric_approximate",
+        "metrics": ["mean_absolute_error", "mean_squared_error", "mean_relative_absolute_error"]
+    },
+    {
+        "name": "string_approximate",
+        "prompt": ["bleu", "rouge", "llm"]
+    },
+    {
+        "name": "exact",
+        "metrics": ["success"]
+    },
+    {
+        "name": "list",
+        "metrics": ["f1", "precision", "recall"]
+    }
+]
