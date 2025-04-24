@@ -1,12 +1,13 @@
-import math
+import json
+from typing import List
 
 import nltk
 from rouge_score import rouge_scorer
 
-def percentage_to_float(percentage_string):
-    cleaned_string = percentage_string.strip("%")
-    float_value = float(cleaned_string) / 100
-    return float_value
+def str_to_float(num_string: str) -> float:
+    if num_string.endswith("%"):
+        return float(num_string.strip("%")) / 100
+    return float(num_string)
 
 class Metric:
     name = "Metric"
@@ -14,65 +15,108 @@ class Metric:
     def __init__(self, *args, **kwargs):
         pass
 
-    def __call__(self, predicted: str, target: str):
+    def __call__(self, predicted: List[str] | float | int | str, target: List[str] | float | int | str) -> float:
         raise NotImplementedError("Metric must implement __call__ method!")
-
-
-class Accuracy(Metric):
-    name = "accuracy"
-
-    def __call__(self, predicted: str, target: str):
-        return 0.0
-        # return accuracy_score(predicted["answer"], target["answer"])
 
 
 class Precision(Metric):
     name = "precision"
 
-    def __call__(self, predicted: str, target: str):
-        # Figure out how to compute precision of individual queries
-        return 0
-        # return precision_score(predicted["answer"], target["answer"])
+    def __call__(self, predicted: List[str] | str, target: List[str] | str):
+        if isinstance(predicted, str) and isinstance(target, str):
+            rouge = rouge_scorer.RougeScorer(['rouge1'])
+            results = rouge.score(target=target, prediction=predicted)
+            return results['rouge1'].precision
+        if isinstance(predicted, list) and isinstance(target, str):
+            target = json.loads(target)
+        if isinstance(predicted, list) and isinstance(target, list):
+            normalize = lambda s: s.strip().lower()
+            pred_set = set(map(normalize, predicted))
+            target_set = set(map(normalize, target))
+            if not pred_set:
+                return 0.0
+            true_positives = pred_set & target_set
+            precision = len(true_positives) / len(pred_set)
+            return precision
+        raise TypeError("Precision Metric: unsupported argument types")
 
 
 class Recall(Metric):
     name = "recall"
 
-    def __call__(self, predicted: str, target: str):
-        return 0.0
-        # return recall_score(predicted["answer"], target["answer"])
+    def __call__(self, predicted: List[str] | str, target: List[str] | str):
+        if isinstance(predicted, str) and isinstance(target, str):
+            rouge = rouge_scorer.RougeScorer(['rouge1'])
+            results = rouge.score(target=target, prediction=predicted)
+            return results['rouge1'].recall
+        if isinstance(predicted, list) and isinstance(target, str):
+            target = json.loads(target)
+        if isinstance(predicted, list) and isinstance(target, list):
+            normalize = lambda s: s.strip().lower()
+            pred_set = set(map(normalize, predicted))
+            target_set = set(map(normalize, target))
+            if not target_set:
+                return 0.0
+            true_positives = pred_set & target_set
+            precision = len(true_positives) / len(target_set)
+            return precision
+        raise TypeError("Precision Metric: unsupported argument types")
 
 
 class F1(Metric):
     name = "f1"
 
-    def __call__(self, predicted: str, target: str):
-        return 0.0
-        # return f1_score(predicted["answer"], target["answer"])
+    def __call__(self, predicted: List[str], target: List[str] | str):
+        if isinstance(predicted, list) and isinstance(target, str):
+            target = json.loads(target)
+        normalize = lambda s: s.strip().lower()
+        pred_set = set(map(normalize, predicted))
+        target_set = set(map(normalize, target))
+        if not pred_set and not target_set:
+            return 1.0  # both empty — define F1 as perfect match
+        if not pred_set or not target_set:
+            return 0.0
+
+        true_positives = pred_set & target_set
+        precision = len(true_positives) / len(pred_set) if pred_set else 0.0
+        recall = len(true_positives) / len(target_set) if target_set else 0.0
+        if precision + recall == 0:
+            return 0.0
+        f1 = 2 * precision * recall / (precision + recall)
+        return f1
 
 class MeanSquaredError(Metric):
     # This method computes the squared error. The evaluation script is responsible for aggregating.
     name = "mean_squared_error"
 
     def __call__(self, predicted: str | int | float, target: str | int | float):
-        # TODO: account for percentage
-        return (float(predicted) - float(target)) * (float(predicted) - float(target))
+        if isinstance(predicted, str):
+            predicted = str_to_float(predicted)
+        if isinstance(target, str):
+            target = str_to_float(target)
+        return (predicted - target) * (predicted - target)
     
 class MeanAbsoluteError(Metric):
     # This method computes the squared error. The evaluation script is responsible for aggregating.
     name = "mean_absolute_error"
 
     def __call__(self, predicted: str | int | float, target: str | int | float):
-        # TODO: account for percentage
-        return abs(float(predicted) - float(target))
+        if isinstance(predicted, str):
+            predicted = str_to_float(predicted)
+        if isinstance(target, str):
+            target = str_to_float(target)
+        return abs(predicted - target)
 
 class MeanRelativeAbsoluteError(Metric):
     # This method computes the squared error. The evaluation script is responsible for aggregating.
     name = "mean_relative_absolute_error"
 
     def __call__(self, predicted: str | int | float, target: str | int | float):
-        # TODO: account for percentage
-        return abs(float(predicted) - float(target)) / float(target)
+        if isinstance(predicted, str):
+            predicted = str_to_float(predicted)
+        if isinstance(target, str):
+            target = str_to_float(target)
+        return abs(predicted - target) / target
 
 
 class BleuScore(Metric):

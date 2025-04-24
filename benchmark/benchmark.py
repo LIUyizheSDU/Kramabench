@@ -162,7 +162,7 @@ class Evaluator:
         """Normalize a string by removing spaces, punctuation, and making it lowercase."""
         return re.sub(r'[^a-z0-9]', '', s.lower())
 
-    def evaluate_response_with_metric(self, system_response: Dict, target_answer: str | int | float, metric_name: str) -> float:
+    def evaluate_response_with_metric(self, task_id: str, system_response: Dict, target_answer: str | int | float, metric_name: str) -> float:
         """
         Evaluate a single system response against a target answer using the specified metric.
 
@@ -179,7 +179,7 @@ class Evaluator:
             # TODO: deal with code and subtask evaluation
         except Exception as e:
             # TODO: Add verbose control flag to log the json marshalling failure and clean up trace logging
-            print(f"evaluate_response_with_metric: failed to parse system response as JSON: {e}.")
+            print(f"evaluate_response_with_metric: task_id {task_id} - failed to parse system response as JSON: {e}.")
             return 0.0
 
         # Cast system answer and target answer to strings since all metrics in the
@@ -191,7 +191,8 @@ class Evaluator:
             metric = metric_factory(metric_name)
             score = metric(predicted=system_answer, target=target_answer)
         except Exception as e:
-            print(f"evaluate_response_with_metric: failed to compute metric {metric_name}: {e}.")
+            print(f"evaluate_response_with_metric: task_id {task_id} - failed to compute metric {metric_name}: {e}.")
+            print(system_answer)
             score = 0.0
 
         return score
@@ -208,7 +209,7 @@ class Evaluator:
         assert(task["id"] == response["task_id"])
         evaluation_result = {"task_id": task["id"]}
         for metric in target_metrics:
-            score = self.evaluate_response_with_metric(response["model_output"], task["answer"], metric)
+            score = self.evaluate_response_with_metric(task["id"], response["model_output"], task["answer"], metric)
             evaluation_result[metric] = score
         all_evaluation_results.append(evaluation_result)
         if "subtasks" in task:
