@@ -409,7 +409,7 @@
     },
     {
         "id": "environment-hard-16",
-        "query": "How many marine beaches (from 2002 to 2023) remained safe to swimming for the entire time (i.e., no violation at all throughout the seasons)?",
+        "query": "How many marine beaches (from 2002 to 2023) remained safe to swimming for the entire time (i.e., no violation at all throughout the seasons; if no data for a beach in a particular year, assume safe)?",
         "answer": 60,
         "answer_type": "exact",
         "data_sources": [
