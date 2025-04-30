@@ -381,7 +381,7 @@
             {
                 "id": "astronomy-hard-3-3",
                 "query": "Compute hourly altitude change from TLEs and round epochs to the nearest hour",
-                "answer": "Time series of change ofaltitude per hour",
+                "answer": "Time series of change of altitude per hour",
                 "answer_type": "intermediate"
             },
             {
@@ -416,7 +416,7 @@
         "subtasks": [
             {
                 "id": "astronomy-hard-4-1",
-                "query": "Parse SP3 files and compute hourly change ofaltitude",
+                "query": "Parse SP3 files and compute hourly change of altitude",
                 "answer": "DataFrame",
                 "answer_type": "intermediate"
             },
@@ -434,7 +434,7 @@
             },
             {
                 "id": "astronomy-hard-4-4",
-                "query": "Calculate Pearson correlation between change ofaltitude and each variable",
+                "query": "Calculate Pearson correlation between change of altitude and each variable",
                 "answer": "Correlation dictionary",
                 "answer_type": "intermediate"
             },
