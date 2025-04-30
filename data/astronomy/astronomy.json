@@ -30,7 +30,7 @@
                 "answer_type": "number"
             }
         ]
-    },
+    },  
     {
         "id": "astronomy-easy-2",
         "query": "Calculate the ratio of peak atmospheric mass density experienced by Swarm A satellite during Feb 2014 (wu016 file) vs July 2018 (wu545 file).",
@@ -261,6 +261,52 @@
         ]
     },
     {
+        "id": "atmosphere-hard-1",
+        "query": "Train a density prediction model using OMNI2 variables (f10.7_index, Kp_index, Dst_index_nT) and GOES variables (xrsb_flux_observed, xrsa_flux_observed) to forecast Swarm Alpha's atmospheric density 4 hours ahead. Specifically, use a 16-hour context window to project the input time series forward using a VAR(1) model, then fit a linear regression model to predict the next 4 hours of density. Use data from wu334 (OMNI/GOES: 2016-10-22 to 2016-10-23; Density: 2016-10-23 to 2016-10-24) for training, and wu335 (OMNI/GOES: 2016-10-25 to 2016-10-26; Density: 2016-10-29) for evaluation. Assume that all windows contain valid data. Note that the data for training VAR lies at the end of the OMNI2 and GOES input window, and the corresponding Swarm Alpha density data begins immediately afterward; i.e., they only overlap at a single timestamp where OMNI/GOES ends and Density begins. Report the RMSE between the predicted and observed density values over the 4-hour forecast window.",
+        "answer": 1.211e-13,
+        "answer_type": "number",
+        "data_sources": [
+            "../data_local/STORM-AI/warmup/v2/OMNI2/omni2-wu334-20161022_to_20161024.csv",
+            "../data_local/STORM-AI/warmup/v2/GOES/goes-wu334-20161022_to_20161024.csv",
+            "../data_local/STORM-AI/warmup/v2/Sat_Density/swarma-wu334-20161022_to_20161024.csv",
+            "../data_local/STORM-AI/warmup/v2/OMNI2/omni2-wu335-20161025_to_20161029.csv",
+            "../data_local/STORM-AI/warmup/v2/GOES/goes-wu335-20161025_to_20161029.csv",
+            "../data_local/STORM-AI/warmup/v2/Sat_Density/swarma-wu335-20161025_to_20161029.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "atmosphere-hard-1-1",
+                "query": "Load OMNI2 and GOES data (f10.7_index, Kp_index, Dst_index_nT, xrsb_flux_observed, xrsa_flux_observed) for wu334 and wu335, resample to hourly",
+                "answer": "DataFrames",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "atmosphere-hard-1-2",
+                "query": "Load Swarm Alpha orbit mean density (ρ) data for wu334 and wu335, resample to hourly",
+                "answer": "DataFrames",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "atmosphere-hard-1-3",
+                "query": "Extract a 16-hour window ending at 2016-10-23 for training and at 2016-10-26 for testing, then forecast 4 hours of input variables using VAR(1)",
+                "answer": "Predicted features for next 4 hours",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "atmosphere-hard-1-4",
+                "query": "Train a linear regression model on the 4-hour forecasted inputs to predict 4-hour forward Swarm Alpha ρ using the training set",
+                "answer": "Trained regression model",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "atmosphere-hard-1-5",
+                "query": "Evaluate model on test forecast using test set and report RMSE",
+                "answer": 1.211e-13,
+                "answer_type": "number"
+            }
+        ]
+    },  
+    {
         "id": "astronomy-hard-2",
         "query": "Compare the predictive accuracy (using RMSE) of two single-variable linear regression models forecasting Swarm Alpha's along-track acceleration 3 hours ahead during May 11, 2024. Model 1 uses only OMNI Kp index as input; Model 2 uses only OMNI solar wind dynamic pressure (Pdyn) as input. Report both RMSE values on the test set.",
         "answer": {
@@ -309,6 +355,48 @@
             }
         ]
     },
+    {
+        "id": "astronomy-hard-3",
+        "query": "Determine the best lag (from 0 to 48 hours) between atmospheric drag—measured as altitude change (in km) from TLE data of SATCAT 43180—and the OMNI AP index, that maximizes the r^2 correlation during May 1–30, 2024. TLE epoch times should be rounded to the nearest hour to align with AP measurements. Use hourly OMNI2 data.",
+        "answer": 24,
+        "answer_type": "exact",
+        "data_sources": [
+            "../data_local/TLE/43180.tle",
+            "../data_local/omni2_low_res/omni2_2024.dat"
+        ],
+        "subtasks": [
+            {
+                "id": "astronomy-hard-3-1",
+                "query": "Load and extract OMNI2 hourly AP index for May 2024",
+                "answer": "Time-indexed DataFrame of AP values",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-3-2",
+                "query": "Parse TLEs for SATCAT 43180 and compute semi-major axis and altitude (in km) for each epoch",
+                "answer": "Time series of altitudes",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-3-3",
+                "query": "Compute hourly altitude change from TLEs and round epochs to the nearest hour",
+                "answer": "Time series of Δaltitude per hour",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-3-4",
+                "query": "Shift AP index by lag in [0, 48] hours, and compute r^2 between shifted AP and altitude change",
+                "answer": "r^2 value per lag",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-3-5",
+                "query": "Identify the lag that yields maximum r^2",
+                "answer": 24,
+                "answer_type": "exact"
+            }
+        ]
+    },    
     {
         "id": "astronomy-hard-4",
         "query": "In the STORM-AI Warmup dataset (v2), for the 10-day period from 2018-10-01 to 2018-10-10, compare all variables from OMNI2 and Sat_Density against Swarm-A satellite's hourly altitude change (Δaltitude). Which variable shows the strongest Pearson correlation (positive or negative)?",
@@ -360,6 +448,49 @@
             }
         ]
     },
+    {
+        "id": "astronomy-hard-5",
+        "query": "Using OMNI2 data, run the NRLMSISE-00 atmospheric model to predict neutral density values for Swarm-B throughout 2024. Derive model inputs (F10.7, F10.7A, daily Ap, 3-hour Ap vector) directly from the OMNI2 dataset. Compare predictions against measured neutral density from Swarm-B POD files and report RMSE over the entire year. Do not use external space weather feeds.",
+        "answer": "4.638e-13",
+        "answer_type": "number",
+        "data_sources": [
+            "../data_local/swarmb/SB_DNS_POD_2024_*.txt",
+            "../data_local/omni2_low_res/omni2_2024.dat",
+            "../data_local/omni2_low_res/omni2_2023.dat"
+        ],
+        "subtasks": [
+            {
+                "id": "astronomy-hard-5-1",
+                "query": "Load hourly OMNI2 data for 2023–2024 and compute daily F10.7, daily Ap 3-hour Ap vector, and 81-day running average F10.7A that will be used for NRLMSISE-00. 3-hour AP defined according to https://www.mathworks.com/help/aeroblks/nrlmsise00atmospheremodel.html",
+                "answer": "OMNI2-derived time series",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-5-2",
+                "query": "Load and clean Swarm-B POD density files for 2024, keeping only whole-hour timestamps",
+                "answer": "DataFrame of Swarm-B hourly density",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-5-3",
+                "query": "For each timestamp with location in Swarm-B data, extract model input values using a helper that builds F10.7, F10.7A, Ap, and 3-hour Ap vector from OMNI2",
+                "answer": "Dictionary of model inputs per hour",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-5-4",
+                "query": "Implement or modify an NRLMSISE-00 model wrapper (e.g., in pyatmos) that accepts explicit F10.7, F10.7A, Ap, and 3-hour Ap vector (APH) as input, then run predictions for all hourly Swarm-B timestamps in 2024",
+                "answer": "Time series of predicted density",
+                "answer_type": "intermediate"
+            },
+            {
+                "id": "astronomy-hard-5-5",
+                "query": "Compare predicted and ground-truth Swarm-B density, and compute RMSE",
+                "answer": "4.638e-13",
+                "answer_type": "number"
+            }
+        ]
+    },    
     {
         "id": "astronomy-hard-6",
         "query": "Using the TIE-GCM model, driven by hourly F10.7 and Kp indices, simulate the thermosphere for the period September 2–29, 2019. Along the Swarm-A satellite trajectory (derived from SP3 precise orbit files), interpolate TIE-GCM output fields to the satellite’s location (latitude, longitude, altitude) and compute the geopotential energy (J/kg) at each timepoint. Report the mean geopotential energy over the period.",

@@ -28,24 +28,29 @@ Easy
 
 Hard
 
-1. Train a simple linear regression model using the OMNI Kp index values (1-hour resolution) to predict the next-hour atmospheric density change observed by Swarm Bravo. Report the Mean Squared Error (MSE) on a held-out test set covering the Gannon storm period (May 10-13, 2024).
+1. "Train a density prediction model using OMNI2 variables (f10.7_index, Kp_index, Dst_index_nT) and GOES variables (xrsb_flux_observed, xrsa_flux_observed) to forecast Swarm Alpha's atmospheric density 4 hours ahead. Specifically, use a 16-hour context window to project the input time series forward using a VAR(1) model, then fit a linear regression model to predict the next 4 hours of density. Use data from wu334 (OMNI/GOES: 2016-10-22 to 2016-10-23; Density: 2016-10-23 to 2016-10-24) for training, and wu335 (OMNI/GOES: 2016-10-25 to 2016-10-26; Density: 2016-10-29) for evaluation. Assume that all windows contain valid data. Note that the data for training VAR lies at the end of the OMNI2 and GOES input window, and the corresponding Swarm Alpha density data begins immediately afterward; i.e., they only overlap at a single timestamp where OMNI/GOES ends and Density begins. Report the RMSE between the predicted and observed density values over the 4-hour forecast window.
+    - 1.211e-13 
+
+
 2. Compare the predictive accuracy (using Root Mean Squared Error - RMSE) of two simple single-variable linear regression models forecasting Swarm Alpha’s along-track acceleration 3 hours ahead during May 11, 2024. Model 1 uses only the OMNI Kp index as input. Model 2 uses only the OMNI solar wind dynamic pressure (Pdyn) as input. Use a time-ordered split (first 70% for training, last 30% for testing). Report and compare the RMSE on the test set. (numerical comparison)
     - Model Performance (RMSE on Test Set):
         - Kp input: 6.1655e-07
         - Pdyn input: 5.1206e-07
 
-3. What is the correlation in terms of r^2 between the altitude change of SATCAT43180 and measured AP? (numerical)
-    - this is from the paper plot; need to find TLE data of SATCAT43180
+3. Determine the best lag (from 0 to 48 hours) between atmospheric drag—measured as altitude change (in km) from TLE data of SATCAT 43180—and the OMNI AP index, that maximizes the r^2 correlation during May 1–30, 2024. TLE epoch times should be rounded to the nearest hour to align with AP measurements. Use hourly OMNI2 data. (numerical)
+    - best lag = 24 h   with  r^2 = 0.6536
 
 4. In the STORM-AI Warmup dataset (version 2), for the 10-day period from 2018-10-01 to 2018-10-10, compare all available variables coming from: OMNI2 (solar wind parameters, IMF measurements, geomagnetic indices, and proton flux metrics embedded within OMNI2),and Sat_Density (mean atmospheric density near Swarm-A orbit), against the Swarm-A satellite's hourly altitude change (∆altitude per hour, computed from POD SP3 data). Which variable shows the strongest Pearson correlation (positive or negative) with the hourly ∆altitude?
     - Proton_flux_>30_Mev with a Pearson correlation coefficient of r = -0.166.
 
-5. Compute the POD with 100 modes for the first satellite in the STORM-A warm-up satellite dataset, and report the difference in the reconstructed full-dimensional state and the ground truth measurement in MSE. (numerical)
-    - Difficulty is in math and being able to construct the POD.
+5. Using OMNI2 data, run the NRLMSISE-00 atmospheric model to predict neutral density values for Swarm-B throughout 2024. Derive model inputs (F10.7, F10.7A, daily Ap, 3-hour Ap vector) directly from the OMNI2 dataset. Compare predictions against measured neutral density from Swarm-B POD files and report RMSE over the entire year. Do not use external space weather feeds. 
+    - 4.638e-13
 
 6. Using the Thermosphere-Ionosphere-Electrodynamics General Circulation Model (TIE-GCM), simulate the global thermosphere for the period September 2–29, 2019, driven by hourly F10.7 and Kp indices from the STORM-A warmup dataset. Along the trajectory of Swarm-A (Satellite 1), derived from its SP3 precise orbit files, interpolate the TIE-GCM model outputs to the satellite’s latitude, longitude, and altitude at each timepoint. At each timepoint, compute the geopotential energy (in J/kg) at the satellite’s location. Finally, report the mean geopotential energy (in J/kg) over the entire 2019-09-02 to 2019-09-29 period. Note: the difficulty should mostly come from setting up the pipeline in this question since the TIE-GCM implementation is available online but is a Fortran code repository. It does have a python frontend.
     - Mean Geopotential Energy: 66822738.84 J/kg
 
+
+# unverified below.
 7. Which hour, from May 9 to May 14, 2024, has the highest satellite maneuver count normalized by solar activity for LEO satellites?
 8. During the 2024 Gannon Geomagnetic Storm, which type of satellite's altitude is affected more, geo-stationary or LEO? Sample 10 satellite from each group. (exact) 
     - should probably provide which satellites to sample. Need to pull TLE data from internet. 
