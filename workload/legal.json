@@ -1,0 +1,93 @@
+[
+    {   "id": "legal-easy-ziniu-1",
+        "query": "What is the proportion of fraud reporters who lost between $1-$500 in 2024?",
+        "answer": "0.523",
+        "answer_type": "float",
+        "data_sources": ["2024_CSN_Fraud_Reports_by_Amount_Lost.csv"],
+        "subtasks":[]
+    },
+    {   "id": "legal-easy-ziniu-2",
+        "query": "What is the percentage of fraud reporters in 2024?",
+        "answer": "0.4",
+        "answer_type": "float",
+        "data_sources": ["2024_CSN_Number_of_Reports_by_Type.csv"],
+        "subtasks":[]
+    },
+    {   "id": "legal-easy-ziniu-3",
+        "query": "From 2002 to 2024 (inclusive), which (year and type pair) has the highest relative increase in number of reporters compared to the previous year?",
+        "answer": "2020",
+        "answer_type": "text",
+        "data_sources": ["2024_CSN_Number_of_Reports_by_Type.csv"],
+        "subtasks":[]
+    },
+    {   "id": "legal-easy-ziniu-4",
+        "query": "What is the total number of identity theft reporters in Alabama in 2024?",
+        "answer": "15387",
+        "answer_type": "int",
+        "data_sources": ["2024_CSN_State_Identity_Theft_Reports.csv"],
+        "subtasks":[]
+    },
+    {   "id": "legal-hard-ziniu-1",
+        "query": "What is the proportion of all reports who reported identity theft with Back Account (Theft Type) and New Accounts (Theft Subtype)?",
+        "answer": "0.0554",
+        "answer_type": "float",
+        "data_sources": ["2024_CSN_Report_Type.csv", "2024_CSN_Identity_Theft_Reports_by_Type.csv"],
+        "subtasks":[
+          {
+                "id": "legal-hard-ziniu-1-1",
+                "query": "Clean table 2024_CSN_Report_Type.csv to get the total number of identity theft reports",
+                "answer": 1135291,
+                "answer_type": "int"
+          },
+          {
+              "id": "legal-hard-ziniu-1-2",
+              "query": "Clean table 2024_CSN_Identity_Theft_Reports_by_Type.csv to get the number of identity theft reports with Back Account and New Accounts",
+              "answer": 62982,
+              "answer_type": "int"
+          }
+        ]
+    },
+    {   "id": "legal-hard-ziniu-2",
+        "query": "What state (including DC and PR) has the highest reporter density (reports per 100K population) considering all type of reports (identity theft, fraud and others)??",
+        "answer": "District of Columbia",
+        "answer_type": "text",
+        "data_sources": ["2024_CSN_State_Rankings_Identity_Theft_Reports.csv", "2024_CSN_State_Rankings_Fraud_and_Other_Reports.csv"],
+        "subtasks":[
+          {
+                "id": "legal-hard-ziniu-2-1",
+                "query": "Clean table 2024_CSN_State_Rankings_Identity_Theft_Reports.csv and 2024_CSN_State_Rankings_Fraud_and_Other_Reports.csv",
+                "answer": null
+          },
+          {
+              "id": "legal-hard-ziniu-2-2",
+              "query": "join the two tables to get the desired the output",
+              "answer": null
+          }
+        ]
+    },
+    {   "id": "legal-hard-ziniu-3",
+        "query": "For the state (including DC and PR) with the highest # of reporter of all type of reports (identity theft, fraud and others), which one of its metropolitan area has the highest # of reports for identity theft?",
+        "answer": "Los Angeles-Long Beach-Anaheim CA Metropolitan Statistical Area",
+        "answer_type": "text",
+        "data_sources": ["2024_CSN_State_Rankings_Identity_Theft_Reports.csv", "2024_CSN_State_Rankings_Fraud_and_Other_Reports.csv", "all csv in State MSA Identity Theft data/"],
+        "subtasks":[
+          {
+                "id": "legal-hard-ziniu-3-1",
+                "query": "Get the state with with the highest # of reporter of all type",
+                "answer": "California",
+                "answer_type": "text"
+          },
+          {
+              "id": "legal-hard-ziniu-3-2",
+              "query": "Read the correct state table State MSA Identity Theft data/California.csv",
+              "answer": null
+          },
+          {
+            "id": "legal-hard-ziniu-3-3",
+            "query": "Get the final answer from California.csv",
+            "answer": "Los Angeles-Long Beach-Anaheim CA Metropolitan Statistical Area",
+            "answer_type": "text"
+          }
+        ]
+    }
+]
