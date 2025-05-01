@@ -28,13 +28,13 @@
                 "id": "archeology-hard-7-1",
                 "query": "How many modern cities have a population of over 100k",
                 "answer": 5873,
-                "answer_type": "int"
+                "answer_type": "number"
             },
             {
                 "id": "archeology-hard-7-2",
                 "query": "How many of those modern cities with a population of over 100k are within 0.01 degrees of a Roman-era city?",
                 "answer": "274",
-                "answer_type": "int"
+                "answer_type": "number"
             }
         ]
     },
@@ -44,8 +44,7 @@
         "answer": "88",
         "answer_type": "number",
         "data_sources": [ "archeology/input/roman_cities.csv"],
-        "subtasks": [
-        ]
+        "subtasks": []
     },
     {
         "id": "archeology-hard-9",
@@ -58,7 +57,7 @@
                 "id": "archeology-hard-9-1",
                 "query": "How many modern cities with a population of over one million exist?",
                 "answer": "767",
-                "answer_type": "int"
+                "answer_type": "number"
             },
             {
                 "id": "archeology-hard-9-2",
@@ -70,7 +69,7 @@
                 "id": "archeology-hard-9-3",
                 "query": "How many of our selected modern cities correspond to some Roman city?",
                 "answer": "30",
-                "answer_type": "int"
+                "answer_type": "number"
             },
             {
                 "id": "archeology-hard-9-4",
@@ -92,10 +91,22 @@
     {
         "id": "archeology-easy-11",
         "query": "What is the average latitude of capital cities?",
-        "answer": "25.933692269136962",
+        "answer": "25.93369",
         "answer_type": "number",
         "data_sources": [ "archeology/input/worldcities.csv"],
         "subtasks": [
+            {
+                "id": "archeology-easy-11-1",
+                "query": "Extract all of the capital cities. How many exist?",
+                "answer": "250",
+                "answer_type": "number"
+            },
+            {
+                "id": "archeology-easy-11-1",
+                "query": "Compute the average latitude of all of the capitals.",
+                "answer": "25.93369",
+                "answer_type": "number"
+            }
         ]
     },
     {
@@ -109,19 +120,19 @@
                 "id": "archeology-hard-12-1",
                 "query": "Get the set of countries from our dataset. How many countries are there?",
                 "answer": "241",
-                "answer_type": "int"
+                "answer_type": "number"
             },
             {
                 "id": "archeology-hard-12-2",
                 "query": "Clean the conflict dataset as best you can, extracting the two sides, and the start and end year. How many conflicts are there in the cleaned dataset?",
                 "answer": "480",
-                "answer_type": "int"
+                "answer_type": "number"
             },
             {
                 "id": "archeology-hard-12-3",
                 "query": "Process the conflicts, removing any duplicate conflicts according to the definition in the original question.",
                 "answer": "422",
-                "answer_type": "int"
+                "answer_type": "number"
             }
         ]
     }
