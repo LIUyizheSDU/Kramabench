@@ -10,8 +10,8 @@
         "subtasks": [
             {
                 "id": "environment-easy-1-1",
-                "query": "How many water samples exceeded bacterial standards?",
-                "answer": 738,
+                "query": "How many water samples in total were collected?",
+                "answer": 15388,
                 "answer_type": "exact",
                 "data_sources": [
                     "water-body-testing-2013.csv"
@@ -19,8 +19,8 @@
             },
             {
                 "id": "environment-easy-1-2",
-                "query": "How many water samples in total were collected?",
-                "answer": 15388,
+                "query": "How many water samples exceeded bacterial standards?",
+                "answer": 738,
                 "answer_type": "exact",
                 "data_sources": [
                     "water-body-testing-2013.csv"
@@ -43,14 +43,74 @@
         ],
         "answer_type": "list",
         "data_sources": [
-            "water-body-testing-2018.csv"
+            "water-body-testing-2002.csv",
+            "water-body-testing-2003.csv",
+            "water-body-testing-2004.csv",
+            "water-body-testing-2005.csv",
+            "water-body-testing-2006.csv",
+            "water-body-testing-2007.csv",
+            "water-body-testing-2008.csv",
+            "water-body-testing-2009.csv",
+            "water-body-testing-2010.csv",
+            "water-body-testing-2011.csv",
+            "water-body-testing-2012.csv",
+            "water-body-testing-2013.csv",
+            "water-body-testing-2014.csv",
+            "water-body-testing-2015.csv",
+            "water-body-testing-2016.csv",
+            "water-body-testing-2017.csv",
+            "water-body-testing-2018.csv",
+            "water-body-testing-2019.csv",
+            "water-body-testing-2020.csv",
+            "water-body-testing-2021.csv",
+            "water-body-testing-2022.csv",
+            "water-body-testing-2023.csv"
         ],
         "subtasks": [
             {
                 "id": "environment-easy-2-1",
-                "query": "What is the average freshwater beach exceedance rate (to 2 decimal places)?",
+                "query": "What is the average bacterial exceedance rate for freshwater beaches between 2002 and 2023 (inclusive) (to 2 decimal places)?",
                 "answer": 4.04,
                 "answer_type": "exact",
+                "data_sources": [
+                    "water-body-testing-2002.csv",
+                    "water-body-testing-2003.csv",
+                    "water-body-testing-2004.csv",
+                    "water-body-testing-2005.csv",
+                    "water-body-testing-2006.csv",
+                    "water-body-testing-2007.csv",
+                    "water-body-testing-2008.csv",
+                    "water-body-testing-2009.csv",
+                    "water-body-testing-2010.csv",
+                    "water-body-testing-2011.csv",
+                    "water-body-testing-2012.csv",
+                    "water-body-testing-2013.csv",
+                    "water-body-testing-2014.csv",
+                    "water-body-testing-2015.csv",
+                    "water-body-testing-2016.csv",
+                    "water-body-testing-2017.csv",
+                    "water-body-testing-2018.csv",
+                    "water-body-testing-2019.csv",
+                    "water-body-testing-2020.csv",
+                    "water-body-testing-2021.csv",
+                    "water-body-testing-2022.csv",
+                    "water-body-testing-2023.csv"
+                ]
+            },
+            {
+                "id": "environment-easy-2-2",
+                "query": "Which years had a bacterial exceedance rate higher than the average?",
+                "answer": [
+                    2003,
+                    2011,
+                    2015,
+                    2018,
+                    2020,
+                    2021,
+                    2022,
+                    2023
+                ],
+                "answer_type": "list",
                 "data_sources": [
                     "water-body-testing-2002.csv",
                     "water-body-testing-2003.csv",
@@ -80,14 +140,42 @@
     },
     {
         "id": "environment-easy-3",
-        "query": "How many beaches had a higher exceedance rate for water samples collected in 2013 compared to 2012, excluding those with no samples in 2012?",
+        "query": "How many beaches had a higher bacterial exceedance rate for water samples collected in 2013 compared to 2012, excluding those with no samples in 2012?",
         "answer": 267,
         "answer_type": "exact",
         "data_sources": [
             "water-body-testing-2012.csv",
             "water-body-testing-2013.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-easy-3-1",
+                "query": "What is the bacterial exceedance rate for water samples collected in 2013 for each beach?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "water-body-testing-2012.csv"
+                ]
+            },
+            {
+                "id": "environment-easy-3-2",
+                "query": "What is the bacterial exceedance rate for water samples collected in 2012 for each beach?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "water-body-testing-2013.csv"
+                ]
+            },
+            {
+                "id": "environment-easy-3-2",
+                "query": "Among the beaches in 2013, which ones has a higher bacterial exceedance rate than in 2012?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "water-body-testing-2013.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-easy-4",
@@ -290,7 +378,55 @@
             "environmental-justice-populations.csv",
             "water-body-testing-2023.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-7-1",
+                "query": "What are the marine beaches with samples collected in 2023?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "water-body-testing-2023.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-7-2",
+                "query": "What are the communities with more than 50% EJ populations?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-7-3",
+                "query": "What are the communities with less than 25% EJ populations?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-7-4",
+                "query": "What is the bacterial exceedance rate for the communities with more than 50% EJ populations?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv",
+                    "water-body-testing-2023.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-7-5",
+                "query": "What is the bacterial exceedance rate for the communities with less than 25% EJ populations?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv",
+                    "water-body-testing-2023.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-8",
@@ -308,7 +444,49 @@
             "tenean_beach_datasheet.csv",
             "wollaston_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-8-1",
+                "query": "Which beaches are the Boston Harbor beaches?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt"
+                ]
+            },
+            {
+                "id": "environment-hard-8-2",
+                "query": "Which are the samples that have Enterococcus rate higher than 104 counts per 100 milliliters of water?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-8-3",
+                "query": "What are the samples that has rainfall within 24 hours prior to sampling?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-9",
@@ -330,7 +508,49 @@
             "tenean_beach_datasheet.csv",
             "wollaston_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-9-1",
+                "query": "Which beaches are the Boston Harbor beaches?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt"
+                ]
+            },
+            {
+                "id": "environment-hard-9-2",
+                "query": "What are the samples that were collected between 2020 and 2024 (inclusive)?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-9-3",
+                "query": "Which beaches had no samples that have Enterococcus rate higher than 104 counts per 100 milliliters of water?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-10",
@@ -339,10 +559,50 @@
         "answer_type": "exact",
         "data_sources": [
             "environmental-justice-populations.csv",
-            "water-body-testing-2023.csv",
+            "TODO(SIVA): ANY OTHER FILE MIGHT WORK HERE?water-body-testing-2023.csv",
             "wollaston_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-10-1",
+                "query": "Which beaches are the Boston Harbor beaches?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt"
+                ]
+            },
+            {
+                "id": "environment-hard-10-2",
+                "query": "What are the communities with more than 90% EJ populations?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-10-3",
+                "query": "Which of the Boston Harbor beaches are in these communities?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv",
+                    "water-body-testing-2023.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-10-4",
+                "query": "What is the correlation between rainfall in the past 3 days and Enterococcus levels for the samples?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "environmental-justice-populations.csv",
+                    "water-body-testing-2023.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-11",
@@ -352,7 +612,26 @@
         "data_sources": [
             "pleasure_bay_and_castle_island_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-11-1",
+                "query": "Which samples from Pleasure Bay Beach has Enterococcus levels higher than 104 counts per 100 milliliters of water?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-11-2",
+                "query": "What is the average rainfall in the one-day period before sampling for the samples?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-12",
@@ -370,7 +649,51 @@
             "tenean_beach_datasheet.csv",
             "wollaston_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-12-1",
+                "query": "Which beaches are the Boston Harbor beaches?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt"
+                ]
+            },
+            {
+                "id": "environment-hard-12-2",
+                "query": "What are the samples that had no rainfall in the preceding three days?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt",
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-12-3",
+                "query": "How many such samples had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "boston-harbor-beaches.txt",
+                    "constitution_beach_datasheet.csv",
+                    "carson-beach-datasheet.csv",
+                    "pleasure_bay_and_castle_island_beach_datasheet.csv",
+                    "m-street-beach-datasheet.csv",
+                    "city_point_beach_datasheet.csv",
+                    "malibu_beach_datasheet.csv",
+                    "tenean_beach_datasheet.csv",
+                    "wollaston_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-13",
@@ -380,7 +703,26 @@
         "data_sources": [
             "constitution_beach_datasheet.csv"
         ],
-        "subtasks": []
+        "subtasks": [
+            {
+                "id": "environment-hard-12-1",
+                "query": "What are the samples from Constitution Beach in 2024?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv"
+                ]
+            },
+            {
+                "id": "environment-hard-12-2",
+                "query": "How many samples from each day had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
+                "answer": [],
+                "answer_type": "list",
+                "data_sources": [
+                    "constitution_beach_datasheet.csv"
+                ]
+            }
+        ]
     },
     {
         "id": "environment-hard-14",
