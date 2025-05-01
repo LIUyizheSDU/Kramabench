@@ -50,7 +50,7 @@
     {
         "id": "archeology-hard-9",
         "query": "What is the r score between the rank of ancient Roman cities and their corresponding modern cities?",
-        "answer": "0.015647537477581852",
+        "answer": "0.015648",
         "answer_type": "number",
         "data_sources": [ "archeology/input/roman_cities.csv", "archeology/input/worldcities.csv" ],
         "subtasks": [
