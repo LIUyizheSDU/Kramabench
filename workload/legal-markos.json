@@ -1,0 +1,522 @@
+[
+    {
+        "id": "legal-easy-9",
+        "query": "Between 2002 and 2024 inclusive, which year saw the greatest relative increase in total reports (Fraud, Identity Theft and Other) compared to the previous year?",
+        "answer": 2002,
+        "answer_type": "exact",
+        "data_sources": [
+            "2024_CSN_Report_Count.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-9-1",
+                "query": "To get the counts of reports between 2001 and 2024 inclusive, which file(s) do we need? Answer in a list of filenames.",
+                "answer": ["2024_CSN_Report_Count.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Report_Count.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-9-2",
+                "query": "Read the file needed to get the counts of reports between 2001 and 2024 inclusive and compute the relative increase in total reports of each year on the previous year. Report the answer in a list of numbers in chronological order, rounding to 2 digits after decimal.",
+                "answer": [0.69, 0.29, 0.21, 0.06, -0.00, 0.18, 0.19, 0.13, 0.03, 0.29, 0.11, 0.01, 0.23, 0.18, -0.01, -0.04, 0.08, 0.10, 0.48, 0.19, -0.137, 0.047, 0.17],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Report_Count.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-10",
+        "query": "In which years were Fraud reports at least 50% of the total reports?",
+        "answer": [
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2019
+        ],
+        "answer_type": "list",
+        "data_sources": [
+            "2024_CSN_Number_of_Reports_by_Type.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-10-1",
+                "query": "To study the breakdown of reports by year, which file(s) should we read? Answer in a list of filenames.",
+                "answer": ["2024_CSN_Number_of_Reports_by_Type.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Number_of_Reports_by_Type.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-10-2",
+                "query": "To read the file containing the report breakdown information correctly, how many rows do we need to drop?",
+                "answer": 2,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Number_of_Reports_by_Type.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-10-3",
+                "query": "What are the numbers of total reports each year? Answer in a list of numbers in chronological order.",
+                "answer": [325519, 551622, 713657, 860383, 909314, 906129, 1070447, 1261124, 1428977, 1470306, 1898543, 2115079, 2134565, 2620931, 3085154, 3063095, 2928227, 3171058, 3527200, 5217263, 6163234, 5341119, 5573059, 6495932],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Number_of_Reports_by_Type.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-11",
+        "query": "Was there ever a year between 2001-2024 inclusive where 'Other' reports were more than half of the total reports? Answer Yes or No.",
+        "answer": "No",
+        "answer_type": "exact",
+        "data_sources": [
+            "2024_CSN_Number_of_Reports_by_Type.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-11-1",
+                "query": "To study the proportion of 'Other' reports between 2001 and 2024 inclusive, which file do we need to read? Answer in a list of filenames.",
+                "answer": ["2024_CSN_Number_of_Reports_by_Type.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Number_of_Reports_by_Type.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-11-2",
+                "query": "What are the numbers of 'Other' reports each year? Answer in a list of numbers in chronological order.",
+                "answer": [101963, 146862, 167051, 203176, 216042, 236243, 305570, 325705, 441836, 399160, 577835, 632428, 685352, 762021, 1429676, 1435874, 1247309, 1203425, 980572, 1361628, 1686786, 1661691, 1914555, 2759963],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Number_of_Reports_by_Type.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-12",
+        "query": "What is the minimum number of report categories that collectively account for at least 50% of reports in 2024?",
+        "answer": 3,
+        "answer_type": "exact",
+        "data_sources": [
+            "2024_CSN_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-12-subtask-1",
+                "query": "What is the file containing report categories information for 2024? Answer in a list of filenames.",
+                "answer": ["2024_CSN_Report_Categories.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-12-subtask-2",
+                "query": "What percentage do the 2 largest categories in 2024 collectivly account for? Answer in one number.",
+                "answer": "38.45%",
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-12-subtask-3",
+                "query": "What percentage do the 3 largest categories in 2024 collectivly account for? Answer in one number.",
+                "answer": "51.52%",
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-13",
+        "query": "In 2024, what was the ratio of reports between the most frequent and the least frequent category (rounded to two decimal places)?",
+        "answer": 1097.47,
+        "answer_type": "numeric_approximate",
+        "data_sources": [
+            "2024_CSN_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-13-1",
+                "query": "When we read the file containing report categories information for 2024, how many rows do we need to skip?",
+                "answer": 2,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-13-2",
+                "query": "In 2024, what were the numbers of reports the most frequent and the least frequent category? Answer in a list of 2 numbers.",
+                "answer": [1353175, 1233],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-14",
+        "query": "What are the top 5 distinct Metropolitan areas in New England that have the most Identity Theft reports in 2024?",
+        "answer": [
+            "Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",
+            "Providence-Warwick, RI-MA Metropolitan Statistical Area",
+            "Hartford-West Hartford-East Hartford, CT Metropolitan Statistical Area",
+            "Bridgeport-Stamford-Danbury, CT Metropolitan Statistical Area",
+            "Worcester, MA Metropolitan Statistical Area"
+        ],
+        "answer_type": "list",
+        "data_sources": [
+            "State MSA Identity Theft data/*.csv",
+            "new_england_states.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-14-1",
+                "query": "Which states are in New England?",
+                "answer": [
+                    "Connecticut",
+                    "Maine",
+                    "Massachusetts",
+                    "New Hampshire",
+                    "Rhode Island",
+                    "Vermont"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "new_england_states.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-14-2",
+                "query": "Which folder are we reading the relevant files from? Ignore any parent folders and report only the base directory.",
+                "answer": "State MSA Identity Theft data",
+                "answer_type": "string_approximate",
+                "data_sources": [
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-14-3",
+                "query": "List all the Metropolitan areas in New England",
+                "answer": [
+                    "Bridgeport-Stamford-Danbury, CT Metropolitan Statistical Area",
+                    "Hartford-West Hartford-East Hartford, CT Metropolitan Statistical Area",
+                    "New Haven, CT Metropolitan Statistical Area",
+                    "Norwich-New London-Willimantic, CT Metropolitan Statistical Area",
+                    "Torrington, CT Micropolitan Statistical Area",
+                    "Waterbury-Shelton, CT Metropolitan Statistical Area",
+                    "Augusta-Waterville, ME Micropolitan Statistical Area",
+                    "Bangor, ME Metropolitan Statistical Area",
+                    "Lewiston-Auburn, ME Metropolitan Statistical Area",
+                    "Portland-South Portland, ME Metropolitan Statistical Area",
+                    "Amherst Town-Northampton, MA Metropolitan Statistical Area",
+                    "Barnstable Town, MA Metropolitan Statistical Area",
+                    "Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",
+                    "Pittsfield, MA Metropolitan Statistical Area",
+                    "Providence-Warwick, RI-MA Metropolitan Statistical Area",
+                    "Springfield, MA Metropolitan Statistical Area",
+                    "Worcester, MA Metropolitan Statistical Area",
+                    "Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",
+                    "Concord, NH Micropolitan Statistical Area",
+                    "Lebanon-Claremont, NH-VT Micropolitan Statistical Area",
+                    "Manchester-Nashua, NH Metropolitan Statistical Area",
+                    "Providence-Warwick, RI-MA Metropolitan Statistical Area",
+                    "Burlington-South Burlington, VT Metropolitan Statistical Area",
+                    "Lebanon-Claremont, NH-VT Micropolitan Statistical Area"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "new_england_states.csv",
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-15",
+        "query": "How many total Identity Theft reports were there in 2024 from cross-state Metropolitan Statistical Areas?",
+        "answer": 593524,
+        "answer_type": "numeric_approximate",
+        "data_sources": [
+            "State MSA Identity Theft data/*.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-15-1",
+                "query": "What is the column name of number of Identity Theft Reports in the data?",
+                "answer": "# of Reports",
+                "answer_type": "exact",
+                "data_sources": [
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-15-2",
+                "query": "List all the cross-state Metropolitan Statistical Areas.",
+                "answer": [
+                    "Augusta-Richmond County, GA-SC Metropolitan Statistical Area",
+                    "Chattanooga, TN-GA Metropolitan Statistical Area",
+                    "Columbus, GA-AL Metropolitan Statistical Area",
+                    "LaGrange, GA-AL Micropolitan Statistical Area",
+                    "Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",
+                    "Lebanon-Claremont, NH-VT Micropolitan Statistical Area",
+                    "Duluth, MN-WI Metropolitan Statistical Area",
+                    "La Crosse-Onalaska, WI-MN Metropolitan Statistical Area",
+                    "Minneapolis-St. Paul-Bloomington, MN-WI Metropolitan Statistical Area",
+                    "Duluth, MN-WI Metropolitan Statistical Area",
+                    "Fargo, ND-MN Metropolitan Statistical Area",
+                    "Grand Forks, ND-MN Metropolitan Statistical Area",
+                    "La Crosse-Onalaska, WI-MN Metropolitan Statistical Area",
+                    "Minneapolis-St. Paul-Bloomington, MN-WI Metropolitan Statistical Area",
+                    "Sioux Falls, SD-MN Metropolitan Statistical Area",
+                    "Hagerstown-Martinsburg, MD-WV Metropolitan Statistical Area",
+                    "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area",
+                    "Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",
+                    "Allentown-Bethlehem-Easton, PA-NJ Metropolitan Statistical Area",
+                    "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area",
+                    "Texarkana, TX-AR Metropolitan Statistical Area",
+                    "South Bend-Mishawaka, IN-MI Metropolitan Statistical Area",
+                    "Chattanooga, TN-GA Metropolitan Statistical Area",
+                    "Clarksville, TN-KY Metropolitan Statistical Area",
+                    "Kingsport-Bristol, TN-VA Metropolitan Statistical Area",
+                    "Memphis, TN-MS-AR Metropolitan Statistical Area",
+                    "Fort Smith, AR-OK Metropolitan Statistical Area",
+                    "Memphis, TN-MS-AR Metropolitan Statistical Area",
+                    "Texarkana, TX-AR Metropolitan Statistical Area",
+                    "Cincinnati, OH-KY-IN Metropolitan Statistical Area",
+                    "Huntington-Ashland, WV-KY-OH Metropolitan Statistical Area",
+                    "Weirton-Steubenville, WV-OH Metropolitan Statistical Area",
+                    "Wheeling, WV-OH Metropolitan Statistical Area",
+                    "Omaha, NE-IA Metropolitan Statistical Area",
+                    "Sioux City, IA-NE-SD Metropolitan Statistical Area",
+                    "Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area",
+                    "Cincinnati, OH-KY-IN Metropolitan Statistical Area",
+                    "Louisville/Jefferson County, KY-IN Metropolitan Statistical Area",
+                    "South Bend-Mishawaka, IN-MI Metropolitan Statistical Area",
+                    "New York-Newark-Jersey City, NY-NJ Metropolitan Statistical Area",
+                    "Augusta-Richmond County, GA-SC Metropolitan Statistical Area",
+                    "Charlotte-Concord-Gastonia, NC-SC Metropolitan Statistical Area",
+                    "Memphis, TN-MS-AR Metropolitan Statistical Area",
+                    "Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",
+                    "Charlotte-Concord-Gastonia, NC-SC Metropolitan Statistical Area",
+                    "Virginia Beach-Chesapeake-Norfolk, VA-NC Metropolitan Statistical Area",
+                    "Fort Smith, AR-OK Metropolitan Statistical Area",
+                    "Hagerstown-Martinsburg, MD-WV Metropolitan Statistical Area",
+                    "Huntington-Ashland, WV-KY-OH Metropolitan Statistical Area",
+                    "Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",
+                    "Weirton-Steubenville, WV-OH Metropolitan Statistical Area",
+                    "Wheeling, WV-OH Metropolitan Statistical Area",
+                    "Winchester, VA-WV Metropolitan Statistical Area",
+                    "Logan, UT-ID Metropolitan Statistical Area",
+                    "Fargo, ND-MN Metropolitan Statistical Area",
+                    "Grand Forks, ND-MN Metropolitan Statistical Area",
+                    "Kingsport-Bristol, TN-VA Metropolitan Statistical Area",
+                    "Virginia Beach-Chesapeake-Norfolk, VA-NC Metropolitan Statistical Area",
+                    "Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",
+                    "Winchester, VA-WV Metropolitan Statistical Area",
+                    "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area",
+                    "Cincinnati, OH-KY-IN Metropolitan Statistical Area",
+                    "Clarksville, TN-KY Metropolitan Statistical Area",
+                    "Huntington-Ashland, WV-KY-OH Metropolitan Statistical Area",
+                    "Louisville/Jefferson County, KY-IN Metropolitan Statistical Area",
+                    "Paducah, KY-IL Metropolitan Statistical Area",
+                    "Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",
+                    "Providence-Warwick, RI-MA Metropolitan Statistical Area",
+                    "Allentown-Bethlehem-Easton, PA-NJ Metropolitan Statistical Area",
+                    "New York-Newark-Jersey City, NY-NJ Metropolitan Statistical Area",
+                    "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area",
+                    "Columbus, GA-AL Metropolitan Statistical Area",
+                    "LaGrange, GA-AL Micropolitan Statistical Area",
+                    "Providence-Warwick, RI-MA Metropolitan Statistical Area",
+                    "Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area",
+                    "Davenport-Moline-Rock Island, IA-IL Metropolitan Statistical Area",
+                    "Paducah, KY-IL Metropolitan Statistical Area",
+                    "St. Louis, MO-IL Metropolitan Statistical Area",
+                    "Logan, UT-ID Metropolitan Statistical Area",
+                    "Portland-Vancouver-Hillsboro, OR-WA Metropolitan Statistical Area",
+                    "Davenport-Moline-Rock Island, IA-IL Metropolitan Statistical Area",
+                    "Omaha, NE-IA Metropolitan Statistical Area",
+                    "Sioux City, IA-NE-SD Metropolitan Statistical Area",
+                    "Lebanon-Claremont, NH-VT Micropolitan Statistical Area",
+                    "Joplin, MO-KS Metropolitan Statistical Area",
+                    "Kansas City, MO-KS Metropolitan Statistical Area",
+                    "St. Joseph, MO-KS Metropolitan Statistical Area",
+                    "Portland-Vancouver-Hillsboro, OR-WA Metropolitan Statistical Area",
+                    "Joplin, MO-KS Metropolitan Statistical Area",
+                    "Kansas City, MO-KS Metropolitan Statistical Area",
+                    "St. Joseph, MO-KS Metropolitan Statistical Area",
+                    "St. Louis, MO-IL Metropolitan Statistical Area",
+                    "Sioux City, IA-NE-SD Metropolitan Statistical Area",
+                    "Sioux Falls, SD-MN Metropolitan Statistical Area"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-16",
+        "query": "Among states with at least two metropolitan areas, considering each multi-state metropolitan area separately in each state it belongs to, which state has the highest concentration of identity theft reports in a single metropolitan area?",
+        "answer": "Delaware",
+        "answer_type": "exact",
+        "data_sources": [
+            "State MSA Identity Theft data/*.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-17-1",
+                "query": "List all states with at least two metropolitan areas.",
+                "answer": [
+                    "Georgia",
+                    "NewHampshire",
+                    "Wisconsin",
+                    "Minnesota",
+                    "Maryland",
+                    "Pennsylvania",
+                    "Texas",
+                    "Florida",
+                    "Michigan",
+                    "Hawaii",
+                    "Tennessee",
+                    "Arkansas",
+                    "Ohio",
+                    "Nebraska",
+                    "Montana",
+                    "Indiana",
+                    "NewYork",
+                    "SouthCarolina",
+                    "Mississippi",
+                    "NorthCarolina",
+                    "PuertoRico",
+                    "Connecticut",
+                    "Oklahoma",
+                    "WestVirginia",
+                    "Colorado",
+                    "Maine",
+                    "Louisiana",
+                    "Utah",
+                    "NorthDakota",
+                    "Virginia",
+                    "Delaware",
+                    "Kentucky",
+                    "Massachusetts",
+                    "NewJersey",
+                    "Alabama",
+                    "Arizona",
+                    "California",
+                    "Nevada",
+                    "Illinois",
+                    "Idaho",
+                    "Oregon",
+                    "Iowa",
+                    "Vermont",
+                    "Kansas",
+                    "Washington",
+                    "Missouri",
+                    "NewMexico",
+                    "SouthDakota"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-16-2",
+                "query": "What is the maximum concentration of Identity Theft reports of one metropolitan area compared to its state in states with more than one metropolitan areas? Report a floating number rounded to 2 digits after decimal.",
+                "answer": 0.96,
+                "answer_type": "exact",
+                "data_sources": [
+                    "State MSA Identity Theft data/*.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-17",
+        "query": "If the 2007 report category distribution were exactly like the 2024 ones, how many reports in 2007 would be Auto Related (rounded to the nearest integer)?",
+        "answer": 32542,
+        "answer_type": "numeric_approximate",
+        "data_sources": [
+            "2024_CSN_Report_Count.csv",
+            "2024_CSN_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-17-1",
+                "query": "How many total reports were there in 2007?",
+                "answer": 1070447,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Report_Count.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-17-2",
+                "query": "What fraction of reports in 2024 were Auto Related?",
+                "answer": 0.0304,
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-18",
+        "query": "If the 2007 reports were distributed exactly like the 2024 ones, how many identity theft reports in 2007 would concern people ages 40 or older (rounded to the nearest thousand)?",
+        "answer": 91000,
+        "answer_type": "numeric_approximate",
+        "data_sources": [
+            "2024_CSN_Report_Count.csv",
+            "2024_CSN_Report_Categories.csv",
+            "2024_CSN_Identity_Theft_Reports_by_Age.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-18-1",
+                "query": "How many total reports were there in 2007?",
+                "answer": 1070447,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Report_Count.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-18-2",
+                "query": "What fraction of reports in 2024 were Identity Theft reports?",
+                "answer": 0.1754,
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-markos-5-subtask-3",
+                "query": "What fraction of identity theft reports in 2024 concerned people ages 40 or older?",
+                "answer": 0.4861,
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Identity_Theft_Reports_by_Age.csv"
+                ]
+            }
+        ]
+    }
+]

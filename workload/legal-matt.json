@@ -1,0 +1,287 @@
+[
+    {
+        "id": "legal-easy-26",
+        "query": "Which branch of the U.S. Military had the largest \"Median Fraud Loss\" reported by its service members in 2024?",
+        "answer": "U.S. Space Force",
+        "answer_type": "string_approximate",
+        "data_sources": [
+            "2024_CSN_Fraud, Identity Theft, and Other Reports by Military Consumers.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-26-1",
+                "query": "What are the military branches in the reports?",
+                "answer": ["U.S. Air Force", "U.S. Army", "U.S. Coast Guard", "U.S. Marines", "U.S. Navy", "U.S. Space Force"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Fraud, Identity Theft, and Other Reports by Military Consumers.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-26-2",
+                "query": "What are the mediam fraud losses of each military branch? Report a list of numbers in dollars without the dollar sign.",
+                "answer": [584, 731, 500, 727, 569, 1300],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_Fraud, Identity Theft, and Other Reports by Military Consumers.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-27",
+        "query": "Which states had \"Identity Theft\" as their top report category?",
+        "answer": [
+            "Arizona",
+            "California",
+            "Massachusetts",
+            "Ohio",
+            "Oklahoma",
+            "Rhode Island"
+        ],
+        "answer_type": "list",
+        "data_sources": [
+            "2024_CSN_State_Top_Ten_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-27-1",
+                "query": "Which file is needed to answer \"Which states had \"Identity Theft\" as their top report category?\"? Answer in a list of filenames.",
+                "answer": ["2024_CSN_State_Top_Ten_Report_Categories.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_State_Top_Ten_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-easy-28",
+        "query": "How many states had \"Prizes, Sweepstakes and Lotteries\" in their top-10 report categories in 2024?",
+        "answer": 27,
+        "answer_type": "exact",
+        "data_sources": [
+            "2024_CSN_State_Top_Ten_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-easy-28-1",
+                "query": "Which file is needed to answer \"How many states had \"Prizes, Sweepstakes and Lotteries\" in their top-10 report categories in 2024\"? Answer in a list of filenames.",
+                "answer": ["2024_CSN_State_Top_Ten_Report_Categories.csv"],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_State_Top_Ten_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-easy-28-2",
+                "query": "Which states have \"Prizes, Sweepstakes and Lotteries\" in its top-ten categories in 2024?",
+                "answer": [
+                    "Alabama",
+                    "Alaska",
+                    "Arkansas",
+                    "Hawaii",
+                    "Idaho",
+                    "Indiana",
+                    "Iowa",
+                    "Kansas",
+                    "Kentucky",
+                    "Louisiana",
+                    "Maine",
+                    "Michigan",
+                    "Minnesota",
+                    "Mississippi",
+                    "Missouri",
+                    "Montana",
+                    "Nebraska",
+                    "New Mexico",
+                    "North Dakota",
+                    "Oklahoma",
+                    "Oregon",
+                    "South Dakota",
+                    "Tennessee",
+                    "Vermont",
+                    "West Virginia",
+                    "Wisconsin",
+                    "Wyoming"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "2024_CSN_State_Top_Ten_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-29",
+        "query": "In 2024, as a percentage of all reports for the same demographic, did military consumers report a higher percentage of Imposter Scams than the general population? Answer Yes or No.",
+        "answer": "Yes",
+        "answer_type": "string_approximate",
+        "data_sources": [
+            "2024_CSN_Reports_by_Military_Consumers.csv",
+            "2024_CSN_Report_Categories.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-29-1",
+                "query": "What is the total number of reports by military consumers?",
+                "answer": 213831,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Reports_by_Military_Consumers.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-29-2",
+                "query": "What is the number of Imposter Scams reported by military consumers?",
+                "answer": 44587,
+                "answer_type": "exact",
+                "data_sources": [
+                    "2024_CSN_Reports_by_Military_Consumers.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-29-3",
+                "query": "What is the percentage of reports by military consumers which are Imposter Scams?",
+                "answer": 0.2085,
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Reports_by_Military_Consumers.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-29-4",
+                "query": "What is the percentage of reports by the general population which are Imposter Scams?",
+                "answer": 0.1307,
+                "answer_type": "numeric_approximate",
+                "data_sources": [
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-29-5",
+                "query": "Do military consumers report a higher percentage of Imposter Scams than the general population? Answer Yes or No.",
+                "answer": "Yes",
+                "answer_type": "string_approximate",
+                "data_sources": [
+                    "2024_CSN_Reports_by_Military_Consumers.csv",
+                    "2024_CSN_Report_Categories.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-30",
+        "query": "Among states with 5 or more metro areas, which metropolitan area had the largest percentage of fraud reports in its own state?",
+        "answer": "Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",
+        "answer_type": "exact",
+        "data_sources": [
+            "State MSA Fraud and Other Data/*.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-30-1",
+                "query": "List the states with five or more metro areas.",
+                "answer": [
+                    "Alabama",
+                    "Arizona",
+                    "Arkansas",
+                    "California",
+                    "Colorado",
+                    "Connecticut",
+                    "Florida",
+                    "Georgia",
+                    "Idaho",
+                    "Illinois",
+                    "Indiana",
+                    "Iowa",
+                    "Kansas",
+                    "Kentucky",
+                    "Louisiana",
+                    "Maryland",
+                    "Massachusetts",
+                    "Michigan",
+                    "Minnesota",
+                    "Mississippi",
+                    "Missouri",
+                    "New Jersey",
+                    "New York",
+                    "North Carolina",
+                    "Ohio",
+                    "Oregon",
+                    "Pennsylvania",
+                    "South Carolina",
+                    "Tennessee",
+                    "Texas",
+                    "Utah",
+                    "Virginia",
+                    "Washington",
+                    "West Virginia",
+                    "Wisconsin"
+                ],
+                "answer_type": "list",
+                "data_sources": [
+                    "State MSA Fraud and Other Data/*.csv"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "legal-hard-31",
+        "query": "Does there exist a metropolitan area in which the number of reports of identity theft exceeded the number of reports of fraud in 2024?",
+        "answer": "No",
+        "answer_type": "string_approximate",
+        "data_sources": [
+            "State MSA Fraud and Other Data/*.csv",
+            "State MSA Identity Theft Data/*.csv"
+        ],
+        "subtasks": [
+            {
+                "id": "legal-hard-31-1",
+                "query": "List the number of fraud reports for each area. Answer in a list of numbers",
+                "answer": [
+                    "# for a single state CSV",
+                    "df = pd.read_csv(state_fraud_csv_filepath)",
+                    "df = df.iloc[1:-4]",
+                    "column_names = list(df.iloc[0].to_dict().values())",
+                    "df.columns = [col.strip() for col in column_names]",
+                    "df = df.iloc[1:]",
+                    "df['# of Reports'] = df['# of Reports'].apply(lambda entry: int(entry.replace(',','')))",
+                    "metro_area_to_fraud_reports = **pd.Series(df['# of Reports'], index=df['Metropolitan Area'].values).to_dict()"
+                ],
+                "answer_type": "code",
+                "data_sources": [
+                    "State MSA Fraud and Other Data/*.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-31-2",
+                "query": "For each metro area, compute its number of identity theft reports",
+                "answer": [
+                    "# for a single state CSV",
+                    "df = pd.read_csv(state_identity_theft_csv_filepath)",
+                    "df = df.iloc[1:-4]",
+                    "column_names = list(df.iloc[0].to_dict().values())",
+                    "df.columns = [col.strip() for col in column_names]",
+                    "df = df.iloc[1:]",
+                    "df['# of Reports'] = df['# of Reports'].apply(lambda entry: int(entry.replace(',','')))",
+                    "metro_area_to_identity_theft_reports = **pd.Series(df['# of Reports'], index=df['Metropolitan Area'].values).to_dict()"
+                ],
+                "answer_type": "code",
+                "data_sources": [
+                    "State MSA Identity Theft Data/*.csv"
+                ]
+            },
+            {
+                "id": "legal-hard-matt-3-subtask-3",
+                "query": "Identify whether any metro area had more reports of identity theft than reports of fraud",
+                "answer": false,
+                "answer_type": "boolean",
+                "data_sources": [
+                    "State MSA Fraud and Other Data/*.csv",
+                    "State MSA Identity Theft Data/*.csv"
+                ]
+            }
+        ]
+    }
+]
