@@ -373,7 +373,7 @@
     },
     {
         "id": "legal-hard-16",
-        "query": "Among states with at least two metropolitan areas, find the metropolitan area that has the highest fraction of its state's identity theft reports in metropolitan areas. What state does it belong to?",
+        "query": "Among states with at least two metropolitan areas, considering each multi-state metropolitan area separately in each state it belongs to, which state has the highest concentration of identity theft reports in a single metropolitan area?",
         "answer": "Delaware",
         "answer_type": "exact",
         "data_sources": [
@@ -440,8 +440,8 @@
             },
             {
                 "id": "legal-hard-16-2",
-                "query": "Which metropolitan area that is not the only metropolitan area in its state has the highest fraction of its state's identity theft reports in metropolitan areas?",
-                "answer": "Delaware",
+                "query": "What is the maximum concentration of Identity Theft reports of one metropolitan area compared to its state in states with more than one metropolitan areas? Report a floating number rounded to 2 digits after decimal.",
+                "answer": 0.96,
                 "answer_type": "exact",
                 "data_sources": [
                     "State MSA Identity Theft data/*.csv"
@@ -451,7 +451,7 @@
     },
     {
         "id": "legal-hard-17",
-        "query": "If the 2007 reports were distributed exactly like the 2024 ones, how many reports in 2007 would be Auto Related (rounded to the nearest integer)?",
+        "query": "If the 2007 report category distribution were exactly like the 2024 ones, how many reports in 2007 would be Auto Related (rounded to the nearest integer)?",
         "answer": 32542,
         "answer_type": "numeric_approximate",
         "data_sources": [
@@ -460,30 +460,20 @@
         ],
         "subtasks": [
             {
-                "id": "legal-hard-markos-4-subtask-1",
+                "id": "legal-hard-17-1",
                 "query": "How many total reports were there in 2007?",
                 "answer": 1070447,
-                "answer_type": "numeric_approximate",
+                "answer_type": "exact",
                 "data_sources": [
                     "2024_CSN_Report_Count.csv"
                 ]
             },
             {
-                "id": "legal-hard-markos-4-subtask-2",
+                "id": "legal-hard-17-2",
                 "query": "What fraction of reports in 2024 were Auto Related?",
                 "answer": 0.0304,
                 "answer_type": "numeric_approximate",
                 "data_sources": [
-                    "2024_CSN_Report_Categories.csv"
-                ]
-            },
-            {
-                "id": "legal-hard-markos-4-subtask-3",
-                "query": "If the 2007 reports were distributed exactly like the 2024 ones, how many reports in 2007 would be Auto Related (rounded to the nearest integer)?",
-                "answer": 32542,
-                "answer_type": "numeric_approximate",
-                "data_sources": [
-                    "2024_CSN_Report_Count.csv",
                     "2024_CSN_Report_Categories.csv"
                 ]
             }
@@ -501,16 +491,16 @@
         ],
         "subtasks": [
             {
-                "id": "legal-hard-markos-5-subtask-1",
-                "query": "How many total identity theft reports were there in 2007?",
+                "id": "legal-hard-18-1",
+                "query": "How many total reports were there in 2007?",
                 "answer": 1070447,
-                "answer_type": "numeric_approximate",
+                "answer_type": "exact",
                 "data_sources": [
                     "2024_CSN_Report_Count.csv"
                 ]
             },
             {
-                "id": "legal-hard-markos-5-subtask-2",
+                "id": "legal-hard-18-2",
                 "query": "What fraction of reports in 2024 were Identity Theft reports?",
                 "answer": 0.1754,
                 "answer_type": "numeric_approximate",
@@ -524,17 +514,6 @@
                 "answer": 0.4861,
                 "answer_type": "numeric_approximate",
                 "data_sources": [
-                    "2024_CSN_Identity_Theft_Reports_by_Age.csv"
-                ]
-            },
-            {
-                "id": "legal-hard-markos-5-subtask-4",
-                "query": "If the 2007 reports were distributed exactly like the 2024 ones, how many identity theft reports in 2007 would concern people ages 40 or older (rounded to the nearest thousand)?",
-                "answer": 91000,
-                "answer_type": "numeric_approximate",
-                "data_sources": [
-                    "2024_CSN_Report_Count.csv",
-                    "2024_CSN_Report_Categories.csv",
                     "2024_CSN_Identity_Theft_Reports_by_Age.csv"
                 ]
             }
