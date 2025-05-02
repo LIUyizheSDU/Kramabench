@@ -55,63 +55,181 @@
         "data_sources": [ "nifc_human_caused_acres.csv", "nifc_lightning_caused_acres.csv" ],
         "runtime": 0.1
     },
-    {
-        "id": "wildfire-easy-8",
-        "query": "Did lighting or humans cause more fires impacting above 100 acres? Answer with **only** 'Lightning' or 'Human'. No explanation needed.",
-        "answer": "Lightning",
-        "answer_type": "exact",
-        "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
-        "runtime": 0.1
-    },
-    {
-        "id": "wildfire-easy-9",
-        "query": "How many more or less fatalities occurred due to wildfires on days with humidity less than 30% compared to the average? Positive numbers indicate more, and negative numbers will indicate less.",
-        "answer": -0.0053,
-        "answer_type": "numeric_approximate",
-        "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
-        "runtime": 0.1
-    },
-    {
-        "id": "wildfire-hard-10",
-        "query": "Are there more fires in Democratic states or Republican states?",
-        "answer": "Republican",
-        "answer_type": "exact",
-        "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv" ],
-        "runtime": 0.1
-    },
-    {
-        "id": "wildfire-hard-11",
-        "query": "Which state has the most land impacted by fire, per capita?",
-        "answer": "Wyoming",
-        "answer_type": "exact",
-        "data_sources": [ "wildfire_total_fires_p45_54.csv", "NST-EST2024-POP.xlsx" ],
-        "runtime": 0.1
-    },
-    {
-        "id": "wildfire-hard-12",
-        "query": "Has fire start distribution around the year shifted earlier or later over time? Answer with **only** 'Yes' or 'No'. No explanation needed.",
-        "answer": "No",
-        "answer_type": "string_approximate",
-        "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
-        "runtime": 6
-    },
-    {
-        "id": "wildfire-easy-13",
-        "query": "Which of the 10 NICC-defined geographic areas requested the most helicopters for firefighting?",
-        "answer": "Great Basin Area",
-        "answer_type": "string_approximate",
-        "data_sources": [ "cleaned_helicopter_requests_by_region.csv" ],
-        "runtime": 0.1
-    },
-    {
-        "id": "wildfire-hard-14",
-        "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2024?",
-        "answer": 0.645663,
-        "answer_type": "numeric_approximate",
-        "data_sources": [ "Wildfire_Acres_by_State.csv", "annual_aqi_by_county_2024.csv" ],
-        "runtime": 1
-    },
-    {
+{
+    "id": "wildfire-easy-8",
+    "query": "Did lighting or humans cause more fires impacting above 100 acres? Answer with **only** 'Lightning' or 'Human'. No explanation needed.",
+    "answer": "Lightning",
+    "answer_type": "exact",
+    "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
+    "runtime": 0.1,
+    "subtasks": [
+        {
+            "id": "wildfire-easy-8-1",
+            "query": "How many fires started by humans impacted more than 100 acres?",
+            "answer": 1691,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        },
+        {
+            "id": "wildfire-easy-8-2",
+            "query": "How many fires started by lightning impacted more than 100 acres?",
+            "answer": 3593,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        }
+    ]
+},
+{
+    "id": "wildfire-easy-9",
+    "query": "How many more or less fatalities occurred due to wildfires on days with humidity less than 30% compared to the average? Positive numbers indicate more, and negative numbers will indicate less. Round to two significant figures.",
+    "answer": -0.0053,
+    "answer_type": "numeric_approximate",
+    "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
+    "runtime": 0.1,
+    "subtasks": [
+        {
+            "id": "wildfire-easy-9-1",
+            "query": "How many fatalities occurred on days with humidity less than 30%?",
+            "answer": 0.0128,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        },
+        {
+            "id": "wildfire-easy-9-2",
+            "query": "What is the average number of fatalities on all days?",
+            "answer": 0.0182,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        }
+    ]
+},
+{
+    "id": "wildfire-hard-10",
+    "query": "Are there more fires in Democratic states or Republican states? Answer **only** with 'Democratic' or 'Republican'.",
+    "answer": "Republican",
+    "answer_type": "exact",
+    "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv" ],
+    "runtime": 0.1,
+    "subtasks": [
+        {
+            "id": "wildfire-hard-10-1",
+            "query": "Is Alabama a Democratic or Republican state?",
+            "answer": "Republican",
+            "answer_type": "exact",
+            "data_sources": [ "democratic_vs_republican_votes_by_usa_state_2020.csv" ]
+        },
+        {
+            "id": "wildfire-hard-10-2",
+            "query": "How many fires were burned in Republican states?",
+            "answer": 35782,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv" ]
+        },
+        {
+            "id": "wildfire-hard-10-3",
+            "query": "How many fires were burned in Democratic states?",
+            "answer": 29115,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv" ]
+        }
+    ]
+},
+{
+    "id": "wildfire-hard-11",
+    "query": "Which state has the most land area impacted by fire, per capita?",
+    "answer": "Wyoming",
+    "answer_type": "exact",
+    "data_sources": [ "wildfire_total_fires_p45_54.csv", "NST-EST2024-POP.xlsx" ],
+    "runtime": 0.1,
+    "subtasks": [
+        {
+            "id": "wildfire-hard-11-1",
+            "query": "What columns should be used to calculate the land impacted by fire per capita?",
+            "answer": [ "Total Acres Burned", "Population Estimate 2024" ],
+            "answer_type": "list",
+            "data_sources": [ "wildfire_total_fires_p45_54.csv", "NST-EST2024-POP.xlsx" ]
+        },
+    ]
+},
+{
+    "id": "wildfire-hard-12",
+    "query": "Has fire start distribution around the year shifted earlier or later over time? Answer with **only** 'Yes' or 'No'. No explanation needed.",
+    "answer": "No",
+    "answer_type": "string_approximate",
+    "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ],
+    "runtime": 6,
+    "subtasks": [
+        {
+            "id": "wildfire-hard-12-1",
+            "query": "What is the average start date of fires in 2004?",
+            "answer": "2002-07-02",
+            "answer_type": "date_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        },
+        {
+            "id": "wildfire-hard-12-2",
+            "query": "What is the average start date of fires in 2016?",
+            "answer": "2016-07-01",
+            "answer_type": "date_approximate",
+            "data_sources": [ "Fire_Weather_Data_2002-2014_2016.csv" ]
+        }
+    ]
+},
+{
+    "id": "wildfire-easy-13",
+    "query": "Which of the 10 NICC-defined geographic areas requested the most helicopters for firefighting?",
+    "answer": "Great Basin Area",
+    "answer_type": "string_approximate",
+    "data_sources": [ "cleaned_helicopter_requests_by_region.csv" ],
+    "runtime": 0.1,
+    "subtasks": [
+        {
+            "id": "wildfire-easy-13-1",
+            "query": "How many helicopter requests were made in the Great Basin Area?",
+            "answer": 232,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "cleaned_helicopter_requests_by_region.csv" ]
+        },
+        {
+            "id": "wildfire-easy-13-2",
+            "query": "How many helicopter requests were made in the Southern Area?",
+            "answer": 49,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "cleaned_helicopter_requests_by_region.csv" ]
+        }
+    ]
+},
+{
+    "id": "wildfire-hard-14",
+    "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2024?",
+    "answer": 0.645663,
+    "answer_type": "numeric_approximate",
+    "data_sources": [ "Wildfire_Acres_by_State.csv", "annual_aqi_by_county_2024.csv" ],
+    "runtime": 1,
+    "subtasks": [
+        {
+            "id": "wildfire-hard-14-1",
+            "query": "What day types are considered generally unsafe air quality days?",
+            "answer": ['Unhealthy Days', 'Very Unhealthy Days', 'Hazardous Days'],
+            "answer_type": "list",
+            "data_sources": [ "annual_aqi_by_county_2023.csv" ]
+        },
+        {
+            "id": "wildfire-hard-14-2",
+            "query": "What is the proportion of generally safe air quality days according to the EPA in 2024 in Alabama?",
+            "answer": 0.780924,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "annual_aqi_by_county_2023.csv" ]
+        },
+        {
+            "id": "wildfire-hard-14-3",
+            "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2022?",
+            "answer": -0.04043,
+            "answer_type": "numeric_approximate",
+            "data_sources": [ "Wildfire_Acres_by_State.csv", "annual_aqi_by_county_2022.csv" ]
+        }
+    ]
+},    {
         "id": "wildfire-easy-15",
         "query": "According to NOAA, in Julies, are the size of a fire and the median wind speed in the area strongly correlated? The answer should be Yes or No.",
         "answer": "No",
