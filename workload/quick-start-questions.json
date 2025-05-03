@@ -1265,13 +1265,13 @@
     },
     {
         "id": "environment-hard-1",
-        "query": "For the marine beaches, what is the Pearson product-moment correlation from 2002 to 2023 between the rainfall amount in inches during the months June, July, August, and September and the percentage exceedence rate?",
+        "query": "For the marine beaches (which are effected by rainfall in Boston and Chatham), what is the Pearson product-moment correlation (to 4 decimal places) from 2002 to 2023 between the rainfall amount in inches during the months June, July, August, and September and the percentage exceedence rate?",
         "answer": "0.2965",
         "answer_type": "numeric_approximate",
         "data_sources": [
             "beaches_community.csv",
             "monthly_precipitations_boston.csv",
-            "monthly_precipitations_chatam.csv",
+            "monthly_precipitations_chatham.csv",
             "water-body-testing-2022.csv",
             "water-body-testing-2021.csv",
             "water-body-testing-2020.csv",
