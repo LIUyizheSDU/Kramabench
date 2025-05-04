@@ -269,7 +269,7 @@
         "id": "biomedical-easy-2",
         "query": "What is the average age of patients with serous tumor samples analyzed in the study?",
         "answer": 68.5,
-        "answer_type": "approximate_number",
+        "answer_type": "exact",
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx"
         ],
