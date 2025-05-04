@@ -1,5 +1,6 @@
 from abc import abstractmethod
-from typing import Optional
+from typing import Dict, List, Optional
+import os
 
 
 class LLMInterface:
@@ -17,4 +18,8 @@ class LLMInterface:
     
     @abstractmethod
     def evaluate_paraphrase(self, system_answer: str, reference: str) -> Optional[bool]:
+        raise NotImplementedError("LLMInterface: This method should be implemented by the subclass!")
+    
+    @abstractmethod
+    def get_code_key_functionalities(self, file_path: str | os.PathLike, task: Dict) -> Optional[List[str]]:
         raise NotImplementedError("LLMInterface: This method should be implemented by the subclass!")
