@@ -1,8 +1,6 @@
 [
-    "Load roman_cities.csv into a dataframe.",
+    "Load roman_cities.csv.",
     "Filter rows where the Country column equals 'Greece'.",
-    "From the filtered rows select the 'Barrington Atlas Rank' column.",
-    "Convert each rank to a numeric value: if the entry contains 'or', split on 'or', convert both parts to integers and take their average; otherwise convert the entry directly to an integer.",
-    "Compute the mean of the converted numeric ranks.",
-    "Round the resulting mean to 4 decimal places and output it."
+    "Convert the 'Barrington Atlas Rank' column to numeric values: if the entry contains 'or', split on 'or', convert both parts to integers and take their average; otherwise convert the entry directly to an integer.",
+    "Compute the mean of the converted numeric ranks of the filtered Greece rows."
 ]

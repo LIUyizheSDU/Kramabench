@@ -1,0 +1,12 @@
+[
+    "Read all Swarm-A SP3 precise-orbit files for 2\u201329 Sep 2019 with a glob pattern.",
+    "Parse each file line-by-line: when a line starts with '*' record the epoch time; when a line starts with 'PL47' read X, Y, Z satellite coordinates (km) and store them with the current epoch.",
+    "Assemble the collected epochs and coordinates into a DataFrame indexed by time.",
+    "Convert Cartesian coordinates to geodetic parameters: altitude = \u221a(x\u00b2+y\u00b2+z\u00b2) \u2212 R_EARTH, latitude = asin(z/r) (deg), longitude = atan2(y,x) (deg).",
+    "Concatenate all daily DataFrames and keep rows between 2019-09-02 and 2019-09-29 (inclusive).",
+    "Load a mocked TIE-GCM grid from mock_tiegcm_grid_sept2019.npz to obtain latitude, longitude and altitude axes.",
+    "Create a 3-D geopotential field (J kg\u207b\u00b9) on that grid using g\u00b7(R_EARTH\u00b71000 + altitude\u00b71000), identical in lat/lon for each altitude level.",
+    "Build a RegularGridInterpolator with (lat_grid, lon_grid, alt_grid) and the geopotential field; set bounds_error=False so out-of-range points are allowed.",
+    "Wrap satellite longitudes to 0-360\u00b0, form (lat, lon, alt) query points from the trajectory and interpolate geopotential values for every time step.",
+    "Add the interpolated geopotential to the trajectory DataFrame, take the column mean, and print the mean geopotential energy per unit mass rounded to two decimals."
+]

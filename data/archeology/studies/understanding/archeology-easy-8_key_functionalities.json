@@ -1,7 +1,7 @@
 [
-    "Read the roman_cities.csv file into a DataFrame.",
+    "Read the roman_cities.csv.",
     "Filter out rows where the 'Select Bibliography' field is null to keep only cities that list at least one source.",
-    "Iterate over the remaining 'Select Bibliography' entries, remove period characters and split each entry on semicolons to isolate individual source strings.",
-    "Insert every cleaned source string into a Python set to guarantee uniqueness.",
-    "Return / print the size of that set, giving the total count of unique sources used in the dataset."
+    "Iterate over the remaining 'Select Bibliography' entries, normalize/remove period characters and split each entry on semicolons to isolate individual source strings.",
+    "Take the unique set of the source strings",
+    "Find the size of the unique set."
 ]

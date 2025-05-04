@@ -1,0 +1,10 @@
+[
+    "Read two local CSV files (58214_quiet.csv for May 1 \u2013 4 2024 and 58214_storm.csv for May 10 \u2013 13 2024) located in ../../data/astronomy/input/space-track/.",
+    "Validate each file: ensure it is not empty, does not contain the string \u201cNO RESULTS RETURNED\u201d, and that the columns EPOCH and MEAN_MOTION exist.",
+    "Collect rows whose EPOCH and MEAN_MOTION fields are non-empty; parse EPOCH strings into timezone-aware UTC datetimes, creating a list of usable GP-history records per file.",
+    "Sort the records by epoch and, for each analysis window, choose a start record (first record at/after the window start or the latest just before it) and an end record (last record at/before the window end that is after the chosen start record).",
+    "Convert the MEAN_MOTION value of each chosen record from revolutions per day to radians per second, then apply Kepler\u2019s third law (a = (mu / n\u00b2)^(1/3)) with mu = 398 600.4418 km\u00b3/s\u00b2 to obtain the satellite\u2019s semi-major axis in kilometres.",
+    "Compute the elapsed time between the start and end records in days and the change in semi-major axis (end \u2013 start).",
+    "Calculate the average semi-major-axis decay rate for the period as (\u0394a / \u0394t) in km/day (a negative number indicates decay).",
+    "Repeat the selection and calculation steps for the quiet and storm windows and print the two resulting rates as (average_quiet_rate_km_day, average_storm_rate_km_day)."
+]

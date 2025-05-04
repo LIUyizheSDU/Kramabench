@@ -1,0 +1,10 @@
+[
+    "Load the yearly\u2010mean sunspot CSV file using semicolon delimiter and assign explicit column names.",
+    "Create an integer year column by flooring the potentially fractional Year values (e.g., 1960.5 \u279c 1960).",
+    "Filter the data frame to retain only rows whose integer year falls between 1960 and 2020, inclusive.",
+    "Extract the year and mean sunspot number arrays from the filtered data for analysis.",
+    "Use scipy.signal.find_peaks on the sunspot series to locate maxima with a prominence \u226520 and a minimum separation of 5 years; record their indices, years, and values.",
+    "Apply the same peak-finding procedure to the negated series to identify minima (troughs) under identical prominence and distance requirements.",
+    "Compute the average solar\u2010cycle period by taking the mean difference between successive minima years if at least two minima exist.",
+    "Report (print) the calculated average period along with the years and sunspot numbers of all detected maxima and minima, effectively highlighting the top solar activity highs and lows in 1960-2020."
+]

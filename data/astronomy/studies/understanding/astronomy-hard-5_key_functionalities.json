@@ -1,0 +1,12 @@
+[
+    "Read OMNI-2 hourly data files for 2023 and 2024 with fixed field-widths, assign descriptive column names and concatenate them into one DataFrame.",
+    "Convert the year, day-of-year and hour columns of OMNI-2 into a timezone-aware (UTC) DateTimeIndex, sort chronologically and use it as the dataframe index.",
+    "Load every 2024 Swarm-B POD neutral-density text file: skip '#' comment lines, read whitespace-delimited fields, build a DateTimeIndex from the date & time columns (UTC) and concatenate all months into one tidy DataFrame.",
+    "Keep only the Swarm-B records that occur exactly on the hour (minute = 0, second = 0, microsecond = 0) so they can be matched to the hourly OMNI-2 data.",
+    "For any requested model time, derive NRLMSISE-00 driving parameters directly from the indexed OMNI-2 dataframe:\n    \u2022 daily Ap = mean of the 24 hourly Ap values of that day,\n    \u2022 F10.7 = the 00:00 UT row of that day,\n    \u2022 F10.7A = 81-day running mean of daily F10.7 ending the previous day (skip model run when the 81-day window is incomplete),\n    \u2022 3-hour Ap vector (length 7) generated from the mean Ap of consecutive 3-h bins according to the MATLAB/NRLMSISE specification.",
+    "Iterate over each hourly Swarm-B measurement, build the MSIS input set from OMNI-2 (skip hours with missing OMNI or missing F10.7A), extract satellite geodetic latitude, longitude and altitude (convert altitude to km).",
+    "Feed these inputs to a custom wrapper around the NRLMSISE-00 (gtd7 / gtd7d) model to obtain the modeled mass density \u03c1 for that epoch.",
+    "Collect modeled densities and observed Swarm-B densities in parallel NumPy arrays.",
+    "After processing the full year, compute the root-mean-square error: RMSE = sqrt(mean((pred \u2212 obs)\u00b2)) over all retained hours.",
+    "Print the resulting RMSE value, which quantifies NRLMSISE-00 performance against Swarm-B neutral-density observations for 2024."
+]

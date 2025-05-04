@@ -1,9 +1,7 @@
 [
-    "Load roman_cities.csv and worldcities.csv into pandas dataframes.",
-    "Extract longitude/latitude columns to build coordinate arrays for both datasets.",
+    "Load roman_cities.csv and worldcities.csv.",
+    "Extract longitude/latitude columns to build coordinates for both datasets.",
     "Filter the modern cities dataframe to keep only rows where population > 100,000.",
-    "Create a KD-tree (cKDTree) from the Roman-era city coordinates to enable fast spatial queries.",
-    "For every modern city coordinate, query the KD-tree for Roman cities within a 0.1-degree radius (query_ball_point with r = 0.1).",
-    "Collect indices of modern cities that have at least one Roman city within that radius.",
+    "For every modern city coordinate, query the Roman cities coordinates within a 0.1-degree radius (query_ball_point with r = 0.1). Collect modern cities that have at least one Roman city within that radius.",
     "Subset the modern cities dataframe to these indices and count the resulting rows to obtain the final answer."
 ]

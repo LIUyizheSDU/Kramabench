@@ -1,8 +1,8 @@
 [
-    "Load the first sheet of radiocarbon_database_regional.xlsx and climateMeasurements.xlsx into two pandas DataFrames.",
-    "Drop any rows or columns from both DataFrames that are entirely NaN to retain only valid data.",
-    "Create a calendar-year column in each DataFrame: for the archaeological samples, year = 1950 \u2212 date; for the climate data, year = 1950 \u2212 (Age_ky.1 rounded to kyrs \u00d7 1000).",
-    "For every archaeological sample row, find the nearest earlier and later climate-data rows (by \u2018year\u2019) to bracket the sample\u2019s year.",
-    "Pull the \u2018ODP 967 wet-dry index\u2019 from those two bracketing climate rows and mark the sample as increasing (1) if the later value minus earlier value is positive, otherwise 0.",
-    "Store this indicator in a new column \u2018isIncreasing\u2019, then take its mean across all samples and round to two decimals to obtain the percentage of time the wet-dry index was increasing."
+    "Load the first sheet of radiocarbon_database_regional.xlsx and climateMeasurements.xlsx.",
+    "Drop any rows or columns that are entirely NaN.",
+    "Get the calendar year: for the archaeological samples, year = 1950 \u2212 date",
+    "Get the calendar year for each table: for the climate data, year = 1950 \u2212 (Age_ky.1 rounded to kyrs \u00d7 1000).",
+    "Pull the \u2018ODP 967 wet-dry index\u2019 from the nearest earlier and later climate-data bracketing rows and mark the sample as increasing (1) if the later value minus earlier value is positive, otherwise 0.",
+    "Calculate the percentage of time the wet-dry index was increasing using individual sample data."
 ]

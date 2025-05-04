@@ -126,5 +126,9 @@ class GPTInterface(LLMInterface):
             logging.error(f"GPTInterface.get_code_key_functionalities: ERROR {e}")
             return None
         if isinstance(json_answer, dict):
-            json_answer = json_answer['key_steps']
+            ans = None
+            for k, v in json_answer.items():
+                ans = v
+                break
+            json_answer = ans
         return json_answer

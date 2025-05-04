@@ -1,0 +1,10 @@
+[
+    "Load the TLE text file for NORAD-ID 48445, strip blank lines, and split it into consecutive (line1, line2) pairs; raise an error if the number of lines is odd.",
+    "Create a Skyfield TimeScale object (ts) that will be reused for epoch and coordinate calculations.",
+    "For every TLE pair, build an EarthSatellite object, obtain the epoch-instant position with satellite.at(ts.utc(epoch)), convert the resulting GCRS position to ITRF XYZ metres via .itrf_xyz().m, and compute the satellite\u2019s geocentric distance; divide by 1000 to store altitude in kilometres.",
+    "Record the calculated altitude and its corresponding epoch timestamp for each TLE snapshot in two aligned lists.",
+    "Iterate over consecutive altitude measurements; for each pair compute the absolute altitude change (delta_a) and the elapsed time in hours (delta_t).",
+    "Flag a \u2018major altitude change\u2019 event when delta_a exceeds the user-supplied threshold (threshold_km = 1 km, i.e. >1000 m) AND the two measurements are within 12 hours (t_hours = 12).  Store the epoch and magnitude for every event that meets both conditions.",
+    "After scanning all TLE entries, report the maximum detected altitude change as well as the total count of flagged events, and list each event\u2019s epoch and delta_a.",
+    "Provide basic error handling: catch file-read problems, TLE line-count mismatch, missing density columns, or other unexpected exceptions, and print informative messages."
+]

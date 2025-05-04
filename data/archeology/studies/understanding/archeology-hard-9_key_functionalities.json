@@ -1,12 +1,10 @@
 [
-    "Read roman_cities.csv and worldcities.csv into DataFrames.",
-    "Keep only modern cities whose population column is greater than 1,000,000.",
-    "Convert the 'Barrington Atlas Rank' string of each Roman city into a numeric value: extract all numbers (handles 'or' cases), take their average; if none exist assign -1.",
+    "Read roman_cities.csv and worldcities.csv.",
+    "Filter for modern cities whose population column is greater than 1,000,000.",
+    "Convert the 'Barrington Atlas Rank' string of each Roman city into a numeric value: extract all numbers (handles 'or' cases), take their average; handle missing valuea.",
     "Build two coordinate arrays: Roman cities' (Longitude, Latitude) and modern cities' (lng, lat).",
-    "Create a cKDTree on the Roman-city coordinates to enable fast spatial queries.",
-    "For every modern city, find all Roman cities lying within 0.1 degrees using the KD-tree.",
-    "When matches exist, link that modern city with the Roman city that has the highest (max) numeric rank among the matches; store the matching indices.",
-    "Form two aligned Series: populations of the selected modern cities and ranks of their matched Roman cities.",
-    "Compute the Pearson correlation between the two Series.",
-    "Round the resulting correlation to six decimal places and print it."
+    "For every modern city, find all Roman cities lying within 0.1 degrees by coordinate.",
+    "When matches exist, link that modern city with the Roman city that has the highest (max) numeric rank among the matches.",
+    "Gather data vectors of the populations of the selected modern cities and ranks of their matched Roman cities.",
+    "Compute the Pearson correlation between the two demographics data vectors."
 ]

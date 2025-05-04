@@ -1,0 +1,9 @@
+[
+    "Parse all Swarm-A POD SP3 files in the 2018-10-01\u21922018-10-10 window: extract epochs marked by '*' lines, keep position records starting with 'PL47', convert XYZ km coordinates to altitude above a 6371 km Earth radius, and produce a datetime-indexed DataFrame.",
+    "Concatenate all altitude DataFrames, sort by time, resample to 1-hour means, and compute the hour-to-hour change in altitude (delta_alt); drop rows with missing values.",
+    "Load the OMNI2 solar-wind/IMF data CSV, restrict to 2018-10-01\u21922018-10-10, resample to 1-hour means, and drop rows containing NaNs.",
+    "Load every Swarm-A Sat_Density CSV covering the same 10-day window, rename the density column, concatenate them, resample to 1-hour means, and drop NaNs.",
+    "Merge the hourly delta_alt series with all OMNI2 and Sat_Density variables using an inner join on the datetime index, then drop any remaining NaNs to keep only simultaneous records.",
+    "For every column except delta_alt, skip those that are constant, compute the Pearson correlation coefficient between that column and delta_alt, and store the results in a dictionary.",
+    "Select the variable whose correlation has the largest absolute value, retrieve both its name and the correlation coefficient, and report them rounded to three decimals."
+]

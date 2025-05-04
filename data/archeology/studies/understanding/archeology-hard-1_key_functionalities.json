@@ -1,9 +1,9 @@
 [
-    "Load the two Excel workbooks (radio-carbon data and climate measurements) and read the first worksheet of each into dataframes.",
+    "Load the two Excel workbooks (radio-carbon data and climate measurements) and read the first worksheet of each.",
     "Remove rows or columns that are entirely NaN from both dataframes to ensure clean numeric processing.",
-    "Convert both chronologies to calendar years: for the radio-carbon table create a 'year' column as 1950 minus the \u2018date\u2019; for the climate table create a 'year' column as 1950 minus the rounded \u2018Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
-    "Define a helper function that, for any given calendar year, locates the closest earlier and later rows in the climate dataframe and linearly interpolates (or directly returns) the Potassium value \u2018K\u2019.",
+    "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the \u2018date\u2019",
+    "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded \u2018Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
     "Determine the span of human presence in the Maltese area by taking the minimum and maximum \u2018year\u2019 in the radio-carbon dataframe.",
-    "For every integer year within that span, call the interpolation helper to obtain the corresponding Potassium value and collect all such values.",
-    "Compute the mean of the collected Potassium values and print the result rounded to four decimal places."
+    "For every integer year within the human presence span, locate the closest earlier and later rows in the climate dataframe and linearly interpolates (or directly returns) the Potassium value \u2018K\u2019 and collect all these values.",
+    "Compute the mean of the collected Potassium values."
 ]

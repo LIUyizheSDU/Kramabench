@@ -1,11 +1,11 @@
 [
-    "Load the two Excel files and read the first sheet of each into data frames.",
-    "Filter the radiocarbon table to Homo-sapiens records and add a \u2018year\u2019 column computed as 1950 \u2212 date.",
-    "Restrict to Neolithic culture rows, then pick the row(s) whose Latitude equals the maximum Latitude among those Neolithic rows.",
-    "If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) \u2018year\u2019; save that year value.",
+    "Load archeology/input/climateMeasurements.xlsx, archeology/input/radiocarbon_database_regional.xlsx and read the first sheet of each into data frames.",
+    "Filter the radiocarbon table to Homo-sapiens records",
+    "Compute \u2018year\u2019 as 1950 \u2212 date.",
+    "Filter for Neolithic culture rows",
+    "Filter for row(s) whose Latitude equals the maximum Latitude. If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) \u2018year\u2019.",
     "Clean the climate table by dropping rows that are entirely NaN and columns that are entirely NaN.",
-    "Create a \u2018year\u2019 column in the climate table: 1950 \u2212 (Age_ky.1 rounded to 0) \u00d7 1000.",
+    "Compute year for the climate table: 1950 \u2212 (Age_ky.1 rounded to 0) \u00d7 1000.",
     "Find the year in the climate table closest to the chosen Neolithic year (smallest absolute difference).",
-    "Subset the climate table to all rows that have this closest year and take the maximum value of the \u2018Al\u2019 (aluminum) column across those rows.",
-    "Round the resulting maximum aluminum value to four decimal places and output it."
+    "Subset the climate table to all rows that have the year closest to the chosen Neolithic year and take the maximum value of the \u2018Al\u2019 (aluminum) column across those rows."
 ]
