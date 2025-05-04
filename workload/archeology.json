@@ -17,8 +17,8 @@
     },
     {
         "id": "archeology-hard-2",
-        "query": "Based on the approximate dating of the samples found in the Maltese area, what was the percent of time the wet-dry index was increasing? In percentage, round your answer to integer.",
-        "answer": 25,
+        "query": "Based on the approximate dating of the samples found in the Maltese area, what was the percent of time the wet-dry index was increasing? In percentage, round your answer to 2 decimal places.",
+        "answer": 16.51,
         "answer_type": "exact",
         "runtime": 6,
         "data_sources": [ "archeology/input/climateMeasurements.xlsx", "archeology/input/radiocarbon_database_regional.xlsx" ],
