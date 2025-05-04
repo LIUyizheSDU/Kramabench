@@ -133,9 +133,9 @@
     },
     {
         "id": "wildfire-hard-7",
-        "query": "Which geographic area had the most anomalous year (by Z-score) in terms of total acres burned compared to its historical annual average, and what year was it in?",
+        "query": "Which geographic area had the most anomalous year (by Z-score) in terms of total acres burned compared to its historical annual average, and what year was it in? Answer with the geographic area and year, separated by a comma.",
         "answer": "Northwest, 2020",
-        "answer_type": "list",
+        "answer_type": "string_approximate",
         "data_sources": [ "nifc_human_caused_acres.csv", "nifc_lightning_caused_acres.csv" ],
         "subtasks": [
             {
@@ -207,7 +207,7 @@
     "query": "By count, are there more fires in Democratic states or Republican states? Answer **only** with 'Democratic' or 'Republican'.",
     "answer": "Republican",
     "answer_type": "exact",
-    "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv" ],
+    "data_sources": [ "Wildfire_Acres_by_State.csv", "democratic_vs_republican_votes_by_usa_state_2020.csv", "wildfire_total_fires_p45_54.csv"],
     "runtime": 0.1,
     "subtasks": [
         {
@@ -235,18 +235,18 @@
 },
 {
     "id": "wildfire-hard-11",
-    "query": "Which state has the most land area impacted by fire, per capita?",
+    "query": "Which state has the most land area (in Acres) impacted by fire, per capita?",
     "answer": "Wyoming",
     "answer_type": "exact",
-    "data_sources": [ "wildfire_total_fires_p45_54.csv", "NST-EST2024-POP.xlsx" ],
+    "data_sources": [ "Wildfire_Acres_by_State.csv"],
     "runtime": 0.1,
     "subtasks": [
         {
             "id": "wildfire-hard-11-1",
             "query": "What columns should be used to calculate the land impacted by fire per capita?",
-            "answer": [ "Total Acres Burned", "Population Estimate 2024" ],
+            "answer": [ "Total Acres Burned", "Population" ],
             "answer_type": "list",
-            "data_sources": [ "wildfire_total_fires_p45_54.csv", "NST-EST2024-POP.xlsx" ]
+            "data_sources": [ "Wildfire_Acres_by_State.csv"]
         }
     ]
 },
@@ -300,8 +300,8 @@
 },
 {
     "id": "wildfire-hard-14",
-    "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2024?",
-    "answer": 0.645663,
+    "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2024? Round to 2 decimal places.",
+    "answer": 0.65,
     "answer_type": "numeric_approximate",
     "data_sources": [ "Wildfire_Acres_by_State.csv", "annual_aqi_by_county_2024.csv" ],
     "runtime": 1,
@@ -315,15 +315,15 @@
         },
         {
             "id": "wildfire-hard-14-2",
-            "query": "What is the proportion of generally safe air quality days according to the EPA in 2024 in Alabama?",
-            "answer": 0.780924,
+            "query": "What is the proportion of generally safe air quality days according to the EPA in 2024 in Alabama? Round to 4 decimal places.",
+            "answer": 0.7809,
             "answer_type": "numeric_approximate",
             "data_sources": [ "annual_aqi_by_county_2023.csv" ]
         },
         {
             "id": "wildfire-hard-14-3",
-            "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2022?",
-            "answer": -0.04043,
+            "query": "What is the correlation between the proportion of generally unsafe air quality days according to the EPA and the amount of land affected by fires in 2022? Round to 4 decimal places.",
+            "answer": -0.0404,
             "answer_type": "numeric_approximate",
             "data_sources": [ "Wildfire_Acres_by_State.csv", "annual_aqi_by_county_2022.csv" ]
         }
