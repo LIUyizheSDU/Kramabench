@@ -1,9 +1,10 @@
 [
     {
         "id": "biomedical-hard-1",
-        "query": "What is the correlation between the abundance of the protein PLK1 and the abundance of CHEK2-S163 in tumor samples? Exclude samples not in the study and with missing values.",
-        "answer": 0.4764813684787027,
-        "answer_type": "approximate_number",
+        "query": "What is the correlation between the abundance of the protein PLK1 and the abundance of CHEK2-S163 in tumor samples? Exclude samples not in the study and with missing values. Round the result to 4 decimal places.",
+        "answer": 0.4765,
+        "answer_type": "exact",
+        "runtime": 2,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx",
             "data/biomedical/raw/1-s2.0-S0092867420301070-mmc2.xlsx"
@@ -118,7 +119,7 @@
                 "id": "biomedical-hard-1-2",
                 "query": "What sheet contains the levels of the protein PLK1?",
                 "answer": "File: 1-s2.0-S0092867420301070-mmc2.xlsx, Sheet A-global-proteomics",
-                "answer_type": "string",
+                "answer_type": "string_approximate",
                 "data_sources": [
                     "1-s2.0-S0092867420301070-mmc2.xlsx"
                 ]
@@ -188,7 +189,7 @@
                 "id": "biomedical-hard-1-4",
                 "query": "What sheet contains the levels of the protein CHEK2-S163?",
                 "answer": "File: 1-s2.0-S0092867420301070-mmc2.xlsx, Sheet B-phospho-proteomics",
-                "answer_type": "string",
+                "answer_type": "string_approximate",
                 "data_sources": [
                     "1-s2.0-S0092867420301070-mmc2.xlsx"
                 ]
@@ -256,9 +257,9 @@
             },
             {
                 "id": "biomedical-hard-1-6",
-                "query": "What is the correlation between the levels of the protein PLK1 and CHEK2?",
-                "answer": 0.4764813684787027,
-                "answer_type": "approximate_number",
+                "query": "What is the correlation between the levels of the protein PLK1 and CHEK2? Round the result to 4 decimal places.",
+                "answer": 0.47645,
+                "answer_type": "exact",
                 "data_sources": [
                     "1-s2.0-S0092867420301070-mmc2.xlsx"
                 ]
@@ -270,6 +271,7 @@
         "query": "What is the average age of patients with serous tumor samples analyzed in the study?",
         "answer": 68.5,
         "answer_type": "exact",
+        "runtime": 150,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx"
         ],
@@ -309,7 +311,7 @@
                 "id": "biomedical-easy-2-3",
                 "query": "What is the average the age of patients with serous tumour samples in the study?",
                 "answer": 68.5,
-                "answer_type": "approximate_number",
+                "answer_type": "exact",
                 "data_sources": [
                     "1-s2.0-S0092867420301070-mmc1.xlsx"
                 ]
@@ -320,7 +322,8 @@
         "id": "biomedical-hard-3",
         "query": "What is the age of the patient with the lowest APP-Z score?",
         "answer": 60,
-        "answer_type": "approximate_number",
+        "answer_type": "exact",
+        "runtime": 1,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx",
             "1-s2.0-S0092867420301070-mmc7.xlsx"
@@ -340,9 +343,9 @@
     },
     {
         "id": "biomedical-hard-5",
-        "query":"What is the median number of variants per Mbp for the serous tumor samples in the study?",
-        "answer": 2.656346749406481,
-        "answer_type": "approximate_number",
+        "query":"What is the median number of variants per Mbp for the serous tumor samples in the study? Round the result to 4 decimal places.",
+        "answer": 2.6563,
+        "answer_type": "exact",
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx",
             "1-s2.0-S0092867420301070-mmc7.xlsx"
@@ -351,9 +354,10 @@
     },
     {
         "id": "biomedical-easy-6",
-        "query":"What the most common histology grade of the samples taken amongst patients in the study that are above 70?",
+        "query":"What the most common histology grade (i.e., FIGO_stage) of the samples taken amongst patients in the study that are above 70?",
         "answer": "IA",
         "answer_type": "exact",
+        "runtime": 0.5,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx"
         ],
@@ -363,7 +367,8 @@
         "id": "biomedical-hard-7",
         "query":"How many are the significant genes by acetylproteomics?",
         "answer": 16,
-        "answer_type": "approximate_number",
+        "answer_type": "exact",
+        "runtime": 0.5,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc1.xlsx"
         ],
@@ -384,7 +389,8 @@
         "id": "biomedical-easy-9",
         "query":"What is the difference between the average false discovery rate (FDR) in CBX3 genes and the average FDR for the rest of the genes?",
         "answer": -0.008003975,
-        "answer_type": "approximate_number",
+        "answer_type": "exact",
+        "runtime": 0.5,
         "data_sources": [
             "1-s2.0-S0092867420301070-mmc3.xlsx"
         ],
