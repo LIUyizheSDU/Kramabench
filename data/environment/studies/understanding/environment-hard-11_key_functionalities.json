@@ -1,10 +1,10 @@
 [
-    "Load the Pleasure Bay & Castle Island beach datasheet CSV, skipping the first row and using the next two rows as a hierarchical column header.",
-    "Flatten the two\u2013level header: replace any \"Unnamed\" placeholders with null, forward-fill the upper header row, then join the two levels with an underscore so each variable has a single column name.",
-    "Identify columns that contain measurements (those whose name includes \"Tag\" or \"Enterococcus\") versus identifying columns (all others); reshape the table from wide to long with melt, so each measurement becomes a row.",
-    "Split the combined header in the long table into separate 'Location' and 'Measure' fields, then pivot back to a tidy wide format with one row per sample-location and separate columns for each measure.",
-    "Convert all measure columns (e.g., Enterococcus counts and rainfall totals) to numeric, coercing non-numeric entries to NaN.",
-    "Remove rows whose Location equals \"Castle Island Playground\" so only Pleasure Bay samples remain.",
-    "Select only those Pleasure Bay samples whose Enterococcus count exceeds 104 CFU/100 mL (i.e., failed swimming standard).",
-    "Compute the mean of the '1-Day Rain' column for these exceedance rows and output that average rainfall value rounded to two decimals."
+    "Load pleasure_bay_and_castle_island_beach_datasheet.csv, skipping the first row and using the next two rows as a multi-level header.",
+    "Clean two\u2013level header: handle \"Unnamed\" placeholders, handle empty cells in the upper header row, then combine the two levels to get column names.",
+    "Identify columns that contain measurements (those whose name includes \"Tag\" or \"Enterococcus\") versus identifying columns (all others)",
+    "Have separate 'Location' and 'Measure' fields or handle this during filtering for Location.",
+    "Convert all measure columns (e.g., Enterococcus counts and rainfall totals) to numeric, handling malformed data.",
+    "Filter for rows whose Location is Pleasure Bay and not \"Castle Island Playground\".",
+    "Filter for rows with Enterococcus count exceeding 104 CFU/100 mL (failed swimming standard).",
+    "Compute the mean of the '1-Day Rain' column for these filtered rows and output that average rainfall value."
 ]

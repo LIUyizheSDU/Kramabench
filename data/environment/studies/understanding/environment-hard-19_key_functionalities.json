@@ -1,8 +1,9 @@
 [
-    "Loop through water-body testing files from 2002-2023, keep only rows where 'Beach Type Description' == 'Marine'.",
-    "Within those marine rows, count violations ('Violation' equal to 'yes') and divide by total marine rows to get yearly exceedance rate.",
-    "Build an array of those yearly rates, take absolute year-to-year differences (np.diff), and locate the index of the maximum jump; convert that index to the calendar year (argmax + start_year + 1).",
-    "Read Boston and Chatham monthly precipitation CSVs, keep rows 2-23 so years align to 2002-2023, and retain only the columns 'Year', 'Jun', 'Jul', 'Aug'.",
+    "Load water-body testing files from 2002-2023",
+    "Filter for data where 'Beach Type Description' == 'Marine'.",
+    "Within filtered marine rows, count violations ('Violation' equal to 'yes') and divide by total marine rows to get yearly exceedance rate.",
+    "Take absolute year-to-year differences, and locate the index of the maximum jump; convert that index to the calendar year (argmax + start_year + 1).",
+    "Read Boston and Chatham monthly precipitation CSVs, filter for years 2002-2023 (rows 2-23).",
     "For each month in each file, treat the string 'M' as missing, cast the column to float, and impute missing values with the column\u2019s median value.",
     "Compute a row-wise summer total (Jun+Jul+Aug) for each city, then sum Boston and Chatham totals to obtain a single rainfall total per year.",
     "Create an array of these combined yearly rainfall totals, take absolute year-to-year differences, and find the year with the largest change (argmax + start_year + 1).",

@@ -1,9 +1,8 @@
 [
     "For every year from 2002 through 2023, read the corresponding water-body-testing-<year>.csv file.",
-    "Keep only rows where Beach Type Description equals 'Marine' to focus on marine beaches.",
+    "Filter for rows where Beach Type Description equals 'Marine'.",
     "Standardise beach names by splitting the Beach Name field at '@' and retaining only the part before the delimiter to make names consistent across years.",
-    "Lower-case the Violation column so the value 'yes' can be detected reliably regardless of original capitalisation.",
-    "Collect just Beach Name and Violation columns from each yearly file and vertically concatenate all years into one dataframe.",
+    "Lower-case the Violation column or handle the normalization during filtering.",
     "Build the set of all unique marine beach names observed over the full 2002-2023 period.",
     "Build the set of beach names that ever recorded a violation (Violation == 'yes') in any year.",
     "Determine the beaches that never appear in the violation set (i.e., safe the whole time) by set difference and count them."

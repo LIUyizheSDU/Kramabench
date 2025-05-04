@@ -1,10 +1,13 @@
 [
-    "Load the environmental-justice populations file and keep only municipalities where the 'Percent of population in EJ BGs' column exceeds 90 %.  Collect these municipality names for later filtering.",
-    "Read the 2023 water-body testing file, keep only rows whose 'Beach Type Description' is 'Marine', then keep only beaches whose 'Community' is in the > 90 % EJ municipality list.  Clean beach names by dropping the text that follows the '@' character.",
-    "Read the Wollaston Beach daily datasheet CSV after verifying the file exists.  Skip the first row and use the next two rows as a multi-level header.",
-    "Flatten that multi-level header by forward-filling missing top-level entries, joining the two header levels with an underscore, and stripping white-space.",
-    "Reshape the datasheet from wide to long: treat all columns that contain either 'Tag' or 'Enterococcus' as value columns, melt everything else as identifiers, then split the combined header into separate 'Location' and 'Measure' parts.",
-    "Pivot the long data back to tidy wide form so each record contains numeric columns such as '1-Day Rain', '2-Day Rain', '3-Day Rain', and 'Enterococcus', converting all non-identifier fields to numeric with coercion of bad values to NaN.",
-    "Create a new 'Total Rain' column by summing the three individual rain columns; although created, the correlation is actually taken only between the existing '3-Day Rain' column and 'Enterococcus'.",
-    "Compute the Pearson correlation between '3-Day Rain' and 'Enterococcus' for the EJ community beach data and print the value rounded to two decimal places."
+    "Load environmental-justice-populations.csv",
+    "Filter the environmental-justice data for municipalities where the 'Percent of population in EJ BGs' column exceeds 90 %.",
+    "Load water-body-testing-2023.csv",
+    "Filter for rows whose 'Beach Type Description' is 'Marine'.",
+    "Clean beach names by dropping the text that follows the '@' character.",
+    "Load wollaston_beach_datasheet.csv.  Skip the first row and use the next two rows as a multi-level header.",
+    "Clean that multi-level header, handling missing top-level entries, combining the two header levels to get column names, and stripping white-space.",
+    "Clean and transform the data: treat all columns that contain either 'Tag' or 'Enterococcus' as value columns, treat everything else as identifiers",
+    "Have separate records for 'Location' and 'Measure' or handle thid during filtering for Location",
+    "Clean and transform the data so that each record contains numeric columns such as '1-Day Rain', '2-Day Rain', '3-Day Rain', and 'Enterococcus', converting all non-identifier fields to numeric, handling potential bad values to NaN.",
+    "Compute the Pearson correlation between '3-Day Rain' and 'Enterococcus' for the EJ community beach data."
 ]

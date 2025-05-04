@@ -1,11 +1,12 @@
 [
     "Load monthly precipitation data for Chatham from monthly_precipitations_chatham.csv.",
-    "Restrict dataframe to summer months (June, July, August) and the years 2002-2020.",
-    "Convert June, July and August precipitation columns to numeric and, where any value is missing, impute it with the median for that month calculated from the available years.",
+    "Filter for summer months (June, July, August)",
+    "Filter for years 2002-2020.",
+    "Convert precipitation columns to numeric and, where any value is missing, impute it with the median for that month calculated from the available years.",
     "Compute the total summer rainfall per year by summing June, July and August precipitation.",
     "Identify the year that has the maximum total summer rainfall (the wettest summer).",
-    "Read the corresponding water-body testing file for that year (water-body-testing-{year}.csv).",
-    "Filter rows to the target beach, \u201cBucks Creek\u201d.",
+    "Read the corresponding water-body testing file for the year with the wettest summer (water-body-testing-{year}.csv).",
+    "Filter water-body-testing data to the target beach, \u201cBucks Creek\u201d.",
     "Calculate the exceedance rate for that season as: (number of samples whose Violation column is 'yes') / (total number of samples for that beach).",
     "Convert the exceedance rate to a percentage and round to two decimal places before reporting."
 ]

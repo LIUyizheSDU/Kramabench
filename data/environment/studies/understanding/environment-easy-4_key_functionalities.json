@@ -1,8 +1,9 @@
 [
-    "Loop over each year from 2019 to 2023 and read the corresponding water-quality CSV file.",
-    "Filter the data to keep only records whose 'Beach Name' contains the word 'Wollaston', using na=False so missing names do not raise errors.",
+    "For each year from 2019 to 2023 read the corresponding water-quality CSV file.",
+    "Filter the data to keep only records whose 'Beach Name' contains the word 'Wollaston'",
     "Transform the 'Violation' column to lowercase and flag rows equal to 'yes' to identify tests that exceeded swimming-quality standards.",
-    "For each year compute the exceedance rate as (# of violations) \u00f7 (total Wollaston records); if a year has no records, set the rate to 0 to avoid division by zero.",
-    "Store the yearly rates, take their mean, and calculate 1 \u2212 mean_rate to obtain the overall fraction of time the beach met standards across 2019\u20132023.",
-    "Convert that fraction to a percentage (integer format when printed) and display the result."
+    "For each year compute the exceedance rate as (# of violations) \u00f7 (total Wollaston records).",
+    "Handles missing data for years with no records.",
+    "Take the mean of yearly rates, and calculate 1 \u2212 mean_rate to obtain the overall fraction of time the beach met standards across 2019\u20132023.",
+    "Convert that fraction to a percentage and display the result."
 ]

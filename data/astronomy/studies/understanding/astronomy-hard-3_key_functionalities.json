@@ -1,0 +1,12 @@
+[
+    "Read the hourly OMNI-2 file with fixed-width columns, assign column names, and keep the data in a pandas DataFrame.",
+    "Convert index columns (year, day-of-year, hour) into a timezone-aware UTC datetime, divide Kp by 10, and keep only the AP index; then time-slice the DataFrame to 2024-04-01 through 2024-06-30.",
+    "Load the satellite TLE file, read it two lines at a time to obtain individual TLE pairs, and build EarthSatellite objects with Skyfield.",
+    "For every TLE, compute the semi-major axis in kilometres using the satellite mean motion and Earth\u2019s gravitational parameter \u03bc = 398 600.4418 km\u00b3 s\u207b\u00b2, and store the result together with the TLE epoch.",
+    "Assemble the epochs and semi-major axes into a DataFrame, sort by epoch, and keep only TLEs dated 2024-05-01 \u2264 epoch < 2024-06-01.",
+    "Compute the change in semi-major axis between successive TLEs with .diff(), drop the first NaN created by the difference.",
+    "Round every TLE epoch to the nearest hour (>= 30 min up, < 30 min down) so that it aligns with the hourly AP grid; if more than one TLE lands in the same hour, average their semi-major-axis changes.",
+    "Create two aligned hourly time-series: (1) the rounded-and-averaged semi-major-axis change and (2) the AP index.",
+    "For each candidate lag from 0 to 47 hours, shift the AP series forward by that lag so that an AP value at t is compared to a semi-major-axis change at t + lag, inner-join the two series, and compute their Pearson correlation r; square r to obtain r\u00b2.",
+    "Track the lag that yields the maximum r\u00b2, skipping any lag where fewer than two overlapping points exist, and finally print the best lag together with its r\u00b2 value."
+]

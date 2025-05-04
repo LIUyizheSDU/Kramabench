@@ -1,11 +1,10 @@
 [
-    "Verify the beach data file exists and read it while skipping the first row and using the next two rows as a multi-level header.",
-    "Flatten the multi-level column names: forward-fill unnamed top-level cells, then join the two header levels with an underscore.",
-    "Classify columns containing either 'Tag' or 'Enterococcus' as location/measurement columns and treat all remaining columns as identifiers.",
-    "Reshape the data from wide to long with pandas.melt so each row becomes a single (identifier, location, variable) observation.",
-    "Split the combined 'Variable' column into separate 'Location' and 'Measure' fields and pivot back to tidy wide format with one row per (identifier, location).",
-    "Convert all measurement columns (except identifiers, 'Location', and 'Tag') to numeric, coercing non-numeric entries to NaN.",
-    "Create a 'Year' column by extracting the year part of the 'Date' string and retain only rows where Year equals 2024.",
-    "Flag exceedances where the 'Enterococcus' value is greater than 104 CFU/100 mL, then group by 'Date' and count how many sampling points exceeded the limit on each day.",
+    "Read constitution_beach_datasheet.csv while skipping the first row and using the next two rows as a multi-level header.",
+    "Handle multi-level column names: handle unnamed top-level cells, then combine the two header levels to get column names",
+    "Use columns containing 'Tag' or 'Enterococcus' as location/measurement columns and treat all remaining columns as identifiers.",
+    "Have separate 'Location' and 'Measure' fields or handle this while filtering for Location.",
+    "Convert all measurement columns (except identifiers, 'Location', and 'Tag') to numeric, handling malformed data.",
+    "Filter for data from 2024 by using the 'Date' column.",
+    "Flag exceedances by filtering for data where the 'Enterococcus' value is greater than 104 CFU/100 mL, then group by 'Date' and count how many sampling points exceeded the limit on each day.",
     "Select the dates whose exceedance count is less than the total number of sampling points (i.e., at least one point exceeded but at least one met the standard) and count these dates to answer the question."
 ]

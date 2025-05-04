@@ -1,12 +1,10 @@
 [
-    "Load monthly precipitation csv for each specified city.",
-    "Keep the Year plus Jun, Jul, Aug columns and truncate to the first 27 rows.",
-    "Replace the string 'M' with NaN, cast the month column to float and fill NaNs with that month\u2019s median across the remaining rows (imputing missing values).",
-    "Filter the precipitation frame to just the target years 2020\u20132023 and convert month columns to float again.",
+    "Load all four monthly_precipitation csvs, truncate out footer rows",
+    "Handling missing value represented by the string 'M': cast the month column to float and fill missing values with that month\u2019s median across the remaining rows.",
+    "Filter the precipitation frame to just the target years 2020\u20132023.",
     "For every city row, sum Jun + Jul + Aug to obtain a summer-season total, collect those totals for each city, then sum across all cities to get one rainfall value per year (fresh_rains).",
     "For each year 2020\u20132023, load the water-body-testing file.",
     "Select rows where Beach Type Description == 'Fresh'.",
-    "Compute the exceedance rate as (count of rows whose Violation == 'yes') divided by total fresh rows, append to list.",
-    "Convert the exceedance rate list to a NumPy array and multiply by 100 (percentage).",
+    "Compute the exceedance rate as (count of rows whose Violation is'yes') divided by total fresh rows, append to list.",
     "Compare the sequence of yearly rainfall totals with the sequence of yearly exceedance rates, checking whether year-to-year direction of change is identical for every interval, and return True/False accordingly."
 ]

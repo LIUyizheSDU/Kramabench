@@ -1,0 +1,6 @@
+[
+    "Read the worldcities.csv file into a dataframe.",
+    "Group the rows by the 'country' column and compute the mean of the 'population' column for each country.",
+    "Identify the country whose mean population value is the largest (using idxmax).",
+    "Print that country name as the answer."
+]

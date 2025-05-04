@@ -1,12 +1,10 @@
 [
-    "Read each beach CSV file, verifying the path exists; skip the first row and use the next two rows as a multi-level header.",
-    "Flatten the two-level column header: replace 'Unnamed' placeholders with NaNs, forward-fill top-level labels, then join the two levels with an underscore to form single-level column names.",
-    "Separate the columns that contain measurement data (those with 'Tag' or 'Enterococcus' in the name) from the identifier columns, then melt the dataframe so every measurement becomes its own row.",
-    "From the melted 'Variable' column, split on the underscore to create explicit 'Location' and 'Measure' fields, and pivot the table so each row has one value per measure (e.g., Enterococcus, Tag, 3-Day Rain).",
-    "Convert all non-identifier / non-text columns to numeric types with pandas to_numeric, coercing non-numeric entries to NaN.",
-    "For every beach dataframe: extract the sampling year from the 'Date' string (last comma-separated token) and create a Year column.",
-    "Filter the data to rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
-    "Mark exceedances by selecting rows where the numeric 'Enterococcus' value is greater than 104 counts/100 mL.",
-    "Count exceedance rows for each beach and track the beach with the largest count across all files.",
-    "After processing all beaches, output the beach (file name) that recorded the most exceedances under dry-weather conditions, along with the count."
+    "Read each boston beach CSV file. Skip the first row and use the next two rows as a multi-level header.",
+    "Handle the two-level column header: handle 'Unnamed' placeholders, handle empty cells in top-level header, then combine the two levels to get column names.",
+    "Separate the columns that contain measurement data (those with 'Tag' or 'Enterococcus' in the name) from the identifier columns.",
+    "Have separate 'Location' and 'Measure' fields, or handle the combined header during filtering for Location.",
+    "Convert all non-identifier / non-text columns to numeric types, handling malformed data.",
+    "Filter for rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
+    "Mark exceedances by filtering for rows where the numeric 'Enterococcus' value is greater than 104 counts/100 mL.",
+    "After the filters, count exceedance rows for each beach and get the beach with the largest count across all files."
 ]

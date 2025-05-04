@@ -304,7 +304,7 @@
         ]
     },
     {
-        "id": "atmosphere-hard-1",
+        "id": "astronomy-hard-1",
         "query": "Train a density prediction model using OMNI2 variables (f10.7_index, Kp_index, Dst_index_nT) and GOES variables (xrsb_flux_observed, xrsa_flux_observed) to forecast Swarm Alpha's atmospheric density 4 hours ahead. Specifically, use a 16-hour context window to project the input time series forward using a VAR(1) model, then fit a linear regression model to predict the next 4 hours of density. Use data from wu334 (OMNI/GOES: 2016-10-22 to 2016-10-23; Density: 2016-10-23 to 2016-10-24) for training, and wu335 (OMNI/GOES: 2016-10-25 to 2016-10-26; Density: 2016-10-29) for evaluation. Assume that all windows contain valid data. Note that the data for training VAR lies at the end of the OMNI2 and GOES input window, and the corresponding Swarm Alpha density data begins immediately afterward; i.e., they only overlap at a single timestamp where OMNI/GOES ends and Density begins. Report the RMSE between the predicted and observed density values over the 4-hour forecast window.",
         "answer": 1.211e-13,
         "answer_type": "exact",
@@ -319,7 +319,7 @@
         ],
         "subtasks": [
             {
-                "id": "atmosphere-hard-1-1",
+                "id": "astronomy-hard-1-1",
                 "query": "Locate all relavant files for wu334 and wu335 under STORM-AI/warmup/v2 for subfolders OMNI2, GOES, Sat_Density. What are the file names?",
                 "answer": [
                     "../../data/astronomy/input/STORM-AI/warmup/v2/OMNI2/omni2-wu334-20161022_to_20161024.csv",
@@ -340,7 +340,7 @@
                 ]
             },
             {
-                "id": "atmosphere-hard-1-2",
+                "id": "astronomy-hard-1-2",
                 "query": "Load OMNI2 and GOES data (f10.7_index, Kp_index, Dst_index_nT, xrsb_flux_observed, xrsa_flux_observed) for wu334 and wu335 and join them on timestamp, resample to hourly. How many rows are there in the resulting dataframe for wu334 and wu335? Report in a list for wu334 and wu335.",
                 "answer": [1441, 1441],
                 "answer_type": "list",
@@ -352,7 +352,7 @@
                 ]
             },
             {
-                "id": "atmosphere-hard-1-3",
+                "id": "astronomy-hard-1-3",
                 "query": "Load Swarm Alpha orbit mean density data for wu334 and wu335, resample to hourly. How many rows are there in the resulting dataframe for wu334 and wu335? Report in a list for wu334 and wu335.",
                 "answer": [73, 73],
                 "answer_type": "list",
@@ -362,7 +362,7 @@
                 ]
             },
             {
-                "id": "atmosphere-hard-1-4",
+                "id": "astronomy-hard-1-4",
                 "query": "Extract a 16-hour window ending at 2016-10-23 for training and at 2016-10-26 for testing, then forecast 4 hours of input variables using VAR(1). As a verification, report the number of average projected f10.7_index for the next 4 hours, for wu334 and wu335 in a pair.",
                 "answer": [75.0347655860013, 77.14561587141677],
                 "answer_type": "list",
@@ -374,7 +374,7 @@
                 ]
             },
             {
-                "id": "atmosphere-hard-1-5",
+                "id": "astronomy-hard-1-5",
                 "query": "Train a linear regression model on the 4-hour forecasted inputs to predict 4-hour forward Swarm Alpha density using the training set wu334. As a verification, report the rMSE of the linear regression model on the training set.",
                 "answer": 9.800935891391763e-27,
                 "answer_type": "exact",
@@ -385,7 +385,7 @@
                 ]
             },
             {
-                "id": "atmosphere-hard-1-6",
+                "id": "astronomy-hard-1-6",
                 "query": "Evaluate model on test forecast using test set and report RMSE, on wu335.",
                 "answer": 1.211e-13,
                 "answer_type": "exact",

@@ -53,8 +53,6 @@ max_ex_count = 0
 max_ex_beach = ''
 for beach_name in boston_beach_names:
     df = prepare_beach_datasheet(os.path.join(data_path, beach_name))
-    # Filter by year, only keep year between 2020 and 2024
-    df['Year'] = df['Date'].apply(lambda x: x.split(', ')[-1]).astype(int)
     df = df[(df['3-Day Rain'] == 0)]
     ex_df = df[df['Enterococcus'] > 104]
     if len(ex_df) > max_ex_count:

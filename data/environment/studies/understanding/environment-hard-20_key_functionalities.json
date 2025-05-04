@@ -1,12 +1,14 @@
 [
-    "Iterate over the four candidate cities (Boston, Chatham, Amherst, Ashburnham) and read each monthly_precipitations_<city>.csv file.",
-    "Keep only the 2015 row and the three summer-month columns (Jun, Jul, Aug); convert these month columns to float and sum them to obtain the total summer rainfall for that city.",
-    "Collect the four totals in a list/array and pick the city whose index corresponds to the extreme rainfall value that np.argmax returns (intended to identify the city to analyse further).",
-    "Read the master water-body-testing-2015.csv file.",
+    "Read all four monthly_precipitations_<city>.csvs.",
+    "Filter for year 2015",
+    "Filter for summer-month columns (Jun, Jul, Aug)",
+    "convert monthly measurement columns to float and sum them to obtain the total summer rainfall for each city.",
+    "After filtering and summing, pick the city with greatest rainfall value.",
+    "Read water-body-testing-2015.csv.",
     "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as \u201cChatham\u201d in the snippet) are retained.",
     "Clean the Beach Name field by splitting on \u201c@\u201d and keeping only the first part to get a canonical beach name.",
     "Group the filtered data by Beach Name to count total samples taken at each beach.",
-    "Within the same filtered set, isolate rows where the Violation column (converted to lower-case) equals \u201cyes\u201d and count those violations per beach.",
-    "Merge total-sample counts with violation counts, fill any missing violation counts with zero, and compute an exceedance (violation) rate for 2015 as Violations \u00f7 Total Samples.",
-    "Sort beaches by this exceedance rate in descending order; the first three entries of the sorted list represent the three most polluted beaches for the selected city."
+    "Within the same filtered set, isolate rows where the Violation column (normalized) equals \u201cyes\u201d and count those violations per beach.",
+    "Using total-sample counts and violation counts, and compute an exceedance (violation) rate for 2015 as Violations \u00f7 Total Samples.",
+    "Using the exceedance rate, get the three most polluted beaches."
 ]

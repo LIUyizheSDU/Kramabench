@@ -1,0 +1,9 @@
+[
+    "Construct full paths for the two Swarm-A density CSV files inside the base data directory.",
+    "Define which column holds the timestamp and which holds the atmospheric mass density measurement.",
+    "Create a helper function that (a) checks a file exists, (b) reads the CSV while parsing the timestamp column as datetimes, (c) sorts the data by time, (d) verifies the density column is present and the dataframe is not empty, and (e) returns the maximum value found in the density column (peak density) together with its occurrence time.",
+    "Call the helper function for the March-2014 file and again for the July-2018 file, capturing each peak density value.",
+    "Compute the ratio peak_Mar2014 / peak_Jul2018, but only if the first peak is positive to avoid divide-by-zero or sign issues.",
+    "Print the individual peak densities and the resulting ratio.",
+    "Wrap the whole workflow in try/except blocks to surface clear error messages for missing files, missing/renamed columns, empty dataframes, or any other unexpected failure."
+]

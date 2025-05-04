@@ -1,0 +1,8 @@
+[
+    "Read 0309geomag_forecast.txt to obtain the 3-day forecast bulletin issued on 09 Mar 2025.",
+    "Use a regular-expression on the \u2018Predicted Ap \u2026\u2019 line to capture the three forecasted Ap values (for 10-, 11-, and 12-Mar).",
+    "For each of the following files \u2013 0311geomag_forecast.txt, 0312geomag_forecast.txt, 0313geomag_forecast.txt \u2013 read the text and, with another regex, pull out the single \u2018Observed Ap\u2019 value that each bulletin reports for the previous day (yielding the observed Ap for 10-, 11-, and 12-Mar respectively).",
+    "Assemble the three forecasted values and the three observed values into two pandas Series objects of equal length.",
+    "Compute the mean absolute error (MAE) between the observed and forecasted series using sklearn.metrics.mean_absolute_error.",
+    "Output the forecast list, the observed list, and the resulting MAE, which quantifies the 09 Mar 2025 3-day Ap forecast error for 10\u201312 Mar 2025."
+]

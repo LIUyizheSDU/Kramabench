@@ -1,9 +1,9 @@
 [
     "Iterate through every year from 2002-2023 and read the corresponding water-body-testing-<year>.csv file.",
     "Filter each file to only freshwater records by checking Beach Type Description == 'fresh' (case-insensitive).",
-    "Within the freshwater subset, further filter rows where Violation == 'yes' to count bacterial exceedances.",
+    "Filter rows where Violation == 'yes' to count bacterial exceedances.",
     "For each year compute the annual exceedance rate: (freshwater violations / total freshwater samples) \u00d7 100 and store it.",
-    "Simultaneously accumulate the total number of freshwater samples and total violations across all years.",
+    "Accumulate the total number of freshwater samples and total violations across all years.",
     "After processing all years, calculate the overall (historical) average freshwater exceedance rate using the accumulated totals.",
     "Compare each annual rate to the historical average and collect the years whose rate is higher than that average."
 ]

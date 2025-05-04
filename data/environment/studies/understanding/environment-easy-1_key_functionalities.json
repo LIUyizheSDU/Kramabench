@@ -1,6 +1,6 @@
 [
-    "Load the 2013 beach\u2010sampling file (water-body-testing-2013.csv) into a DataFrame.",
-    "Filter the DataFrame to rows whose \u2018Violation\u2019 column equals 'yes', using a case-insensitive comparison to capture all positive violations.",
+    "Load the 2013 beach\u2010sampling file (water-body-testing-2013.csv).",
+    "Filter to rows whose \u2018Violation\u2019 column equals 'yes', using a case-insensitive comparison to capture all positive violations.",
     "Count the number of violating samples and divide by the total number of samples, then multiply by 100 to obtain the percentage of samples that exceeded bacterial standards.",
     "Round (or format) the resulting percentage to three decimal places before displaying."
 ]

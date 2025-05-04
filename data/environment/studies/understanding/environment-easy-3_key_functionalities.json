@@ -1,5 +1,5 @@
 [
-    "Read water-body-testing-2013.csv and water-body-testing-2012.csv from the data folder.",
+    "Read water-body-testing-2013.csv and water-body-testing-2012.csv.",
     "Standardise the 'Beach Name' column to lower-case in both dataframes so names match across files.",
     "For each year, group by beach name and: a) count total sample rows, b) count rows where 'Violation' equals 'yes' (case-insensitive), then compute exceedance_rate = num_violations / total_samples * 100.",
     "Inner-join the two yearly summary tables on beach name so only beaches present in both years (i.e., at least one 2012 sample) remain.",

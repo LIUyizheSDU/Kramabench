@@ -1092,7 +1092,7 @@
         "id": "environment-hard-18",
         "query": "Is it true (answer with True or False) that the exceedance rate of fresh water beaches follow the same trend as the rainfall, from 2020 to 2023 (inclusive)? (e.g., they both increase and decrease together) Impute missing values with median of the month in non-missing years.",
         "answer": "True",
-        "answer_type": "exact",
+        "answer_type": "string_approximate",
         "runtime": 0.5,
         "data_sources": [
             "monthly_precipitations_boston.csv",

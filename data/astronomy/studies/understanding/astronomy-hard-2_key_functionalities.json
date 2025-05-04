@@ -1,0 +1,12 @@
+[
+    "Read Kp index and solar-wind dynamic pressure text files; parse year, day-of-year and hour into pandas datetimes, build hourly time-indexed DataFrames.",
+    "Scale Kp values by dividing by 10 and resample both Kp and Pdyn series to 1-hour means.",
+    "Open Swarm Alpha ACCACAL CDF file, extract epoch times and the along-track calibrated acceleration component, convert epochs to pandas datetimes and resample to 1-hour means.",
+    "Merge the hourly acceleration, Kp and Pdyn DataFrames on their datetime index with an inner join and drop any rows that still contain NaNs.",
+    "Create the forecasting target by shifting the along-track acceleration column \u22123 hours (so inputs at t predict acceleration at t+3 h) and drop resulting NaNs.",
+    "Form two single-column feature matrices: one with Kp values and one with Pdyn values; define the shifted acceleration as y.",
+    "Split the rows chronologically into training (first 70 %) and test (remaining 30 %) sets for all three arrays to preserve time order.",
+    "Fit an ordinary least-squares LinearRegression model on the Kp feature and another on the Pdyn feature using the training portion.",
+    "Generate test-set predictions for each model and compute the root-mean-square error (RMSE) between y_test and each prediction.",
+    "Return / print the two RMSE numbers in the required list order: [RMSE for Kp model, RMSE for Pdyn model]."
+]

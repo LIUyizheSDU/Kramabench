@@ -1,0 +1,8 @@
+[
+    "Load the worldcities.csv file into a DataFrame.",
+    "Filter the rows where longitude (lng) is negative to keep cities in the Western Hemisphere.",
+    "Further filter those rows where latitude (lat) is negative to keep only cities that are simultaneously in the Southern Hemisphere.",
+    "Find the maximum value in the population column within this doubly-filtered set.",
+    "Select the row(s) whose population equals that maximum value (i.e., the most populous city in both hemispheres).",
+    "Output the corresponding city name."
+]

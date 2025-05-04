@@ -1,12 +1,10 @@
 [
-    "Loop over 2007-2009 water-quality CSVs; read each file into a dataframe.",
-    "Within each year\u2019s data frame, split rows by the value in 'Beach Type Description' to isolate Marine and Fresh beaches.",
+    "Read 2007-2009 water-quality-testing CSVs.",
+    "Tell whether a beach is Marine or Fresh from 'Beach Type Description'.",
     "For each type, flag exceedances by selecting rows whose 'Violation' column (case-insensitive) equals 'yes'.",
-    "Compute yearly exceedance rate for each type:  (# rows with violation) / (# rows of that beach type); store these three yearly rates in separate Marine and Fresh lists.",
-    "Convert the two lists of rates to NumPy arrays so they align by year (length 3).",
-    "Define summer months Jun, Jul, Aug.",
-    "For Marine rainfall: read the monthly_precipitations_*.csv files for Boston and Chatham; keep Year + summer-month columns, keep only 2007\u20132009 rows, cast month columns to float, sum Jun+Jul+Aug per year to get a summer total, then average the two cities\u2019 totals year-wise to obtain a (3-value) marine_rains array.",
-    "For Fresh rainfall: repeat the same procedure for Boston, Chatham, Amherst and Ashburnham, then average the four cities year-wise to obtain a (3-value) fresh_rains array.",
-    "Use numpy.corrcoef to calculate the Pearson correlation between the 3-year exceedance-rate vector and the 3-year rainfall vector for Marine beaches; repeat for Fresh beaches.",
-    "Print both correlation coefficients and compare them to determine which beach type shows the higher summer rainfall-exceedance correlation."
+    "Compute yearly exceedance rate for each type:  (# rows with violation) / (# rows of that beach type).",
+    "For Marine rainfall: read the monthly_precipitations_*.csv files for Boston and Chatham; keep Year + summer-month (Jun, Jul, Aug) columns, keep only 2007\u20132009 rows, cast month columns to float, sum Jun+Jul+Aug per year to get a summer total, then average the two cities\u2019 totals year-wise.",
+    "For Fresh rainfall: repeat the same procedure for Boston, Chatham, Amherst and Ashburnham, then average the four cities year-wise.",
+    "Calculate the Pearson correlation between the 3-year exceedance-rate vector and the 3-year rainfall vector for Marine beaches and Fresh beaches respectively.",
+    "Compare the correlation coefficients to determine which beach type shows the higher summer rainfall-exceedance correlation."
 ]

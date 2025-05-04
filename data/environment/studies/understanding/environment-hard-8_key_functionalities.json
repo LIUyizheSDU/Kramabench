@@ -1,11 +1,10 @@
 [
-    "Read the list of Boston-Harbor datasheet filenames (either from boston-harbor-beaches.txt or hard-coded fallback).",
-    "For every beach CSV: load with pandas while skipping the first row and using the next two rows as a multi-index header.",
-    "Flatten the two-level header by forward-filling empty first-level cells, then join the two levels with an underscore so each measurement becomes a single column name.",
+    "For every beach CSV in the Boston-Harbor datasheet: read while skipping the first row and using the next two rows as a multi-index header.",
+    "Clean the two-level header by handling empty first-level cells, then combine the two levels so to get columnn names.",
     "Separate measurement columns (those containing 'Tag' or 'Enterococcus'); treat everything else as identifying columns (date, time, etc.).",
-    "Reshape: melt the dataframe to long form on the measurement columns, parse the combined column into 'Location' and 'Measure', then pivot back so each row has separate numeric columns like Enterococcus and 1-Day Rain.",
-    "Cast all measurement columns to numeric with errors coerced to NaN to ensure proper comparisons.",
+    "Have separate records for 'Location' and 'Measure' or handle this during filtering for Location.",
+    "Cast all measurement columns to numeric.",
     "For each beach: filter rows where Enterococcus is greater than 104 to count total exceedances (fails).",
-    "Within those exceedances, further filter to rows where 1-Day Rain is greater than 0 to count failures that had rainfall in the previous 24 hours.",
-    "Accumulate counts across all beaches and finally compute the percentage = (rain-related exceedances \u00f7 total exceedances) \u00d7 100, printing the value rounded to two decimal places."
+    "Filter for rows where 1-Day Rain is greater than 0 to count failures that had rainfall in the previous 24 hours.",
+    "Accumulate counts across all beaches passing the filters and compute (rain-related exceedances \u00f7 total exceedances), possibly multiplying by 100 to get percentage value."
 ]

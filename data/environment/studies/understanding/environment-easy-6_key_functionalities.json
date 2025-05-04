@@ -1,8 +1,7 @@
 [
     "Iterate over the years 2002-2023 and read each yearly CSV (water-body-testing-<year>.csv).",
-    "For each file keep only rows where the column 'Beach Type Description' equals 'Marine'.",
-    "Within those marine rows keep only the ones whose 'Violation' value (lower-cased) is 'yes'.",
-    "Compute that year\u2019s exceedance rate as (number of violation rows) divided by (total marine rows).",
-    "Collect the yearly rates in a list and take their mean with numpy to obtain the overall average rate for 2002-2023.",
-    "Print the average exceedance rate (formatted as a percentage to two decimal places) and also print each year\u2019s individual rate."
+    "Filter for rows where the column 'Beach Type Description' equals 'Marine'.",
+    "FIlter for rows where the column 'Violation' value (lower-case/normalized) is 'yes'.",
+    "Compute the exceedance rate as (number of violation rows) divided by (total marine rows) for each year.",
+    "Take the mean of the yearly rates after filtering to obtain the overall average rate for 2002-2023."
 ]

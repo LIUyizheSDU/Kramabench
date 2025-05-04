@@ -1,0 +1,8 @@
+[
+    "Read worldcities.csv into a dataframe.",
+    "Filter rows where the 'capital' column equals 'primary' to keep only capital-city records.",
+    "Identify all unique countries represented in this filtered set.",
+    "For each country, if it has multiple capital records, select the capital with the largest 'population' value; otherwise keep the single record.",
+    "Collect the latitude ('lat') of the chosen capital for every country.",
+    "Compute the mean of these latitude values and round the result to four decimal places."
+]

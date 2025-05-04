@@ -1,11 +1,10 @@
 [
     "Loop over each Boston Harbor beach CSV filename in the predefined list.",
-    "For every file: verify it exists, then read it with `pd.read_csv`, skipping the first row and treating the next two rows as a multi-level header.",
-    "Flatten the two-level column index: forward-fill missing first-level names, drop the 'Unnamed' placeholders, and join the two levels with an underscore so each column has a single string header.",
-    "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier (ID) columns.",
-    "Reshape to tidy form: melt the dataframe on the ID columns so each measurement is its own row, then split the combined column name into \u2018Location\u2019 and \u2018Measure\u2019, and pivot so every row contains the numeric value of each measure for a specific date/location.",
-    "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric using `pd.to_numeric(..., errors='coerce')`.",
-    "Create a numeric Year column by parsing the year out of the 'Date' string, and keep only rows where the year is between 2020 and 2024 inclusive.",
-    "Find exceedances: rows where the 'Enterococcus' value is greater than 104.  If any exceedances are present the beach fails; if none exist the beach is printed as meeting the swimming standard 100 % of the time during 2020-2024.",
-    "The beaches for which no exceedances are printed constitute the final answer to the question."
+    "Read every Boston Harbor related csv file, skipping the first row and treating the next two rows as a multi-level header.",
+    "Clean the two-level column headers: handle missing first-level names, drop the 'Unnamed' placeholders, and combine the two levels to get column names.",
+    "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier columns.",
+    "Have separate records for \u2018Location\u2019 and \u2018Measure\u2019 or handle this during filtering for Location.",
+    "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric`.",
+    "Filter for rows where the year is between 2020 and 2024 inclusive by getting the year from the Date string.",
+    "Filter out rows where the 'Enterococcus' value is greater than 104. The rows left are beaches meeting the swimming standard 100 % of the time during 2020-2024."
 ]

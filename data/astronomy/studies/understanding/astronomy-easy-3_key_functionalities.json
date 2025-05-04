@@ -1,0 +1,12 @@
+[
+    "Read warmup initial state CSV, keep File ID and Altitude, rename to file_id and alt_km.",
+    "Iterate over every Swarm-A density CSV whose name contains 2015.",
+    "For each file: parse Timestamp column as datetime and keep only rows with year 2015.",
+    "Clean Orbit Mean Density column: convert to numeric, drop NaNs, cast to float, discard unrealistically large sentinel values (>1e30).",
+    "Keep only observations whose Timestamp time component equals 00:00:00.",
+    "Add file_id extracted from the CSV filename and retain Timestamp, file_id, and density.",
+    "Concatenate all cleaned per-file dataframes; raise error if none found.",
+    "Merge the concatenated density dataframe with the initial-state dataframe on file_id to attach altitude.",
+    "Select rows where altitude is between 450 km and 500 km inclusive.",
+    "Compute and report the mean of the Orbit Mean Density values in this altitude slice."
+]

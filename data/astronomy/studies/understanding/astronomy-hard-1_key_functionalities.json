@@ -1,0 +1,12 @@
+[
+    "Scan OMNI2, GOES and Swarm-density folders, pick the csv files whose date ranges overlap the requested training (wu334) and test (wu335) windows.",
+    "Read each selected csv with Timestamp parsing, keep the required OMNI2 columns (f10.7_index, Kp_index, Dst_index_nT) and GOES columns (xrsb_flux_observed, xrsa_flux_observed); divide Kp_index by 10 to restore its usual scale.",
+    "Merge OMNI2 and GOES data on Timestamp, sort and resample to 1-hour means so that every hour has a single row of the five driving variables; resample Swarm Alpha density to the same 1-hour grid in a separate dataframe.",
+    "Define two contiguous windows: (i) a 16-hour context ending at the last OMNI/GOES time stamp, (ii) the following 4 hours of density values that begin one hour after that stamp.",
+    "Within each 16-hour context solve a VAR(1) least-squares problem (Y = A\u00b7X) to obtain a 5\u00d75 coefficient matrix for the five drivers.",
+    "Iteratively propagate the last observed driver vector through the VAR(1) model to generate driver forecasts for the next 4 hours.",
+    "Create a feature matrix from these 4 propagated driver vectors (one row per forecast hour); apply a PolynomialFeatures(degree=1) transformer (effectively a pass-through) to feed a LinearRegression model.",
+    "Train the linear regression on wu334 by mapping the projected driver features to the actual Swarm density values observed in the 4-hour target window.",
+    "Apply the trained regression to the projected drivers of wu335 to obtain 4-hour density predictions and compute the root-mean-square error (RMSE) against the corresponding observed density values.",
+    "Report the RMSE; helper routines raise clear errors if required files, columns or data coverage are missing."
+]

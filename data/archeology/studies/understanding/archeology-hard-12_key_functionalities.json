@@ -1,0 +1,11 @@
+[
+    "Read worldcities.csv to build a set of modern country names that will be used to detect actors\u2019 home countries.",
+    "Load conflict_brecke.csv and iterate through each conflict record.",
+    "For each conflict, split the \u2018Conflict\u2019 text on \u201c-\u201d or \u201cand\u201d (otherwise treat it as a single-party conflict) to obtain two actor strings.",
+    "Extract start and end years for the conflict and convert them to integers.",
+    "Search each actor string for any substring that matches a country name from the world-cities list (case-insensitive); keep the first match or drop the conflict if either actor cannot be matched to a country.",
+    "Standardise actor ordering by sorting the two matched country names alphabetically, then store actor pair together with the conflict\u2019s start and end years.",
+    "Create a DataFrame from all kept rows and sort it by actor-A, actor-B, start year ascending, end year descending.",
+    "Pass the sorted data through a custom overlap-removal routine that, for each repeated actor pair, shifts the start year of later rows to one year after the previous row\u2019s end if the periods overlap, discarding rows whose adjusted start year surpasses the end year.",
+    "Count the remaining non-overlapping conflict rows and print that count as the final answer."
+]
