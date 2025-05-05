@@ -1,0 +1,5 @@
+[
+    "Read the file cleaned_helicopter_requests_by_region.csv.",
+    "Locate the index of the maximum value in the 'Total Helicopter Requests' column.",
+    "Select and return that row, which identifies the geographic area with the greatest number of helicopter requests."
+]

@@ -1,0 +1,8 @@
+[
+    "Read wildfire incident data and RAW station metadata CSV files into DataFrames.",
+    "Extract the unique station IDs used for fire monitoring from the fires data (`station_verified_in_psa`).",
+    "Ensure the station-ID field in the station metadata (`NWS ID`) is numeric so it can be compared with the ID list, coercing non-numeric values to NaN.",
+    "Subset the station metadata to only the rows whose `NWS ID` appears in the list of used stations.",
+    "From this filtered subset, drop missing values in the `Elevation` column and compute the mean elevation.",
+    "Print the count of unique stations, the count with elevation data, and the resulting average elevation."
+]

@@ -1,0 +1,7 @@
+[
+    "Load the Fire_Weather_Data_2002-2014_2016.csv file.",
+    "Filter the rows where the humidity column ('avrh_mean') is below 30 %.",
+    "Compute the mean of 'fatalities_last' for this filtered low-humidity subset.",
+    "Compute the overall mean of 'fatalities_last' for the entire data set.",
+    "Subtract the overall mean from the low-humidity mean to find how many more (positive) or fewer (negative) fatalities occurred on low-humidity days, and round this difference to four decimal places."
+]

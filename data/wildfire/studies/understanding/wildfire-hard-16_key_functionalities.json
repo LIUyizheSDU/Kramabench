@@ -1,0 +1,8 @@
+[
+    "Load the wildfire dataset from noaa_wildfires.csv.",
+    "Convert the start_date column to datetime format so month filtering can be performed.",
+    "Keep only the fires whose start_date month is January, February, or March.",
+    "Exclude rows whose cause is coded as 'U' (unknown) so only known-cause fires remain.",
+    "Build a contingency table (cross-tabulation) counting the number of fires for every combination of region and cause.",
+    "From the contingency table, obtain the chi-square statistic and the associated p-value."
+]

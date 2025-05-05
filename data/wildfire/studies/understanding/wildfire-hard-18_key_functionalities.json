@@ -1,0 +1,8 @@
+[
+    "Load noaa_wildfires.csv.",
+    "Create three binary indicator columns that equal 1 when the dominant strategy (at 25 %, 50 %, or 75 % containment) is 'Full Suppression' and 0 otherwise.",
+    "Drop any rows that contain missing values so the regression sample has complete data.",
+    "For each indicator level (25 %, 50 %, 75 %):\n  \u2022 Build a regression design matrix that contains the suppression-strategy indicator plus weather-control variables (avrh_mean, wind_med, erc_med, rain_sum) and fire-size control hec, then add a constant term.",
+    "Run an OLS regression with robust (HC3) standard errors using\n  \u2022 dependent variable = fire duration,\n  \u2022 independent variables = suppression indicator + weather / size controls, and record the summary.",
+    "Repeat the same three regressions but with dependent variable = number of threatened buildings (prim_threatened_aggregate), again using robust standard errors, and record those summaries as well. Use the regression outcome to answer the question."
+]

@@ -1,0 +1,8 @@
+[
+    "Load nifc_suppression_costs.tsv and nifc_human_caused_acres.tsv into separate dataframes.",
+    "Data cleaning: remove formatting characters (commas, dollar signs) from the \u2018Total\u2019 columns in each file and convert the cleaned strings to numeric floats.",
+    "Join the two tables on the shared Year column so each year has both its acres and suppression costs.",
+    "Compute a new column cost_per_acre by dividing cleaned yearly suppression cost by acres burned.",
+    "Locate the row with the maximum value in cost_per_acre to determine which year had the highest suppression cost per acre.",
+    "Print that year along with the cost_per_acre rounded to two decimal places."
+]

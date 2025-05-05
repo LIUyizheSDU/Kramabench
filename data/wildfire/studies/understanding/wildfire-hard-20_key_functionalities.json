@@ -1,0 +1,9 @@
+[
+    "Load noaa_wildfires.csv into a DataFrame.",
+    "Filter the rows to keep only those where control_year equals 2008.",
+    "Sort the 2008 fires in descending order by the column prim_threatened_aggregate (number of houses threatened/damaged).",
+    "Compute the total number of houses damaged for 2008 and calculate the 90 % threshold (total * 0.9, cast to int).",
+    "For the sorted fires, cumulatively sum prim_threatened_aggregate until the running sum meets or exceeds the threshold.",
+    "Capture the DataFrame index at which this cumulative sum first reaches 90 % of the damage total.",
+    "Calculate the percentage of fires needed to reach the 90 % damage threshold by dividing that index value by the total count of 2008 fires and print the result."
+]

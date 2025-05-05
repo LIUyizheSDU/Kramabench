@@ -1,0 +1,11 @@
+[
+    "Load noaa_wildfires_monthly_stats.csv while skipping the first three non-data rows.",
+    "Load nifc_wildfires.csv with tab delimiter.",
+    "Clean the NIFC 'Fires' column by removing commas and casting the values to integers.",
+    "Get 'Year' column in the NOAA dataframe from the 'Date' field.",
+    "Aggregate NOAA records to annual totals by summing 'Number of Fires' within each year.",
+    "Inner-join the NOAA annual totals with the cleaned NIFC data on the 'Year' column so only years present in both (2000 onward) are kept.",
+    "For every matched year, compute the difference in fire counts (NOAA minus NIFC).",
+    "Take the mean of these yearly differences to obtain the average discrepancy.",
+    "Round this mean difference to the nearest whole number and print it."
+]

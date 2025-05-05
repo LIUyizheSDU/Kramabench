@@ -1,0 +1,7 @@
+[
+    "Read Fire_Weather_Data_2002-2014_2016.csv",
+    "Convert 'hec' to acres (acres = hec * 2.741)",
+    "Filter rows where 'acres' > 100 to focus on large fires",
+    "Group the filtered data by 'cause' and count the number of fires in each category",
+    "Compare counts for 'Lightning' versus 'Human' and output whichever count is larger, printing only the winning label"
+]

@@ -1,0 +1,6 @@
+[
+    "Load the wildfire dataset (Wildfire_Acres_by_State.csv).",
+    "Compute 'acres per capita' by dividing 'Total Acres Burned' by 'Population' for each state.",
+    "Identify the row (state) with the maximum value in 'acres per capita'.",
+    "Return or display that row to reveal which state has the highest fire-impacted acres per resident."
+]

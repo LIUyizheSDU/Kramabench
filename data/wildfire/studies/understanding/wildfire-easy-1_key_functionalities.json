@@ -1,0 +1,8 @@
+[
+    "Load noaa_wildfires_monthly_stats.csv while skipping the first 3 non-data rows.",
+    "Sort the dataframe by the numeric yyyyMM \u2018Date\u2019 column to ensure chronological order.",
+    "Convert each yyyyMM value to an absolute month count (year*12 + month) to test whether two rows represent consecutive calendar months.",
+    "Slide a 3-row consecutive month window through the data, using the absolute month count method.",
+    "For every valid 3-month window, sum the \u2018Acres Burned\u2019 values; keep track of the window that produces the largest sum.",
+    "After scanning all windows, report the start date, end date, and total acres burned for the window with the maximum three-month burn total (and optionally print the rows themselves)."
+]

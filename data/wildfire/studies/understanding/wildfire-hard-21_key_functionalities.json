@@ -1,0 +1,12 @@
+[
+    "Load mapping of state abbreviations to full state names from state_abbreviation_to_state.json.",
+    "Read NOAA wildfire event data (noaa_wildfires.csv) and drop any rows with missing values.",
+    "Read monthly Zillow Home Value Index data for each state (ZHVI.csv).",
+    "Filter the wildfire data to only include events whose start_year is between 2005 and 2010 inclusive.",
+    "Convert start_day_of_year to a calendar month in wildfire record",
+    "Create a date string 'YYYY-MM-01' from calendar year month for wildfire data and use this and the state information to join with ZHVI price data",
+    "Multiply the price joined using state and month by prim_threatened_aggregate to compute the dollar value of residential property threatened/lost for that fire.",
+    "Sum by state and over time to obtain total property value lost per state during 2005-2010.",
+    "Take the three largest values of the state-wide totals.",
+    "Output corresponding state names."
+]

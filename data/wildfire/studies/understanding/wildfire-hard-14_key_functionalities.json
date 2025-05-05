@@ -1,0 +1,7 @@
+[
+    "Read annual air-quality (annual_aqi_by_county_2024.csv) and wildfire acreage (Wildfire_Acres_by_State.csv) datasets.",
+    "Aggregate the AQI data to state level by taking the mean of the good day proportion calculated as Good Days / Days with AQI in the AQI data.",
+    "Merge the state-level AQI dataframe with the wildfire dataframe on the State column.",
+    "Convert the 'Total Acres Burned' column to numeric to ensure proper calculations.",
+    "Compute the Pearson correlation between good day proportion and 'Total Acres Burned'."
+]

@@ -1,0 +1,9 @@
+[
+    "Load US state polygons (usa.gpkg) and NIFC geographic-area polygons (nifc_geographic_areas.gpkg) into geo data frames.",
+    "Convert the NIFC geo data CRS to match the CRS of the US states geo data so spatial operations align.",
+    "Dissolve the US states layer by the state-name column (adm1_name) so each state is represented by a single multipart geometry.",
+    "Run a spatial predicate join (predicate = 'intersects') between the dissolved state geometries and the NIFC polygons to find which states intersect each NIFC area.",
+    "Group the joined records by NIFC geographic-area name and abbreviation, and for each group count the number of unique states that intersect and collect the list of those states.",
+    "Determine the maximum state-count value.",
+    "Filter the nifc region data to the row(s) whose state count equals that maximum and print the corresponding NIFC geographic-area abbreviation(s) (and related info)."
+]

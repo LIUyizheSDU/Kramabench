@@ -1,0 +1,8 @@
+[
+    "Read wildfire acreage data (Wildfire_Acres_by_State.csv).",
+    "Read 2020 election results (democratic_vs_republican_votes_by_usa_state_2020.csv) and label each state as 'democrat' if its Democratic vote share is at least 50 %, otherwise 'republican'.",
+    "Merge the party labels into the wildfire acreage dataframe on state name with an outer join so every state remains even if one of the sources is missing an entry.",
+    "Read the file containing the total fire counts per state (wildfire_total_fires_p45_54.csv) and merge those counts into the combined dataframe on state name (outer join).",
+    "Group the merged dataframe by the party label and aggregate (sum) the column 'Total Fires' (and also sum acreage and population, though only fires are needed for the answer).",
+    "Compare the summed fire counts for the two parties to decide whether Democratic or Republican states experienced more fires."
+]

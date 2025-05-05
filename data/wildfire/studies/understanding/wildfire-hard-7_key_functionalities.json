@@ -1,0 +1,8 @@
+[
+    "Read nifc_human_caused_acres.csv and nifc_lightning_caused_acres.csv tab delimited.",
+    "Remove asterisks from all column names to standardise them.",
+    "For every geographic column convert the string values to numeric: handling 'N/A' and strip commas before casting to numbers.",
+    "Sum over the human-caused and lightning-caused acre values.",
+    "For every geographic area compute its historical mean and standard deviation across years, then calculate the z-score for each year: (annual value \u2013 mean) / std.",
+    "Search through the absolute z-scores for all areas and years to find the single largest (most extreme) value, and record the corresponding geographic area and year."
+]

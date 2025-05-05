@@ -1,0 +1,6 @@
+[
+    "Read the NOAA wild-fires dataset from noaa_wildfires.csv.",
+    "Filter the dataframe to include only fires that started in July by keeping rows whose start_day_of_year is between 181 (inclusive) and 213 (exclusive).",
+    "Compute the Pearson correlation coefficient between the fire size (column 'hec') and the median wind speed (column 'wind_med') for the July subset.",
+    "Determine whether the resulting correlation coefficient indicates a strong relationship (the code comments conclude it is not strong, hence the answer would be 'No')."
+]

@@ -1,0 +1,9 @@
+[
+    "Read the wildfire dataset Fire_Weather_Data_2002-2014_2016.csv.",
+    "Convert the 'start_date' column to datetime format, handling errors",
+    "Drop any rows where the converted 'start_date' is missing.",
+    "For each target year (2002\u20132014, 2016) extract the month component of 'start_date'.",
+    "Fit a Gaussian distribution to the month data of each year to obtain the mean (mu) and standard deviation (sigma).",
+    "Collect all yearly mu (and sigma) values into a list and create a table indexed by year.",
+    "Plot the yearly mu values to inspect whether the mean fire-start month shifts earlier or later over time; decide and output only 'Yes' or 'No' accordingly."
+]
