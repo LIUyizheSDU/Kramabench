@@ -425,9 +425,9 @@ class BaselineLLMSystem(System):
         for file in os.listdir(dataset_directory):
             if file.endswith(".csv"):
                 try:
-                    self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file), engine='python', on_bad_lines='warn')
+                    self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file), engine='python', on_bad_lines='skip')
                 except UnicodeDecodeError:
-                    self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file), engine='python', on_bad_lines='warn', encoding='latin-1')
+                    self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file), engine='python', on_bad_lines='skip', encoding='latin-1')
     
     @typechecked
     def serve_query(self, query: str, query_id:str="default_name-0") -> Dict:

@@ -167,7 +167,10 @@ class GPTInterface(LLMInterface):
         """
         On LLM induced error, return None. Caller takes care of error handling.
         """
-        
+        if len(sut_generated_pipeline) == 0:
+            with open(understanding_filepath, 'r') as f:
+                l = len(json.load(f))
+            return [False for _ in range(l)]
         messages = self._format_pipeline_evaluation_messages(understanding_filepath, sut_generated_pipeline, task)
         json_answer = None
         try:

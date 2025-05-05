@@ -22,6 +22,8 @@ def call_gpt(messages, model="gpt-4o"):
     
     max_retries = 5
     retry_count = 0
+    fatal = False
+    fatal_reason = None
     while retry_count < max_retries:
         try:
             ################### use to be openai.Completion.create(), now ChatCompletion ###################
@@ -36,15 +38,23 @@ def call_gpt(messages, model="gpt-4o"):
             break # break out of while loop if no error
         
         except Exception as e:
-            print(f"An error occurred: {e}. Retrying...")
-            retry_count += 1
-            time.sleep(10 * retry_count)  # Wait 
-            
-    if retry_count == max_retries:
+            print(f"An error occurred: {e}.")
+            if "context_length_exceeded" in f"{e}":
+                fatal = True
+                fatal_reason = f"{e}"
+                break
+            else:
+                print("Retrying...")
+                retry_count += 1
+                time.sleep(10 * retry_count)  # Wait 
+    
+    if fatal:
+        print(f"Fatal error occured. ERROR: {fatal_reason}")
+        res = f"Fatal error occured. ERROR: {fatal_reason}"
+    elif retry_count == max_retries:
         print("Max retries reached. Skipping...")
         res = "Max retries reached. Skipping..."
     else:
-        #print(result)
         try:
             res = result.choices[0].message.content
         except Exception as e:
