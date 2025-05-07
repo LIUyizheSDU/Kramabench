@@ -7,5 +7,5 @@
     "Normalizing the metro name column, by lower casing, removing the suffixes 'Metropolitan Statistical Area' or 'MSA', then stripping all non-alphanumeric characters.",
     "Inner join on msa_key so only metros present in both the fraud and population sources are retained (dropping unmatched entries automatically).",
     "Compute the identity-theft rate per 100 000 residents: fraud_per_100k = (# of Reports / interpolated_2023_population) * 100 000.",
-    "Select the row whose fraud_per_100k is maximal and print its original \u2018Metropolitan Area\u2019 name; this is the metro with the highest identity-theft rate."
+    "Select the row whose fraud_per_100k is maximal and print its original 'Metropolitan Area\u2019 name; this is the metro with the highest identity-theft rate."
 ]

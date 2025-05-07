@@ -66,35 +66,40 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-1-1",
-                "query": "Read 0309geomag_forecast.txt to obtain the 3-day forecast bulletin issued on 09 Mar 2025.",
+                "step": "Read 0309geomag_forecast.txt to obtain the 3-day forecast bulletin issued on 09 Mar 2025.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-1-2",
-                "query": "Use a regular-expression on the \u2018Predicted Ap \u2026\u2019 line to capture the three forecasted Ap values (for 10-, 11-, and 12-Mar).",
+                "step": "Use a regular-expression on the 'Predicted Ap \u2026\u2019 line to capture the three forecasted Ap values (for 10-, 11-, and 12-Mar).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-1-3",
-                "query": "For each of the following files \u2013 0311geomag_forecast.txt, 0312geomag_forecast.txt, 0313geomag_forecast.txt \u2013 read the text and, with another regex, pull out the single \u2018Observed Ap\u2019 value that each bulletin reports for the previous day (yielding the observed Ap for 10-, 11-, and 12-Mar respectively).",
+                "step": "For each of the following files \u2013 0311geomag_forecast.txt, 0312geomag_forecast.txt, 0313geomag_forecast.txt \u2013 read the text and, with another regex, pull out the single 'Observed Ap\u2019 value that each bulletin reports for the previous day (yielding the observed Ap for 10-, 11-, and 12-Mar respectively).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-1-4",
-                "query": "Assemble the three forecasted values and the three observed values.",
+                "step": "Assemble the three forecasted values and the three observed values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-1-5",
-                "query": "Compute the mean absolute error (MAE) between the observed and forecasted values",
+                "step": "Compute the mean absolute error (MAE) between the observed and forecasted values",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -157,28 +162,32 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-2-1",
-                "query": "Read swarma-wu016-20140314_to_20140317.csv and swarma-wu545-20180718_to_20180721.csv.",
+                "step": "Read swarma-wu016-20140314_to_20140317.csv and swarma-wu545-20180718_to_20180721.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-2-2",
-                "query": "Identify that 'Orbit Mean Density (kg/m^3)' holds the atmospheric mass density measurement.",
+                "step": "Identify that 'Orbit Mean Density (kg/m^3)' holds the atmospheric mass density measurement.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-2-3",
-                "query": "Record the maximum value found in the density column (peak density) for March 2014 and July 2018 respectively.",
+                "step": "Record the maximum value found in the density column (peak density) for March 2014 and July 2018 respectively.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-2-4",
-                "query": "Compute the ratio peak_Mar2014 / peak_Jul2018, but only if the first peak is positive to avoid divide-by-zero or sign issues.",
+                "step": "Compute the ratio peak_Mar2014 / peak_Jul2018, but only if the first peak is positive to avoid divide-by-zero or sign issues.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -247,63 +256,72 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-3-1",
-                "query": "Read warmup initial state CSV.",
+                "step": "Read warmup initial state CSV.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-2",
-                "query": "Read every Swarm-A density CSV whose name contains 2015.",
+                "step": "Read every Swarm-A density CSV whose name contains 2015.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-3",
-                "query": "Parse Timestamp column using datetime and filter for rows with year 2015.",
+                "step": "Parse Timestamp column using datetime and filter for rows with year 2015.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-4",
-                "query": "Clean Orbit Mean Density column: convert to numeric, drop NaNs, cast to float, discard unrealistically large sentinel values (>1e30).",
+                "step": "Clean Orbit Mean Density column: convert to numeric, drop NaNs, cast to float, discard unrealistically large sentinel values (>1e30).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-5",
-                "query": "Keep only observations whose Timestamp time component equals 00:00:00.",
+                "step": "Keep only observations whose Timestamp time component equals 00:00:00.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-6",
-                "query": "Add file_id extracted from the CSV filename and retain Timestamp, file_id, and density.",
+                "step": "Add file_id extracted from the CSV filename and retain Timestamp, file_id, and density.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-7",
-                "query": "Join the concatenated density dataframe with the initial-state dataframe on file_id to attach altitude.",
+                "step": "Join the concatenated density dataframe with the initial-state dataframe on file_id to attach altitude.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-8",
-                "query": "Select rows where altitude is between 450 km and 500 km inclusive.",
+                "step": "Select rows where altitude is between 450 km and 500 km inclusive.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-3-9",
-                "query": "Compute and report the mean of the Orbit Mean Density values in this altitude slice.",
+                "step": "Compute and report the mean of the Orbit Mean Density values in this altitude slice.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -372,56 +390,64 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-4-1",
-                "query": "Load the yearly\u2010mean sunspot CSV file using semicolon delimiter and assign explicit column names.",
+                "step": "Load the yearly\u2010mean sunspot CSV file using semicolon delimiter and assign explicit column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-2",
-                "query": "Get integer year by flooring the potentially fractional Year values (e.g., 1960.5 \u279c 1960).",
+                "step": "Get integer year by flooring the potentially fractional Year values (e.g., 1960.5 \u279c 1960).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-3",
-                "query": "Filter the data frame to retain only rows whose integer year falls between 1960 and 2020, inclusive.",
+                "step": "Filter the data frame to retain only rows whose integer year falls between 1960 and 2020, inclusive.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-4",
-                "query": "Extract the year and mean sunspot number arrays from the filtered data for analysis.",
+                "step": "Extract the year and mean sunspot number arrays from the filtered data for analysis.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-5",
-                "query": "On the sunspot series, locate maxima with a prominence \u226520 and a minimum separation of 5 years; record their indices, years, and values.",
+                "step": "On the sunspot series, locate maxima with a prominence \u226520 and a minimum separation of 5 years; record their indices, years, and values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-6",
-                "query": "On the sunspot series, locate minima (troughs) under identical prominence and distance requirements.",
+                "step": "On the sunspot series, locate minima (troughs) under identical prominence and distance requirements.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-7",
-                "query": "Compute the average solar\u2010cycle period by taking the mean difference between successive minima years if at least two minima exist.",
+                "step": "Compute the average solar\u2010cycle period by taking the mean difference between successive minima years if at least two minima exist.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-4-8",
-                "query": "Report (print) the calculated average period along with the years and sunspot numbers of all detected maxima and minima, effectively highlighting the top solar activity highs and lows in 1960-2020.",
+                "step": "Report (print) the calculated average period along with the years and sunspot numbers of all detected maxima and minima, effectively highlighting the top solar activity highs and lows in 1960-2020.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -469,42 +495,48 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-5-1",
-                "query": "Load the TLE text file for NORAD-ID 48445, strip blank lines, and split it into consecutive (line1, line2) pairs; raise an error if the number of lines is odd.",
+                "step": "Load the TLE text file for NORAD-ID 48445, strip blank lines, and split it into consecutive (line1, line2) pairs; raise an error if the number of lines is odd.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-5-2",
-                "query": "For every TLE pair, obtain the epoch-instant position, convert the resulting GCRS position to ITRF XYZ metres, and compute the satellite\u2019s geocentric distance.",
+                "step": "For every TLE pair, obtain the epoch-instant position, convert the resulting GCRS position to ITRF XYZ metres, and compute the satellite\u2019s geocentric distance.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-5-3",
-                "query": "Record the calculated altitude and its corresponding epoch timestamp for each TLE snapshot.",
+                "step": "Record the calculated altitude and its corresponding epoch timestamp for each TLE snapshot.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-5-4",
-                "query": "For each pair of consecutive altitude measurements, compute the absolute altitude change (delta_a) and the elapsed time in hours (delta_t).",
+                "step": "For each pair of consecutive altitude measurements, compute the absolute altitude change (delta_a) and the elapsed time in hours (delta_t).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-5-5",
-                "query": "Flag a \u2018major altitude change\u2019 event when delta_a exceeds the user-supplied threshold (threshold_km = 1 km, i.e. >1000 m) AND the two measurements are within 12 hours (t_hours = 12). Filter for every event that meets both conditions.",
+                "step": "Flag a 'major altitude change\u2019 event when delta_a exceeds the user-supplied threshold (threshold_km = 1 km, i.e. >1000 m) AND the two measurements are within 12 hours (t_hours = 12). Filter for every event that meets both conditions.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-5-6",
-                "query": "After processing all TLE entries, report the maximum detected altitude change as well as the total count of flagged events, and list each event\u2019s epoch and delta_a.",
+                "step": "After processing all TLE entries, report the maximum detected altitude change as well as the total count of flagged events, and list each event\u2019s epoch and delta_a.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -568,56 +600,64 @@
         "key_functionalities": [
             {
                 "id": "astronomy-easy-6-1",
-                "query": "Read two local CSV files (58214_quiet.csv for May 1 \u2013 4 2024 and 58214_storm.csv for May 10 \u2013 13 2024).",
+                "step": "Read two local CSV files (58214_quiet.csv for May 1 \u2013 4 2024 and 58214_storm.csv for May 10 \u2013 13 2024).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-2",
-                "query": "Handle missing data represented by \u201cNO RESULTS RETURNED\u201d",
+                "step": "Handle missing data represented by \u201cNO RESULTS RETURNED\u201d",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-3",
-                "query": "Collect rows whose EPOCH and MEAN_MOTION fields are non-empty; parse EPOCH strings into timezone-aware UTC datetimes, creating a list of usable GP-history records per file.",
+                "step": "Collect rows whose EPOCH and MEAN_MOTION fields are non-empty; parse EPOCH strings into timezone-aware UTC datetimes, creating a list of usable GP-history records per file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-4",
-                "query": "Sort the records by epoch and, for each analysis window, choose a start record (first record at/after the window start or the latest just before it) and an end record (last record at/before the window end that is after the chosen start record).",
+                "step": "Sort the records by epoch and, for each analysis window, choose a start record (first record at/after the window start or the latest just before it) and an end record (last record at/before the window end that is after the chosen start record).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-5",
-                "query": "Convert the MEAN_MOTION value of each chosen record from revolutions per day to radians per second, then apply Kepler\u2019s third law (a = (mu / n\u00b2)^(1/3)) with mu = 398 600.4418 km\u00b3/s\u00b2 to obtain the satellite\u2019s semi-major axis in kilometres.",
+                "step": "Convert the MEAN_MOTION value of each chosen record from revolutions per day to radians per second, then apply Kepler\u2019s third law (a = (mu / n\u00b2)^(1/3)) with mu = 398 600.4418 km\u00b3/s\u00b2 to obtain the satellite\u2019s semi-major axis in kilometres.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-6",
-                "query": "Compute the elapsed time between the start and end records in days and the change in semi-major axis (end \u2013 start).",
+                "step": "Compute the elapsed time between the start and end records in days and the change in semi-major axis (end \u2013 start).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-7",
-                "query": "Calculate the average semi-major-axis decay rate for the period as (\u0394a / \u0394t) in km/day (a negative number indicates decay).",
+                "step": "Calculate the average semi-major-axis decay rate for the period as (\u0394a / \u0394t) in km/day (a negative number indicates decay).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-easy-6-8",
-                "query": "Repeat the selection and calculation steps for the quiet and storm windows and print the two resulting rates as (average_quiet_rate_km_day, average_storm_rate_km_day).",
+                "step": "Repeat the selection and calculation steps for the quiet and storm windows and print the two resulting rates as (average_quiet_rate_km_day, average_storm_rate_km_day).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -729,63 +769,72 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-1-1",
-                "query": "Scan OMNI2, GOES and Swarm-density folders, pick the csv files whose date ranges overlap the requested training (wu334) and test (wu335) windows.",
+                "step": "Scan OMNI2, GOES and Swarm-density folders, pick the csv files whose date ranges overlap the requested training (wu334) and test (wu335) windows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-2",
-                "query": "Read each selected csv with Timestamp parsing, keep the required OMNI2 columns (f10.7_index, Kp_index, Dst_index_nT) and GOES columns (xrsb_flux_observed, xrsa_flux_observed); divide Kp_index by 10 to restore its usual scale.",
+                "step": "Read each selected csv with Timestamp parsing, keep the required OMNI2 columns (f10.7_index, Kp_index, Dst_index_nT) and GOES columns (xrsb_flux_observed, xrsa_flux_observed); divide Kp_index by 10 to restore its usual scale.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-3",
-                "query": "Merge OMNI2 and GOES data on Timestamp, sort and resample to 1-hour means so that every hour has a single row of the five driving variables; resample Swarm Alpha density to the same 1-hour grid in a separate dataframe.",
+                "step": "Merge OMNI2 and GOES data on Timestamp, sort and resample to 1-hour means so that every hour has a single row of the five driving variables; resample Swarm Alpha density to the same 1-hour grid in a separate dataframe.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-4",
-                "query": "Within each 16-hour context ending at the last OMNI/GOES time stamp, solve a VAR(1) least-squares problem (Y = A\u00b7X) to obtain a 5\u00d75 coefficient matrix for the five drivers.",
+                "step": "Within each 16-hour context ending at the last OMNI/GOES time stamp, solve a VAR(1) least-squares problem (Y = A\u00b7X) to obtain a 5\u00d75 coefficient matrix for the five drivers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-5",
-                "query": "Iteratively propagate the last observed driver vector through the VAR(1) model to generate driver forecasts for the following 4 hours of density values that begin one hour after that stamp.",
+                "step": "Iteratively propagate the last observed driver vector through the VAR(1) model to generate driver forecasts for the following 4 hours of density values that begin one hour after that stamp.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-6",
-                "query": "Create a feature matrix from these 4 propagated driver vectors (one row per forecast hour); apply a PolynomialFeatures(degree=1) transformer (effectively a pass-through) to feed a LinearRegression model.",
+                "step": "Create a feature matrix from these 4 propagated driver vectors (one row per forecast hour); apply a PolynomialFeatures(degree=1) transformer (effectively a pass-through) to feed a LinearRegression model.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-7",
-                "query": "Train the linear regression on wu334 by mapping the projected driver features to the actual Swarm density values observed in the 4-hour target window.",
+                "step": "Train the linear regression on wu334 by mapping the projected driver features to the actual Swarm density values observed in the 4-hour target window.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-8",
-                "query": "Apply the trained regression to the projected drivers of wu335 to obtain 4-hour density predictions and compute the root-mean-square error (RMSE) against the corresponding observed density values.",
+                "step": "Apply the trained regression to the projected drivers of wu335 to obtain 4-hour density predictions and compute the root-mean-square error (RMSE) against the corresponding observed density values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-1-9",
-                "query": "Report the RMSE; helper routines raise clear errors if required files, columns or data coverage are missing.",
+                "step": "Report the RMSE; helper routines raise clear errors if required files, columns or data coverage are missing.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -869,70 +918,80 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-2-1",
-                "query": "Read Kp index and solar-wind dynamic pressure text files; parse year, day-of-year and hour using datetime datetimes, build a unified hourlytime index",
+                "step": "Read Kp index and solar-wind dynamic pressure text files; parse year, day-of-year and hour using datetime datetimes, build a unified hourlytime index",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-2",
-                "query": "Scale Kp values by dividing by 10 and resample both Kp and Pdyn series to 1-hour means.",
+                "step": "Scale Kp values by dividing by 10 and resample both Kp and Pdyn series to 1-hour means.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-3",
-                "query": "Open Swarm Alpha ACCACAL CDF file, extract epoch times and the along-track calibrated acceleration component, convert epochs to datetimes and resample to 1-hour means.",
+                "step": "Open Swarm Alpha ACCACAL CDF file, extract epoch times and the along-track calibrated acceleration component, convert epochs to datetimes and resample to 1-hour means.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-4",
-                "query": "Merge the hourly acceleration, Kp and Pdyn DataFrames on their datetime index with an inner join on the time and drop any rows that still contain NaNs.",
+                "step": "Merge the hourly acceleration, Kp and Pdyn DataFrames on their datetime index with an inner join on the time and drop any rows that still contain NaNs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-5",
-                "query": "Create the forecasting target by shifting the along-track acceleration column \u22123 hours (so inputs at t predict acceleration at t+3 h) and drop resulting NaNs.",
+                "step": "Create the forecasting target by shifting the along-track acceleration column \u22123 hours (so inputs at t predict acceleration at t+3 h) and drop resulting NaNs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-6",
-                "query": "Form two single-column feature matrices: one with Kp values and one with Pdyn values; define the shifted acceleration as y.",
+                "step": "Form two single-column feature matrices: one with Kp values and one with Pdyn values; define the shifted acceleration as y.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-7",
-                "query": "Split the rows chronologically into training and test sets for all three arrays to preserve time order.",
+                "step": "Split the rows chronologically into training and test sets for all three arrays to preserve time order.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-8",
-                "query": "Fit an ordinary least-squares LinearRegression model on the Kp feature and another on the Pdyn feature using the training portion.",
+                "step": "Fit an ordinary least-squares LinearRegression model on the Kp feature and another on the Pdyn feature using the training portion.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-9",
-                "query": "Generate test-set predictions for each model and compute the root-mean-square error (RMSE) between y_test and each prediction.",
+                "step": "Generate test-set predictions for each model and compute the root-mean-square error (RMSE) between y_test and each prediction.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-2-10",
-                "query": "Return / print the two RMSE numbers in the required list order: [RMSE for Kp model, RMSE for Pdyn model].",
+                "step": "Return / print the two RMSE numbers in the required list order: [RMSE for Kp model, RMSE for Pdyn model].",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -994,70 +1053,80 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-3-1",
-                "query": "Read the hourly OMNI-2 file with fixed-width columns.",
+                "step": "Read the hourly OMNI-2 file with fixed-width columns.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-2",
-                "query": "Convert index columns (year, day-of-year, hour) into a timezone-aware UTC datetime; then slice for times from 2024-04-01 through 2024-06-30.",
+                "step": "Convert index columns (year, day-of-year, hour) into a timezone-aware UTC datetime; then slice for times from 2024-04-01 through 2024-06-30.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-3",
-                "query": "Load the satellite TLE file, read it two lines at a time to obtain individual TLE pairs, and build EarthSatellite objects with Skyfield.",
+                "step": "Load the satellite TLE file, read it two lines at a time to obtain individual TLE pairs, and build EarthSatellite objects with Skyfield.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-4",
-                "query": "For every TLE, compute the semi-major axis in kilometres using the satellite mean motion and Earth\u2019s gravitational parameter \u03bc = 398 600.4418 km\u00b3 s\u207b\u00b2, and store the result together with the TLE epoch.",
+                "step": "For every TLE, compute the semi-major axis in kilometres using the satellite mean motion and Earth\u2019s gravitational parameter \u03bc = 398 600.4418 km\u00b3 s\u207b\u00b2, and store the result together with the TLE epoch.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-5",
-                "query": "Assemble the epochs and semi-major axes and keep only TLEs dated 2024-05-01 \u2264 epoch < 2024-06-01.",
+                "step": "Assemble the epochs and semi-major axes and keep only TLEs dated 2024-05-01 \u2264 epoch < 2024-06-01.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-6",
-                "query": "Compute the change in semi-major axis between successive TLEs, handling edge cases.",
+                "step": "Compute the change in semi-major axis between successive TLEs, handling edge cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-7",
-                "query": "Round every TLE epoch to the nearest hour so that it aligns with the hourly AP grid; if more than one TLE lands in the same hour, average their semi-major-axis changes.",
+                "step": "Round every TLE epoch to the nearest hour so that it aligns with the hourly AP grid; if more than one TLE lands in the same hour, average their semi-major-axis changes.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-8",
-                "query": "Create two aligned hourly time-series: (1) the rounded-and-averaged semi-major-axis change and (2) the AP index.",
+                "step": "Create two aligned hourly time-series: (1) the rounded-and-averaged semi-major-axis change and (2) the AP index.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-9",
-                "query": "For each candidate lag from 0 to 47 hours, shift the AP series forward by that lag so that an AP value at t is compared to a semi-major-axis change at t + lag, inner-join the two series, and compute their Pearson correlation r; square r to obtain r\u00b2.",
+                "step": "For each candidate lag from 0 to 47 hours, shift the AP series forward by that lag so that an AP value at t is compared to a semi-major-axis change at t + lag, inner-join the two series, and compute their Pearson correlation r; square r to obtain r\u00b2.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-3-10",
-                "query": "Track the lag that yields the maximum r\u00b2, skipping any lag where fewer than two overlapping points exist, and finally print the best lag together with its r\u00b2 value.",
+                "step": "Track the lag that yields the maximum r\u00b2, skipping any lag where fewer than two overlapping points exist, and finally print the best lag together with its r\u00b2 value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1147,49 +1216,56 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-4-1",
-                "query": "Parse all Swarm-A POD SP3 files in the 2018-10-01\u21922018-10-10 window: extract epochs marked by '*' lines, keep position records starting with 'PL47', convert XYZ km coordinates to altitude above a 6371 km Earth radius, and produce datetime-indexed data.",
+                "step": "Parse all Swarm-A POD SP3 files in the 2018-10-01\u21922018-10-10 window: extract epochs marked by '*' lines, keep position records starting with 'PL47', convert XYZ km coordinates to altitude above a 6371 km Earth radius, and produce datetime-indexed data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-2",
-                "query": "Concatenate all altitude data, sort by time, resample to 1-hour means, and compute the hour-to-hour change in altitude (delta_alt); drop rows with missing values.",
+                "step": "Concatenate all altitude data, sort by time, resample to 1-hour means, and compute the hour-to-hour change in altitude (delta_alt); drop rows with missing values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-3",
-                "query": "Load the OMNI2 solar-wind/IMF data CSV, filter for 2018-10-01\u21922018-10-10, resample to 1-hour means, and drop rows containing NaNs.",
+                "step": "Load the OMNI2 solar-wind/IMF data CSV, filter for 2018-10-01\u21922018-10-10, resample to 1-hour means, and drop rows containing NaNs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-4",
-                "query": "Load every Swarm-A Sat_Density CSV covering the same 10-day window, rename the density column, resample to 1-hour means, and drop NaNs.",
+                "step": "Load every Swarm-A Sat_Density CSV covering the same 10-day window, rename the density column, resample to 1-hour means, and drop NaNs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-5",
-                "query": "Merge the hourly delta_alt series with all OMNI2 and Sat_Density variables using an inner join on the datetime, then drop any remaining NaNs to keep only simultaneous records.",
+                "step": "Merge the hourly delta_alt series with all OMNI2 and Sat_Density variables using an inner join on the datetime, then drop any remaining NaNs to keep only simultaneous records.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-6",
-                "query": "For every column except delta_alt, skip those that are constant, compute the Pearson correlation coefficient between that column and delta_alt, and store the results in a dictionary.",
+                "step": "For every column except delta_alt, skip those that are constant, compute the Pearson correlation coefficient between that column and delta_alt, and store the results in a dictionary.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-4-7",
-                "query": "Select the variable whose correlation has the largest absolute value, retrieve both its name and the correlation coefficient, and report them rounded to three decimals.",
+                "step": "Select the variable whose correlation has the largest absolute value, retrieve both its name and the correlation coefficient, and report them rounded to three decimals.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1262,70 +1338,80 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-5-1",
-                "query": "Read OMNI-2 hourly data files for 2023 and 2024 with fixed field-widths.",
+                "step": "Read OMNI-2 hourly data files for 2023 and 2024 with fixed field-widths.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-2",
-                "query": "Convert the year, day-of-year and hour columns of OMNI-2 into a timezone-aware (UTC) DateTimeIndex, sort chronologically and use it as the time index.",
+                "step": "Convert the year, day-of-year and hour columns of OMNI-2 into a timezone-aware (UTC) DateTimeIndex, sort chronologically and use it as the time index.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-3",
-                "query": "Load every 2024 Swarm-B POD neutral-density text file: skip '#' comment lines, read whitespace-delimited fields, build a time index from the date & time columns (UTC).",
+                "step": "Load every 2024 Swarm-B POD neutral-density text file: skip '#' comment lines, read whitespace-delimited fields, build a time index from the date & time columns (UTC).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-4",
-                "query": "Keep only the Swarm-B records that occur exactly on the hour (minute = 0, second = 0, microsecond = 0) so they can be matched to the hourly OMNI-2 data.",
+                "step": "Keep only the Swarm-B records that occur exactly on the hour (minute = 0, second = 0, microsecond = 0) so they can be matched to the hourly OMNI-2 data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-5",
-                "query": "For any requested model time, derive NRLMSISE-00 driving parameters directly from the indexed OMNI-2 dataframe:\n    \u2022 daily Ap = mean of the 24 hourly Ap values of that day,\n    \u2022 F10.7 = the 00:00 UT row of that day,\n    \u2022 F10.7A = 81-day running mean of daily F10.7 ending the previous day (skip model run when the 81-day window is incomplete),\n    \u2022 3-hour Ap vector (length 7) generated from the mean Ap of consecutive 3-h bins according to the MATLAB/NRLMSISE specification.",
+                "step": "For any requested model time, derive NRLMSISE-00 driving parameters directly from the indexed OMNI-2 dataframe:\n    \u2022 daily Ap = mean of the 24 hourly Ap values of that day,\n    \u2022 F10.7 = the 00:00 UT row of that day,\n    \u2022 F10.7A = 81-day running mean of daily F10.7 ending the previous day (skip model run when the 81-day window is incomplete),\n    \u2022 3-hour Ap vector (length 7) generated from the mean Ap of consecutive 3-h bins according to the MATLAB/NRLMSISE specification.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-6",
-                "query": "For each hourly Swarm-B measurement, build the MSIS input set from OMNI-2 (skip hours with missing OMNI or missing F10.7A), extract satellite geodetic latitude, longitude and altitude (convert altitude to km).",
+                "step": "For each hourly Swarm-B measurement, build the MSIS input set from OMNI-2 (skip hours with missing OMNI or missing F10.7A), extract satellite geodetic latitude, longitude and altitude (convert altitude to km).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-7",
-                "query": "Feed these inputs to a custom wrapper around the NRLMSISE-00 (gtd7 / gtd7d) model to obtain the modeled mass density \u03c1 for that epoch.",
+                "step": "Feed these inputs to a custom wrapper around the NRLMSISE-00 (gtd7 / gtd7d) model to obtain the modeled mass density \u03c1 for that epoch.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-8",
-                "query": "Collect modeled densities and observed Swarm-B densities in parallel NumPy arrays.",
+                "step": "Collect modeled densities and observed Swarm-B densities in parallel NumPy arrays.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-9",
-                "query": "After processing the full year, compute the root-mean-square error: RMSE = sqrt(mean((pred \u2212 obs)\u00b2)) over all retained hours.",
+                "step": "After processing the full year, compute the root-mean-square error: RMSE = sqrt(mean((pred \u2212 obs)\u00b2)) over all retained hours.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-5-10",
-                "query": "Print the resulting RMSE value, which quantifies NRLMSISE-00 performance against Swarm-B neutral-density observations for 2024.",
+                "step": "Print the resulting RMSE value, which quantifies NRLMSISE-00 performance against Swarm-B neutral-density observations for 2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1377,70 +1463,80 @@
         "key_functionalities": [
             {
                 "id": "astronomy-hard-6-1",
-                "query": "Read all Swarm-A SP3 precise-orbit files for 2\u201329 Sep 2019 with a glob pattern.",
+                "step": "Read all Swarm-A SP3 precise-orbit files for 2\u201329 Sep 2019 with a glob pattern.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-2",
-                "query": "Parse each file line-by-line: when a line starts with '*' record the epoch time; when a line starts with 'PL47' read X, Y, Z satellite coordinates (km) and store them with the current epoch.",
+                "step": "Parse each file line-by-line: when a line starts with '*' record the epoch time; when a line starts with 'PL47' read X, Y, Z satellite coordinates (km) and store them with the current epoch.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-3",
-                "query": "Assemble the collected epochs and coordinates and index by time.",
+                "step": "Assemble the collected epochs and coordinates and index by time.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-4",
-                "query": "Convert Cartesian coordinates to geodetic parameters: altitude = \u221a(x\u00b2+y\u00b2+z\u00b2) \u2212 R_EARTH, latitude = asin(z/r) (deg), longitude = atan2(y,x) (deg).",
+                "step": "Convert Cartesian coordinates to geodetic parameters: altitude = \u221a(x\u00b2+y\u00b2+z\u00b2) \u2212 R_EARTH, latitude = asin(z/r) (deg), longitude = atan2(y,x) (deg).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-5",
-                "query": "Filter for rows between 2019-09-02 and 2019-09-29 (inclusive).",
+                "step": "Filter for rows between 2019-09-02 and 2019-09-29 (inclusive).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-6",
-                "query": "Load a mocked TIE-GCM grid from mock_tiegcm_grid_sept2019.npz to obtain latitude, longitude and altitude axes.",
+                "step": "Load a mocked TIE-GCM grid from mock_tiegcm_grid_sept2019.npz to obtain latitude, longitude and altitude axes.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-7",
-                "query": "Create a 3-D geopotential field (J kg\u207b\u00b9) on that grid using g\u00b7(R_EARTH\u00b71000 + altitude\u00b71000), identical in lat/lon for each altitude level.",
+                "step": "Create a 3-D geopotential field (J kg\u207b\u00b9) on that grid using g\u00b7(R_EARTH\u00b71000 + altitude\u00b71000), identical in lat/lon for each altitude level.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-8",
-                "query": "Perform regular grid interpolation with (lat_grid, lon_grid, alt_grid) and the geopotential field; set bounds_error=False so out-of-range points are allowed.",
+                "step": "Perform regular grid interpolation with (lat_grid, lon_grid, alt_grid) and the geopotential field; set bounds_error=False so out-of-range points are allowed.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-9",
-                "query": "Wrap satellite longitudes to 0-360\u00b0, form (lat, lon, alt) query points from the trajectory and interpolate geopotential values for every time step.",
+                "step": "Wrap satellite longitudes to 0-360\u00b0, form (lat, lon, alt) query points from the trajectory and interpolate geopotential values for every time step.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "astronomy-hard-6-10",
-                "query": "Add the interpolated geopotential to the trajectory data, take the column mean, and print the mean geopotential energy per unit mass rounded to two decimals.",
+                "step": "Add the interpolated geopotential to the trajectory data, take the column mean, and print the mean geopotential energy per unit mass rounded to two decimals.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""

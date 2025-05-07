@@ -268,56 +268,64 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-1-1",
-                "query": "Read the clinical information (mmc1.xlsx) and the two proteomics sheets (A-global-proteomics and B-phospho-proteomics) from mmc2.xlsx.",
+                "step": "Read the clinical information (mmc1.xlsx) and the two proteomics sheets (A-global-proteomics and B-phospho-proteomics) from mmc2.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-2",
-                "query": "Filter for clinical records where Case_excluded == 'No' and Histologic_type is either 'Endometrioid' or 'Serous' to define the tumor-sample cohort.",
+                "step": "Filter for clinical records where Case_excluded == 'No' and Histologic_type is either 'Endometrioid' or 'Serous' to define the tumor-sample cohort.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-3",
-                "query": "Extract the list of case identifiers from those retained clinical rows.",
+                "step": "Extract the list of case identifiers from those retained clinical rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-4",
-                "query": "Filter both proteomics tables for the selected case-identifier columns plus the 'idx' column that labels each protein/phosphosite.",
+                "step": "Filter both proteomics tables for the selected case-identifier columns plus the 'idx' column that labels each protein/phosphosite.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-5",
-                "query": "Locate the PLK1 row in the global-proteomics sheet and the CHEK2-S163 row in the phospho-proteomics sheet and pull out the corresponding abundance values for the chosen cases.",
+                "step": "Locate the PLK1 row in the global-proteomics sheet and the CHEK2-S163 row in the phospho-proteomics sheet and pull out the corresponding abundance values for the chosen cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-6",
-                "query": "Convert the two sets of abundances to numpy arrays and drop every position where the CHEK2-S163 value is NaN (ensuring matched sample pairs and excluding missing values).",
+                "step": "Convert the two sets of abundances to numpy arrays and drop every position where the CHEK2-S163 value is NaN (ensuring matched sample pairs and excluding missing values).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-7",
-                "query": "Compute the Spearman rank correlation between the cleaned PLK1 and CHEK2-S163 abundance vectors.",
+                "step": "Compute the Spearman rank correlation between the cleaned PLK1 and CHEK2-S163 abundance vectors.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-1-8",
-                "query": "Report the resulting correlation coefficient rounded to four decimal places.",
+                "step": "Report the resulting correlation coefficient rounded to four decimal places.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -391,35 +399,40 @@
         "key_functionalities": [
             {
                 "id": "biomedical-easy-2-1",
-                "query": "Load the clinical information from the Excel file 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "step": "Load the clinical information from the Excel file 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-2-2",
-                "query": "Filter _out_ any rows whose Case_excluded value is not 'No' so that only non-excluded cases are considered.",
+                "step": "Filter _out_ any rows whose Case_excluded value is not 'No' so that only non-excluded cases are considered.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-2-3",
-                "query": "Filter for rows where Histologic_type is 'Serous'.",
+                "step": "Filter for rows where Histologic_type is 'Serous'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-2-4",
-                "query": "Compute the arithmetic mean of the Age column for this Serous subset, ignoring missing values.",
+                "step": "Compute the arithmetic mean of the Age column for this Serous subset, ignoring missing values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-2-5",
-                "query": "Report that mean as the average age of patients with serous tumour samples.",
+                "step": "Report that mean as the average age of patients with serous tumour samples.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -440,35 +453,40 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-3-1",
-                "query": "Load clinical data from 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "step": "Load clinical data from 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-3-2",
-                "query": "Filter for rows where Case_excluded == 'No'",
+                "step": "Filter for rows where Case_excluded == 'No'",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-3-3",
-                "query": "Load the sheet \u201cB-APM subtypes\u201d from 1-s2.0-S0092867420301070-mmc7.xlsx.",
+                "step": "Load the sheet \u201cB-APM subtypes\u201d from 1-s2.0-S0092867420301070-mmc7.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-3-4",
-                "query": "Locate the row with the minimum value in the APP_Z_score column and read its idx identifier.",
+                "step": "Locate the row with the minimum value in the APP_Z_score column and read its idx identifier.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-3-5",
-                "query": "Using that idx, find the matching patient in the filtered clinical dataand return the patient\u2019s Age.",
+                "step": "Using that idx, find the matching patient in the filtered clinical dataand return the patient\u2019s Age.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -516,42 +534,48 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-4-1",
-                "query": "Load the clinical information from 1-s2.0-S0092867420301070-mmc1.xlsx and load every sheet (except the README) from 1-s2.0-S0092867420301070-mmc4.xlsx.",
+                "step": "Load the clinical information from 1-s2.0-S0092867420301070-mmc1.xlsx and load every sheet (except the README) from 1-s2.0-S0092867420301070-mmc4.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-4-2",
-                "query": "Gather all non-README peptide sheets.",
+                "step": "Gather all non-README peptide sheets.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-4-3",
-                "query": "Filter peptide data for Peptide column equaling 'HPKPEVLGSSADGALLVSLDGLR'.",
+                "step": "Filter peptide data for Peptide column equaling 'HPKPEVLGSSADGALLVSLDGLR'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-4-4",
-                "query": "Take the comma-separated value(s) in Samples_With_Peptide, split them, and strip whitespace to create a list of sample IDs.",
+                "step": "Take the comma-separated value(s) in Samples_With_Peptide, split them, and strip whitespace to create a list of sample IDs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-4-5",
-                "query": "Filter the clinical information for rows whose idx column is in that list of sample IDs.",
+                "step": "Filter the clinical information for rows whose idx column is in that list of sample IDs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-4-6",
-                "query": "Retrieve the unique values in the Histologic_Grade_FIGO column for these samples; those unique grades constitute the answer.",
+                "step": "Retrieve the unique values in the Histologic_Grade_FIGO column for these samples; those unique grades constitute the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -572,56 +596,64 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-5-1",
-                "query": "Read clinical data from 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "step": "Read clinical data from 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-2",
-                "query": "Filter for rows where Case_excluded == 'No'.",
+                "step": "Filter for rows where Case_excluded == 'No'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-3",
-                "query": "Filter data to histologic type 'Serous'.",
+                "step": "Filter data to histologic type 'Serous'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-4",
-                "query": "Read mutation burden data from sheet 'B-APM subtypes' in 1-s2.0-S0092867420301070-mmc7.xlsx.",
+                "step": "Read mutation burden data from sheet 'B-APM subtypes' in 1-s2.0-S0092867420301070-mmc7.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-5",
-                "query": "Collect the idx values for the remaining 'Serous' tumour cases.",
+                "step": "Collect the idx values for the remaining 'Serous' tumour cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-6",
-                "query": "Subset the mutation-burden table to rows whose idx appears in that serous-case list.",
+                "step": "Subset the mutation-burden table to rows whose idx appears in that serous-case list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-7",
-                "query": "Take the column Log2_variant_per_Mbp and convert it from log2 scale to linear scale with 2 ** value.",
+                "step": "Take the column Log2_variant_per_Mbp and convert it from log2 scale to linear scale with 2 ** value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-5-8",
-                "query": "Compute the median of these converted variant-per-Mbp values.",
+                "step": "Compute the median of these converted variant-per-Mbp values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -641,28 +673,32 @@
         "key_functionalities": [
             {
                 "id": "biomedical-easy-6-1",
-                "query": "Load the clinical data from the Excel file 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "step": "Load the clinical data from the Excel file 1-s2.0-S0092867420301070-mmc1.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-6-2",
-                "query": "Filter _out_ samples where the column Case_excluded is not equal to 'No', keeping only eligible cases.",
+                "step": "Filter _out_ samples where the column Case_excluded is not equal to 'No', keeping only eligible cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-6-3",
-                "query": "Select patients aged 70 years or older (Age >= 70).",
+                "step": "Select patients aged 70 years or older (Age >= 70).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-6-4",
-                "query": "Compute the frequency distribution of the FIGO_stage column in this age-filtered subset to identify the most common stage.",
+                "step": "Compute the frequency distribution of the FIGO_stage column in this age-filtered subset to identify the most common stage.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -682,35 +718,40 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-7-1",
-                "query": "Load every sheet from the Excel workbook (1-s2.0-S0092867420301070-mmc3.xlsx).",
+                "step": "Load every sheet from the Excel workbook (1-s2.0-S0092867420301070-mmc3.xlsx).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-7-2",
-                "query": "From the README sheet, locate the row whose \u201cDescription\u201d column contains the word \u201cacetylproteomics\u201d (case-insensitive) and extract the corresponding value in the \u201cSheet\u201d column; this gives the name of the acetylproteomics data sheet.",
+                "step": "From the README sheet, locate the row whose \u201cDescription\u201d column contains the word \u201cacetylproteomics\u201d (case-insensitive) and extract the corresponding value in the \u201cSheet\u201d column; this gives the name of the acetylproteomics data sheet.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-7-3",
-                "query": "Retrieve the acetylproteomics data sheet.",
+                "step": "Retrieve the acetylproteomics data sheet.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-7-4",
-                "query": "Determine the number of genes by taking the row count of that sheet and adding 1 (because the sheet\u2019s layout causes the first data row to be misread as the header).",
+                "step": "Determine the number of genes by taking the row count of that sheet and adding 1 (because the sheet\u2019s layout causes the first data row to be misread as the header).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-7-5",
-                "query": "Print the resulting gene count as the answer.",
+                "step": "Print the resulting gene count as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -818,49 +859,56 @@
         "key_functionalities": [
             {
                 "id": "biomedical-hard-8-1",
-                "query": "Load clinical data (patient metadata) from mmc1 Excel file, hyperactivated phosphoproteomics data from CSV, and FDA-approved drug target sheet from mmc6 Excel workbook.",
+                "step": "Load clinical data (patient metadata) from mmc1 Excel file, hyperactivated phosphoproteomics data from CSV, and FDA-approved drug target sheet from mmc6 Excel workbook.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-2",
-                "query": "Filter clinical data to retain only samples classified as \u2018CNV_HIGH\u2019, with histologic type \u2018Endometrioid\u2019, and not flagged for exclusion (\u2018Case_excluded\u2019 == 'No').",
+                "step": "Filter clinical data to retain only samples classified as 'CNV_HIGH\u2019, with histologic type 'Endometrioid\u2019, and not flagged for exclusion ('Case_excluded\u2019 == 'No').",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-3",
-                "query": "Collect the sample identifiers (idx) for these CNV-high endometrioid cases.",
+                "step": "Collect the sample identifiers (idx) for these CNV-high endometrioid cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-4",
-                "query": "Filter the hyperactivated phosphoproteomics table to rows whose sample_id appears in the selected sample identifiers.",
+                "step": "Filter the hyperactivated phosphoproteomics table to rows whose sample_id appears in the selected sample identifiers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-5",
-                "query": "Extract the unique protein (gene) names that are hyperactivated in those samples.",
+                "step": "Extract the unique protein (gene) names that are hyperactivated in those samples.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-6",
-                "query": "Intersect that protein list with the gene_name column in the FDA-approved drug sheet to keep only proteins that are known drug targets.",
+                "step": "Intersect that protein list with the gene_name column in the FDA-approved drug sheet to keep only proteins that are known drug targets.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-hard-8-7",
-                "query": "Return / print the resulting list of hyperactivated proteins in CNV-high endometrioid samples that are targeted by FDA-approved drugs.",
+                "step": "Return / print the resulting list of hyperactivated proteins in CNV-high endometrioid samples that are targeted by FDA-approved drugs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -880,42 +928,48 @@
         "key_functionalities": [
             {
                 "id": "biomedical-easy-9-1",
-                "query": "Read the Excel workbook and load the sheet that contains the FDR values.",
+                "step": "Read the Excel workbook and load the sheet that contains the FDR values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-9-2",
-                "query": "Keep only the columns that identify the gene and its FDR value.",
+                "step": "Keep only the columns that identify the gene and its FDR value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-9-3",
-                "query": "Group the data by gene and compute the mean FDR for every gene.",
+                "step": "Group the data by gene and compute the mean FDR for every gene.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-9-4",
-                "query": "Retrieve the average FDR calculated for the gene named CBX3.",
+                "step": "Retrieve the average FDR calculated for the gene named CBX3.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-9-5",
-                "query": "Create a subset of the data that excludes all CBX3 rows and compute the overall mean FDR for this remaining set of genes.",
+                "step": "Create a subset of the data that excludes all CBX3 rows and compute the overall mean FDR for this remaining set of genes.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "biomedical-easy-9-6",
-                "query": "Subtract the mean FDR of the non-CBX3 genes from the mean FDR of CBX3 to obtain the requested difference.",
+                "step": "Subtract the mean FDR of the non-CBX3 genes from the mean FDR of CBX3 to obtain the requested difference.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""

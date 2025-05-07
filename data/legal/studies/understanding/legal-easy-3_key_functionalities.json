@@ -2,6 +2,6 @@
     "Read the raw file 2024_CSN_Number_of_Reports_by_Type.csv line-by-line and strip empty/blank lines.",
     "Identify the header row as the first row that contains at least two non-empty comma-separated cells.",
     "Keep subsequent rows only as long as they also contain at least two non-empty cells, thereby discarding footnotes or other non-tabular text that may follow the data block.",    "Clean every value in every column with convert_value: \u2022 trim whitespace \u2022 remove thousands commas \u2022 drop leading $ \u2022 translate K and M suffixes into \u00d71 000 or \u00d71 000 000 \u2022 convert numeric strings to int/float while leaving non-numeric text unchanged \u2022 keep NaN for blanks.",
-    "From the cleaned data frame pick the \u2018Identity Theft \u2019 column for rows where Year == 2001 and Year == 2024.",
+    "From the cleaned data frame pick the 'Identity Theft \u2019 column for rows where Year == 2001 and Year == 2024.",
     "Compute and print the ratio id_theft_2024 / id_theft_2001."
 ]

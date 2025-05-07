@@ -27,63 +27,72 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-1-1",
-                "query": "Load all state\u2010level identity-theft csv files from 'State MSA Identity Theft data/' and (a) strips blank lines, (b) detects the header row, (c) stops at first almost-empty row, and (d) converts string numerics such as '1,234', '$5.2M', '7K' to proper numbers.",
+                "step": "Load all state\u2010level identity-theft csv files from 'State MSA Identity Theft data/' and (a) strips blank lines, (b) detects the header row, (c) stops at first almost-empty row, and (d) converts string numerics such as '1,234', '$5.2M', '7K' to proper numbers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-2",
-                "query": "Concatenate the cleaned per-state files into one dataframe of identity-theft reports.",
+                "step": "Concatenate the cleaned per-state files into one dataframe of identity-theft reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-3",
-                "query": "Parse metropolitan_statistics.html, locate the table captioned 'The 387 metropolitan statistical areas of the United States', and read it into a dataframe.",
+                "step": "Parse metropolitan_statistics.html, locate the table captioned 'The 387 metropolitan statistical areas of the United States', and read it into a dataframe.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-4",
-                "query": "Create a 2023 population figure for each metro by linearly interpolating between the 2020 census value and the 2024 estimate: 2020 + \u00be\u00b7(2024 \u2013 2020).",
+                "step": "Create a 2023 population figure for each metro by linearly interpolating between the 2020 census value and the 2024 estimate: 2020 + \u00be\u00b7(2024 \u2013 2020).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-5",
-                "query": "Normalize metropolitan\u2010area names in both dataframes: lower-case, drop trailing 'Metropolitan Statistical Area' or 'MSA', and strip all non-alphanumeric characters, producing a common key.",
+                "step": "Normalize metropolitan\u2010area names in both dataframes: lower-case, drop trailing 'Metropolitan Statistical Area' or 'MSA', and strip all non-alphanumeric characters, producing a common key.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-6",
-                "query": "Join the identity-theft dataframe and the population dataframe on the normalized key; drop any rows that fail to match in either source.",
+                "step": "Join the identity-theft dataframe and the population dataframe on the normalized key; drop any rows that fail to match in either source.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-7",
-                "query": "Keep only rows whose interpolated 2023 population exceeds 1,000,000.",
+                "step": "Keep only rows whose interpolated 2023 population exceeds 1,000,000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-8",
-                "query": "Compute the mean of the '# of Reports' column across these large-population metros to obtain the requested average number of reported identity-theft cases.",
+                "step": "Compute the mean of the '# of Reports' column across these large-population metros to obtain the requested average number of reported identity-theft cases.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-1-9",
-                "query": "Print the resulting average.",
+                "step": "Print the resulting average.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -118,63 +127,72 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-2-1",
-                "query": "Load every CSV in the 'State MSA Identity Theft data' folder, trimming blank lines.",
+                "step": "Load every CSV in the 'State MSA Identity Theft data' folder, trimming blank lines.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-2",
-                "query": "Strip commas, dollar signs and suffixes (K, M) so '# of Reports' becomes numeric.",
+                "step": "Strip commas, dollar signs and suffixes (K, M) so '# of Reports' becomes numeric.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-3",
-                "query": "Vertically concatenate the cleaned state-level CSV frames into one dataframe (df_reports).",
+                "step": "Vertically concatenate the cleaned state-level CSV frames into one dataframe (df_reports).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-4",
-                "query": "Open metropolitan_statistics.html, locate the table titled like 'The 387 metropolitan statistical areas of the United States', and read it into a dataframe (df_population).",
+                "step": "Open metropolitan_statistics.html, locate the table titled like 'The 387 metropolitan statistical areas of the United States', and read it into a dataframe (df_population).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-5",
-                "query": "Create an estimated 2023 population for each metro by linearly interpolating between the 2020 census and the 2024 estimate: pop_2023 = 2020 + (3\u20444)*(2024 \u2212 2020).",
+                "step": "Create an estimated 2023 population for each metro by linearly interpolating between the 2020 census and the 2024 estimate: pop_2023 = 2020 + (3\u20444)*(2024 \u2212 2020).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-6",
-                "query": "Normalizing the metro name column, by lower casing, removing the suffixes 'Metropolitan Statistical Area' or 'MSA', then stripping all non-alphanumeric characters.",
+                "step": "Normalizing the metro name column, by lower casing, removing the suffixes 'Metropolitan Statistical Area' or 'MSA', then stripping all non-alphanumeric characters.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-7",
-                "query": "Inner join on msa_key so only metros present in both the fraud and population sources are retained (dropping unmatched entries automatically).",
+                "step": "Inner join on msa_key so only metros present in both the fraud and population sources are retained (dropping unmatched entries automatically).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-8",
-                "query": "Compute the identity-theft rate per 100 000 residents: fraud_per_100k = (# of Reports / interpolated_2023_population) * 100 000.",
+                "step": "Compute the identity-theft rate per 100 000 residents: fraud_per_100k = (# of Reports / interpolated_2023_population) * 100 000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-2-9",
-                "query": "Select the row whose fraud_per_100k is maximal and print its original \u2018Metropolitan Area\u2019 name; this is the metro with the highest identity-theft rate.",
+                "step": "Select the row whose fraud_per_100k is maximal and print its original 'Metropolitan Area\u2019 name; this is the metro with the highest identity-theft rate.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -206,42 +224,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-3-1",
-                "query": "Read the raw file 2024_CSN_Number_of_Reports_by_Type.csv line-by-line and strip empty/blank lines.",
+                "step": "Read the raw file 2024_CSN_Number_of_Reports_by_Type.csv line-by-line and strip empty/blank lines.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-3-2",
-                "query": "Identify the header row as the first row that contains at least two non-empty comma-separated cells.",
+                "step": "Identify the header row as the first row that contains at least two non-empty comma-separated cells.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-3-3",
-                "query": "Keep subsequent rows only as long as they also contain at least two non-empty cells, thereby discarding footnotes or other non-tabular text that may follow the data block.",
+                "step": "Keep subsequent rows only as long as they also contain at least two non-empty cells, thereby discarding footnotes or other non-tabular text that may follow the data block.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-3-4",
-                "query": "Clean every value in every column with convert_value: \u2022 trim whitespace \u2022 remove thousands commas \u2022 drop leading $ \u2022 translate K and M suffixes into \u00d71 000 or \u00d71 000 000 \u2022 convert numeric strings to int/float while leaving non-numeric text unchanged \u2022 keep NaN for blanks.",
+                "step": "Clean every value in every column with convert_value: \u2022 trim whitespace \u2022 remove thousands commas \u2022 drop leading $ \u2022 translate K and M suffixes into \u00d71 000 or \u00d71 000 000 \u2022 convert numeric strings to int/float while leaving non-numeric text unchanged \u2022 keep NaN for blanks.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-3-5",
-                "query": "From the cleaned data frame pick the \u2018Identity Theft \u2019 column for rows where Year == 2001 and Year == 2024.",
+                "step": "From the cleaned data frame pick the 'Identity Theft \u2019 column for rows where Year == 2001 and Year == 2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-3-6",
-                "query": "Compute and print the ratio id_theft_2024 / id_theft_2001.",
+                "step": "Compute and print the ratio id_theft_2024 / id_theft_2001.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -273,42 +297,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-4-1",
-                "query": "Load 2024_CSN_Data_Contributors.csv trimming blank lines, detects the true header row, keeps only the contiguous data block.",
+                "step": "Load 2024_CSN_Data_Contributors.csv trimming blank lines, detects the true header row, keeps only the contiguous data block.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-4-2",
-                "query": "Convert every cell to numeric when possible\u2014removing commas and dollar signs, and expanding K (\u00d71,000) or M (\u00d71,000,000) suffixes\u2014to ensure '# of Reports' and other numeric columns are proper numbers.",
+                "step": "Convert every cell to numeric when possible\u2014removing commas and dollar signs, and expanding K (\u00d71,000) or M (\u00d71,000,000) suffixes\u2014to ensure '# of Reports' and other numeric columns are proper numbers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-4-3",
-                "query": "Select rows whose Year is between 2022 and 2024 (inclusive).",
+                "step": "Select rows whose Year is between 2022 and 2024 (inclusive).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-4-4",
-                "query": "Select rows whose 'Data Contributor' string matches 'FTC - Web Reports (Fraud & Other)'.",
+                "step": "Select rows whose 'Data Contributor' string matches 'FTC - Web Reports (Fraud & Other)'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-4-5",
-                "query": "Sum the '# of Reports' column for the rows that meet both conditions to obtain the total number of FTC web-reported fraud cases over 2022-2024.",
+                "step": "Sum the '# of Reports' column for the rows that meet both conditions to obtain the total number of FTC web-reported fraud cases over 2022-2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-4-6",
-                "query": "Print the computed total.",
+                "step": "Print the computed total.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -340,49 +370,56 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-5-1",
-                "query": "Read the raw file 2024_CSN_Fraud_Reports_by_Payment_Method.csv line-by-line, discarding blank lines.",
+                "step": "Read the raw file 2024_CSN_Fraud_Reports_by_Payment_Method.csv line-by-line, discarding blank lines.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-2",
-                "query": "Detect the header row as the first line that contains at least two non-empty comma-separated fields.",
+                "step": "Detect the header row as the first line that contains at least two non-empty comma-separated fields.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-3",
-                "query": "Collect subsequent lines as data until a line is reached that has fewer than two non-empty cells (marks end of table).",
+                "step": "Collect subsequent lines as data until a line is reached that has fewer than two non-empty cells (marks end of table).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-4",
-                "query": "Strip spaces, commas, dollar signs, interpret K/M suffixes, and convert strings to numeric values (ints/floats), leaving other entries unchanged or as NaN.",
+                "step": "Strip spaces, commas, dollar signs, interpret K/M suffixes, and convert strings to numeric values (ints/floats), leaving other entries unchanged or as NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-5",
-                "query": "After data cleaning, take the ' Total $ Loss' column and compute its sum.",
+                "step": "After data cleaning, take the ' Total $ Loss' column and compute its sum.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-6",
-                "query": "Divide this sum by 1,000,000 to express the result in millions of dollars and cast it to int.",
+                "step": "Divide this sum by 1,000,000 to express the result in millions of dollars and cast it to int.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-5-7",
-                "query": "Print the resulting integer representing the total money defrauded over all payment methods.",
+                "step": "Print the resulting integer representing the total money defrauded over all payment methods.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -432,42 +469,48 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-6-1",
-                "query": "Read 2024_CSN_Top_Three_Identity_Theft_Reports_by_Year.csv, discarding blank lines.",
+                "step": "Read 2024_CSN_Top_Three_Identity_Theft_Reports_by_Year.csv, discarding blank lines.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-6-2",
-                "query": "Identify the first line that contains at least two non-empty comma-separated fields and treat it as the header; keep subsequent rows only until a line with <2 non-empty cells appears (handles messy extra footers).",
+                "step": "Identify the first line that contains at least two non-empty comma-separated fields and treat it as the header; keep subsequent rows only until a line with <2 non-empty cells appears (handles messy extra footers).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-6-3",
-                "query": "Strip whitespace, remove commas and dollar signs, interpret K / M suffixes as \u00d71 000 or \u00d71 000 000, and cast to int/float where possible (ensures numeric '# of Reports' values).",
+                "step": "Strip whitespace, remove commas and dollar signs, interpret K / M suffixes as \u00d71 000 or \u00d71 000 000, and cast to int/float where possible (ensures numeric '# of Reports' values).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-6-4",
-                "query": "Trim and lower-case the entries in the \u2018Year\u2019 column to standardise text values.",
+                "step": "Trim and lower-case the entries in the 'Year\u2019 column to standardise text values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-6-5",
-                "query": "Because in the CSV\u2019s two key columns are swapped, get credit card related reports for 2020 and 2024 by matching where df['Theft Type'] equals the numeric year and df['Year'] equals the (lower-cased) theft-type string to extract the \u201c# of Reports\u201d value.",
+                "step": "Because in the CSV\u2019s two key columns are swapped, get credit card related reports for 2020 and 2024 by matching where df['Theft Type'] equals the numeric year and df['Year'] equals the (lower-cased) theft-type string to extract the \u201c# of Reports\u201d value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-6-6",
-                "query": "Using Credit Card fraud counts for 2020 and 2024, compute and print the ratio (2024 count \u00f7 2020 count).",
+                "step": "Using Credit Card fraud counts for 2020 and 2024, compute and print the ratio (2024 count \u00f7 2020 count).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -517,56 +560,64 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-7-1",
-                "query": "Load the raw file 2024_CSN_Top_Three_Identity_Theft_Reports_by_Year.csv",
+                "step": "Load the raw file 2024_CSN_Top_Three_Identity_Theft_Reports_by_Year.csv",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-2",
-                "query": "Strip blank lines, detect the first valid header row, and stop reading when the file becomes sparse so only the data table is kept.",
+                "step": "Strip blank lines, detect the first valid header row, and stop reading when the file becomes sparse so only the data table is kept.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-3",
-                "query": "Remove commas and dollar signs, interpret K/M suffixes, and cast to numeric types whenever possible so # of Reports becomes pure numbers.",
+                "step": "Remove commas and dollar signs, interpret K/M suffixes, and cast to numeric types whenever possible so # of Reports becomes pure numbers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-4",
-                "query": "Treat two columns as swapped: keep rows whose 'Theft Type' field contains the years 2020 or 2024 (so 'Theft Type' is actually the year and 'Year' is the fraud category).",
+                "step": "Treat two columns as swapped: keep rows whose 'Theft Type' field contains the years 2020 or 2024 (so 'Theft Type' is actually the year and 'Year' is the fraud category).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-5",
-                "query": "Pivot the table so each fraud category (original 'Year' column) is one row and the two years 2020 and 2024 become separate columns holding the numeric report counts.",
+                "step": "Pivot the table so each fraud category (original 'Year' column) is one row and the two years 2020 and 2024 become separate columns holding the numeric report counts.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-6",
-                "query": "Drop any category that does not have data for both 2020 and 2024 to ensure valid comparison.",
+                "step": "Drop any category that does not have data for both 2020 and 2024 to ensure valid comparison.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-7",
-                "query": "Compute the growth_ratio column as (reports in 2024) divided by (reports in 2020) for every remaining category.",
+                "step": "Compute the growth_ratio column as (reports in 2024) divided by (reports in 2020) for every remaining category.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-7-8",
-                "query": "Identify the category with the largest growth_ratio (idxmax) and output that category name (title-cased) as the fastest-growing fraud type between 2020 and 2024.",
+                "step": "Identify the category with the largest growth_ratio (idxmax) and output that category name (title-cased) as the fastest-growing fraud type between 2020 and 2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -610,49 +661,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-8-1",
-                "query": "Strip commas/whitespace, remove $ sign, convert K / M suffixed numbers to true numeric values, returns int or float, otherwise None.",
+                "step": "Strip commas/whitespace, remove $ sign, convert K / M suffixed numbers to true numeric values, returns int or float, otherwise None.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-2",
-                "query": "Load the two required data files (Florida-only MSA file and national 2024 metro report file), using \u201cISO-8859-1\u201d encoding.",
+                "step": "Load the two required data files (Florida-only MSA file and national 2024 metro report file), using \u201cISO-8859-1\u201d encoding.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-3",
-                "query": "Find the first line having at least two non-empty comma-separated cells and treat it as header and keep subsequent lines until a line with <2 populated cells (cuts off footers/notes).",
+                "step": "Find the first line having at least two non-empty comma-separated cells and treat it as header and keep subsequent lines until a line with <2 populated cells (cuts off footers/notes).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-4",
-                "query": "Drop all non-alphanumeric characters and lower-case the string for metropolitan area names, ensuring equivalent metropolitan area names match even if punctuation or spacing differs.",
+                "step": "Drop all non-alphanumeric characters and lower-case the string for metropolitan area names, ensuring equivalent metropolitan area names match even if punctuation or spacing differs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-5",
-                "query": "Create two normalised target strings that represent \"Miami-Fort Lauderdale-West Palm Beach, FL Metropolitan Statistical Area\" (slightly different punctuations), select the row in each DataFrame whose 'Metropolitan Area' value, after normalisation, equals its respective target string.",
+                "step": "Create two normalised target strings that represent \"Miami-Fort Lauderdale-West Palm Beach, FL Metropolitan Statistical Area\" (slightly different punctuations), select the row in each DataFrame whose 'Metropolitan Area' value, after normalisation, equals its respective target string.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-6",
-                "query": "Extract '# of Reports' from both rows (and \u2018Reports per 100K Population\u2019 from the second file), cast to int for numeric comparison.",
+                "step": "Extract '# of Reports' from both rows (and 'Reports per 100K Population\u2019 from the second file), cast to int for numeric comparison.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-8-7",
-                "query": "Compare the two '# of Reports' values and print True if they are identical, False otherwise.",
+                "step": "Compare the two '# of Reports' values and print True if they are identical, False otherwise.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -717,42 +775,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-9-1",
-                "query": "Load 2024_CSN_Report_Count.csv while skipping the first two non-data rows.",
+                "step": "Load 2024_CSN_Report_Count.csv while skipping the first two non-data rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-9-2",
-                "query": "Drop any rows that contain null values to ensure clean calculations.",
+                "step": "Drop any rows that contain null values to ensure clean calculations.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-9-3",
-                "query": "Cast the Year column to integer so arithmetic and indexing work correctly.",
+                "step": "Cast the Year column to integer so arithmetic and indexing work correctly.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-9-4",
-                "query": "Strip commas from the '# of Reports' strings, then convert that column to integers.",
+                "step": "Strip commas from the '# of Reports' strings, then convert that column to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-9-5",
-                "query": "Compute the year-over-year difference for '# of Reports'",
+                "step": "Compute the year-over-year difference for '# of Reports'",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-9-6",
-                "query": "Locate the row with the maximum rel_diff (idxmax) and return its Year value as the answer.",
+                "step": "Locate the row with the maximum rel_diff (idxmax) and return its Year value as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -834,42 +898,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-10-1",
-                "query": "Load the file 2024_CSN_Number_of_Reports_by_Type.csv while skipping the first two non-data rows.",
+                "step": "Load the file 2024_CSN_Number_of_Reports_by_Type.csv while skipping the first two non-data rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-10-2",
-                "query": "Drop any rows containing missing values.",
+                "step": "Drop any rows containing missing values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-10-3",
-                "query": "For every other report-type column: remove thousands separators (commas) then cast the column to integer.",
+                "step": "For every other report-type column: remove thousands separators (commas) then cast the column to integer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-10-4",
-                "query": "Create a total column that is the row-wise sum of all report-type counts.",
+                "step": "Create a total column that is the row-wise sum of all report-type counts.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-10-5",
-                "query": "Compute percentage as the Fraud column divided by the total column.",
+                "step": "Compute percentage as the Fraud column divided by the total column.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-10-6",
-                "query": "Select the rows where the percentage exceeds 0.5 (i.e., Fraud reports are more than 50% of total). Return the corresponding Year values from those rows as integers and print the resulting list.",
+                "step": "Select the rows where the percentage exceeds 0.5 (i.e., Fraud reports are more than 50% of total). Return the corresponding Year values from those rows as integers and print the resulting list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -935,42 +1005,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-11-1",
-                "query": "Read the file 2024_CSN_Number_of_Reports_by_Type.csv while skipping the first two metadata rows.",
+                "step": "Read the file 2024_CSN_Number_of_Reports_by_Type.csv while skipping the first two metadata rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-11-2",
-                "query": "Drop any rows that contain NaN values.",
+                "step": "Drop any rows that contain NaN values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-11-3",
-                "query": "For every report-type column strip out the thousands separator ',' and cast the strings to integers.",
+                "step": "For every report-type column strip out the thousands separator ',' and cast the strings to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-11-4",
-                "query": "Do a row-wise sum of every report-type count, giving the yearly total number of reports.",
+                "step": "Do a row-wise sum of every report-type count, giving the yearly total number of reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-11-5",
-                "query": "Compute the share of 'Other' reports for each year by dividing the 'Other' count by the yearly total.",
+                "step": "Compute the share of 'Other' reports for each year by dividing the 'Other' count by the yearly total.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-11-6",
-                "query": "Check whether the maximum value of the percentage is greater than 0.5; if so print 'Yes', otherwise print No.",
+                "step": "Check whether the maximum value of the percentage is greater than 0.5; if so print 'Yes', otherwise print No.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1020,49 +1096,56 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-12-1",
-                "query": "Load the 2024_CSN_Report_Categories.csv file while skipping the first two header rows and using unicode-escape encoding.",
+                "step": "Load the 2024_CSN_Report_Categories.csv file while skipping the first two header rows and using unicode-escape encoding.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-2",
-                "query": "Drop any rows that contain missing values.",
+                "step": "Drop any rows that contain missing values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-3",
-                "query": "Clean the 'Percentage' column: remove the percent sign, convert the values to float, and divide by 100 so the column represents fractions.",
+                "step": "Clean the 'Percentage' column: remove the percent sign, convert the values to float, and divide by 100 so the column represents fractions.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-4",
-                "query": "Convert the 'Rank' column to integer type.",
+                "step": "Convert the 'Rank' column to integer type.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-5",
-                "query": "Sort the dataframe in descending order of the cleaned 'Percentage' so the most frequent categories appear first.",
+                "step": "Sort the dataframe in descending order of the cleaned 'Percentage' so the most frequent categories appear first.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-6",
-                "query": "Compute a running cumulative sum of the sorted 'Percentage' values.",
+                "step": "Compute a running cumulative sum of the sorted 'Percentage' values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-12-7",
-                "query": "Locate the first index where this cumulative sum exceeds 0.5 (50% of all reports) and output its 'Rank' value. This rank equals the minimum number of top categories needed to reach at least half of the total reports.",
+                "step": "Locate the first index where this cumulative sum exceeds 0.5 (50% of all reports) and output its 'Rank' value. This rank equals the minimum number of top categories needed to reach at least half of the total reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1104,35 +1187,40 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-13-1",
-                "query": "Load the report-category counts from 2024_CSN_Report_Categories.csv (skip first 2 header rows, handle Unicode escapes).",
+                "step": "Load the report-category counts from 2024_CSN_Report_Categories.csv (skip first 2 header rows, handle Unicode escapes).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-13-2",
-                "query": "Remove any rows that contain missing values.",
+                "step": "Remove any rows that contain missing values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-13-3",
-                "query": "Clean the '# of Reports' field: strip thousand-separator commas and convert the column to integers.",
+                "step": "Clean the '# of Reports' field: strip thousand-separator commas and convert the column to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-13-4",
-                "query": "Determine the maximum and minimum report counts across all categories.",
+                "step": "Determine the maximum and minimum report counts across all categories.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-13-5",
-                "query": "Compute the ratio max/min and round the result to two decimal places before output.",
+                "step": "Compute the ratio max/min and round the result to two decimal places before output.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1220,42 +1308,48 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-14-1",
-                "query": "Load new_england_states.csv to obtain the list of New-England state names.",
+                "step": "Load new_england_states.csv to obtain the list of New-England state names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-14-2",
-                "query": "Iterate over each state name, strip spaces, and read its corresponding State MSA Identity Theft data/<State>.csv file, skipping the first two header rows and dropping rows that are entirely NaN.",
+                "step": "Iterate over each state name, strip spaces, and read its corresponding State MSA Identity Theft data/<State>.csv file, skipping the first two header rows and dropping rows that are entirely NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-14-3",
-                "query": "Clean the # of Reports column by removing thousands separators (commas) and casting the values to integers.",
+                "step": "Clean the # of Reports column by removing thousands separators (commas) and casting the values to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-14-4",
-                "query": "Sort the combined dataframe in descending order of # of Reports.",
+                "step": "Sort the combined dataframe in descending order of # of Reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-14-5",
-                "query": "Remove duplicate Metropolitan Area entries, keeping the first (highest-report) occurrence for each metro area.",
+                "step": "Remove duplicate Metropolitan Area entries, keeping the first (highest-report) occurrence for each metro area.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-14-6",
-                "query": "Select the first five rows after de-duplication and output their Metropolitan Area values as the top-5 list.",
+                "step": "Select the first five rows after de-duplication and output their Metropolitan Area values as the top-5 list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1389,35 +1483,40 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-15-1",
-                "query": "Loop over every CSV in 'State MSA Identity Theft data', read each with skiprows=2 and drop rows that are all-NaN.",
+                "step": "Loop over every CSV in 'State MSA Identity Theft data', read each with skiprows=2 and drop rows that are all-NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-15-2",
-                "query": "From the 'Metropolitan Area' field, extract the state portion (text after the comma) and keep only the first token.",
+                "step": "From the 'Metropolitan Area' field, extract the state portion (text after the comma) and keep only the first token.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-15-3",
-                "query": "Mark an MSA as cross-state possibly by checking whether the extracted state code string contains a hyphen ('-').",
+                "step": "Mark an MSA as cross-state possibly by checking whether the extracted state code string contains a hyphen ('-').",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-15-4",
-                "query": "Clean the '# of Reports' column: remove thousands commas and convert the values to integer type.",
+                "step": "Clean the '# of Reports' column: remove thousands commas and convert the values to integer type.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-15-5",
-                "query": "Filter the cross-state rows and sum their '# of Reports' values to obtain the total cross-state Identity Theft reports for 2024.",
+                "step": "Filter the cross-state rows and sum their '# of Reports' values to obtain the total cross-state Identity Theft reports for 2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1505,35 +1604,40 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-16-1",
-                "query": "Read every CSV inside 'State MSA Identity Theft data', skipping the two-row header, drop NAs, and add a column of state name extracted from the filename so each metro entry is tagged with its state.",
+                "step": "Read every CSV inside 'State MSA Identity Theft data', skipping the two-row header, drop NAs, and add a column of state name extracted from the filename so each metro entry is tagged with its state.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-16-2",
-                "query": "Clean the '# of Reports' column by stripping comma thousands separators and converting the values to integers.",
+                "step": "Clean the '# of Reports' column by stripping comma thousands separators and converting the values to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-16-3",
-                "query": "Filter the combined data to keep only those states that have more than one metropolitan-area record.",
+                "step": "Filter the combined data to keep only those states that have more than one metropolitan-area record.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-16-4",
-                "query": "Within each remaining state, compute the share of identity-theft reports contributed by each metro: fraction_of_state = # of Reports / (state-level total # of Reports).",
+                "step": "Within each remaining state, compute the share of identity-theft reports contributed by each metro: fraction_of_state = # of Reports / (state-level total # of Reports).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-16-5",
-                "query": "Sort the rows by this share in descending order and pick the top row; output the associated state_name.",
+                "step": "Sort the rows by this share in descending order and pick the top row; output the associated state_name.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1573,49 +1677,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-17-1",
-                "query": "Load 2024_CSN_Report_Count.csv (skipping first 2 rows) and drop rows with any NA values.",
+                "step": "Load 2024_CSN_Report_Count.csv (skipping first 2 rows) and drop rows with any NA values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-2",
-                "query": "Convert the 'Year' column to integer and the '# of Reports' column to integer after removing comma thousand-separators.",
+                "step": "Convert the 'Year' column to integer and the '# of Reports' column to integer after removing comma thousand-separators.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-3",
-                "query": "Extract the total number of reports recorded for the year 2007 from the cleaned count table.",
+                "step": "Extract the total number of reports recorded for the year 2007 from the cleaned count table.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-4",
-                "query": "Load 2024_CSN_Report_Categories.csv (skipping first 2 rows) and drop rows with any NA values.",
+                "step": "Load 2024_CSN_Report_Categories.csv (skipping first 2 rows) and drop rows with any NA values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-5",
-                "query": "Locate the 'Auto Related' row in the category table, strip the trailing '%' from its 'Percentage' value, convert it to a decimal proportion.",
+                "step": "Locate the 'Auto Related' row in the category table, strip the trailing '%' from its 'Percentage' value, convert it to a decimal proportion.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-6",
-                "query": "Estimate the hypothetical 2007 Auto Related count by multiplying that 2024 proportion by the 2007 total reports and rounding to the nearest integer.",
+                "step": "Estimate the hypothetical 2007 Auto Related count by multiplying that 2024 proportion by the 2007 total reports and rounding to the nearest integer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-17-7",
-                "query": "Print the resulting integer value.",
+                "step": "Print the resulting integer value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1665,42 +1776,48 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-18-1",
-                "query": "Read 2024_CSN_Report_Count.csv skipping the first two rows, drop missing rows, strip commas from '# of Reports', cast Year and '# of Reports' to int.",
+                "step": "Read 2024_CSN_Report_Count.csv skipping the first two rows, drop missing rows, strip commas from '# of Reports', cast Year and '# of Reports' to int.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-18-2",
-                "query": "Extract the total number of consumer reports for the year 2007 from this cleaned dataframe.",
+                "step": "Extract the total number of consumer reports for the year 2007 from this cleaned dataframe.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-18-3",
-                "query": "Read 2024_CSN_Report_Categories.csv, drop NaNs, locate the 'Identity Theft' row, remove '%' and convert its Percentage to a decimal share.",
+                "step": "Read 2024_CSN_Report_Categories.csv, drop NaNs, locate the 'Identity Theft' row, remove '%' and convert its Percentage to a decimal share.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-18-4",
-                "query": "Read 2024_CSN_Identity_Theft_Reports_by_Age.csv, drop NaNs, strip commas from '# of Reports', convert to int, then compute each age bracket's share of all identity-theft reports.",
+                "step": "Read 2024_CSN_Identity_Theft_Reports_by_Age.csv, drop NaNs, strip commas from '# of Reports', convert to int, then compute each age bracket's share of all identity-theft reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-18-5",
-                "query": "Sum the shares for all age brackets whose age range starts at 40 or above to get the fraction of identity-theft reports involving people 40+.",
+                "step": "Sum the shares for all age brackets whose age range starts at 40 or above to get the fraction of identity-theft reports involving people 40+.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-18-6",
-                "query": "Estimate the 2007 identity-theft reports for ages 40+ by multiplying: total_2007_reports \u00d7 identity_theft_percentage \u00d7 fraction_age_40_plus.",
+                "step": "Estimate the 2007 identity-theft reports for ages 40+ by multiplying: total_2007_reports \u00d7 identity_theft_percentage \u00d7 fraction_age_40_plus.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1720,42 +1837,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-19-1",
-                "query": "Load the custom-formatted CSV file \"2024_CSN_Fraud_Reports_by_Amount_Lost.csv\"",
+                "step": "Load the custom-formatted CSV file \"2024_CSN_Fraud_Reports_by_Amount_Lost.csv\"",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-19-2",
-                "query": "Strip commas in quoted strings, remove quotes and blank lines,  handle table titles, deal with different csv blocks",
+                "step": "Strip commas in quoted strings, remove quotes and blank lines,  handle table titles, deal with different csv blocks",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-19-3",
-                "query": "From the parsed attributes, read the scalar value in \"Reports with $ Loss\" and cast it to numeric.",
+                "step": "From the parsed attributes, read the scalar value in \"Reports with $ Loss\" and cast it to numeric.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-19-4",
-                "query": "Locate the embedded sub-table \"Reported Fraud Losses in $1 - $1000 Range\" and iterate over its rows.",
+                "step": "Locate the embedded sub-table \"Reported Fraud Losses in $1 - $1000 Range\" and iterate over its rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-19-5",
-                "query": "Within that sub-table sum the counts whose loss-range label is one of: $1-$100, $101-$200, $201-$300, $301-$400, $401-$500 to get the total below $500.",
+                "step": "Within that sub-table sum the counts whose loss-range label is one of: $1-$100, $101-$200, $201-$300, $301-$400, $401-$500 to get the total below $500.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-19-6",
-                "query": "Compute the proportion of fraud reporters who lost between $1\u2013$500 by dividing total_below_500 by total_reports and print the resulting float.",
+                "step": "Compute the proportion of fraud reporters who lost between $1\u2013$500 by dividing total_below_500 by total_reports and print the resulting float.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1775,63 +1898,72 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-20-1",
-                "query": "Read the file 2024_CSN_Number_of_Reports_by_Type.csv line-by-line.",
+                "step": "Read the file 2024_CSN_Number_of_Reports_by_Type.csv line-by-line.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-2",
-                "query": "Clean each line: remove any commas that are inside quotes and strip the surrounding quote marks so that numbers containing commas are not split across columns.",
+                "step": "Clean each line: remove any commas that are inside quotes and strip the surrounding quote marks so that numbers containing commas are not split across columns.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-3",
-                "query": "Parse the file into logical blocks separated by blank lines; treat the first block as a CSV-style sub-table whose header row is 'Number of Reports by Type'.",
+                "step": "Parse the file into logical blocks separated by blank lines; treat the first block as a CSV-style sub-table whose header row is 'Number of Reports by Type'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-4",
-                "query": "Within sub-table, select rows with Year 2024.",
+                "step": "Within sub-table, select rows with Year 2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-5",
-                "query": "Convert number entries to integers.",
+                "step": "Convert number entries to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-6",
-                "query": "Sum those converted numbers to obtain the total number of reports for 2024 across all categories.",
+                "step": "Sum those converted numbers to obtain the total number of reports for 2024 across all categories.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-7",
-                "query": "Take the first numeric cell after the year in that row containing the count of Fraud reports.",
+                "step": "Take the first numeric cell after the year in that row containing the count of Fraud reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-8",
-                "query": "Compute the proportion of Fraud reports by dividing the Fraud count by the total 2024 report count.",
+                "step": "Compute the proportion of Fraud reports by dividing the Fraud count by the total 2024 report count.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-20-9",
-                "query": "Return/print this proportion (which can be multiplied by 100 externally to express it as a percentage).",
+                "step": "Return/print this proportion (which can be multiplied by 100 externally to express it as a percentage).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1851,49 +1983,56 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-21-1",
-                "query": "Load the two CSV files 2024_CSN_Report_Type.csv and 2024_CSN_Identity_Theft_Reports_by_Type.csv line-by-line.",
+                "step": "Load the two CSV files 2024_CSN_Report_Type.csv and 2024_CSN_Identity_Theft_Reports_by_Type.csv line-by-line.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-2",
-                "query": "Clean each line by removing commas that appear inside quoted strings to handle thousands-separators in numeric values.",
+                "step": "Clean each line by removing commas that appear inside quoted strings to handle thousands-separators in numeric values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-3",
-                "query": "Split each file into blocks separated by blank lines, classifying each block either as an attribute block or as a sub-table block.",
+                "step": "Split each file into blocks separated by blank lines, classifying each block either as an attribute block or as a sub-table block.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-4",
-                "query": "For every sub-table block, process into tabular data.",
+                "step": "For every sub-table block, process into tabular data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-5",
-                "query": "Extract the tabular data named \u201cReport Type\u201d; convert the value in its first row and second column to an integer to obtain the grand-total number of reports (variable total).",
+                "step": "Extract the tabular data named \u201cReport Type\u201d; convert the value in its first row and second column to an integer to obtain the grand-total number of reports (variable total).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-6",
-                "query": "Extract the tabular data named \u201cIdentity Theft Reports by Type\u201d; convert the value in its second row and third column to an integer to obtain the identity-theft count of interest (variable correct, assumed to be Alabama).",
+                "step": "Extract the tabular data named \u201cIdentity Theft Reports by Type\u201d; convert the value in its second row and third column to an integer to obtain the identity-theft count of interest (variable correct, assumed to be Alabama).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-21-7",
-                "query": "Compute correct / total (a ratio) and return/print that result.",
+                "step": "Compute correct / total (a ratio) and return/print that result.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1927,49 +2066,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-22-1",
-                "query": "Open the raw file 2024_CSN_State_Identity_Theft_Reports.csv and load every line.",
+                "step": "Open the raw file 2024_CSN_State_Identity_Theft_Reports.csv and load every line.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-2",
-                "query": "Before splitting on commas, remove commas found inside quoted strings so embedded commas are not treated as delimiters.",
+                "step": "Before splitting on commas, remove commas found inside quoted strings so embedded commas are not treated as delimiters.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-3",
-                "query": "Iterate over the cleaned lines and split the content into blocks separated by blank lines; each block represents either a sub-table or a set of key-value attributes.",
+                "step": "Iterate over the cleaned lines and split the content into blocks separated by blank lines; each block represents either a sub-table or a set of key-value attributes.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-4",
-                "query": "For any block that looks like a table (first block or a block whose header is a single cell) treat the first non-blank line as the column list, the remaining lines as data rows, processing into tabular data and preserving the sub-table title.",
+                "step": "For any block that looks like a table (first block or a block whose header is a single cell) treat the first non-blank line as the column list, the remaining lines as data rows, processing into tabular data and preserving the sub-table title.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-5",
-                "query": "Locate the sub-table named \"State: Identity Theft Reports\".",
+                "step": "Locate the sub-table named \"State: Identity Theft Reports\".",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-6",
-                "query": "Loop over the rows of the identity theft reports sub-table, select the rows where the first column equals \"Alabama\", convert the value in the third column to an integer, and accumulate these values.",
+                "step": "Loop over the rows of the identity theft reports sub-table, select the rows where the first column equals \"Alabama\", convert the value in the third column to an integer, and accumulate these values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-22-7",
-                "query": "Return and print the accumulated total as the answer.",
+                "step": "Return and print the accumulated total as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2006,49 +2152,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-23-1",
-                "query": "Load the two raw CSV files that hold \u2018State Rankings\u2019 for Identity-Theft reports and for Fraud & Other reports.",
+                "step": "Load the two raw CSV files that hold 'State Rankings\u2019 for Identity-Theft reports and for Fraud & Other reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-2",
-                "query": "Strips commas inside quoted strings,  \u2022 splits the file into separate embedded tables.",
+                "step": "Strips commas inside quoted strings,  \u2022 splits the file into separate embedded tables.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-3",
-                "query": "Extract from each parsed file the embedded table named \u2018State Rankings: Identity Theft Reports\u2019 and \u2018State Rankings: Fraud and Other Reports\u2019.",
+                "step": "Extract from each parsed file the embedded table named 'State Rankings: Identity Theft Reports\u2019 and 'State Rankings: Fraud and Other Reports\u2019.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-4",
-                "query": "Iterate over the rows of the identity-theft table; for every state pick out:  \u2022 the state name (row[1]),  \u2022 the total-reports column (row[2]),  \u2022 the \u2018reports-per-100 K\u2019 column (row[3]). Derive the state\u2019s population as  population = (reports-per-100 K) / (total reports).",
+                "step": "Iterate over the rows of the identity-theft table; for every state pick out:  \u2022 the state name (row[1]),  \u2022 the total-reports column (row[2]),  \u2022 the 'reports-per-100 K\u2019 column (row[3]). Derive the state\u2019s population as  population = (reports-per-100 K) / (total reports).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-5",
-                "query": "Perform a join with the fraud/other table on state and pull the other table's \u2018reports-per-100 K\u2019 value (row2[3]).",
+                "step": "Perform a join with the fraud/other table on state and pull the other table's 'reports-per-100 K\u2019 value (row2[3]).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-6",
-                "query": "Compute a combined density for the state: combined_density = (identity_theft_reports_per_100k + fraud_other_reports_per_100k) / population.",
+                "step": "Compute a combined density for the state: combined_density = (identity_theft_reports_per_100k + fraud_other_reports_per_100k) / population.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-23-7",
-                "query": "Keep track of the state whose combined_density is the highest; return that state name as the answer.",
+                "step": "Keep track of the state whose combined_density is the highest; return that state name as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2111,49 +2264,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-24-1",
-                "query": "CSV parsing that removes commas inside quoted strings, removes quotes, splits into columns/values and stores each sub-table.",
+                "step": "CSV parsing that removes commas inside quoted strings, removes quotes, splits into columns/values and stores each sub-table.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-2",
-                "query": "Load 2024_CSN_State_Rankings_Identity_Theft_Reports.csv, 2024_CSN_State_Rankings_Fraud_and_Other_Reports.csv, all csv in State MSA Identity Theft data/.",
+                "step": "Load 2024_CSN_State_Rankings_Identity_Theft_Reports.csv, 2024_CSN_State_Rankings_Fraud_and_Other_Reports.csv, all csv in State MSA Identity Theft data/.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-3",
-                "query": "For every state/territory (row[1] is name) locate its row in both tables and add the two report counts (row[3] from each table) to get that state\u2019s total number of all reports.",
+                "step": "For every state/territory (row[1] is name) locate its row in both tables and add the two report counts (row[3] from each table) to get that state\u2019s total number of all reports.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-4",
-                "query": "Determine the single state/territory with the highest combined total of reports across the two tables.",
+                "step": "Determine the single state/territory with the highest combined total of reports across the two tables.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-5",
-                "query": "Open that state\u2019s per-state MSA identity-theft file in \u201cState MSA Identity Theft data/<state>.csv\u201d.",
+                "step": "Open that state\u2019s per-state MSA identity-theft file in \u201cState MSA Identity Theft data/<state>.csv\u201d.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-6",
-                "query": "Within the sub-table \u201cMetropolitan Areas: Identity Theft Reports\u201d convert the report count in column 1 to int and find the metropolitan area (row[0]) with the maximum value.",
+                "step": "Within the sub-table \u201cMetropolitan Areas: Identity Theft Reports\u201d convert the report count in column 1 to int and find the metropolitan area (row[0]) with the maximum value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-24-7",
-                "query": "Return / print the name of this metropolitan area as the answer.",
+                "step": "Return / print the name of this metropolitan area as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2206,42 +2366,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-25-1",
-                "query": "Read the file 2024_CSN_Fraud, Identity Theft, and Other Reports by Military Consumers.csv.",
+                "step": "Read the file 2024_CSN_Fraud, Identity Theft, and Other Reports by Military Consumers.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-25-2",
-                "query": "Isolate the slice of rows (index 7 to 13) that contains the fraud-loss table by military branch.",
+                "step": "Isolate the slice of rows (index 7 to 13) that contains the fraud-loss table by military branch.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-25-3",
-                "query": "Take the first row of that slice/block as the true header row.",
+                "step": "Take the first row of that slice/block as the true header row.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-25-4",
-                "query": "From the data rows, strip the \"$\" and comma characters from the \u2018Median Fraud Loss\u2019 string and convert it to an integer.",
+                "step": "From the data rows, strip the \"$\" and comma characters from the 'Median Fraud Loss\u2019 string and convert it to an integer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-25-5",
-                "query": "From clean data, find the branch whose median fraud loss is the largest.",
+                "step": "From clean data, find the branch whose median fraud loss is the largest.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-25-6",
-                "query": "Print the name of the branch with the maximum median fraud loss.",
+                "step": "Print the name of the branch with the maximum median fraud loss.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2280,49 +2446,56 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-26-1",
-                "query": "Load `2024_CSN_State_Top_Ten_Report_Categories.csv`.",
+                "step": "Load `2024_CSN_State_Top_Ten_Report_Categories.csv`.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-2",
-                "query": "Drop the first header line and last four footnote lines so that only data rows remain.",
+                "step": "Drop the first header line and last four footnote lines so that only data rows remain.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-3",
-                "query": "Use the first remaining row as the real header, strip whitespace from each column name, then remove that row from the data.",
+                "step": "Use the first remaining row as the real header, strip whitespace from each column name, then remove that row from the data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-4",
-                "query": "Convert the `# of Reports` numeric column from thousands-separated string to integers.",
+                "step": "Convert the `# of Reports` numeric column from thousands-separated string to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-5",
-                "query": "For every state group, sort its rows in descending order of `# of Reports` to identify the category with the highest count.",
+                "step": "For every state group, sort its rows in descending order of `# of Reports` to identify the category with the highest count.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-6",
-                "query": "If the top category for that state is `'Identity Theft'`, record the state name.",
+                "step": "If the top category for that state is `'Identity Theft'`, record the state name.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-26-7",
-                "query": "After iterating through all states, print the final list.",
+                "step": "After iterating through all states, print the final list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2391,42 +2564,48 @@
         "key_functionalities": [
             {
                 "id": "legal-easy-27-1",
-                "query": "Read the file 2024_CSN_State_Top_Ten_Report_Categories.csv.",
+                "step": "Read the file 2024_CSN_State_Top_Ten_Report_Categories.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-27-2",
-                "query": "Remove the first metadata row and the last four summary/footer rows.",
+                "step": "Remove the first metadata row and the last four summary/footer rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-27-3",
-                "query": "Take the first remaining row as the true header: convert it to a list of values and assign them (after stripping whitespace) as the DataFrame\u2019s column names.",
+                "step": "Take the first remaining row as the true header: convert it to a list of values and assign them (after stripping whitespace) as the DataFrame\u2019s column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-27-4",
-                "query": "Group the cleaned data by the State column, and for each state collect the list of values in the Category column.",
+                "step": "Group the cleaned data by the State column, and for each state collect the list of values in the Category column.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-27-5",
-                "query": "For each state, check whether the string 'Prizes, Sweepstakes and Lotteries' appears in its Category list; if so, record the state.",
+                "step": "For each state, check whether the string 'Prizes, Sweepstakes and Lotteries' appears in its Category list; if so, record the state.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-easy-27-6",
-                "query": "Count (len) the recorded states and print the resulting number \u2013 the number of states whose 2024 top-10 categories include Prizes, Sweepstakes and Lotteries.",
+                "step": "Count (len) the recorded states and print the resulting number \u2013 the number of states whose 2024 top-10 categories include Prizes, Sweepstakes and Lotteries.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2494,49 +2673,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-28-1",
-                "query": "Load 2024_CSN_Reports_by_Military_Consumers.csv and 2024_CSN_Report_Categories.csv.",
+                "step": "Load 2024_CSN_Reports_by_Military_Consumers.csv and 2024_CSN_Report_Categories.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-2",
-                "query": "For the military file: slice rows 12-22 to isolate the Top Categories section, use its first row to set proper column names.",
+                "step": "For the military file: slice rows 12-22 to isolate the Top Categories section, use its first row to set proper column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-3",
-                "query": "For the general population file: use the second row to set column names, then remove the first two header rows and the last four footer rows to leave only data rows.",
+                "step": "For the general population file: use the second row to set column names, then remove the first two header rows and the last four footer rows to leave only data rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-4",
-                "query": "Convert the '# of Reports' column in the military dataframe from comma-separated numeric strings to integers.",
+                "step": "Convert the '# of Reports' column in the military dataframe from comma-separated numeric strings to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-5",
-                "query": "Compute total military reports and the number of military Imposter Scam reports, then calculate the share (military_imposter_scams / total_military_reports).",
+                "step": "Compute total military reports and the number of military Imposter Scam reports, then calculate the share (military_imposter_scams / total_military_reports).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-6",
-                "query": "Retrieve the Percentage value for the Imposter Scams row in the general population dataframe, strip the '%' sign, and convert it to a decimal fraction.",
+                "step": "Retrieve the Percentage value for the Imposter Scams row in the general population dataframe, strip the '%' sign, and convert it to a decimal fraction.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-28-7",
-                "query": "Compare the military Imposter Scam share with the general population share.",
+                "step": "Compare the military Imposter Scam share with the general population share.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2602,49 +2788,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-29-1",
-                "query": "List all CSV files in the 'State MSA Fraud and Other data' directory and read them.",
+                "step": "List all CSV files in the 'State MSA Fraud and Other data' directory and read them.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-2",
-                "query": "For each CSV, drop the first row and the last four footer rows, then use the first remaining row as the header.",
+                "step": "For each CSV, drop the first row and the last four footer rows, then use the first remaining row as the header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-3",
-                "query": "Skip/filter out any state that contains data for fewer than five metropolitan areas.",
+                "step": "Skip/filter out any state that contains data for fewer than five metropolitan areas.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-4",
-                "query": "Clean the '# of Reports' column by removing commas and converting the values to integers.",
+                "step": "Clean the '# of Reports' column by removing commas and converting the values to integers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-5",
-                "query": "Calculate each metro area's share of fraud reports within its state by dividing its '# of Reports' by the state's total '# of Reports'.",
+                "step": "Calculate each metro area's share of fraud reports within its state by dividing its '# of Reports' by the state's total '# of Reports'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-6",
-                "query": "Sort the metros in descending order by this share and take the top metro for that state.",
+                "step": "Sort the metros in descending order by this share and take the top metro for that state.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-29-7",
-                "query": "Keep track of the metro area with the highest share across all eligible states and print its name at the end.",
+                "step": "Keep track of the metro area with the highest share across all eligible states and print its name at the end.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -3488,49 +3681,56 @@
         "key_functionalities": [
             {
                 "id": "legal-hard-30-1",
-                "query": "Collect file paths for every CSV in the 'State MSA Fraud and Other Data' directory and in the 'State MSA Identity Theft Data' directory.",
+                "step": "Collect file paths for every CSV in the 'State MSA Fraud and Other Data' directory and in the 'State MSA Identity Theft Data' directory.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-2",
-                "query": "For each Fraud CSV: (a) read the file, (b) drop the first row and last four rows that hold meta\u2010data / totals, (c) take the first remaining row as the header, (d) drop that header row from the data",
+                "step": "For each Fraud CSV: (a) read the file, (b) drop the first row and last four rows that hold meta\u2010data / totals, (c) take the first remaining row as the header, (d) drop that header row from the data",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-3",
-                "query": "Convert the '# of Reports' column from a comma-separated string to an integer.",
+                "step": "Convert the '# of Reports' column from a comma-separated string to an integer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-4",
-                "query": "For each Identity-Theft CSV perform the same cleaning steps",
+                "step": "For each Identity-Theft CSV perform the same cleaning steps",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-5",
-                "query": "Map Metropolitan Area \u2192 to number of identity-theft reports and fraud reports respectively.",
+                "step": "Map Metropolitan Area \u2192 to number of identity-theft reports and fraud reports respectively.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-6",
-                "query": "Iterate over every metro in the identity-theft dictionary; for metros that also appear in the fraud dictionary compare the two counts. If any metro has identity-theft reports > fraud reports, and stop the search.",
+                "step": "Iterate over every metro in the identity-theft dictionary; for metros that also appear in the fraud dictionary compare the two counts. If any metro has identity-theft reports > fraud reports, and stop the search.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "legal-hard-30-7",
-                "query": "Count and print the number of metros that appear in both dictionaries (overlap/intersection).",
+                "step": "Count and print the number of metros that appear in both dictionaries (overlap/intersection).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""

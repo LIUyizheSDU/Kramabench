@@ -20,49 +20,56 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-1-1",
-                "query": "Load the radiocarbon_database_regional.xlsx and climateMeasurements.xlsx and read the first worksheet of each.",
-                "answer": "",
-                "answer_type": "",
-                "data_sources": ""
+                "step": "Load the radiocarbon_database_regional.xlsx and climateMeasurements.xlsx and read the first worksheet of each.",
+                "query": "Which files contain information about Potassium in ppm and the maltese people?",
+                "answer": ["radiocarbon_database_regional.xlsx", "climateMeasurements.xlsx"],
+                "answer_type": "list_exact",
+                "data_sources": "./"
             },
             {
                 "id": "archeology-hard-1-2",
-                "query": "Remove rows or columns that are entirely NaN from both dataframes to ensure clean numeric processing.",
-                "answer": "",
-                "answer_type": "",
-                "data_sources": ""
+                "step": "Remove rows or columns that are entirely NaN or do not contain relevant information from both dataframes to ensure clean numeric processing.",
+                "query": "What are the indices (0-indexed) in rows in the climate measurement dataframe that must be cleaned?",
+                "answer": [0, 1, 2, 3, 4],
+                "answer_type": "list_exact",
+                "data_sources": "climateMeasurements.xlsx"
             },
             {
                 "id": "archeology-hard-1-3",
-                "query": "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the \u2018date\u2019",
+                "step": "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the 'date'",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-1-4",
-                "query": "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded \u2018Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
+                "step": "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded 'Age_ky.1' (in thousands of years) multiplied by 1000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-1-5",
-                "query": "Determine the span of human presence in the Maltese area by taking the minimum and maximum \u2018year\u2019 in the radio-carbon dataframe.",
+                "step": "Determine the span of human presence in the Maltese area by taking the minimum and maximum 'year' in the radio-carbon dataframe.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-1-6",
-                "query": "For every integer year within the human presence span, locate the closest earlier and later rows in the climate dataframe and linearly interpolates (or directly returns) the Potassium value \u2018K\u2019 and collect all these values.",
+                "step": "For every integer year within the human presence span, locate the closest earlier and later rows in the climate dataframe and linearly interpolates (or directly returns) the Potassium value 'K' and collect all these values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-1-7",
-                "query": "Compute the mean of the collected Potassium values.",
+                "step": "Compute the mean of the collected Potassium values.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -83,42 +90,48 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-2-1",
-                "query": "Load the first sheet of radiocarbon_database_regional.xlsx and climateMeasurements.xlsx.",
+                "step": "Load the first sheet of radiocarbon_database_regional.xlsx and climateMeasurements.xlsx.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-2-2",
-                "query": "Drop any rows or columns that are entirely NaN.",
+                "step": "Drop any rows or columns that are entirely NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-2-3",
-                "query": "Get the calendar year: for the archaeological samples, year = 1950 \u2212 date",
+                "step": "Get the calendar year: for the archaeological samples, year = 1950 \u2212 date",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-2-4",
-                "query": "Get the calendar year for each table: for the climate data, year = 1950 \u2212 (Age_ky.1 rounded to kyrs \u00d7 1000).",
+                "step": "Get the calendar year for each table: for the climate data, year = 1950 \u2212 (Age_ky.1 rounded to kyrs \u00d7 1000).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-2-5",
-                "query": "Pull the \u2018ODP 967 wet-dry index\u2019 from the nearest earlier and later climate-data bracketing rows and mark the sample as increasing (1) if the later value minus earlier value is positive, otherwise 0.",
+                "step": "Pull the 'ODP 967 wet-dry index' from the nearest earlier and later climate-data bracketing rows and mark the sample as increasing (1) if the later value minus earlier value is positive, otherwise 0.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-2-6",
-                "query": "Calculate the percentage of time the wet-dry index was increasing using individual sample data.",
+                "step": "Calculate the percentage of time the wet-dry index was increasing using individual sample data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -138,28 +151,32 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-3-1",
-                "query": "Load roman_cities.csv.",
+                "step": "Load roman_cities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-3-2",
-                "query": "Filter rows where the Country column equals 'Greece'.",
+                "step": "Filter rows where the Country column equals 'Greece'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-3-3",
-                "query": "Convert the 'Barrington Atlas Rank' column to numeric values: if the entry contains 'or', split on 'or', convert both parts to integers and take their average; otherwise convert the entry directly to an integer.",
+                "step": "Convert the 'Barrington Atlas Rank' column to numeric values: if the entry contains 'or', split on 'or', convert both parts to integers and take their average; otherwise convert the entry directly to an integer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-3-4",
-                "query": "Compute the mean of the converted numeric ranks of the filtered Greece rows.",
+                "step": "Compute the mean of the converted numeric ranks of the filtered Greece rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -179,56 +196,64 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-4-1",
-                "query": "Load the Excel file `climateMeasurements.xlsx`, reading the first sheet while skipping the first 5 metadata rows so only data rows are retained.",
+                "step": "Load the Excel file `climateMeasurements.xlsx`, reading the first sheet while skipping the first 5 metadata rows so only data rows are retained.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-2",
-                "query": "Remove any columns that are completely empty (all\u2010NaN) to keep only informative variables.",
+                "step": "Remove any columns that are completely empty (all\u2010NaN) to keep only informative variables.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-3",
-                "query": "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the \u2018date\u2019",
+                "step": "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the 'date'",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-4",
-                "query": "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded \u2018Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
+                "step": "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded 'Age_ky.1' (in thousands of years) multiplied by 1000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-5",
-                "query": "Find the smallest value in the column `ODP 967 Dust proxy` and filter the dataframe to the rows that have exactly this minimum dust proxy value.",
+                "step": "Find the smallest value in the column `ODP 967 Dust proxy` and filter the dataframe to the rows that have exactly this minimum dust proxy value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-6",
-                "query": "If multiple rows share the same minimum dust proxy, break the tie by selecting the row with the smallest `ODP 967 wet-dry index` among them.",
+                "step": "If multiple rows share the same minimum dust proxy, break the tie by selecting the row with the smallest `ODP 967 wet-dry index` among them.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-7",
-                "query": "Extract the value in the `Ca` (calcium) column, which gives the calcium concentration (ppm) at the time of minimum dust proxy.",
+                "step": "Extract the value in the `Ca` (calcium) column, which gives the calcium concentration (ppm) at the time of minimum dust proxy.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-4-8",
-                "query": "Output the calcium value for the resolved single row.",
+                "step": "Output the calcium value for the resolved single row.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -286,63 +311,72 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-5-1",
-                "query": "Load archeology/input/climateMeasurements.xlsx, archeology/input/radiocarbon_database_regional.xlsx and read the first sheet of each into data frames.",
+                "step": "Load archeology/input/climateMeasurements.xlsx, archeology/input/radiocarbon_database_regional.xlsx and read the first sheet of each into data frames.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-2",
-                "query": "Filter the radiocarbon table to Homo-sapiens records",
+                "step": "Filter the radiocarbon table to Homo-sapiens records",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-3",
-                "query": "Compute \u2018year\u2019 as 1950 \u2212 date.",
+                "step": "Compute 'year' as 1950 \u2212 date.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-4",
-                "query": "Filter for Neolithic culture rows",
+                "step": "Filter for Neolithic culture rows",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-5",
-                "query": "Filter for row(s) whose Latitude equals the maximum Latitude. If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) \u2018year\u2019.",
+                "step": "Filter for row(s) whose Latitude equals the maximum Latitude. If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) 'year'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-6",
-                "query": "Clean the climate table by dropping rows that are entirely NaN and columns that are entirely NaN.",
+                "step": "Clean the climate table by dropping rows that are entirely NaN and columns that are entirely NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-7",
-                "query": "Compute year for the climate table: 1950 \u2212 (Age_ky.1 rounded to 0) \u00d7 1000.",
+                "step": "Compute year for the climate table: 1950 \u2212 (Age_ky.1 rounded to 0) \u00d7 1000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-8",
-                "query": "Find the year in the climate table closest to the chosen Neolithic year (smallest absolute difference).",
+                "step": "Find the year in the climate table closest to the chosen Neolithic year (smallest absolute difference).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-5-9",
-                "query": "Subset the climate table to all rows that have the year closest to the chosen Neolithic year and take the maximum value of the \u2018Al\u2019 (aluminum) column across those rows.",
+                "step": "Subset the climate table to all rows that have the year closest to the chosen Neolithic year and take the maximum value of the 'Al' (aluminum) column across those rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -362,35 +396,40 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-6-1",
-                "query": "Load the worldcities.csv.",
+                "step": "Load the worldcities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-6-2",
-                "query": "Filter the rows where longitude (lng) is negative to keep cities in the Western Hemisphere.",
+                "step": "Filter the rows where longitude (lng) is negative to keep cities in the Western Hemisphere.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-6-3",
-                "query": "Filter those rows where latitude (lat) is negative to keep only cities that are simultaneously in the Southern Hemisphere.",
+                "step": "Filter those rows where latitude (lat) is negative to keep only cities that are simultaneously in the Southern Hemisphere.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-6-4",
-                "query": "Find the maximum value in the population column passing the longitude and latitude filters.",
+                "step": "Find the maximum value in the population column passing the longitude and latitude filters.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-6-5",
-                "query": "Select the row(s) whose population equals that maximum value (i.e., the most populous city in both hemispheres) and get the corresponding city name.",
+                "step": "Select the row(s) whose population equals that maximum value (i.e., the most populous city in both hemispheres) and get the corresponding city name.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -424,35 +463,40 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-7-1",
-                "query": "Load roman_cities.csv and worldcities.csv.",
+                "step": "Load roman_cities.csv and worldcities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-7-2",
-                "query": "Extract longitude/latitude columns to build coordinates for both datasets.",
+                "step": "Extract longitude/latitude columns to build coordinates for both datasets.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-7-3",
-                "query": "Filter the modern cities dataframe to keep only rows where population > 100,000.",
+                "step": "Filter the modern cities dataframe to keep only rows where population > 100,000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-7-4",
-                "query": "For every modern city coordinate, query the Roman cities coordinates within a 0.1-degree radius (query_ball_point with r = 0.1). Collect modern cities that have at least one Roman city within that radius.",
+                "step": "For every modern city coordinate, query the Roman cities coordinates within a 0.1-degree radius (query_ball_point with r = 0.1). Collect modern cities that have at least one Roman city within that radius.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-7-5",
-                "query": "Subset the modern cities dataframe to these indices and count the resulting rows to obtain the final answer.",
+                "step": "Subset the modern cities dataframe to these indices and count the resulting rows to obtain the final answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -472,35 +516,40 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-8-1",
-                "query": "Read the roman_cities.csv.",
+                "step": "Read the roman_cities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-8-2",
-                "query": "Filter out rows where the 'Select Bibliography' field is null to keep only cities that list at least one source.",
+                "step": "Filter out rows where the 'Select Bibliography' field is null to keep only cities that list at least one source.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-8-3",
-                "query": "Iterate over the remaining 'Select Bibliography' entries, normalize/remove period characters and split each entry on semicolons to isolate individual source strings.",
+                "step": "Iterate over the remaining 'Select Bibliography' entries, normalize/remove period characters and split each entry on semicolons to isolate individual source strings.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-8-4",
-                "query": "Take the unique set of the source strings",
+                "step": "Take the unique set of the source strings",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-8-5",
-                "query": "Find the size of the unique set.",
+                "step": "Find the size of the unique set.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -546,56 +595,64 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-9-1",
-                "query": "Read roman_cities.csv and worldcities.csv.",
+                "step": "Read roman_cities.csv and worldcities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-2",
-                "query": "Filter for modern cities whose population column is greater than 1,000,000.",
+                "step": "Filter for modern cities whose population column is greater than 1,000,000.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-3",
-                "query": "Convert the 'Barrington Atlas Rank' string of each Roman city into a numeric value: extract all numbers (handles 'or' cases), take their average; handle missing valuea.",
+                "step": "Convert the 'Barrington Atlas Rank' string of each Roman city into a numeric value: extract all numbers (handles 'or' cases), take their average; handle missing valuea.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-4",
-                "query": "Build two coordinate arrays: Roman cities' (Longitude, Latitude) and modern cities' (lng, lat).",
+                "step": "Build two coordinate arrays: Roman cities' (Longitude, Latitude) and modern cities' (lng, lat).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-5",
-                "query": "For every modern city, find all Roman cities lying within 0.1 degrees by coordinate.",
+                "step": "For every modern city, find all Roman cities lying within 0.1 degrees by coordinate.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-6",
-                "query": "When matches exist, link that modern city with the Roman city that has the highest (max) numeric rank among the matches.",
+                "step": "When matches exist, link that modern city with the Roman city that has the highest (max) numeric rank among the matches.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-7",
-                "query": "Gather data vectors of the populations of the selected modern cities and ranks of their matched Roman cities.",
+                "step": "Gather data vectors of the populations of the selected modern cities and ranks of their matched Roman cities.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-9-8",
-                "query": "Compute the Pearson correlation between the two demographics data vectors.",
+                "step": "Compute the Pearson correlation between the two demographics data vectors.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -615,28 +672,32 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-10-1",
-                "query": "Read the worldcities.csv.",
+                "step": "Read the worldcities.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-10-2",
-                "query": "Group the rows by the 'country' column and compute the mean of the 'population' column for each country.",
+                "step": "Group the rows by the 'country' column and compute the mean of the 'population' column for each country.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-10-3",
-                "query": "Identify the country whose mean population value is the largest (using idxmax).",
+                "step": "Identify the country whose mean population value is the largest (using idxmax).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-10-4",
-                "query": "Print that country name as the answer.",
+                "step": "Print that country name as the answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -669,42 +730,48 @@
         "key_functionalities": [
             {
                 "id": "archeology-easy-11-1",
-                "query": "Read worldcities.csv .",
+                "step": "Read worldcities.csv .",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-11-2",
-                "query": "Filter rows where the 'capital' column equals 'primary' to keep only capital-city records.",
+                "step": "Filter rows where the 'capital' column equals 'primary' to keep only capital-city records.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-11-3",
-                "query": "Identify all unique countries represented in this filtered set.",
+                "step": "Identify all unique countries represented in this filtered set.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-11-4",
-                "query": "For each country, if it has multiple capital records, select the capital with the largest 'population' value; otherwise keep the single record.",
+                "step": "For each country, if it has multiple capital records, select the capital with the largest 'population' value; otherwise keep the single record.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-11-5",
-                "query": "Collect the latitude ('lat') of the chosen capital for every country.",
+                "step": "Collect the latitude ('lat') of the chosen capital for every country.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-easy-11-6",
-                "query": "Compute the mean of these latitude values and round the result to four decimal places.",
+                "step": "Compute the mean of these latitude values and round the result to four decimal places.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -744,49 +811,56 @@
         "key_functionalities": [
             {
                 "id": "archeology-hard-12-1",
-                "query": "Read worldcities.csv to build a set of modern country names that will be used to detect actors\u2019 home countries.",
+                "step": "Read worldcities.csv to build a set of modern country names that will be used to detect actors' home countries.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-2",
-                "query": "Load conflict_brecke.csv",
+                "step": "Load conflict_brecke.csv",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-3",
-                "query": "For each conflict, get the two actors by splitting the \u2018Conflict\u2019 text on \u201c-\u201d or \u201cand\u201d (otherwise treat it as a single-party conflict).",
+                "step": "For each conflict, get the two actors by splitting the 'Conflict' text on \u201c-\u201d or \u201cand\u201d (otherwise treat it as a single-party conflict).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-4",
-                "query": "Extract start and end years for the conflicts.",
+                "step": "Extract start and end years for the conflicts.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-5",
-                "query": "Search each actor string for any substring that matches a country name from the world-cities list (case-insensitive); keep the first match or drop the conflict if either actor cannot be matched to a country.",
+                "step": "Search each actor string for any substring that matches a country name from the world-cities list (case-insensitive); keep the first match or drop the conflict if either actor cannot be matched to a country.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-6",
-                "query": "Detect overlaps using data with clean records for actor-A, actor-B, start year, end year by comparing whether an end year proceeds a start year.a",
+                "step": "Detect overlaps using data with clean records for actor-A, actor-B, start year, end year by comparing whether an end year proceeds a start year.a",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "archeology-hard-12-7",
-                "query": "Count the remaining non-overlapping conflict rows and print that count as the final answer.",
+                "step": "Count the remaining non-overlapping conflict rows and print that count as the final answer.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""

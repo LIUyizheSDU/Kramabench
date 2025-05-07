@@ -31,28 +31,32 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-1-1",
-                "query": "Load the 2013 beach\u2010sampling file (water-body-testing-2013.csv).",
+                "step": "Load the 2013 beach\u2010sampling file (water-body-testing-2013.csv).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-1-2",
-                "query": "Filter to rows whose \u2018Violation\u2019 column equals 'yes', using a case-insensitive comparison to capture all positive violations.",
+                "step": "Filter to rows whose 'Violation\u2019 column equals 'yes', using a case-insensitive comparison to capture all positive violations.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-1-3",
-                "query": "Count the number of violating samples and divide by the total number of samples, then multiply by 100 to obtain the percentage of samples that exceeded bacterial standards.",
+                "step": "Count the number of violating samples and divide by the total number of samples, then multiply by 100 to obtain the percentage of samples that exceeded bacterial standards.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-1-4",
-                "query": "Round (or format) the resulting percentage to three decimal places before displaying.",
+                "step": "Round (or format) the resulting percentage to three decimal places before displaying.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -172,49 +176,56 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-2-1",
-                "query": "Iterate through every year from 2002-2023 and read the corresponding water-body-testing-<year>.csv file.",
+                "step": "Iterate through every year from 2002-2023 and read the corresponding water-body-testing-<year>.csv file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-2",
-                "query": "Filter each file to only freshwater records by checking Beach Type Description == 'fresh' (case-insensitive).",
+                "step": "Filter each file to only freshwater records by checking Beach Type Description == 'fresh' (case-insensitive).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-3",
-                "query": "Filter rows where Violation == 'yes' to count bacterial exceedances.",
+                "step": "Filter rows where Violation == 'yes' to count bacterial exceedances.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-4",
-                "query": "For each year compute the annual exceedance rate: (freshwater violations / total freshwater samples) \u00d7 100 and store it.",
+                "step": "For each year compute the annual exceedance rate: (freshwater violations / total freshwater samples) \u00d7 100 and store it.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-5",
-                "query": "Accumulate the total number of freshwater samples and total violations across all years.",
+                "step": "Accumulate the total number of freshwater samples and total violations across all years.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-6",
-                "query": "After processing all years, calculate the overall (historical) average freshwater exceedance rate using the accumulated totals.",
+                "step": "After processing all years, calculate the overall (historical) average freshwater exceedance rate using the accumulated totals.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-2-7",
-                "query": "Compare each annual rate to the historical average and collect the years whose rate is higher than that average.",
+                "step": "Compare each annual rate to the historical average and collect the years whose rate is higher than that average.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -254,42 +265,48 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-3-1",
-                "query": "Read water-body-testing-2013.csv and water-body-testing-2012.csv.",
+                "step": "Read water-body-testing-2013.csv and water-body-testing-2012.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-3-2",
-                "query": "Standardise the 'Beach Name' column to lower-case in both dataframes so names match across files.",
+                "step": "Standardise the 'Beach Name' column to lower-case in both dataframes so names match across files.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-3-3",
-                "query": "For each year, group by beach name and: a) count total sample rows, b) count rows where 'Violation' equals 'yes' (case-insensitive), then compute exceedance_rate = num_violations / total_samples * 100.",
+                "step": "For each year, group by beach name and: a) count total sample rows, b) count rows where 'Violation' equals 'yes' (case-insensitive), then compute exceedance_rate = num_violations / total_samples * 100.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-3-4",
-                "query": "Inner-join the two yearly summary tables on beach name so only beaches present in both years (i.e., at least one 2012 sample) remain.",
+                "step": "Inner-join the two yearly summary tables on beach name so only beaches present in both years (i.e., at least one 2012 sample) remain.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-3-5",
-                "query": "Select beaches whose 2013 exceedance_rate is strictly greater than their 2012 exceedance_rate.",
+                "step": "Select beaches whose 2013 exceedance_rate is strictly greater than their 2012 exceedance_rate.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-3-6",
-                "query": "Return/print the number of beaches that satisfy this condition.",
+                "step": "Return/print the number of beaches that satisfy this condition.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -351,49 +368,56 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-4-1",
-                "query": "For each year from 2019 to 2023 read the corresponding water-quality CSV file.",
+                "step": "For each year from 2019 to 2023 read the corresponding water-quality CSV file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-2",
-                "query": "Filter the data to keep only records whose 'Beach Name' contains the word 'Wollaston'",
+                "step": "Filter the data to keep only records whose 'Beach Name' contains the word 'Wollaston'",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-3",
-                "query": "Transform the 'Violation' column to lowercase and flag rows equal to 'yes' to identify tests that exceeded swimming-quality standards.",
+                "step": "Transform the 'Violation' column to lowercase and flag rows equal to 'yes' to identify tests that exceeded swimming-quality standards.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-4",
-                "query": "For each year compute the exceedance rate as (# of violations) \u00f7 (total Wollaston records).",
+                "step": "For each year compute the exceedance rate as (# of violations) \u00f7 (total Wollaston records).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-5",
-                "query": "Handles missing data for years with no records.",
+                "step": "Handles missing data for years with no records.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-6",
-                "query": "Take the mean of yearly rates, and calculate 1 \u2212 mean_rate to obtain the overall fraction of time the beach met standards across 2019\u20132023.",
+                "step": "Take the mean of yearly rates, and calculate 1 \u2212 mean_rate to obtain the overall fraction of time the beach met standards across 2019\u20132023.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-4-7",
-                "query": "Convert that fraction to a percentage and display the result.",
+                "step": "Convert that fraction to a percentage and display the result.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -431,42 +455,48 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-5-1",
-                "query": "For each region, read the corresponding monthly_precipitations_<region>.csv file.",
+                "step": "For each region, read the corresponding monthly_precipitations_<region>.csv file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-5-2",
-                "query": "Filter the dataframe for the record whose Year equals 2020.",
+                "step": "Filter the dataframe for the record whose Year equals 2020.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-5-3",
-                "query": "Convert the monthly columns from string to float so they can be summed numerically.",
+                "step": "Convert the monthly columns from string to float so they can be summed numerically.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-5-4",
-                "query": "Compute the total rainfall for that region by summing the Jun, Jul, and Aug columns.",
+                "step": "Compute the total rainfall for that region by summing the Jun, Jul, and Aug columns.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-5-5",
-                "query": "Track the maximum total rainfall encountered and the associated region over all four regions.",
+                "step": "Track the maximum total rainfall encountered and the associated region over all four regions.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-5-6",
-                "query": "Find the corresponding rainfall amount for the region with the highest summed rainfall for June-August 2020.",
+                "step": "Find the corresponding rainfall amount for the region with the highest summed rainfall for June-August 2020.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -588,35 +618,40 @@
         "key_functionalities": [
             {
                 "id": "environment-easy-6-1",
-                "query": "Iterate over the years 2002-2023 and read each yearly CSV (water-body-testing-<year>.csv).",
+                "step": "Iterate over the years 2002-2023 and read each yearly CSV (water-body-testing-<year>.csv).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-6-2",
-                "query": "Filter for rows where the column 'Beach Type Description' equals 'Marine'.",
+                "step": "Filter for rows where the column 'Beach Type Description' equals 'Marine'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-6-3",
-                "query": "FIlter for rows where the column 'Violation' value (lower-case/normalized) is 'yes'.",
+                "step": "FIlter for rows where the column 'Violation' value (lower-case/normalized) is 'yes'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-6-4",
-                "query": "Compute the exceedance rate as (number of violation rows) divided by (total marine rows) for each year.",
+                "step": "Compute the exceedance rate as (number of violation rows) divided by (total marine rows) for each year.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-easy-6-5",
-                "query": "Take the mean of the yearly rates after filtering to obtain the overall average rate for 2002-2023.",
+                "step": "Take the mean of the yearly rates after filtering to obtain the overall average rate for 2002-2023.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -685,56 +720,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-7-1",
-                "query": "Load 2023 beach\u2010testing dataset (water-body-testing-2023.csv).",
+                "step": "Load 2023 beach\u2010testing dataset (water-body-testing-2023.csv).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-2",
-                "query": "Normalize/lowercase \u2018Beach Name\u2019, \u2018Community\u2019, and \u2018Violation\u2019 fields for reliable matching / filtering.",
+                "step": "Normalize/lowercase 'Beach Name\u2019, 'Community\u2019, and 'Violation\u2019 fields for reliable matching / filtering.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-3",
-                "query": "Filter for rows where Beach Type Description equals \u2018Marine\u2019.",
+                "step": "Filter for rows where Beach Type Description equals 'Marine\u2019.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-4",
-                "query": "Load environmental-justice data (environmental-justice-populations.csv) and normalize/lowercase \u2018Municipality\u2019.",
+                "step": "Load environmental-justice data (environmental-justice-populations.csv) and normalize/lowercase 'Municipality\u2019.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-5",
-                "query": "Find two subsets in environmental-justice data: communities whose \u2018Percent of population in EJ BGs\u2019 is >50% and communities whose percentage is <25%.",
+                "step": "Find two subsets in environmental-justice data: communities whose 'Percent of population in EJ BGs\u2019 is >50% and communities whose percentage is <25%.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-6",
-                "query": "Inner-join the marine-only beach dataframe with each environmental-justice subset (Community \u2194 Municipality).",
+                "step": "Inner-join the marine-only beach dataframe with each environmental-justice subset (Community \u2194 Municipality).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-7",
-                "query": "For each joined subset, compute bacterial exceedance rate: (number of rows whose Violation == 'yes') divided by total rows in subset, possibly multiplying by 100 to get percentage value.",
+                "step": "For each joined subset, compute bacterial exceedance rate: (number of rows whose Violation == 'yes') divided by total rows in subset, possibly multiplying by 100 to get percentage value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-7-8",
-                "query": "Subtract the <25% EJ exceedance rate from the >50% EJ exceedance rate to get the difference.",
+                "step": "Subtract the <25% EJ exceedance rate from the >50% EJ exceedance rate to get the difference.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -830,56 +873,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-8-1",
-                "query": "For every beach CSV in the Boston-Harbor datasheet: read while skipping the first row and using the next two rows as a multi-index header.",
+                "step": "For every beach CSV in the Boston-Harbor datasheet: read while skipping the first row and using the next two rows as a multi-index header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-2",
-                "query": "Clean the two-level header by handling empty first-level cells, then combine the two levels so to get columnn names.",
+                "step": "Clean the two-level header by handling empty first-level cells, then combine the two levels so to get columnn names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-3",
-                "query": "Separate measurement columns (those containing 'Tag' or 'Enterococcus'); treat everything else as identifying columns (date, time, etc.).",
+                "step": "Separate measurement columns (those containing 'Tag' or 'Enterococcus'); treat everything else as identifying columns (date, time, etc.).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-4",
-                "query": "Have separate records for 'Location' and 'Measure' or handle this during filtering for Location.",
+                "step": "Have separate records for 'Location' and 'Measure' or handle this during filtering for Location.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-5",
-                "query": "Cast all measurement columns to numeric.",
+                "step": "Cast all measurement columns to numeric.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-6",
-                "query": "For each beach: filter rows where Enterococcus is greater than 104 to count total exceedances (fails).",
+                "step": "For each beach: filter rows where Enterococcus is greater than 104 to count total exceedances (fails).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-7",
-                "query": "Filter for rows where 1-Day Rain is greater than 0 to count failures that had rainfall in the previous 24 hours.",
+                "step": "Filter for rows where 1-Day Rain is greater than 0 to count failures that had rainfall in the previous 24 hours.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-8-8",
-                "query": "Accumulate counts across all beaches passing the filters and compute (rain-related exceedances \u00f7 total exceedances), possibly multiplying by 100 to get percentage value.",
+                "step": "Accumulate counts across all beaches passing the filters and compute (rain-related exceedances \u00f7 total exceedances), possibly multiplying by 100 to get percentage value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1012,56 +1063,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-9-1",
-                "query": "Loop over each Boston Harbor beach CSV filename in the predefined list.",
+                "step": "Loop over each Boston Harbor beach CSV filename in the predefined list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-2",
-                "query": "Read every Boston Harbor related csv file, skipping the first row and treating the next two rows as a multi-level header.",
+                "step": "Read every Boston Harbor related csv file, skipping the first row and treating the next two rows as a multi-level header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-3",
-                "query": "Clean the two-level column headers: handle missing first-level names, drop the 'Unnamed' placeholders, and combine the two levels to get column names.",
+                "step": "Clean the two-level column headers: handle missing first-level names, drop the 'Unnamed' placeholders, and combine the two levels to get column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-4",
-                "query": "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier columns.",
+                "step": "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier columns.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-5",
-                "query": "Have separate records for \u2018Location\u2019 and \u2018Measure\u2019 or handle this during filtering for Location.",
+                "step": "Have separate records for 'Location\u2019 and 'Measure\u2019 or handle this during filtering for Location.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-6",
-                "query": "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric`.",
+                "step": "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric`.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-7",
-                "query": "Filter for rows where the year is between 2020 and 2024 inclusive by getting the year from the Date string.",
+                "step": "Filter for rows where the year is between 2020 and 2024 inclusive by getting the year from the Date string.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-9-8",
-                "query": "Filter out rows where the 'Enterococcus' value is greater than 104. The rows left are beaches meeting the swimming standard 100 % of the time during 2020-2024.",
+                "step": "Filter out rows where the 'Enterococcus' value is greater than 104. The rows left are beaches meeting the swimming standard 100 % of the time during 2020-2024.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1124,77 +1183,88 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-10-1",
-                "query": "Load environmental-justice-populations.csv",
+                "step": "Load environmental-justice-populations.csv",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-2",
-                "query": "Filter the environmental-justice data for municipalities where the 'Percent of population in EJ BGs' column exceeds 90 %.",
+                "step": "Filter the environmental-justice data for municipalities where the 'Percent of population in EJ BGs' column exceeds 90 %.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-3",
-                "query": "Load water-body-testing-2023.csv",
+                "step": "Load water-body-testing-2023.csv",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-4",
-                "query": "Filter for rows whose 'Beach Type Description' is 'Marine'.",
+                "step": "Filter for rows whose 'Beach Type Description' is 'Marine'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-5",
-                "query": "Clean beach names by dropping the text that follows the '@' character.",
+                "step": "Clean beach names by dropping the text that follows the '@' character.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-6",
-                "query": "Load wollaston_beach_datasheet.csv.  Skip the first row and use the next two rows as a multi-level header.",
+                "step": "Load wollaston_beach_datasheet.csv.  Skip the first row and use the next two rows as a multi-level header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-7",
-                "query": "Clean that multi-level header, handling missing top-level entries, combining the two header levels to get column names, and stripping white-space.",
+                "step": "Clean that multi-level header, handling missing top-level entries, combining the two header levels to get column names, and stripping white-space.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-8",
-                "query": "Clean and transform the data: treat all columns that contain either 'Tag' or 'Enterococcus' as value columns, treat everything else as identifiers",
+                "step": "Clean and transform the data: treat all columns that contain either 'Tag' or 'Enterococcus' as value columns, treat everything else as identifiers",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-9",
-                "query": "Have separate records for 'Location' and 'Measure' or handle thid during filtering for Location",
+                "step": "Have separate records for 'Location' and 'Measure' or handle thid during filtering for Location",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-10",
-                "query": "Clean and transform the data so that each record contains numeric columns such as '1-Day Rain', '2-Day Rain', '3-Day Rain', and 'Enterococcus', converting all non-identifier fields to numeric, handling potential bad values to NaN.",
+                "step": "Clean and transform the data so that each record contains numeric columns such as '1-Day Rain', '2-Day Rain', '3-Day Rain', and 'Enterococcus', converting all non-identifier fields to numeric, handling potential bad values to NaN.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-10-11",
-                "query": "Compute the Pearson correlation between '3-Day Rain' and 'Enterococcus' for the EJ community beach data.",
+                "step": "Compute the Pearson correlation between '3-Day Rain' and 'Enterococcus' for the EJ community beach data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1233,56 +1303,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-11-1",
-                "query": "Load pleasure_bay_and_castle_island_beach_datasheet.csv, skipping the first row and using the next two rows as a multi-level header.",
+                "step": "Load pleasure_bay_and_castle_island_beach_datasheet.csv, skipping the first row and using the next two rows as a multi-level header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-2",
-                "query": "Clean two\u2013level header: handle \"Unnamed\" placeholders, handle empty cells in the upper header row, then combine the two levels to get column names.",
+                "step": "Clean two\u2013level header: handle \"Unnamed\" placeholders, handle empty cells in the upper header row, then combine the two levels to get column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-3",
-                "query": "Identify columns that contain measurements (those whose name includes \"Tag\" or \"Enterococcus\") versus identifying columns (all others)",
+                "step": "Identify columns that contain measurements (those whose name includes \"Tag\" or \"Enterococcus\") versus identifying columns (all others)",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-4",
-                "query": "Have separate 'Location' and 'Measure' fields or handle this during filtering for Location.",
+                "step": "Have separate 'Location' and 'Measure' fields or handle this during filtering for Location.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-5",
-                "query": "Convert all measure columns (e.g., Enterococcus counts and rainfall totals) to numeric, handling malformed data.",
+                "step": "Convert all measure columns (e.g., Enterococcus counts and rainfall totals) to numeric, handling malformed data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-6",
-                "query": "Filter for rows whose Location is Pleasure Bay and not \"Castle Island Playground\".",
+                "step": "Filter for rows whose Location is Pleasure Bay and not \"Castle Island Playground\".",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-7",
-                "query": "Filter for rows with Enterococcus count exceeding 104 CFU/100 mL (failed swimming standard).",
+                "step": "Filter for rows with Enterococcus count exceeding 104 CFU/100 mL (failed swimming standard).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-11-8",
-                "query": "Compute the mean of the '1-Day Rain' column for these filtered rows and output that average rainfall value.",
+                "step": "Compute the mean of the '1-Day Rain' column for these filtered rows and output that average rainfall value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1411,56 +1489,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-12-1",
-                "query": "Read each boston beach CSV file. Skip the first row and use the next two rows as a multi-level header.",
+                "step": "Read each boston beach CSV file. Skip the first row and use the next two rows as a multi-level header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-2",
-                "query": "Handle the two-level column header: handle 'Unnamed' placeholders, handle empty cells in top-level header, then combine the two levels to get column names.",
+                "step": "Handle the two-level column header: handle 'Unnamed' placeholders, handle empty cells in top-level header, then combine the two levels to get column names.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-3",
-                "query": "Separate the columns that contain measurement data (those with 'Tag' or 'Enterococcus' in the name) from the identifier columns.",
+                "step": "Separate the columns that contain measurement data (those with 'Tag' or 'Enterococcus' in the name) from the identifier columns.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-4",
-                "query": "Have separate 'Location' and 'Measure' fields, or handle the combined header during filtering for Location.",
+                "step": "Have separate 'Location' and 'Measure' fields, or handle the combined header during filtering for Location.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-5",
-                "query": "Convert all non-identifier / non-text columns to numeric types, handling malformed data.",
+                "step": "Convert all non-identifier / non-text columns to numeric types, handling malformed data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-6",
-                "query": "Filter for rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
+                "step": "Filter for rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-7",
-                "query": "Mark exceedances by filtering for rows where the numeric 'Enterococcus' value is greater than 104 counts/100 mL.",
+                "step": "Mark exceedances by filtering for rows where the numeric 'Enterococcus' value is greater than 104 counts/100 mL.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-12-8",
-                "query": "After the filters, count exceedance rows for each beach and get the beach with the largest count across all files.",
+                "step": "After the filters, count exceedance rows for each beach and get the beach with the largest count across all files.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1494,56 +1580,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-13-1",
-                "query": "Read constitution_beach_datasheet.csv while skipping the first row and using the next two rows as a multi-level header.",
+                "step": "Read constitution_beach_datasheet.csv while skipping the first row and using the next two rows as a multi-level header.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-2",
-                "query": "Handle multi-level column names: handle unnamed top-level cells, then combine the two header levels to get column names",
+                "step": "Handle multi-level column names: handle unnamed top-level cells, then combine the two header levels to get column names",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-3",
-                "query": "Use columns containing 'Tag' or 'Enterococcus' as location/measurement columns and treat all remaining columns as identifiers.",
+                "step": "Use columns containing 'Tag' or 'Enterococcus' as location/measurement columns and treat all remaining columns as identifiers.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-4",
-                "query": "Have separate 'Location' and 'Measure' fields or handle this while filtering for Location.",
+                "step": "Have separate 'Location' and 'Measure' fields or handle this while filtering for Location.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-5",
-                "query": "Convert all measurement columns (except identifiers, 'Location', and 'Tag') to numeric, handling malformed data.",
+                "step": "Convert all measurement columns (except identifiers, 'Location', and 'Tag') to numeric, handling malformed data.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-6",
-                "query": "Filter for data from 2024 by using the 'Date' column.",
+                "step": "Filter for data from 2024 by using the 'Date' column.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-7",
-                "query": "Flag exceedances by filtering for data where the 'Enterococcus' value is greater than 104 CFU/100 mL, then group by 'Date' and count how many sampling points exceeded the limit on each day.",
+                "step": "Flag exceedances by filtering for data where the 'Enterococcus' value is greater than 104 CFU/100 mL, then group by 'Date' and count how many sampling points exceeded the limit on each day.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-13-8",
-                "query": "Select the dates whose exceedance count is less than the total number of sampling points (i.e., at least one point exceeded but at least one met the standard) and count these dates to answer the question.",
+                "step": "Select the dates whose exceedance count is less than the total number of sampling points (i.e., at least one point exceeded but at least one met the standard) and count these dates to answer the question.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1632,56 +1726,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-14-1",
-                "query": "Read 2007-2009 water-quality-testing CSVs.",
+                "step": "Read 2007-2009 water-quality-testing CSVs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-2",
-                "query": "Tell whether a beach is Marine or Fresh from 'Beach Type Description'.",
+                "step": "Tell whether a beach is Marine or Fresh from 'Beach Type Description'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-3",
-                "query": "For each type, flag exceedances by selecting rows whose 'Violation' column (case-insensitive) equals 'yes'.",
+                "step": "For each type, flag exceedances by selecting rows whose 'Violation' column (case-insensitive) equals 'yes'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-4",
-                "query": "Compute yearly exceedance rate for each type:  (# rows with violation) / (# rows of that beach type).",
+                "step": "Compute yearly exceedance rate for each type:  (# rows with violation) / (# rows of that beach type).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-5",
-                "query": "For Marine rainfall: read the monthly_precipitations_*.csv files for Boston and Chatham; keep Year + summer-month (Jun, Jul, Aug) columns, keep only 2007\u20132009 rows, cast month columns to float, sum Jun+Jul+Aug per year to get a summer total, then average the two cities\u2019 totals year-wise.",
+                "step": "For Marine rainfall: read the monthly_precipitations_*.csv files for Boston and Chatham; keep Year + summer-month (Jun, Jul, Aug) columns, keep only 2007\u20132009 rows, cast month columns to float, sum Jun+Jul+Aug per year to get a summer total, then average the two cities\u2019 totals year-wise.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-6",
-                "query": "For Fresh rainfall: repeat the same procedure for Boston, Chatham, Amherst and Ashburnham, then average the four cities year-wise.",
+                "step": "For Fresh rainfall: repeat the same procedure for Boston, Chatham, Amherst and Ashburnham, then average the four cities year-wise.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-7",
-                "query": "Calculate the Pearson correlation between the 3-year exceedance-rate vector and the 3-year rainfall vector for Marine beaches and Fresh beaches respectively.",
+                "step": "Calculate the Pearson correlation between the 3-year exceedance-rate vector and the 3-year rainfall vector for Marine beaches and Fresh beaches respectively.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-14-8",
-                "query": "Compare the correlation coefficients to determine which beach type shows the higher summer rainfall-exceedance correlation.",
+                "step": "Compare the correlation coefficients to determine which beach type shows the higher summer rainfall-exceedance correlation.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1717,56 +1819,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-15-1",
-                "query": "Read CSV files water-body-testing-2020\u20132023.",
+                "step": "Read CSV files water-body-testing-2020\u20132023.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-2",
-                "query": "Filter for rows where Beach Type Description equals 'Fresh'.",
+                "step": "Filter for rows where Beach Type Description equals 'Fresh'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-3",
-                "query": "Standardize the Beach Name by splitting on '@' and retaining the first part so the same beach is counted once across years.",
+                "step": "Standardize the Beach Name by splitting on '@' and retaining the first part so the same beach is counted once across years.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-4",
-                "query": "For every year, compute per-beach sample count and per-beach violation count (rows whose Violation column equals 'yes' case-insensitively).",
+                "step": "For every year, compute per-beach sample count and per-beach violation count (rows whose Violation column equals 'yes' case-insensitively).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-5",
-                "query": "Calculate the yearly exceedance rate for each beach as violations / total samples.",
+                "step": "Calculate the yearly exceedance rate for each beach as violations / total samples.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-6",
-                "query": "Inner-merge the yearly dataframes on Beach Name so that only beaches appearing in every year 2020\u20132023 are retained, satisfying the \u2018measured in all years\u2019 requirement.",
+                "step": "Inner-merge the yearly dataframes on Beach Name so that only beaches appearing in every year 2020\u20132023 are retained, satisfying the 'measured in all years\u2019 requirement.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-7",
-                "query": "Across the yearly rates, compute the row-wise mean to obtain each beach\u2019s average exceedance rate over time since 2020.",
+                "step": "Across the yearly rates, compute the row-wise mean to obtain each beach\u2019s average exceedance rate over time since 2020.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-15-8",
-                "query": "Find the Beach Name with the highest average exceedance rate.",
+                "step": "Find the Beach Name with the highest average exceedance rate.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1868,49 +1978,56 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-16-1",
-                "query": "For every year from 2002 through 2023, read the corresponding water-body-testing-<year>.csv file.",
+                "step": "For every year from 2002 through 2023, read the corresponding water-body-testing-<year>.csv file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-2",
-                "query": "Filter for rows where Beach Type Description equals 'Marine'.",
+                "step": "Filter for rows where Beach Type Description equals 'Marine'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-3",
-                "query": "Standardise beach names by splitting the Beach Name field at '@' and retaining only the part before the delimiter to make names consistent across years.",
+                "step": "Standardise beach names by splitting the Beach Name field at '@' and retaining only the part before the delimiter to make names consistent across years.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-4",
-                "query": "Lower-case the Violation column or handle the normalization during filtering.",
+                "step": "Lower-case the Violation column or handle the normalization during filtering.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-5",
-                "query": "Build the set of all unique marine beach names observed over the full 2002-2023 period.",
+                "step": "Build the set of all unique marine beach names observed over the full 2002-2023 period.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-6",
-                "query": "Build the set of beach names that ever recorded a violation (Violation == 'yes') in any year.",
+                "step": "Build the set of beach names that ever recorded a violation (Violation == 'yes') in any year.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-16-7",
-                "query": "Determine the beaches that never appear in the violation set (i.e., safe the whole time) by set difference and count them.",
+                "step": "Determine the beaches that never appear in the violation set (i.e., safe the whole time) by set difference and count them.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -1941,70 +2058,80 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-17-1",
-                "query": "Load monthly precipitation data for Chatham from monthly_precipitations_chatham.csv.",
+                "step": "Load monthly precipitation data for Chatham from monthly_precipitations_chatham.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-2",
-                "query": "Filter for summer months (June, July, August)",
+                "step": "Filter for summer months (June, July, August)",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-3",
-                "query": "Filter for years 2002-2020.",
+                "step": "Filter for years 2002-2020.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-4",
-                "query": "Convert precipitation columns to numeric and, where any value is missing, impute it with the median for that month calculated from the available years.",
+                "step": "Convert precipitation columns to numeric and, where any value is missing, impute it with the median for that month calculated from the available years.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-5",
-                "query": "Compute the total summer rainfall per year by summing June, July and August precipitation.",
+                "step": "Compute the total summer rainfall per year by summing June, July and August precipitation.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-6",
-                "query": "Identify the year that has the maximum total summer rainfall (the wettest summer).",
+                "step": "Identify the year that has the maximum total summer rainfall (the wettest summer).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-7",
-                "query": "Read the corresponding water-body testing file for the year with the wettest summer (water-body-testing-{year}.csv).",
+                "step": "Read the corresponding water-body testing file for the year with the wettest summer (water-body-testing-{year}.csv).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-8",
-                "query": "Filter water-body-testing data to the target beach, \u201cBucks Creek\u201d.",
+                "step": "Filter water-body-testing data to the target beach, \u201cBucks Creek\u201d.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-9",
-                "query": "Calculate the exceedance rate for that season as: (number of samples whose Violation column is 'yes') / (total number of samples for that beach).",
+                "step": "Calculate the exceedance rate for that season as: (number of samples whose Violation column is 'yes') / (total number of samples for that beach).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-17-10",
-                "query": "Convert the exceedance rate to a percentage and round to two decimal places before reporting.",
+                "step": "Convert the exceedance rate to a percentage and round to two decimal places before reporting.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2066,56 +2193,64 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-18-1",
-                "query": "Load all four monthly_precipitation csvs, truncate out footer rows",
+                "step": "Load all four monthly_precipitation csvs, truncate out footer rows",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-2",
-                "query": "Handling missing value represented by the string 'M': cast the month column to float and fill missing values with that month\u2019s median across the remaining rows.",
+                "step": "Handling missing value represented by the string 'M': cast the month column to float and fill missing values with that month\u2019s median across the remaining rows.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-3",
-                "query": "Filter the precipitation frame to just the target years 2020\u20132023.",
+                "step": "Filter the precipitation frame to just the target years 2020\u20132023.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-4",
-                "query": "For every city row, sum Jun + Jul + Aug to obtain a summer-season total, collect those totals for each city, then sum across all cities to get one rainfall value per year (fresh_rains).",
+                "step": "For every city row, sum Jun + Jul + Aug to obtain a summer-season total, collect those totals for each city, then sum across all cities to get one rainfall value per year (fresh_rains).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-5",
-                "query": "For each year 2020\u20132023, load the water-body-testing file.",
+                "step": "For each year 2020\u20132023, load the water-body-testing file.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-6",
-                "query": "Select rows where Beach Type Description == 'Fresh'.",
+                "step": "Select rows where Beach Type Description == 'Fresh'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-7",
-                "query": "Compute the exceedance rate as (count of rows whose Violation is'yes') divided by total fresh rows, append to list.",
+                "step": "Compute the exceedance rate as (count of rows whose Violation is'yes') divided by total fresh rows, append to list.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-18-8",
-                "query": "Compare the sequence of yearly rainfall totals with the sequence of yearly exceedance rates, checking whether year-to-year direction of change is identical for every interval, and return True/False accordingly.",
+                "step": "Compare the sequence of yearly rainfall totals with the sequence of yearly exceedance rates, checking whether year-to-year direction of change is identical for every interval, and return True/False accordingly.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2199,63 +2334,72 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-19-1",
-                "query": "Load water-body testing files from 2002-2023",
+                "step": "Load water-body testing files from 2002-2023",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-2",
-                "query": "Filter for data where 'Beach Type Description' == 'Marine'.",
+                "step": "Filter for data where 'Beach Type Description' == 'Marine'.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-3",
-                "query": "Within filtered marine rows, count violations ('Violation' equal to 'yes') and divide by total marine rows to get yearly exceedance rate.",
+                "step": "Within filtered marine rows, count violations ('Violation' equal to 'yes') and divide by total marine rows to get yearly exceedance rate.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-4",
-                "query": "Take absolute year-to-year differences, and locate the index of the maximum jump; convert that index to the calendar year (argmax + start_year + 1).",
+                "step": "Take absolute year-to-year differences, and locate the index of the maximum jump; convert that index to the calendar year (argmax + start_year + 1).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-5",
-                "query": "Read Boston and Chatham monthly precipitation CSVs, filter for years 2002-2023 (rows 2-23).",
+                "step": "Read Boston and Chatham monthly precipitation CSVs, filter for years 2002-2023 (rows 2-23).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-6",
-                "query": "For each month in each file, treat the string 'M' as missing, cast the column to float, and impute missing values with the column\u2019s median value.",
+                "step": "For each month in each file, treat the string 'M' as missing, cast the column to float, and impute missing values with the column\u2019s median value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-7",
-                "query": "Compute a row-wise summer total (Jun+Jul+Aug) for each city, then sum Boston and Chatham totals to obtain a single rainfall total per year.",
+                "step": "Compute a row-wise summer total (Jun+Jul+Aug) for each city, then sum Boston and Chatham totals to obtain a single rainfall total per year.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-8",
-                "query": "Create an array of these combined yearly rainfall totals, take absolute year-to-year differences, and find the year with the largest change (argmax + start_year + 1).",
+                "step": "Create an array of these combined yearly rainfall totals, take absolute year-to-year differences, and find the year with the largest change (argmax + start_year + 1).",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-19-9",
-                "query": "Compare the two identified years (largest exceedance-rate jump vs. largest rainfall jump); print True if they are identical, otherwise False.",
+                "step": "Compare the two identified years (largest exceedance-rate jump vs. largest rainfall jump); print True if they are identical, otherwise False.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
@@ -2323,84 +2467,96 @@
         "key_functionalities": [
             {
                 "id": "environment-hard-20-1",
-                "query": "Read all four monthly_precipitations_<city>.csvs.",
+                "step": "Read all four monthly_precipitations_<city>.csvs.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-2",
-                "query": "Filter for year 2015",
+                "step": "Filter for year 2015",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-3",
-                "query": "Filter for summer-month columns (Jun, Jul, Aug)",
+                "step": "Filter for summer-month columns (Jun, Jul, Aug)",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-4",
-                "query": "convert monthly measurement columns to float and sum them to obtain the total summer rainfall for each city.",
+                "step": "convert monthly measurement columns to float and sum them to obtain the total summer rainfall for each city.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-5",
-                "query": "After filtering and summing, pick the city with greatest rainfall value.",
+                "step": "After filtering and summing, pick the city with greatest rainfall value.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-6",
-                "query": "Read water-body-testing-2015.csv.",
+                "step": "Read water-body-testing-2015.csv.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-7",
-                "query": "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as \u201cChatham\u201d in the snippet) are retained.",
+                "step": "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as \u201cChatham\u201d in the snippet) are retained.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-8",
-                "query": "Clean the Beach Name field by splitting on \u201c@\u201d and keeping only the first part to get a canonical beach name.",
+                "step": "Clean the Beach Name field by splitting on \u201c@\u201d and keeping only the first part to get a canonical beach name.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-9",
-                "query": "Group the filtered data by Beach Name to count total samples taken at each beach.",
+                "step": "Group the filtered data by Beach Name to count total samples taken at each beach.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-10",
-                "query": "Within the same filtered set, isolate rows where the Violation column (normalized) equals \u201cyes\u201d and count those violations per beach.",
+                "step": "Within the same filtered set, isolate rows where the Violation column (normalized) equals \u201cyes\u201d and count those violations per beach.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-11",
-                "query": "Using total-sample counts and violation counts, and compute an exceedance (violation) rate for 2015 as Violations \u00f7 Total Samples.",
+                "step": "Using total-sample counts and violation counts, and compute an exceedance (violation) rate for 2015 as Violations \u00f7 Total Samples.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""
             },
             {
                 "id": "environment-hard-20-12",
-                "query": "Using the exceedance rate, get the three most polluted beaches.",
+                "step": "Using the exceedance rate, get the three most polluted beaches.",
+                "query": "",
                 "answer": "",
                 "answer_type": "",
                 "data_sources": ""

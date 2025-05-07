@@ -1,6 +1,6 @@
 [
     "Load clinical data (patient metadata) from mmc1 Excel file, hyperactivated phosphoproteomics data from CSV, and FDA-approved drug target sheet from mmc6 Excel workbook.",
-    "Filter clinical data to retain only samples classified as \u2018CNV_HIGH\u2019, with histologic type \u2018Endometrioid\u2019, and not flagged for exclusion (\u2018Case_excluded\u2019 == 'No').",
+    "Filter clinical data to retain only samples classified as 'CNV_HIGH\u2019, with histologic type 'Endometrioid\u2019, and not flagged for exclusion ('Case_excluded\u2019 == 'No').",
     "Collect the sample identifiers (idx) for these CNV-high endometrioid cases.",
     "Filter the hyperactivated phosphoproteomics table to rows whose sample_id appears in the selected sample identifiers.",
     "Extract the unique protein (gene) names that are hyperactivated in those samples.",

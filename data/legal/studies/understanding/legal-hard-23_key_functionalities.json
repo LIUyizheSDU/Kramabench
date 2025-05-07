@@ -1,9 +1,9 @@
 [
-    "Load the two raw CSV files that hold \u2018State Rankings\u2019 for Identity-Theft reports and for Fraud & Other reports.",
+    "Load the two raw CSV files that hold 'State Rankings\u2019 for Identity-Theft reports and for Fraud & Other reports.",
     "Strips commas inside quoted strings,  \u2022 splits the file into separate embedded tables.",
-    "Extract from each parsed file the embedded table named \u2018State Rankings: Identity Theft Reports\u2019 and \u2018State Rankings: Fraud and Other Reports\u2019.",
-    "Iterate over the rows of the identity-theft table; for every state pick out:  \u2022 the state name (row[1]),  \u2022 the total-reports column (row[2]),  \u2022 the \u2018reports-per-100 K\u2019 column (row[3]). Derive the state\u2019s population as  population = (reports-per-100 K) / (total reports).",
-    "Perform a join with the fraud/other table on state and pull the other table's \u2018reports-per-100 K\u2019 value (row2[3]).",
+    "Extract from each parsed file the embedded table named 'State Rankings: Identity Theft Reports\u2019 and 'State Rankings: Fraud and Other Reports\u2019.",
+    "Iterate over the rows of the identity-theft table; for every state pick out:  \u2022 the state name (row[1]),  \u2022 the total-reports column (row[2]),  \u2022 the 'reports-per-100 K\u2019 column (row[3]). Derive the state\u2019s population as  population = (reports-per-100 K) / (total reports).",
+    "Perform a join with the fraud/other table on state and pull the other table's 'reports-per-100 K\u2019 value (row2[3]).",
     "Compute a combined density for the state: combined_density = (identity_theft_reports_per_100k + fraud_other_reports_per_100k) / population.",
     "Keep track of the state whose combined_density is the highest; return that state name as the answer."
 ]
