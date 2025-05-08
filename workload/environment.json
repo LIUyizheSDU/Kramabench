@@ -3,7 +3,7 @@
         "id": "environment-easy-1",
         "query": "What percentage (to 3 decimal places) of water samples collected from Massachusetts beaches during the 2013 bathing season exceeded bacterial standards, leading to temporary closures?",
         "answer": 4.796,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "water-body-testing-2013.csv"
@@ -13,7 +13,7 @@
                 "id": "environment-easy-1-1",
                 "query": "How many water samples in total were collected?",
                 "answer": 15388,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2013.csv"
                 ]
@@ -22,10 +22,44 @@
                 "id": "environment-easy-1-2",
                 "query": "How many water samples exceeded bacterial standards?",
                 "answer": 738,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2013.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-1-1",
+                "step": "Load the 2013 beach\u2010sampling file (water-body-testing-2013.csv).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-1-2",
+                "step": "Filter to rows whose 'Violation\u2019 column equals 'yes', using a case-insensitive comparison to capture all positive violations.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-1-3",
+                "step": "Count the number of violating samples and divide by the total number of samples, then multiply by 100 to obtain the percentage of samples that exceeded bacterial standards.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-1-4",
+                "step": "Round (or format) the resulting percentage to three decimal places before displaying.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -42,7 +76,7 @@
             2022,
             2023
         ],
-        "answer_type": "list",
+        "answer_type": "list_exact",
         "runtime": 1,
         "data_sources": [
             "water-body-testing-2002.csv",
@@ -73,7 +107,7 @@
                 "id": "environment-easy-2-1",
                 "query": "What is the average bacterial exceedance rate for freshwater beaches between 2002 and 2023 (inclusive) (to 2 decimal places)?",
                 "answer": 4.04,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2002.csv",
                     "water-body-testing-2003.csv",
@@ -112,7 +146,7 @@
                     2022,
                     2023
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2002.csv",
                     "water-body-testing-2003.csv",
@@ -138,13 +172,71 @@
                     "water-body-testing-2023.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-2-1",
+                "step": "Iterate through every year from 2002-2023 and read the corresponding water-body-testing-<year>.csv file.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-2",
+                "step": "Filter each file to only freshwater records by checking Beach Type Description == 'fresh' (case-insensitive).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-3",
+                "step": "Filter rows where Violation == 'yes' to count bacterial exceedances.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-4",
+                "step": "For each year compute the annual exceedance rate: (freshwater violations / total freshwater samples) \u00d7 100 and store it.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-5",
+                "step": "Accumulate the total number of freshwater samples and total violations across all years.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-6",
+                "step": "After processing all years, calculate the overall (historical) average freshwater exceedance rate using the accumulated totals.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-2-7",
+                "step": "Compare each annual rate to the historical average and collect the years whose rate is higher than that average.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-easy-3",
         "query": "How many beaches had a higher bacterial exceedance rate for water samples collected in 2013 compared to 2012, excluding those with no samples in 2012?",
         "answer": 255,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 1,
         "data_sources": [
             "water-body-testing-2012.csv",
@@ -155,7 +247,7 @@
                 "id": "environment-easy-3-1",
                 "query": "What file contain the water samples collected in 2013 for each beach?",
                 "answer": "water-body-testing-2013.csv",
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "water-body-testing-2013.csv"
                 ]
@@ -164,10 +256,60 @@
                 "id": "environment-easy-3-2",
                 "query": "What file contain the water samples collected in 2012 for each beach?",
                 "answer": "water-body-testing-2012.csv",
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "water-body-testing-2012.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-3-1",
+                "step": "Read water-body-testing-2013.csv and water-body-testing-2012.csv.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-3-2",
+                "step": "Standardise the 'Beach Name' column to lower-case in both dataframes so names match across files.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-3-3",
+                "step": "For each year, group by beach name and: a) count total sample rows, b) count rows where 'Violation' equals 'yes' (case-insensitive), then compute exceedance_rate = num_violations / total_samples * 100.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-3-4",
+                "step": "Inner-join the two yearly summary tables on beach name so only beaches present in both years (i.e., at least one 2012 sample) remain.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-3-5",
+                "step": "Select beaches whose 2013 exceedance_rate is strictly greater than their 2012 exceedance_rate.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-3-6",
+                "step": "Return/print the number of beaches that satisfy this condition.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -175,7 +317,7 @@
         "id": "environment-easy-4",
         "query": "What is the percentage (to integer) of time in 2019 to 2023 (inclusive) that the water quality at Quincy's Wollaston Beach has met swimming standards?",
         "answer": 86,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "water-body-testing-2019.csv",
@@ -194,7 +336,7 @@
                     "Wollaston @ Rice Road (DCR)",
                     "Wollaston @ Sachem Street (DCR)"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2019.csv",
                     "water-body-testing-2020.csv",
@@ -213,7 +355,7 @@
                     12.23,
                     12.93
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2019.csv",
                     "water-body-testing-2020.csv",
@@ -222,13 +364,71 @@
                     "water-body-testing-2023.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-4-1",
+                "step": "For each year from 2019 to 2023 read the corresponding water-quality CSV file.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-2",
+                "step": "Filter the data to keep only records whose 'Beach Name' contains the word 'Wollaston'",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-3",
+                "step": "Transform the 'Violation' column to lowercase and flag rows equal to 'yes' to identify tests that exceeded swimming-quality standards.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-4",
+                "step": "For each year compute the exceedance rate as (# of violations) \u00f7 (total Wollaston records).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-5",
+                "step": "Handles missing data for years with no records.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-6",
+                "step": "Take the mean of yearly rates, and calculate 1 \u2212 mean_rate to obtain the overall fraction of time the beach met standards across 2019\u20132023.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-4-7",
+                "step": "Convert that fraction to a percentage and display the result.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-easy-5",
         "query": "Which region out of Boston, Chatham, Amherst, Ashburnham, had the most rainfall in June, July, August, in 2020?",
         "answer": "Ashburnham",
-        "answer_type": "exact",
+        "answer_type": "string_exact",
         "runtime": 0.1,
         "data_sources": [
             "monthly_precipitations_boston.csv",
@@ -246,10 +446,60 @@
                     "Jul",
                     "Aug"
                 ],
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "monthly_precipitations_ashburnham.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-5-1",
+                "step": "For each region, read the corresponding monthly_precipitations_<region>.csv file.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-5-2",
+                "step": "Filter the dataframe for the record whose Year equals 2020.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-5-3",
+                "step": "Convert the monthly columns from string to float so they can be summed numerically.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-5-4",
+                "step": "Compute the total rainfall for that region by summing the Jun, Jul, and Aug columns.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-5-5",
+                "step": "Track the maximum total rainfall encountered and the associated region over all four regions.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-5-6",
+                "step": "Find the corresponding rainfall amount for the region with the highest summed rainfall for June-August 2020.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -257,7 +507,7 @@
         "id": "environment-easy-6",
         "query": "What is the average historical exceedance rate (to 2 decimal places) for marine beaches from 2002 to 2023 (inclusive)?",
         "answer": 5.14,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "water-body-testing-2022.csv",
@@ -287,7 +537,7 @@
                 "id": "environment-easy-6-1",
                 "query": "What is the 'Beach Type Description' of the marine beaches?",
                 "answer": "Marine",
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "water-body-testing-2022.csv",
                     "water-body-testing-2021.csv",
@@ -321,12 +571,12 @@
                     4.11,
                     4.24,
                     4.37,
-                    3.10,
+                    3.1,
                     5.39,
                     6.75,
                     5.65,
                     5.63,
-                    4.10,
+                    4.1,
                     5.71,
                     4.18,
                     4.85,
@@ -335,11 +585,11 @@
                     4.99,
                     6.07,
                     5.13,
-                    7.90,
+                    7.9,
                     5.38,
                     8.01
                 ],
-                "answer_type": "exact",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2022.csv",
                     "water-body-testing-2021.csv",
@@ -364,13 +614,55 @@
                     "water-body-testing-2002.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-easy-6-1",
+                "step": "Iterate over the years 2002-2023 and read each yearly CSV (water-body-testing-<year>.csv).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-6-2",
+                "step": "Filter for rows where the column 'Beach Type Description' equals 'Marine'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-6-3",
+                "step": "FIlter for rows where the column 'Violation' value (lower-case/normalized) is 'yes'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-6-4",
+                "step": "Compute the exceedance rate as (number of violation rows) divided by (total marine rows) for each year.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-easy-6-5",
+                "step": "Take the mean of the yearly rates after filtering to obtain the overall average rate for 2002-2023.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-hard-7",
         "query": "What was the difference in bacterial exceedance rates (to 2 decimal places) for marine beach samples collected in 2023 between communities with more than 50% environmental justice (EJ) populations and those with less than 25% EJ populations?",
         "answer": 10.87,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "environmental-justice-populations.csv",
@@ -381,7 +673,7 @@
                 "id": "environment-hard-7-1",
                 "query": "How many samples were collected for marine beaches in 2023?",
                 "answer": 8491,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2023.csv"
                 ]
@@ -390,7 +682,7 @@
                 "id": "environment-hard-7-2",
                 "query": "How many communities have more than 50% EJ populations?",
                 "answer": 64,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv"
                 ]
@@ -399,7 +691,7 @@
                 "id": "environment-hard-7-3",
                 "query": "How many communities have less than 25% EJ populations?",
                 "answer": 75,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv"
                 ]
@@ -408,7 +700,7 @@
                 "id": "environment-hard-7-4",
                 "query": "What is the bacterial exceedance rate (to 2 decimal places) for the communities with more than 50% EJ populations?",
                 "answer": 15.12,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv",
                     "water-body-testing-2023.csv"
@@ -418,11 +710,77 @@
                 "id": "environment-hard-7-5",
                 "query": "What is the bacterial exceedance rate (to 2 decimal places) for the communities with less than 25% EJ populations?",
                 "answer": 4.25,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv",
                     "water-body-testing-2023.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-7-1",
+                "step": "Load 2023 beach\u2010testing dataset (water-body-testing-2023.csv).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-2",
+                "step": "Normalize/lowercase 'Beach Name\u2019, 'Community\u2019, and 'Violation\u2019 fields for reliable matching / filtering.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-3",
+                "step": "Filter for rows where Beach Type Description equals 'Marine\u2019.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-4",
+                "step": "Load environmental-justice data (environmental-justice-populations.csv) and normalize/lowercase 'Municipality\u2019.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-5",
+                "step": "Find two subsets in environmental-justice data: communities whose 'Percent of population in EJ BGs\u2019 is >50% and communities whose percentage is <25%.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-6",
+                "step": "Inner-join the marine-only beach dataframe with each environmental-justice subset (Community \u2194 Municipality).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-7",
+                "step": "For each joined subset, compute bacterial exceedance rate: (number of rows whose Violation == 'yes') divided by total rows in subset, possibly multiplying by 100 to get percentage value.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-7-8",
+                "step": "Subtract the <25% EJ exceedance rate from the >50% EJ exceedance rate to get the difference.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -430,7 +788,7 @@
         "id": "environment-hard-8",
         "query": "What percentage of samples (to 2 decimal places) that failed to meet the swimming standard at Boston Harbor beaches had rainfall within 24 hours prior to sampling? A sample meets the standard if it contains fewer than 104 counts of Enterococcus per 100 milliliters of water.",
         "answer": 54.03,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.5,
         "data_sources": [
             "boston-harbor-beaches.txt",
@@ -458,7 +816,7 @@
                     "Tenean Beach",
                     "Wollaston Beach"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "boston-harbor-beaches.txt"
                 ]
@@ -467,7 +825,7 @@
                 "id": "environment-hard-8-2",
                 "query": "How many samples were collected from the Boston Harbor beaches?",
                 "answer": 23280,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv",
                     "carson-beach-datasheet.csv",
@@ -483,7 +841,7 @@
                 "id": "environment-hard-8-3",
                 "query": "How many of those samples have Enterococcus rate higher than 104 counts per 100 milliliters of water?",
                 "answer": 2071,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv",
                     "carson-beach-datasheet.csv",
@@ -499,7 +857,7 @@
                 "id": "environment-hard-8-4",
                 "query": "How many of those samples that have Enterococcus rate higher than 104 counts per 100 milliliters of water have rainfall within 24 hours prior to sampling?",
                 "answer": 1119,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv",
                     "carson-beach-datasheet.csv",
@@ -511,6 +869,72 @@
                     "wollaston_beach_datasheet.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-8-1",
+                "step": "For every beach CSV in the Boston-Harbor datasheet: read while skipping the first row and using the next two rows as a multi-index header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-2",
+                "step": "Clean the two-level header by handling empty first-level cells, then combine the two levels so to get columnn names.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-3",
+                "step": "Separate measurement columns (those containing 'Tag' or 'Enterococcus'); treat everything else as identifying columns (date, time, etc.).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-4",
+                "step": "Have separate records for 'Location' and 'Measure' or handle this during filtering for Location.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-5",
+                "step": "Cast all measurement columns to numeric.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-6",
+                "step": "For each beach: filter rows where Enterococcus is greater than 104 to count total exceedances (fails).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-7",
+                "step": "Filter for rows where 1-Day Rain is greater than 0 to count failures that had rainfall in the previous 24 hours.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-8-8",
+                "step": "Accumulate counts across all beaches passing the filters and compute (rain-related exceedances \u00f7 total exceedances), possibly multiplying by 100 to get percentage value.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
@@ -521,7 +945,7 @@
             "Castle Island Beach",
             "City Point Beach"
         ],
-        "answer_type": "list",
+        "answer_type": "list_exact",
         "runtime": 0.5,
         "data_sources": [
             "boston-harbor-beaches.txt",
@@ -549,7 +973,7 @@
                     "Tenean Beach",
                     "Wollaston Beach"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "boston-harbor-beaches.txt"
                 ]
@@ -558,7 +982,7 @@
                 "id": "environment-hard-9-2",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Constitution Beach?",
                 "answer": 99,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv"
                 ]
@@ -567,7 +991,7 @@
                 "id": "environment-hard-9-3",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Castle Island Beach?",
                 "answer": 0,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
@@ -576,7 +1000,7 @@
                 "id": "environment-hard-9-4",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Pleasure Bay Beach?",
                 "answer": 0,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
@@ -585,7 +1009,7 @@
                 "id": "environment-hard-9-5",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at City Point Beach?",
                 "answer": 0,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "city_point_beach_datasheet.csv"
                 ]
@@ -594,7 +1018,7 @@
                 "id": "environment-hard-9-6",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at M Street Beach?",
                 "answer": 4,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "m-street-beach-datasheet.csv"
                 ]
@@ -603,7 +1027,7 @@
                 "id": "environment-hard-9-7",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Carson Beach?",
                 "answer": 9,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "carson-beach-datasheet.csv"
                 ]
@@ -612,7 +1036,7 @@
                 "id": "environment-hard-9-8",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Malibu Beach?",
                 "answer": 68,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "malibu_beach_datasheet.csv"
                 ]
@@ -621,7 +1045,7 @@
                 "id": "environment-hard-9-9",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Tenean Beach?",
                 "answer": 104,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "tenean_beach_datasheet.csv"
                 ]
@@ -630,10 +1054,76 @@
                 "id": "environment-hard-9-10",
                 "query": "How many samples collected between 2020 and 2024 (inclusive) have Enterococcus levels higher than 104 counts per 100 milliliters of water at Wollaston Beach?",
                 "answer": 239,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "wollaston_beach_datasheet.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-9-1",
+                "step": "Loop over each Boston Harbor beach CSV filename in the predefined list.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-2",
+                "step": "Read every Boston Harbor related csv file, skipping the first row and treating the next two rows as a multi-level header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-3",
+                "step": "Clean the two-level column headers: handle missing first-level names, drop the 'Unnamed' placeholders, and combine the two levels to get column names.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-4",
+                "step": "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier columns.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-5",
+                "step": "Have separate records for 'Location\u2019 and 'Measure\u2019 or handle this during filtering for Location.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-6",
+                "step": "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric`.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-7",
+                "step": "Filter for rows where the year is between 2020 and 2024 inclusive by getting the year from the Date string.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-9-8",
+                "step": "Filter out rows where the 'Enterococcus' value is greater than 104. The rows left are beaches meeting the swimming standard 100 % of the time during 2020-2024.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -641,7 +1131,7 @@
         "id": "environment-hard-10",
         "query": "For Boston Harbor beaches located in communities with more than 90% environmental justice (EJ) populations, what is the Pearson correlation (to 3 decimal places) between rainfall in the past 3 days and Enterococcus levels? Estimate Enterococcus levels labeled as less than x as x/2, and those labeled as greater than x as x.",
         "answer": 0.206,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.2,
         "data_sources": [
             "environmental-justice-populations.csv",
@@ -663,7 +1153,7 @@
                     "Tenean Beach",
                     "Wollaston Beach"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "boston-harbor-beaches.txt"
                 ]
@@ -672,7 +1162,7 @@
                 "id": "environment-hard-10-2",
                 "query": "How many communities have more than 90% EJ populations?",
                 "answer": 27,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv"
                 ]
@@ -683,11 +1173,101 @@
                 "answer": [
                     "Wollaston Beach"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "environmental-justice-populations.csv",
                     "water-body-testing-2023.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-10-1",
+                "step": "Load environmental-justice-populations.csv",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-2",
+                "step": "Filter the environmental-justice data for municipalities where the 'Percent of population in EJ BGs' column exceeds 90 %.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-3",
+                "step": "Load water-body-testing-2023.csv",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-4",
+                "step": "Filter for rows whose 'Beach Type Description' is 'Marine'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-5",
+                "step": "Clean beach names by dropping the text that follows the '@' character.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-6",
+                "step": "Load wollaston_beach_datasheet.csv.  Skip the first row and use the next two rows as a multi-level header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-7",
+                "step": "Clean that multi-level header, handling missing top-level entries, combining the two header levels to get column names, and stripping white-space.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-8",
+                "step": "Clean and transform the data: treat all columns that contain either 'Tag' or 'Enterococcus' as value columns, treat everything else as identifiers",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-9",
+                "step": "Have separate records for 'Location' and 'Measure' or handle thid during filtering for Location",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-10",
+                "step": "Clean and transform the data so that each record contains numeric columns such as '1-Day Rain', '2-Day Rain', '3-Day Rain', and 'Enterococcus', converting all non-identifier fields to numeric, handling potential bad values to NaN.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-10-11",
+                "step": "Compute the Pearson correlation between '3-Day Rain' and 'Enterococcus' for the EJ community beach data.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -695,7 +1275,7 @@
         "id": "environment-hard-11",
         "query": "What was the average rainfall (to 2 decimal places) in the one-day period before sampling when water samples from Pleasure Bay Beach failed to meet swimming standards? A sample meets the standard if it contains fewer than 104 counts of Enterococcus per 100 milliliters of water.",
         "answer": 0.37,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "pleasure_bay_and_castle_island_beach_datasheet.csv"
@@ -705,7 +1285,7 @@
                 "id": "environment-hard-11-1",
                 "query": "Which file contains the samples from Pleasure Bay Beach?",
                 "answer": "pleasure_bay_and_castle_island_beach_datasheet.csv",
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
@@ -714,10 +1294,76 @@
                 "id": "environment-hard-11-2",
                 "query": "How many samples from Pleasure Bay Beach had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 24,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-11-1",
+                "step": "Load pleasure_bay_and_castle_island_beach_datasheet.csv, skipping the first row and using the next two rows as a multi-level header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-2",
+                "step": "Clean two\u2013level header: handle \"Unnamed\" placeholders, handle empty cells in the upper header row, then combine the two levels to get column names.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-3",
+                "step": "Identify columns that contain measurements (those whose name includes \"Tag\" or \"Enterococcus\") versus identifying columns (all others)",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-4",
+                "step": "Have separate 'Location' and 'Measure' fields or handle this during filtering for Location.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-5",
+                "step": "Convert all measure columns (e.g., Enterococcus counts and rainfall totals) to numeric, handling malformed data.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-6",
+                "step": "Filter for rows whose Location is Pleasure Bay and not \"Castle Island Playground\".",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-7",
+                "step": "Filter for rows with Enterococcus count exceeding 104 CFU/100 mL (failed swimming standard).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-11-8",
+                "step": "Compute the mean of the '1-Day Rain' column for these filtered rows and output that average rainfall value.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -725,7 +1371,7 @@
         "id": "environment-hard-12",
         "query": "Which Boston Harbor beach had the highest number of samples that failed to meet swimming standards when there was no rainfall in the preceding three days? A sample meets the standard if it contains fewer than 104 counts of Enterococcus per 100 milliliters of water.",
         "answer": "Wollaston Beach",
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.5,
         "data_sources": [
             "boston-harbor-beaches.txt",
@@ -753,7 +1399,7 @@
                     "Tenean Beach",
                     "Wollaston Beach"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "boston-harbor-beaches.txt"
                 ]
@@ -762,7 +1408,7 @@
                 "id": "environment-hard-12-2",
                 "query": "How many samples from Constitution Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 36,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv"
                 ]
@@ -771,7 +1417,7 @@
                 "id": "environment-hard-12-3",
                 "query": "How many samples from Castle Island Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 0,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
@@ -780,7 +1426,7 @@
                 "id": "environment-hard-12-4",
                 "query": "How many samples from Pleasure Bay Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 4,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "pleasure_bay_and_castle_island_beach_datasheet.csv"
                 ]
@@ -789,7 +1435,7 @@
                 "id": "environment-hard-12-5",
                 "query": "How many samples from City Point Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 6,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "city_point_beach_datasheet.csv"
                 ]
@@ -798,7 +1444,7 @@
                 "id": "environment-hard-12-6",
                 "query": "How many samples from M Street Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 7,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "m-street-beach-datasheet.csv"
                 ]
@@ -807,7 +1453,7 @@
                 "id": "environment-hard-12-7",
                 "query": "How many samples from Carson Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 24,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "carson-beach-datasheet.csv"
                 ]
@@ -816,7 +1462,7 @@
                 "id": "environment-hard-12-8",
                 "query": "How many samples from Malibu Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 20,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "malibu_beach_datasheet.csv"
                 ]
@@ -825,7 +1471,7 @@
                 "id": "environment-hard-12-9",
                 "query": "How many samples from Tenean Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 40,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "tenean_beach_datasheet.csv"
                 ]
@@ -834,10 +1480,76 @@
                 "id": "environment-hard-12-10",
                 "query": "How many samples from Wollaston Beach had no rainfall in the preceding three days and had Enterococcus levels higher than 104 counts per 100 milliliters of water?",
                 "answer": 129,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "wollaston_beach_datasheet.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-12-1",
+                "step": "Read each boston beach CSV file. Skip the first row and use the next two rows as a multi-level header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-2",
+                "step": "Handle the two-level column header: handle 'Unnamed' placeholders, handle empty cells in top-level header, then combine the two levels to get column names.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-3",
+                "step": "Separate the columns that contain measurement data (those with 'Tag' or 'Enterococcus' in the name) from the identifier columns.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-4",
+                "step": "Have separate 'Location' and 'Measure' fields, or handle the combined header during filtering for Location.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-5",
+                "step": "Convert all non-identifier / non-text columns to numeric types, handling malformed data.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-6",
+                "step": "Filter for rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-7",
+                "step": "Mark exceedances by filtering for rows where the numeric 'Enterococcus' value is greater than 104 counts/100 mL.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-12-8",
+                "step": "After the filters, count exceedance rows for each beach and get the beach with the largest count across all files.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -845,7 +1557,7 @@
         "id": "environment-hard-13",
         "query": "How many days in 2024 at Constitution Beach had one sampling point meet the standard while another did not? A sample meets the standard if it contains fewer than 104 counts of Enterococcus per 100 milliliters of water.",
         "answer": 11,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.1,
         "data_sources": [
             "constitution_beach_datasheet.csv"
@@ -859,10 +1571,76 @@
                     "South",
                     "Middle"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "constitution_beach_datasheet.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-13-1",
+                "step": "Read constitution_beach_datasheet.csv while skipping the first row and using the next two rows as a multi-level header.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-2",
+                "step": "Handle multi-level column names: handle unnamed top-level cells, then combine the two header levels to get column names",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-3",
+                "step": "Use columns containing 'Tag' or 'Enterococcus' as location/measurement columns and treat all remaining columns as identifiers.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-4",
+                "step": "Have separate 'Location' and 'Measure' fields or handle this while filtering for Location.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-5",
+                "step": "Convert all measurement columns (except identifiers, 'Location', and 'Tag') to numeric, handling malformed data.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-6",
+                "step": "Filter for data from 2024 by using the 'Date' column.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-7",
+                "step": "Flag exceedances by filtering for data where the 'Enterococcus' value is greater than 104 CFU/100 mL, then group by 'Date' and count how many sampling points exceeded the limit on each day.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-13-8",
+                "step": "Select the dates whose exceedance count is less than the total number of sampling points (i.e., at least one point exceeded but at least one met the standard) and count these dates to answer the question.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -870,7 +1648,7 @@
         "id": "environment-hard-14",
         "query": "From 2007 to 2009 (inclusive), between fresh water beaches and marine beaches, which had a higher correlation between monthly rainfall and their exceedance rate in the summer (Jun, Jul, Aug)? Regions whose rainfall data effect Fresh water beaches are Boston, Chatham, Amherst, Ashburnham. Regions whose rainfall data effect Marine beaches are Boston and Chatham. Impute missing values with median of the month in non-missing years.",
         "answer": "Marine",
-        "answer_type": "exact",
+        "answer_type": "string_exact",
         "runtime": 0.2,
         "data_sources": [
             "water-body-testing-2009.csv",
@@ -890,7 +1668,7 @@
                     10.56,
                     14.45
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "monthly_precipitations_boston.csv",
                     "monthly_precipitations_chatham.csv",
@@ -906,7 +1684,7 @@
                     13.6125,
                     16.18
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "monthly_precipitations_boston.csv",
                     "monthly_precipitations_chatham.csv",
@@ -920,9 +1698,9 @@
                 "answer": [
                     2.78,
                     3.91,
-                    2.70
+                    2.7
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2009.csv",
                     "water-body-testing-2008.csv",
@@ -933,16 +1711,82 @@
                 "id": "environment-hard-14-4",
                 "query": "What is the Marine beach exceedance rate (in percentage, to 2 decimal places) in the summer (Jun, Jul, Aug) from 2007 to 2009 (inclusive)?",
                 "answer": [
-                    3.10,
+                    3.1,
                     5.39,
                     6.75
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2009.csv",
                     "water-body-testing-2008.csv",
                     "water-body-testing-2007.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-14-1",
+                "step": "Read 2007-2009 water-quality-testing CSVs.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-2",
+                "step": "Tell whether a beach is Marine or Fresh from 'Beach Type Description'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-3",
+                "step": "For each type, flag exceedances by selecting rows whose 'Violation' column (case-insensitive) equals 'yes'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-4",
+                "step": "Compute yearly exceedance rate for each type:  (# rows with violation) / (# rows of that beach type).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-5",
+                "step": "For Marine rainfall: read the monthly_precipitations_*.csv files for Boston and Chatham; keep Year + summer-month (Jun, Jul, Aug) columns, keep only 2007\u20132009 rows, cast month columns to float, sum Jun+Jul+Aug per year to get a summer total, then average the two cities\u2019 totals year-wise.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-6",
+                "step": "For Fresh rainfall: repeat the same procedure for Boston, Chatham, Amherst and Ashburnham, then average the four cities year-wise.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-7",
+                "step": "Calculate the Pearson correlation between the 3-year exceedance-rate vector and the 3-year rainfall vector for Marine beaches and Fresh beaches respectively.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-14-8",
+                "step": "Compare the correlation coefficients to determine which beach type shows the higher summer rainfall-exceedance correlation.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -950,7 +1794,7 @@
         "id": "environment-hard-15",
         "query": "Which fresh water beach is the most polluted since 2020 (inclusive)? Most polluted is defined as highest average exceedance rate since 2020, and only consider the beaches that are measured in all the years from 2020 to 2023 (inclusive).",
         "answer": "Damon Pond Beach (DCR)",
-        "answer_type": "exact",
+        "answer_type": "string_exact",
         "runtime": 0.2,
         "data_sources": [
             "water-body-testing-2020.csv",
@@ -963,7 +1807,7 @@
                 "id": "environment-hard-15-1",
                 "query": "What is the number of beaches that are measured in all the years from 2020 to 2023 (inclusive)?",
                 "answer": 415,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2020.csv",
                     "water-body-testing-2021.csv",
@@ -971,13 +1815,79 @@
                     "water-body-testing-2023.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-15-1",
+                "step": "Read CSV files water-body-testing-2020\u20132023.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-2",
+                "step": "Filter for rows where Beach Type Description equals 'Fresh'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-3",
+                "step": "Standardize the Beach Name by splitting on '@' and retaining the first part so the same beach is counted once across years.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-4",
+                "step": "For every year, compute per-beach sample count and per-beach violation count (rows whose Violation column equals 'yes' case-insensitively).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-5",
+                "step": "Calculate the yearly exceedance rate for each beach as violations / total samples.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-6",
+                "step": "Inner-merge the yearly dataframes on Beach Name so that only beaches appearing in every year 2020\u20132023 are retained, satisfying the 'measured in all years\u2019 requirement.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-7",
+                "step": "Across the yearly rates, compute the row-wise mean to obtain each beach\u2019s average exceedance rate over time since 2020.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-15-8",
+                "step": "Find the Beach Name with the highest average exceedance rate.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-hard-16",
         "query": "How many marine beaches (from 2002 to 2023 inclusive) remained safe to swimming for the entire time (i.e., no violation at all throughout the seasons; if no data for a beach in a particular year, assume safe)?",
         "answer": 60,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 1,
         "data_sources": [
             "water-body-testing-2002.csv",
@@ -1008,7 +1918,7 @@
                 "id": "environment-hard-16-1",
                 "query": "What is the number of unique marine beaches (from 2002 to 2023 inclusive) are there?",
                 "answer": 618,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2002.csv",
                     "water-body-testing-2003.csv",
@@ -1038,7 +1948,7 @@
                 "id": "environment-hard-16-2",
                 "query": "What is the number of unique beaches with violations?",
                 "answer": 558,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2002.csv",
                     "water-body-testing-2003.csv",
@@ -1064,13 +1974,71 @@
                     "water-body-testing-2023.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-16-1",
+                "step": "For every year from 2002 through 2023, read the corresponding water-body-testing-<year>.csv file.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-2",
+                "step": "Filter for rows where Beach Type Description equals 'Marine'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-3",
+                "step": "Standardise beach names by splitting the Beach Name field at '@' and retaining only the part before the delimiter to make names consistent across years.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-4",
+                "step": "Lower-case the Violation column or handle the normalization during filtering.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-5",
+                "step": "Build the set of all unique marine beach names observed over the full 2002-2023 period.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-6",
+                "step": "Build the set of beach names that ever recorded a violation (Violation == 'yes') in any year.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-16-7",
+                "step": "Determine the beaches that never appear in the violation set (i.e., safe the whole time) by set difference and count them.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-hard-17",
         "query": "What is the seasonal exceedance rate (in percentage, to 2 decimal places) of Chatham's Bucks Creek Beach in the summer (June, July, August) with the most rainfall in its area? Impute missing values with median of the month in non-missing years.",
         "answer": 47.37,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 0.5,
         "data_sources": [
             "monthly_precipitations_chatham.csv",
@@ -1081,10 +2049,92 @@
                 "id": "environment-hard-17-1",
                 "query": "What is the year with the most rainfall in Chatham?",
                 "answer": 2006,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "monthly_precipitations_chatham.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-17-1",
+                "step": "Load monthly precipitation data for Chatham from monthly_precipitations_chatham.csv.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-2",
+                "step": "Filter for summer months (June, July, August)",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-3",
+                "step": "Filter for years 2002-2020.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-4",
+                "step": "Convert precipitation columns to numeric and, where any value is missing, impute it with the median for that month calculated from the available years.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-5",
+                "step": "Compute the total summer rainfall per year by summing June, July and August precipitation.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-6",
+                "step": "Identify the year that has the maximum total summer rainfall (the wettest summer).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-7",
+                "step": "Read the corresponding water-body testing file for the year with the wettest summer (water-body-testing-{year}.csv).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-8",
+                "step": "Filter water-body-testing data to the target beach, \u201cBucks Creek\u201d.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-9",
+                "step": "Calculate the exceedance rate for that season as: (number of samples whose Violation column is 'yes') / (total number of samples for that beach).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-17-10",
+                "step": "Convert the exceedance rate to a percentage and round to two decimal places before reporting.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     },
@@ -1114,7 +2164,7 @@
                     27.7,
                     68.75
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "monthly_precipitations_boston.csv",
                     "monthly_precipitations_chatham.csv",
@@ -1131,7 +2181,7 @@
                     4.66,
                     5.57
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2020.csv",
                     "water-body-testing-2021.csv",
@@ -1139,13 +2189,79 @@
                     "water-body-testing-2023.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-18-1",
+                "step": "Load all four monthly_precipitation csvs, truncate out footer rows",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-2",
+                "step": "Handling missing value represented by the string 'M': cast the month column to float and fill missing values with that month\u2019s median across the remaining rows.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-3",
+                "step": "Filter the precipitation frame to just the target years 2020\u20132023.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-4",
+                "step": "For every city row, sum Jun + Jul + Aug to obtain a summer-season total, collect those totals for each city, then sum across all cities to get one rainfall value per year (fresh_rains).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-5",
+                "step": "For each year 2020\u20132023, load the water-body-testing file.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-6",
+                "step": "Select rows where Beach Type Description == 'Fresh'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-7",
+                "step": "Compute the exceedance rate as (count of rows whose Violation is'yes') divided by total fresh rows, append to list.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-18-8",
+                "step": "Compare the sequence of yearly rainfall totals with the sequence of yearly exceedance rates, checking whether year-to-year direction of change is identical for every interval, and return True/False accordingly.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
         "id": "environment-hard-19",
         "query": "For marine beaches, is the year with the highest average exceedance rate difference (with the previous year) different or the same as the highest total rainfall difference (with the previous year)? Only count the rainfall in June, July, August in Boston and Chatham; impute missing values with median of the month in non-missing years. Answer with True or False.",
         "answer": "False",
-        "answer_type": "exact",
+        "answer_type": "string_exact",
         "runtime": 1,
         "data_sources": [
             "water-body-testing-2002.csv",
@@ -1214,6 +2330,80 @@
                     "monthly_precipitations_chatham.csv"
                 ]
             }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-19-1",
+                "step": "Load water-body testing files from 2002-2023",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-2",
+                "step": "Filter for data where 'Beach Type Description' == 'Marine'.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-3",
+                "step": "Within filtered marine rows, count violations ('Violation' equal to 'yes') and divide by total marine rows to get yearly exceedance rate.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-4",
+                "step": "Take absolute year-to-year differences, and locate the index of the maximum jump; convert that index to the calendar year (argmax + start_year + 1).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-5",
+                "step": "Read Boston and Chatham monthly precipitation CSVs, filter for years 2002-2023 (rows 2-23).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-6",
+                "step": "For each month in each file, treat the string 'M' as missing, cast the column to float, and impute missing values with the column\u2019s median value.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-7",
+                "step": "Compute a row-wise summer total (Jun+Jul+Aug) for each city, then sum Boston and Chatham totals to obtain a single rainfall total per year.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-8",
+                "step": "Create an array of these combined yearly rainfall totals, take absolute year-to-year differences, and find the year with the largest change (argmax + start_year + 1).",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-19-9",
+                "step": "Compare the two identified years (largest exceedance-rate jump vs. largest rainfall jump); print True if they are identical, otherwise False.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            }
         ]
     },
     {
@@ -1224,7 +2414,7 @@
             "Pleasant Street",
             "Forest Street"
         ],
-        "answer_type": "exact",
+        "answer_type": "string_exact",
         "runtime": 0.5,
         "data_sources": [
             "monthly_precipitations_boston.csv",
@@ -1238,7 +2428,7 @@
                 "id": "environment-hard-20-1",
                 "query": "What is the region that had the least rainfall in the summer (June, July, August) in 2015?",
                 "answer": "Amherst",
-                "answer_type": "exact",
+                "answer_type": "string_exact",
                 "data_sources": [
                     "monthly_precipitations_boston.csv",
                     "monthly_precipitations_chatham.csv",
@@ -1268,10 +2458,108 @@
                     "White Pond Cottages",
                     "White Pond Town Landing"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2015.csv"
                 ]
+            }
+        ],
+        "key_functionalities": [
+            {
+                "id": "environment-hard-20-1",
+                "step": "Read all four monthly_precipitations_<city>.csvs.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-2",
+                "step": "Filter for year 2015",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-3",
+                "step": "Filter for summer-month columns (Jun, Jul, Aug)",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-4",
+                "step": "convert monthly measurement columns to float and sum them to obtain the total summer rainfall for each city.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-5",
+                "step": "After filtering and summing, pick the city with greatest rainfall value.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-6",
+                "step": "Read water-body-testing-2015.csv.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-7",
+                "step": "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as \u201cChatham\u201d in the snippet) are retained.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-8",
+                "step": "Clean the Beach Name field by splitting on \u201c@\u201d and keeping only the first part to get a canonical beach name.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-9",
+                "step": "Group the filtered data by Beach Name to count total samples taken at each beach.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-10",
+                "step": "Within the same filtered set, isolate rows where the Violation column (normalized) equals \u201cyes\u201d and count those violations per beach.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-11",
+                "step": "Using total-sample counts and violation counts, and compute an exceedance (violation) rate for 2015 as Violations \u00f7 Total Samples.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
+            },
+            {
+                "id": "environment-hard-20-12",
+                "step": "Using the exceedance rate, get the three most polluted beaches.",
+                "query": "",
+                "answer": "",
+                "answer_type": "",
+                "data_sources": ""
             }
         ]
     }
