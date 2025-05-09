@@ -108,7 +108,7 @@
     },
     {
         "id": "astronomy-easy-2",
-        "query": "Calculate the ratio of peak atmospheric mass density experienced by Swarm A satellite during March 2014 (wu016 file) vs July 2018 (wu545 file).",
+        "query": "Calculate the ratio of peak atmospheric mass density experienced by Swarm A satellite during March 2014 vs July 2018.",
         "answer": 7.52,
         "answer_type": "numeric_exact",
         "runtime": 0.1,
@@ -456,7 +456,7 @@
     },
     {
         "id": "astronomy-easy-5",
-        "query": "Estimate the total count of satellite major altitude changes (change of altitude > 1000m within 12h) for satellite 48445 during 2024 using TLE history. Use skifield's itrf_xyz to estimate altitude from TLE.The TLE file in located in the input/TLE folder, with format <NORAD_ID>.tle.",
+        "query": "Estimate the total count of satellite major altitude changes (change of altitude > 1000m within 12h) for satellite 48445 during 2024 using TLE history. Use skifield's itrf_xyz to estimate altitude from TLE.",
         "answer": 2,
         "answer_type": "numeric_exact",
         "runtime": 1,
@@ -545,7 +545,7 @@
     },
     {
         "id": "astronomy-easy-6",
-        "query": "Using TLE data fetched for Starlink satellites 58214, calcualte the average rate of semi-major axis decay (km/day) for the Gannon storm (May 10-13, 2024) and the preceding quiet period (May 1-4, 2024). Use earth's gravitational paremeter mu = 398600.4418 km^3/s^2, earth radius 6371.0 km, and Kepler's law as a rough estimate of the semi-major axis length. Report in a pair of numers: (average_quiet_rate_km_day, average_storm_rate_km_day). The tle files are located in input/space-track/, with format <NORAD_ID>_storm.csv and <NORAD_ID>_quiet.csv.",
+        "query": "Using TLE data fetched for Starlink satellites 58214, calculate the average rate of semi-major axis decay (km/day) for the Gannon storm (May 10-13, 2024) and the preceding quiet period (May 1-4, 2024). Use earth's gravitational paremeter mu = 398600.4418 km^3/s^2, earth radius 6371.0 km, and Kepler's law as a rough estimate of the semi-major axis length. Report in a pair of numbers: (average_quiet_rate_km_day, average_storm_rate_km_day). The tle files are located in input/space-track/, with format <NORAD_ID>_storm.csv and <NORAD_ID>_quiet.csv.",
         "answer": [
             0.0193,
             -0.002
@@ -1179,7 +1179,7 @@
                 "id": "astronomy-hard-4-4",
                 "query": "Load and resample Sat_Density in 1 hour period under input/STORM-AI/warmup/v2/Sat_Density.  The file is located under input/STORM-AI/warmup/v2/Sat_Density. Again for sanity check, what is the row count?",
                 "answer": 240,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "STORM-AI/warmup/v2/Sat_Density/swarma-wu???-201810??_to_201810??.csv"
                 ]
@@ -1276,7 +1276,7 @@
         "id": "astronomy-hard-5",
         "query": "Using OMNI2 data, run the NRLMSISE-00 atmospheric model to predict neutral density values for Swarm-B throughout 2024. Derive model inputs (F10.7, F10.7A, daily Ap, 3-hour Ap vector) directly from the OMNI2 dataset. Compare predictions against measured neutral density from Swarm-B POD files and report RMSE over the entire year. Do not use external space weather feeds. OMNI2 data format specification can be found at omni2.text file. 3-hour AP defined according to https://www.mathworks.com/help/aeroblks/nrlmsise00atmospheremodel.html.",
         "answer": 4.638e-13,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 240,
         "data_sources": [
             "swarmb/SB_DNS_POD_2024_*.txt",
@@ -1315,7 +1315,7 @@
                 "id": "astronomy-hard-5-3",
                 "query": "For each timestamp with location in Swarm-B data, extract model input values using a helper that builds F10.7, F10.7A, Ap, and 3-hour Ap vector from OMNI2. Report the average F10.7 81 day average value for the entire 2024 for verification (to 10 decimal places).",
                 "answer": 186.3899097275,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "omni2_low_res/omni2_2024.dat",
                     "omni2_low_res/omni2_2023.dat",
@@ -1326,7 +1326,7 @@
                 "id": "astronomy-hard-5-3",
                 "query": "Compare predicted and ground-truth Swarm-B density, and compute RMSE.",
                 "answer": 4.638e-13,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "swarmb/SB_DNS_POD_2024_*.txt",
                     "omni2_low_res/omni2_2024.dat",
@@ -1422,7 +1422,7 @@
         "id": "astronomy-hard-6",
         "query": "Estimate the mean geopotential energy per unit mass (in J/kg) experienced by Swarm-A from September 2 to 29, 2019 using precise orbital data. Use SP3 files to determine the satellite\u2019s geodetic position, and interpolate a mock geopotential field defined over latitude, longitude, and altitude to compute the potential energy at each timepoint. Average the results to compute the mean energy. Use earth radius 6371.0 km, and g = 9.80665 m/s^2. Answer round to 2 decimal places.",
         "answer": 66822738.84,
-        "answer_type": "exact",
+        "answer_type": "numeric_exact",
         "runtime": 40,
         "data_sources": [
             "swarm/POD/SW_OPER_SP3ACOM_2__201909??T????_201909??T????_0201/*.sp3",
@@ -1445,7 +1445,7 @@
                 "id": "astronomy-hard-6-2",
                 "query": "Load mock geopotential field grid defined over latitude, longitude, and altitude from TIE-GCM-style .npz file. For verification, report the avearge of the altitute grid.",
                 "answer": 300.0,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "mock_tiegcm_grid_sept2019.npz"
                 ]
@@ -1454,7 +1454,7 @@
                 "id": "astronomy-hard-6-3",
                 "query": "Perform 3D interpolation of geopotential values at each satellite location using trilinear interpolation, and compute the mean geopotential energy from all interpolated values during the period (to 2 decimal places).",
                 "answer": 66822738.84,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "mock_tiegcm_grid_sept2019.npz"
                 ]

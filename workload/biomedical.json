@@ -259,7 +259,7 @@
                 "id": "biomedical-hard-1-6",
                 "query": "What is the correlation between the levels of the protein PLK1 and CHEK2? Round the result to 4 decimal places.",
                 "answer": 0.47645,
-                "answer_type": "exact",
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "1-s2.0-S0092867420301070-mmc2.xlsx"
                 ]

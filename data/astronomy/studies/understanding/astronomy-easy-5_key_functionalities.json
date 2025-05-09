@@ -3,6 +3,6 @@
     "For every TLE pair, obtain the epoch-instant position, convert the resulting GCRS position to ITRF XYZ metres, and compute the satellite\u2019s geocentric distance.",
     "Record the calculated altitude and its corresponding epoch timestamp for each TLE snapshot.",
     "For each pair of consecutive altitude measurements, compute the absolute altitude change (delta_a) and the elapsed time in hours (delta_t).",
-    "Flag a \u2018major altitude change\u2019 event when delta_a exceeds the user-supplied threshold (threshold_km = 1 km, i.e. >1000 m) AND the two measurements are within 12 hours (t_hours = 12). Filter for every event that meets both conditions.",
+    "Flag a 'major altitude change\u2019 event when delta_a exceeds the user-supplied threshold (threshold_km = 1 km, i.e. >1000 m) AND the two measurements are within 12 hours (t_hours = 12). Filter for every event that meets both conditions.",
     "After processing all TLE entries, report the maximum detected altitude change as well as the total count of flagged events, and list each event\u2019s epoch and delta_a."
 ]

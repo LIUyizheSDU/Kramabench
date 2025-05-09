@@ -4,7 +4,7 @@
     "Standardize the Beach Name by splitting on '@' and retaining the first part so the same beach is counted once across years.",
     "For every year, compute per-beach sample count and per-beach violation count (rows whose Violation column equals 'yes' case-insensitively).",
     "Calculate the yearly exceedance rate for each beach as violations / total samples.",
-    "Inner-merge the yearly dataframes on Beach Name so that only beaches appearing in every year 2020\u20132023 are retained, satisfying the \u2018measured in all years\u2019 requirement.",
+    "Inner-merge the yearly dataframes on Beach Name so that only beaches appearing in every year 2020\u20132023 are retained, satisfying the 'measured in all years\u2019 requirement.",
     "Across the yearly rates, compute the row-wise mean to obtain each beach\u2019s average exceedance rate over time since 2020.",
     "Find the Beach Name with the highest average exceedance rate."
 ]

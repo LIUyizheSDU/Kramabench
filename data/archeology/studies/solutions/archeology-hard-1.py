@@ -3,7 +3,7 @@
 
 import pandas as pd
 
-data_path = "../input/"
+data_path = "../../input/"
 
 
 radioCarbonPath = data_path + "radiocarbon_database_regional.xlsx"
@@ -62,8 +62,8 @@ def find_closest_year(row):
 
 
 
-
-humansExistedInArea = (radioCarbonDF["year"].min(), radioCarbonDF["year"].max())
+maltaDF = radioCarbonDF[radioCarbonDF["Region"] == "Malta"]
+humansExistedInArea = (maltaDF["year"].min(), maltaDF["year"].max())
 KValuesForHumans = []
 for i in range(humansExistedInArea[0], humansExistedInArea[1]):
     KValue = find_closest_year({"year": i})

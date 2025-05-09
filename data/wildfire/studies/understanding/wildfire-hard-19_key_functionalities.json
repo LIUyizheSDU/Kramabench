@@ -2,11 +2,11 @@
     "Read WeatherEvents_Jan2016-Dec2022.csv",
     "Filter for rows whose StartTime(UTC) begins with 2016 (i.e., events that occurred in 2016).",
     "Convert each weather event\u2019s StartTime(UTC) and EndTime(UTC) to local time using the station-specific time-zone and store them in new columns.",
-    "For each local start / end timestamp derive the \u2018day-of-year\u2019 integer so we can check if the event overlaps a specific calendar day.",
+    "For each local start / end timestamp derive the 'day-of-year\u2019 integer so we can check if the event overlaps a specific calendar day.",
     "Read noaa_wildfires.csv and keep only fire incidents whose control_year is 2016.",
-    "For every 2016 fire determine the day before the control day (control_day_of_year \u2011 1) and a boolean column \u2018rained\u2019 initialised to False.",
+    "For every 2016 fire determine the day before the control day (control_day_of_year \u2011 1) and a boolean column 'rained\u2019 initialised to False.",
     "Perform a UDF join: Loop through every fire incident and pull the subset of 2016 weather rows whose local start-end window covers either the control day itself or the previous day.",
     "Perform a UDF join: Keep only rows where Type == 'Rain', precipitation is greater than 0.05 inches, and the station lies inside the fire area: compute the geodesic distance between the station and the fire coordinates and require distance \u2264 sqrt(hectares/100) km (\u2248 radius of the fire\u2019s 1-km narrowest diameter assumption).",
-    "If at least one such rain record is found for the fire, mark the fire\u2019s \u2018rained\u2019 flag True.",
-    "After examining all 2016 fires, compute the percentage: mean of the \u2018rained\u2019 boolean column \u00d7 100 and print with two-decimal formatting."
+    "If at least one such rain record is found for the fire, mark the fire\u2019s 'rained\u2019 flag True.",
+    "After examining all 2016 fires, compute the percentage: mean of the 'rained\u2019 boolean column \u00d7 100 and print with two-decimal formatting."
 ]

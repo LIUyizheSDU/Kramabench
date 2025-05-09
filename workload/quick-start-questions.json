@@ -2,8 +2,8 @@
     {
         "id": "environment-easy-1",
         "query": "In 2018, how many bacterial exceedances were observed in freshwater beaches?",
-        "answer": "375",
-        "answer_type": "exact",
+        "answer": 375,
+        "answer_type": "numeric_exact",
         "data_sources": [
             "water-body-testing-2018.csv"
         ],
@@ -590,7 +590,7 @@
                     "YMCA Camp Norwich Beach",
                     "York Lake Beach (DCR)"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2018.csv"
                 ]
@@ -598,8 +598,8 @@
             {
                 "id": "environment-easy-1-2",
                 "query": "How many bacterial exceedances were observed?",
-                "answer": "375",
-                "answer_type": "exact",
+                "answer": 375,
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2018.csv"
                 ]
@@ -607,10 +607,10 @@
         ]
     },
     {
-        "id": "environment-medium-1",
+        "id": "environment-hard-2",
         "query": "For the freshwater beaches, what is the difference between the percentage exceedance rate in 2023 and the historic average from 2002 to 2022?",
-        "answer": "1.6080%",
-        "answer_type": "numeric_approximate",
+        "answer": 1.6080,
+        "answer_type": "numeric_exact",
         "data_sources": [
             "water-body-testing-2023.csv",
             "water-body-testing-2022.csv",
@@ -637,7 +637,7 @@
         ],
         "subtasks": [
             {
-                "id": "environment-medium-1-1",
+                "id": "environment-hard-2-1",
                 "query": "What beaches are freshwater beaches?",
                 "answer": [
                     "American Legion Park",
@@ -1218,22 +1218,22 @@
                     "YMCA Camp Norwich Beach",
                     "York Lake Beach (DCR)"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2023.csv"
                 ]
             },
             {
-                "id": "environment-medium-1-2",
+                "id": "environment-hard-2-2",
                 "query": "What is the exceedance rate for freshwater beaches in 2023?",
-                "answer": "5.5748%",
-                "answer_type": "numeric_approximate",
+                "answer": 5.5748,
+                "answer_type": "numeric_exact",
                 "data_sources": [
                     "water-body-testing-2023.csv"
                 ]
             },
             {
-                "id": "environment-medium-1-3",
+                "id": "environment-hard-2-3",
                 "query": "What is the historical average exceedance rate from 2002 to 2022 for freshwater beaches?",
                 "answer": "3.96680%",
                 "answer_type": "numeric_approximate",
@@ -1264,10 +1264,10 @@
         ]
     },
     {
-        "id": "environment-hard-1",
+        "id": "environment-hard-3",
         "query": "For the marine beaches (which are effected by rainfall in Boston and Chatham), what is the Pearson product-moment correlation (to 4 decimal places) from 2002 to 2023 between the rainfall amount in inches during the months June, July, August, and September and the percentage exceedence rate?",
-        "answer": "0.2965",
-        "answer_type": "numeric_approximate",
+        "answer": 0.2965,
+        "answer_type": "numeric_exact",
         "data_sources": [
             "beaches_community.csv",
             "monthly_precipitations_boston.csv",
@@ -1296,7 +1296,7 @@
         ],
         "subtasks": [
             {
-                "id": "environment-hard-1-1",
+                "id": "environment-hard-3-1",
                 "query": "What beaches locations are marine?",
                 "answer": [
                     "333 Commercial Street",
@@ -1887,7 +1887,7 @@
                     "Yerrill Lagoon",
                     "Zylpha Road"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2023.csv",
                     "water-body-testing-2022.csv",
@@ -1914,19 +1914,19 @@
                 ]
             },
             {
-                "id": "environment-hard-1-2",
+                "id": "environment-hard-3-2",
                 "query": "What precipitation communities correspond to marine beaches?",
                 "answer": [
                     "Boston",
                     "Chatham"
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "beaches_community.csv"
                 ]
             },
             {
-                "id": "environment-hard-1-3",
+                "id": "environment-hard-3-3",
                 "query": "What is the rainfall amount in inches for the months of June, July, August, September from 2002 to 2023 for the marine beaches?",
                 "answer": [
                     24.99,
@@ -1952,7 +1952,7 @@
                     7.02,
                     24.08
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "monthly_precipitations_boston.csv",
                     "monthly_precipitations_chatam.csv"
@@ -1985,7 +1985,7 @@
                     5.38,
                     8.00
                 ],
-                "answer_type": "list",
+                "answer_type": "list_exact",
                 "data_sources": [
                     "water-body-testing-2023.csv",
                     "water-body-testing-2022.csv",
