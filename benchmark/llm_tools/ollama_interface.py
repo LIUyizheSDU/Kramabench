@@ -27,29 +27,30 @@ class OllamaInterface(LLMInterface):
 
     def __init__(
         self,
-        model="deepseek-r1:70b",
-        # model="gemma3:27b",
+        # model="deepseek-r1:70b",
+        model="gemma3:27b-it-qat",
         file_limit=10e4,
-        MAX_TOKENS=128000,
+        MAX_TOKENS=32000,
         server_url="http://localhost:11434",
         format="json",
         *args,
         **kwargs,
     ):
         self.model = model
-        self.client = ollama.Client(host=server_url)
 
         self.MAX_TOKENS = int(MAX_TOKENS)
         self.file_limit = int(file_limit)
         self.format = format
+        self.client = ollama.Client(host=server_url)
 
     def _call_llm(self, messages, answer_format=None):
         try:
             response = self.client.chat(
                 model=self.model,
                 messages=messages,
-                format=answer_format,
+                # format=answer_format,
                 stream=False,
+                options= {"num_ctx": self.MAX_TOKENS}
             )
             if not response["done"]:
                 logging.warning("WARNING - Conversation kept going! Maybe output is truncated.")
@@ -60,7 +61,7 @@ class OllamaInterface(LLMInterface):
                 logging.error("ERROR - Model is done but response not stopped")
                 return ""
         except Exception as e:
-            logging.error(f"OllamaInterface.evaluate_paraphrase: ERROR {e}")
+            logging.error(f"OllamaInterface: ERROR {e}")
             return ""
 
         if answer_format == "json":

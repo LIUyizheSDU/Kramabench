@@ -5,24 +5,14 @@ import pandas as pd
 import numpy as np
 data_path = "../input"
 
-
-
-# What is the average latitude of capital cities?
-
 city_path = "{}/worldcities.csv".format(data_path)
-
 df = pd.read_csv(city_path)
-
-
 
 capitals = df[df["capital"] == "primary"].reset_index(drop=True)
 print(len(capitals))
 
-
 countries = set(capitals["country"])
 print(len(countries))
-
-
 
 values = []
 for country in countries:
@@ -36,8 +26,6 @@ for country in countries:
         values.append(country_capitals["lat"].values[0])
 
 print("Number of capital cities: ", len(values))
-
-
 print(np.mean(values))
 
 
