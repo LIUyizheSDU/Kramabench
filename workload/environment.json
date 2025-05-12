@@ -2114,7 +2114,7 @@
             },
             {
                 "id": "environment-hard-17-8",
-                "step": "Filter water-body-testing data to the target beach, "Bucks Creek".",
+                "step": "Filter water-body-testing data to the target beach, \"Bucks Creek\".",
                 "query": "",
                 "answer": "",
                 "answer_type": "",
@@ -2515,7 +2515,7 @@
             },
             {
                 "id": "environment-hard-20-7",
-                "step": "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as "Chatham" in the snippet) are retained.",
+                "step": "Filter the water-quality records so that only rows whose Community equals the chosen city (hard-coded as \"Chatham\" in the snippet) are retained.",
                 "query": "",
                 "answer": "",
                 "answer_type": "",
@@ -2523,7 +2523,7 @@
             },
             {
                 "id": "environment-hard-20-8",
-                "step": "Clean the Beach Name field by splitting on "@" and keeping only the first part to get a canonical beach name.",
+                "step": "Clean the Beach Name field by splitting on \"@\" and keeping only the first part to get a canonical beach name.",
                 "query": "",
                 "answer": "",
                 "answer_type": "",
@@ -2539,7 +2539,7 @@
             },
             {
                 "id": "environment-hard-20-10",
-                "step": "Within the same filtered set, isolate rows where the Violation column (normalized) equals "yes" and count those violations per beach.",
+                "step": "Within the same filtered set, isolate rows where the Violation column (normalized) equals \"yes\" and count those violations per beach.",
                 "query": "",
                 "answer": "",
                 "answer_type": "",

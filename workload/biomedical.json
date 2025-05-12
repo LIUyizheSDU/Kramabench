@@ -469,7 +469,7 @@
             },
             {
                 "id": "biomedical-hard-3-3",
-                "step": "Load the sheet "B-APM subtypes" from 1-s2.0-S0092867420301070-mmc7.xlsx.",
+                "step": "Load the sheet \"B-APM subtypes\" from 1-s2.0-S0092867420301070-mmc7.xlsx.",
                 "query": "",
                 "answer": "",
                 "answer_type": "",
@@ -726,7 +726,7 @@
             },
             {
                 "id": "biomedical-hard-7-2",
-                "step": "From the README sheet, locate the row whose "Description" column contains the word "acetylproteomics" (case-insensitive) and extract the corresponding value in the "Sheet" column; this gives the name of the acetylproteomics data sheet.",
+                "step": "From the README sheet, locate the row whose \"Description\" column contains the word \"acetylproteomics\" (case-insensitive) and extract the corresponding value in the \"Sheet\" column; this gives the name of the acetylproteomics data sheet.",
                 "query": "",
                 "answer": "",
                 "answer_type": "",
