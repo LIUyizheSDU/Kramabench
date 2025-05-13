@@ -4,10 +4,10 @@
 import pandas as pd
 from scipy.spatial import cKDTree
 import re
-data_path = "../input"
+data_path = "./data/archeology/input/"
 
-roman_path = "{}/roman_cities.csv".format(data_path)
-cities_path = "{}/worldcities.csv".format(data_path)
+roman_path = f"{data_path}/roman_cities.csv"
+cities_path = f"{data_path}/worldcities.csv"
 
 roman_df = pd.read_csv(roman_path)
 global_df = pd.read_csv(cities_path)

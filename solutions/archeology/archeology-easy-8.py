@@ -13,7 +13,6 @@ sources = set()
 index = 0
 for values in roman_sources:
     values = values.replace(".", "").split(";")
-    for value in values:
-        sources.add(value)
+    sources |= set([x.strip() for x in values if x.strip() != ""])
 
 print(len(sources))
