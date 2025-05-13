@@ -1,9 +1,9 @@
 [
     "Load 2023 beach\u2010testing dataset (water-body-testing-2023.csv).",
-    "Normalize/lowercase \u2018Beach Name\u2019, \u2018Community\u2019, and \u2018Violation\u2019 fields for reliable matching / filtering.",
-    "Filter for rows where Beach Type Description equals \u2018Marine\u2019.",
-    "Load environmental-justice data (environmental-justice-populations.csv) and normalize/lowercase \u2018Municipality\u2019.",
-    "Find two subsets in environmental-justice data: communities whose \u2018Percent of population in EJ BGs\u2019 is >50% and communities whose percentage is <25%.",
+    "Normalize/lowercase 'Beach Name\u2019, 'Community\u2019, and 'Violation\u2019 fields for reliable matching / filtering.",
+    "Filter for rows where Beach Type Description equals 'Marine\u2019.",
+    "Load environmental-justice data (environmental-justice-populations.csv) and normalize/lowercase 'Municipality\u2019.",
+    "Find two subsets in environmental-justice data: communities whose 'Percent of population in EJ BGs\u2019 is >50% and communities whose percentage is <25%.",
     "Inner-join the marine-only beach dataframe with each environmental-justice subset (Community \u2194 Municipality).",
     "For each joined subset, compute bacterial exceedance rate: (number of rows whose Violation == 'yes') divided by total rows in subset, possibly multiplying by 100 to get percentage value.",
     "Subtract the <25% EJ exceedance rate from the >50% EJ exceedance rate to get the difference."

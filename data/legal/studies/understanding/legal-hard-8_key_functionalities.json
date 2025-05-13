@@ -4,6 +4,6 @@
     "Find the first line having at least two non-empty comma-separated cells and treat it as header and keep subsequent lines until a line with <2 populated cells (cuts off footers/notes).",
     "Drop all non-alphanumeric characters and lower-case the string for metropolitan area names, ensuring equivalent metropolitan area names match even if punctuation or spacing differs.",
     "Create two normalised target strings that represent \"Miami-Fort Lauderdale-West Palm Beach, FL Metropolitan Statistical Area\" (slightly different punctuations), select the row in each DataFrame whose 'Metropolitan Area' value, after normalisation, equals its respective target string.",
-    "Extract '# of Reports' from both rows (and \u2018Reports per 100K Population\u2019 from the second file), cast to int for numeric comparison.",
+    "Extract '# of Reports' from both rows (and 'Reports per 100K Population\u2019 from the second file), cast to int for numeric comparison.",
     "Compare the two '# of Reports' values and print True if they are identical, False otherwise."
 ]

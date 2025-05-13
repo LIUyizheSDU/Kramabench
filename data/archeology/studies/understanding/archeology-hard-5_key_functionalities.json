@@ -1,11 +1,11 @@
 [
     "Load archeology/input/climateMeasurements.xlsx, archeology/input/radiocarbon_database_regional.xlsx and read the first sheet of each into data frames.",
     "Filter the radiocarbon table to Homo-sapiens records",
-    "Compute \u2018year\u2019 as 1950 \u2212 date.",
+    "Compute 'year\u2019 as 1950 \u2212 date.",
     "Filter for Neolithic culture rows",
-    "Filter for row(s) whose Latitude equals the maximum Latitude. If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) \u2018year\u2019.",
+    "Filter for row(s) whose Latitude equals the maximum Latitude. If several samples share that same northern latitude, keep only the one(s) with the greatest (latest) 'year\u2019.",
     "Clean the climate table by dropping rows that are entirely NaN and columns that are entirely NaN.",
     "Compute year for the climate table: 1950 \u2212 (Age_ky.1 rounded to 0) \u00d7 1000.",
     "Find the year in the climate table closest to the chosen Neolithic year (smallest absolute difference).",
-    "Subset the climate table to all rows that have the year closest to the chosen Neolithic year and take the maximum value of the \u2018Al\u2019 (aluminum) column across those rows."
+    "Subset the climate table to all rows that have the year closest to the chosen Neolithic year and take the maximum value of the 'Al\u2019 (aluminum) column across those rows."
 ]

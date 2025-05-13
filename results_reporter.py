@@ -1,8 +1,9 @@
 import argparse
 import csv
 import json
-import numpy as np
 import os
+
+import numpy as np
 import pandas as pd
 
 from benchmark import Benchmark
@@ -10,10 +11,9 @@ from benchmark import Benchmark
 workload_names = [
     "archeology.json",
     "astronomy.json",
-    "biomedical.json"
-    "environment.json",
+    "biomedical.json" "environment.json",
     "legal.json",
-    "wildfire.json"
+    "wildfire.json",
 ]
 sut_name = "BaselineLLMSystemGPT4oFewShot"
 aggregated_result_filepath = "./results/aggregated_results.csv"

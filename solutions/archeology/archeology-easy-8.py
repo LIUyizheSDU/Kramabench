@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# coding: utf-8
+import pandas as pd
+data_path = "../input"
+
+roman_path = "{}/roman_cities.csv".format(data_path)
+roman_df = pd.read_csv(roman_path)
+
+filtered_df = roman_df[roman_df["Select Bibliography"].notna()]
+roman_sources = filtered_df["Select Bibliography"]
+
+sources = set()
+index = 0
+for values in roman_sources:
+    values = values.replace(".", "").split(";")
+    for value in values:
+        sources.add(value)
+
+print(len(sources))

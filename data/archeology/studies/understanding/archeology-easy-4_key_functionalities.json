@@ -1,8 +1,8 @@
 [
     "Load the Excel file `climateMeasurements.xlsx`, reading the first sheet while skipping the first 5 metadata rows so only data rows are retained.",
     "Remove any columns that are completely empty (all\u2010NaN) to keep only informative variables.",
-    "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the \u2018date\u2019",
-    "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded \u2018Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
+    "Convert both chronologies to calendar years: for the radio-carbon table get the year as 1950 minus the 'date\u2019",
+    "Convert both chronologies to calendar years: for the climate table get the year as 1950 minus the rounded 'Age_ky.1\u2019 (in thousands of years) multiplied by 1000.",
     "Find the smallest value in the column `ODP 967 Dust proxy` and filter the dataframe to the rows that have exactly this minimum dust proxy value.",
     "If multiple rows share the same minimum dust proxy, break the tie by selecting the row with the smallest `ODP 967 wet-dry index` among them.",
     "Extract the value in the `Ca` (calcium) column, which gives the calcium concentration (ppm) at the time of minimum dust proxy.",

@@ -3,7 +3,7 @@
     "Read every Boston Harbor related csv file, skipping the first row and treating the next two rows as a multi-level header.",
     "Clean the two-level column headers: handle missing first-level names, drop the 'Unnamed' placeholders, and combine the two levels to get column names.",
     "Identify the columns that contain measurement variables (those whose names include either 'Tag' or 'Enterococcus'); treat all remaining columns as identifier columns.",
-    "Have separate records for \u2018Location\u2019 and \u2018Measure\u2019 or handle this during filtering for Location.",
+    "Have separate records for 'Location\u2019 and 'Measure\u2019 or handle this during filtering for Location.",
     "Convert all measurement columns (everything except identifiers, 'Location', and 'Tag') to numeric`.",
     "Filter for rows where the year is between 2020 and 2024 inclusive by getting the year from the Date string.",
     "Filter out rows where the 'Enterococcus' value is greater than 104. The rows left are beaches meeting the swimming standard 100 % of the time during 2020-2024."

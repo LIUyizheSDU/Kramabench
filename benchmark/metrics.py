@@ -128,11 +128,20 @@ class F1Approximate(Metric):
             llm_interface = GPTInterface(model="gpt-4o-mini")
             # Calculate the recall
             recall_cnt = 0
+            if isinstance(target, str):
+                target = json.loads(target)
+            if isinstance(predicted, str):
+                try:
+                    predicted = json.loads(predicted)
+                except json.JSONDecodeError:
+                    predicted = eval(predicted)
+
+            predicted = list(predicted) # make sure the predicted is a list
             for i, t in enumerate(target):
                 found = False
                 for j, p in enumerate(predicted):
                     if isinstance(t, str):
-                        if llm_interface.evaluate_data_pipeline(str(p), t):
+                        if llm_interface.evaluate_paraphrase(str(p), t):
                                 found = True
                                 matched_predicted.add(j)
                                 break
