@@ -22,16 +22,16 @@ from skyfield.api import load, wgs84, EarthSatellite  # type: ignore
 ts = load.timescale()
 
 def calculate_orbit_with_tle(satellite):
-        """
-        calculate the height of a satellite based on tle
-        Returns:
-            height in km
-        """
-        #code based off of https://rhodesmill.org/skyfield/earth-satellites.html
-        gcrsLocation = satellite.at(ts.utc(satellite.epoch.utc_datetime()))
-        itrs = gcrsLocation.itrf_xyz().m
-        loc = (itrs[0], itrs[1], itrs[2])
-        return sum([i**2 for i in loc]) ** (1/2) / 1000
+    """
+    calculate the height of a satellite based on tle
+    Returns:
+        height in km
+    """
+    #code based off of https://rhodesmill.org/skyfield/earth-satellites.html
+    gcrsLocation = satellite.at(ts.utc(satellite.epoch.utc_datetime()))
+    itrs = gcrsLocation.itrf_xyz().m
+    loc = (itrs[0], itrs[1], itrs[2])
+    return sum([i**2 for i in loc]) ** (1/2) / 1000
 
 def detect_altitude_change(tle_pairs, threshold_km=0.1, t_hours=12):
     """
@@ -60,12 +60,12 @@ def detect_altitude_change(tle_pairs, threshold_km=0.1, t_hours=12):
         delta_a = abs(sat_height[i] - sat_height[i - 1])
         delta_t = (epochs[i] - epochs[i - 1]).total_seconds() / 3600.0  # Convert to hours
         if delta_a > threshold_km and delta_t <= t_hours:
-            altitude_change.append((epochs[i], delta_a))
+            altitude_change.append((delta_a, epochs[i-1], epochs[i]))
 
-    return altitude_change
+    return altitude_change, sat_height
 
 
-tle_filename = '../../data/astronomy/input/TLE/48445.tle'  # Replace with your TLE file path
+tle_filename = './data/astronomy/input/TLE/48445.tle'  # Replace with your TLE file path
 threshold_km = 1  # Threshold for detecting altitude_change in kilometers
 hour_interval = 12
 
@@ -74,12 +74,12 @@ try:
 except Exception as e:
     print(f"Error reading TLE file: {e}")
 
-altitude_change = detect_altitude_change(tle_pairs, threshold_km, hour_interval)
-print(f"Maximum altitude change: {max([d[1] for d in altitude_change])}")
+altitude_change, sat_height = detect_altitude_change(tle_pairs, threshold_km, hour_interval)
+print(f"Maximum altitude change: {max([d[0] for d in altitude_change])}")
 
 print(f"Total altitude_change detected: {len(altitude_change)}")
-for epoch, delta_a in altitude_change:
-    print(f"Maneuver detected at {epoch} with delta_a = {delta_a:.3f} km")
+for delta_a, epoch0, epoch1 in altitude_change:
+    print(f"Maneuver detected {epoch0}-{epoch1} with delta_a = {delta_a:.3f} km")
 
 
 

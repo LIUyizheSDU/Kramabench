@@ -1,16 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-
-#!/usr/bin/env python3
 """
 Analyzes Starlink altitude decay rates using local CSV files from Space-Track.
 
 Compares decay during a quiet period (May 1-4, 2024) vs. a storm period
 (May 10-13, 2024) based on GP History data.
 
-Requires CSV files containing GP History data in the same directory as the script,
-named according to the 'file_mapping' dictionary below.
+Requires CSV files containing GP History data in the same directory as the script, named according to the 'file_mapping' dictionary below.
 """
 
 import csv
@@ -186,165 +182,158 @@ def calculate_decay_rate(start_record, end_record):
 
 # === Main Analysis Logic ===
 
-def run_analysis():
-    """Reads local CSV files, calculates, and compares decay rates."""
 
-    # Define where your downloaded files are relative to the script location
-    # Assumes files are in the same directory as the script.
-    data_directory = "../../data/astronomy/input/space-track/"
+# Define where your downloaded files are relative to the script location
+# Assumes files are in the same directory as the script.
+data_directory = "./data/astronomy/input/space-track/"
 
-    # Define the mapping between satellite IDs, periods, and filenames
-    # Uses the specific filenames identified from user uploads.
-    # Excludes satellites where data files were empty or not provided.
-    file_mapping = {
-        "58214": {
-            "quiet": "58214_quiet.csv",
-            "storm": "58214_storm.csv"
-        },
+# Define the mapping between satellite IDs, periods, and filenames
+# Uses the specific filenames identified from user uploads.
+# Excludes satellites where data files were empty or not provided.
+file_mapping = {
+    "58214": {
+        "quiet": "58214_quiet.csv",
+        "storm": "58214_storm.csv"
+    },
 
-    }
-    analyzed_ids = list(file_mapping.keys())
-    print(f"Analyzing data for NORAD IDs: {', '.join(analyzed_ids)}")
+}
+analyzed_ids = list(file_mapping.keys())
+print(f"Analyzing data for NORAD IDs: {', '.join(analyzed_ids)}")
 
-    # Define analysis windows (UTC)
-    ANALYSIS_QUIET_START = datetime(2024, 5, 1, 0, 0, 0, tzinfo=timezone.utc)
-    ANALYSIS_QUIET_END = datetime(2024, 5, 4, 23, 59, 59, 999999, tzinfo=timezone.utc)
-    ANALYSIS_STORM_START = datetime(2024, 5, 10, 0, 0, 0, tzinfo=timezone.utc)
-    ANALYSIS_STORM_END = datetime(2024, 5, 13, 23, 59, 59, 999999, tzinfo=timezone.utc)
+# Define analysis windows (UTC)
+ANALYSIS_QUIET_START = datetime(2024, 5, 1, 0, 0, 0, tzinfo=timezone.utc)
+ANALYSIS_QUIET_END = datetime(2024, 5, 4, 23, 59, 59, 999999, tzinfo=timezone.utc)
+ANALYSIS_STORM_START = datetime(2024, 5, 10, 0, 0, 0, tzinfo=timezone.utc)
+ANALYSIS_STORM_END = datetime(2024, 5, 13, 23, 59, 59, 999999, tzinfo=timezone.utc)
 
-    results = {} # Dictionary to store calculated rates {norad_id: {period: rate}}
+results = {} # Dictionary to store calculated rates {norad_id: {period: rate}}
 
-    # --- Loop through satellites and periods ---
-    for norad_id, period_files in file_mapping.items():
-        print(f"\n--- Processing NORAD ID: {norad_id} ---")
-        results[norad_id] = {"quiet_rate_km_day": None, "storm_rate_km_day": None}
+# --- Loop through satellites and periods ---
+for norad_id, period_files in file_mapping.items():
+    print(f"\n--- Processing NORAD ID: {norad_id} ---")
+    results[norad_id] = {"quiet_rate_km_day": None, "storm_rate_km_day": None}
 
-        # --- Process Quiet Period File ---
-        quiet_filename = period_files.get("quiet")
-        if quiet_filename:
-            filepath = os.path.join(data_directory, quiet_filename)
-            print(f"  Reading Quiet File: {filepath}")
+    # --- Process Quiet Period File ---
+    quiet_filename = period_files.get("quiet")
+    if quiet_filename:
+        filepath = os.path.join(data_directory, quiet_filename)
+        print(f"  Reading Quiet File: {filepath}")
 
-            quiet_records = []
-            with open(filepath, 'r', encoding='utf-8', newline='') as f:
+        quiet_records = []
+        with open(filepath, 'r', encoding='utf-8', newline='') as f:
+            # Check for empty file / only header
+            first_line = f.readline()
+            if not first_line:
+                    print("  Warning: Quiet file appears empty.")
+                    continue # Skip to next period/satellite
+
+            # Check for "NO RESULTS RETURNED"
+            if "NO RESULTS RETURNED" in first_line:
+                    print("  Warning: Quiet file contains 'NO RESULTS RETURNED'.")
+                    continue
+
+            f.seek(0) # Rewind to read header with DictReader
+            reader = csv.DictReader(f)
+            # Check if header exists
+            if not reader.fieldnames:
+                    print(f"  Error: Could not read header from quiet file: {filepath}", file=sys.stderr)
+                    continue
+
+            # Check for required columns
+            required_cols = ["EPOCH", "MEAN_MOTION"]
+            if not all(col in reader.fieldnames for col in required_cols):
+                print(f"  Error: Missing required columns ({', '.join(required_cols)}) in quiet file: {filepath}", file=sys.stderr)
+                continue
+
+            # Read data rows
+            for row in reader:
+                # Basic validation: ensure required fields are not empty strings
+                if row.get("EPOCH") and row.get("MEAN_MOTION"):
+                        quiet_records.append(row)
+                else:
+                        print(f"  Warning: Skipping row with missing required data in quiet file: {row}", file=sys.stderr)
+
+
+        if quiet_records:
+            print(f"    Read {len(quiet_records)} valid records.")
+            q_start_rec, q_end_rec = find_relevant_records_from_list(
+                quiet_records, ANALYSIS_QUIET_START, ANALYSIS_QUIET_END
+            )
+            if q_start_rec and q_end_rec:
+                print(f"    Quiet period analysis window: {q_start_rec.get('EPOCH')} -> {q_end_rec.get('EPOCH')}")
+                quiet_rate = calculate_decay_rate(q_start_rec, q_end_rec)
+                results[norad_id]["quiet_rate_km_day"] = quiet_rate
+                if quiet_rate is None:
+                        print("    Failed to calculate quiet decay rate.")
+            else:
+                print("    Could not find suitable start/end records within the quiet analysis window.")
+        else:
+            print("    No valid records found in quiet file after reading.")
+
+
+
+    # --- Process Storm Period File (Similar logic) ---
+    storm_filename = period_files.get("storm")
+    if storm_filename:
+        filepath = os.path.join(data_directory, storm_filename)
+        print(f"  Reading Storm File: {filepath}")
+
+        storm_records = []
+        with open(filepath, 'r', encoding='utf-8', newline='') as f:
                 # Check for empty file / only header
-                first_line = f.readline()
-                if not first_line:
-                     print("  Warning: Quiet file appears empty.")
-                     continue # Skip to next period/satellite
+            first_line = f.readline()
+            if not first_line:
+                    print("  Warning: Storm file appears empty.")
+                    continue # Skip to next satellite
 
-                # Check for "NO RESULTS RETURNED"
-                if "NO RESULTS RETURNED" in first_line:
-                     print("  Warning: Quiet file contains 'NO RESULTS RETURNED'.")
-                     continue
+            # Check for "NO RESULTS RETURNED"
+            if "NO RESULTS RETURNED" in first_line:
+                    print("  Warning: Storm file contains 'NO RESULTS RETURNED'.")
+                    continue
 
-                f.seek(0) # Rewind to read header with DictReader
-                reader = csv.DictReader(f)
+            f.seek(0) # Rewind to read header with DictReader
+            reader = csv.DictReader(f)
                 # Check if header exists
-                if not reader.fieldnames:
-                     print(f"  Error: Could not read header from quiet file: {filepath}", file=sys.stderr)
-                     continue
-
-                # Check for required columns
-                required_cols = ["EPOCH", "MEAN_MOTION"]
-                if not all(col in reader.fieldnames for col in required_cols):
-                    print(f"  Error: Missing required columns ({', '.join(required_cols)}) in quiet file: {filepath}", file=sys.stderr)
+            if not reader.fieldnames:
+                    print(f"  Error: Could not read header from storm file: {filepath}", file=sys.stderr)
                     continue
 
-                # Read data rows
-                for row in reader:
-                    # Basic validation: ensure required fields are not empty strings
+            # Check for required columns
+            required_cols = ["EPOCH", "MEAN_MOTION"]
+            if not all(col in reader.fieldnames for col in required_cols):
+                print(f"  Error: Missing required columns ({', '.join(required_cols)}) in storm file: {filepath}", file=sys.stderr)
+                continue
+
+            # Read data rows
+            for row in reader:
                     if row.get("EPOCH") and row.get("MEAN_MOTION"):
-                         quiet_records.append(row)
+                        storm_records.append(row)
                     else:
-                         print(f"  Warning: Skipping row with missing required data in quiet file: {row}", file=sys.stderr)
+                        print(f"  Warning: Skipping row with missing required data in storm file: {row}", file=sys.stderr)
 
 
-            if quiet_records:
-                print(f"    Read {len(quiet_records)} valid records.")
-                q_start_rec, q_end_rec = find_relevant_records_from_list(
-                    quiet_records, ANALYSIS_QUIET_START, ANALYSIS_QUIET_END
-                )
-                if q_start_rec and q_end_rec:
-                    print(f"    Quiet period analysis window: {q_start_rec.get('EPOCH')} -> {q_end_rec.get('EPOCH')}")
-                    quiet_rate = calculate_decay_rate(q_start_rec, q_end_rec)
-                    results[norad_id]["quiet_rate_km_day"] = quiet_rate
-                    if quiet_rate is None:
-                         print("    Failed to calculate quiet decay rate.")
-                else:
-                    print("    Could not find suitable start/end records within the quiet analysis window.")
+        if storm_records:
+            print(f"    Read {len(storm_records)} valid records.")
+            s_start_rec, s_end_rec = find_relevant_records_from_list(
+                storm_records, ANALYSIS_STORM_START, ANALYSIS_STORM_END
+            )
+            if s_start_rec and s_end_rec:
+                print(f"    Storm period analysis window: {s_start_rec.get('EPOCH')} -> {s_end_rec.get('EPOCH')}")
+                storm_rate = calculate_decay_rate(s_start_rec, s_end_rec)
+                results[norad_id]["storm_rate_km_day"] = storm_rate
+                if storm_rate is None:
+                        print("    Failed to calculate storm decay rate.")
             else:
-                print("    No valid records found in quiet file after reading.")
+                print("    Could not find suitable start/end records within the storm analysis window.")
+        else:
+            print("    No valid records found in storm file after reading.")
 
 
-
-        # --- Process Storm Period File (Similar logic) ---
-        storm_filename = period_files.get("storm")
-        if storm_filename:
-            filepath = os.path.join(data_directory, storm_filename)
-            print(f"  Reading Storm File: {filepath}")
-
-            storm_records = []
-            with open(filepath, 'r', encoding='utf-8', newline='') as f:
-                 # Check for empty file / only header
-                first_line = f.readline()
-                if not first_line:
-                     print("  Warning: Storm file appears empty.")
-                     continue # Skip to next satellite
-
-                # Check for "NO RESULTS RETURNED"
-                if "NO RESULTS RETURNED" in first_line:
-                     print("  Warning: Storm file contains 'NO RESULTS RETURNED'.")
-                     continue
-
-                f.seek(0) # Rewind to read header with DictReader
-                reader = csv.DictReader(f)
-                 # Check if header exists
-                if not reader.fieldnames:
-                     print(f"  Error: Could not read header from storm file: {filepath}", file=sys.stderr)
-                     continue
-
-                # Check for required columns
-                required_cols = ["EPOCH", "MEAN_MOTION"]
-                if not all(col in reader.fieldnames for col in required_cols):
-                    print(f"  Error: Missing required columns ({', '.join(required_cols)}) in storm file: {filepath}", file=sys.stderr)
-                    continue
-
-                # Read data rows
-                for row in reader:
-                     if row.get("EPOCH") and row.get("MEAN_MOTION"):
-                         storm_records.append(row)
-                     else:
-                         print(f"  Warning: Skipping row with missing required data in storm file: {row}", file=sys.stderr)
-
-
-            if storm_records:
-                print(f"    Read {len(storm_records)} valid records.")
-                s_start_rec, s_end_rec = find_relevant_records_from_list(
-                    storm_records, ANALYSIS_STORM_START, ANALYSIS_STORM_END
-                )
-                if s_start_rec and s_end_rec:
-                    print(f"    Storm period analysis window: {s_start_rec.get('EPOCH')} -> {s_end_rec.get('EPOCH')}")
-                    storm_rate = calculate_decay_rate(s_start_rec, s_end_rec)
-                    results[norad_id]["storm_rate_km_day"] = storm_rate
-                    if storm_rate is None:
-                         print("    Failed to calculate storm decay rate.")
-                else:
-                    print("    Could not find suitable start/end records within the storm analysis window.")
-            else:
-                print("    No valid records found in storm file after reading.")
-
-
-        # --- Print individual results after processing both periods ---
-        qr = results[norad_id].get('quiet_rate_km_day')
-        sr = results[norad_id].get('storm_rate_km_day')
-        print(f"  Result - Quiet Rate: {qr:.4f} km/day" if qr is not None else "  Result - Quiet Rate: Error/Unavailable")
-        print(f"  Result - Storm Rate: {sr:.4f} km/day" if sr is not None else "  Result - Storm Rate: Error/Unavailable")
-
-
-# === Main execution block ===
-if __name__ == "__main__":
-    run_analysis()
+    # --- Print individual results after processing both periods ---
+    qr = results[norad_id].get('quiet_rate_km_day')
+    sr = results[norad_id].get('storm_rate_km_day')
+    print(f"  Result - Quiet Rate: {qr:.4f} km/day" if qr is not None else "  Result - Quiet Rate: Error/Unavailable")
+    print(f"  Result - Storm Rate: {sr:.4f} km/day" if sr is not None else "  Result - Storm Rate: Error/Unavailable")
 
 
 

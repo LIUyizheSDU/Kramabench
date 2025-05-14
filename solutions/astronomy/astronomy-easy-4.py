@@ -9,7 +9,7 @@ from scipy.signal import find_peaks
 import os
 
 
-file_path = '../../data/astronomy/input/SILSO/SN_y_tot_V2.0.csv' 
+file_path = './data/astronomy/input/SILSO/SN_y_tot_V2.0.csv' 
 
 # --- Load Data ---
 print(f"Attempting to load data from: {file_path}")

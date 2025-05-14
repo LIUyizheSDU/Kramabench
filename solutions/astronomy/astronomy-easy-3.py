@@ -9,14 +9,14 @@ import os
 
 # ---- 1. Load altitude for each file ID -----------------------------------
 init_df = (
-    pd.read_csv("../../data/astronomy/input/STORM-AI/warmup/v2/wu001_to_wu715-initial_states.csv", parse_dates=["Timestamp"])
+    pd.read_csv("./data/astronomy/input/STORM-AI/warmup/v2/wu001_to_wu715-initial_states.csv", parse_dates=["Timestamp"])
       .loc[:, ["File ID", "Altitude (km)"]]
       .rename(columns={"File ID": "file_id", "Altitude (km)": "alt_km"})
 )
 
 # ---- 2. Collect Swarm-A density slices for 2015 ---------------------------
 dens_frames = []
-for f in glob("../../data/astronomy/input/STORM-AI/warmup/v2/Sat_Density/swarma-*2015*.csv"):
+for f in glob("./data/astronomy/input/STORM-AI/warmup/v2/Sat_Density/swarma-*2015*.csv"):
     df = pd.read_csv(f, parse_dates=["Timestamp"])
     df = df[df.Timestamp.dt.year == 2015]
     if df.empty:

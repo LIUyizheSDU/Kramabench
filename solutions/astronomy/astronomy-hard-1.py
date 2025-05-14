@@ -12,9 +12,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
 # --------------- data files -------------------------------------------------
-BASE_OMNI = Path("../../data/astronomy/input/STORM-AI/warmup/v2/OMNI2").expanduser()
-BASE_GOES = Path("../../data/astronomy/input/STORM-AI/warmup/v2/GOES").expanduser()
-BASE_DENS = Path("../../data/astronomy/input/STORM-AI/warmup/v2/Sat_Density").expanduser()
+BASE_OMNI = Path("./data/astronomy/input/STORM-AI/warmup/v2/OMNI2").expanduser()
+BASE_GOES = Path("./data/astronomy/input/STORM-AI/warmup/v2/GOES").expanduser()
+BASE_DENS = Path("./data/astronomy/input/STORM-AI/warmup/v2/Sat_Density").expanduser()
 
 TRAIN_ID  = "wu334"
 TEST_ID   = "wu335"
