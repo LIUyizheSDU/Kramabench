@@ -121,6 +121,7 @@ def main():
             use_system_cache=args.use_system_cache,
             cache_system_output=args.cache_system_output,
             verbose=verbose,
+            skip_subtasks=args.skip_subtasks,
         )
 
         print(f"Starting benchmark workflow on workload: {workload_name}")

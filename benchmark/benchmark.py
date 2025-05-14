@@ -41,7 +41,7 @@ class Executor:
         self.verbose = verbose
         self.skip_subtasks = skip_subtasks
     
-    def run_task(self, task: Dict[str, Any]) -> Dict[str, str | Dict | List]:
+    def run_task(self, task: Dict[str, Any], parent_task_query: Optional[str]=None) -> Dict[str, str | Dict | List]:
         """
         Takes a task entry and runs it on the test subject System
         See `workload/` for examples of the input.
@@ -55,7 +55,11 @@ class Executor:
         if self.verbose:
             print(f"task_id: {task['id']}")
             print(f"query: {task['query']}")
-        system_overall_response = self.system.serve_query(query=task["query"], query_id=task["id"])
+        if parent_task_query is not None:
+            query = f"Your end goal is to answer this overall question: {parent_task_query}, please answer the following question:\n {task['query']} \n\n"
+        else:
+            query = task["query"]
+        system_overall_response = self.system.serve_query(query=query, query_id=task["id"])
         model_output = system_overall_response["explanation"]
         code_string = system_overall_response["pipeline_code"]
         response = {}
@@ -65,7 +69,7 @@ class Executor:
         if "subtasks" in task and not self.skip_subtasks:
             response["subresponses"] = []
             for subtask in task["subtasks"]:
-                subresponse = self.run_task(subtask)
+                subresponse = self.run_task(task=subtask, parent_task_query=task["query"])
                 response["subresponses"].append(subresponse)
         return response
     
@@ -75,7 +79,7 @@ class Executor:
         """
         if self.cur_query_id >= self.num_queries:
             return None
-        result = self.run_task(self.workload[self.cur_query_id])
+        result = self.run_task(self.workload[self.cur_query_id], parent_task_query=None)
         self.cur_query_id += 1
         return result
     
