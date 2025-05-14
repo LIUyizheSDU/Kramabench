@@ -44,7 +44,7 @@ def parse_sp3(sp3_path):
 
 # 3. Build hourly change of altitude series
 sp3_files = sorted(glob.glob(
-    '../../data/astronomy/input/swarm/POD/SW_OPER_SP3ACOM_2__201810??T??????_201810??T??????_0201/*.sp3'
+    './data/astronomy/input/swarm/POD/SW_OPER_SP3ACOM_2__201810??T??????_201810??T??????_0201/*.sp3'
 ))
 alt_dfs = [parse_sp3(fn) for fn in sp3_files]
 alt_all = pd.concat(alt_dfs).sort_index()
@@ -61,7 +61,7 @@ print(f"Swarm-A change of altitude records: {alt_hourly.shape}. Average change o
 
 # 4. Load OMNI2 data
 omni = pd.read_csv(
-    '../../data/astronomy/input/STORM-AI/warmup/v2/OMNI2/omni2-wu590-20181001_to_20181130.csv',
+    './data/astronomy/input/STORM-AI/warmup/v2/OMNI2/omni2-wu590-20181001_to_20181130.csv',
     parse_dates=['Timestamp'],
     index_col='Timestamp'
 )
@@ -71,7 +71,7 @@ print(f"OMNI2 records: {omni10.shape}")
 
 # 5. Load Sat_Density
 sd_files = sorted(glob.glob(
-    '../../data/astronomy/input/STORM-AI/warmup/v2/Sat_Density/swarma-wu???-201810??_to_201810??.csv'
+    './data/astronomy/input/STORM-AI/warmup/v2/Sat_Density/swarma-wu???-201810??_to_201810??.csv'
 ))
 sd_list = []
 for fn in sd_files:

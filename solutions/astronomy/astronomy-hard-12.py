@@ -47,7 +47,7 @@ def parse_sp3(sp3_path):
     return df[['lat_deg', 'lon_deg', 'alt_km']]
 
 # 3. Load all SP3 files
-sp3_files = sorted(glob.glob('../../data/astronomy/input/swarm/POD/SW_OPER_SP3ACOM_2__201909??T??????_201909??T??????_0201/*.sp3'))
+sp3_files = sorted(glob.glob('./data/astronomy/input/swarm/POD/SW_OPER_SP3ACOM_2__201909??T??????_201909??T??????_0201/*.sp3'))
 alt_dfs = [parse_sp3(fn) for fn in sp3_files]
 traj_df = pd.concat(alt_dfs).sort_index()
 traj_df = traj_df.loc['2019-09-02':'2019-09-29']
@@ -55,7 +55,7 @@ print(f"Swarm-A Trajectory Loaded: {traj_df.shape}")
 
 # 4. Prepare mock TIE-GCM grid (normally output from a simulation)
 # (Here, we mock it since TIE-GCM simulation is heavy)
-grid_data = np.load('../../data/astronomy/input/mock_tiegcm_grid_sept2019.npz')
+grid_data = np.load('./data/astronomy/input/mock_tiegcm_grid_sept2019.npz')
 lat_grid = grid_data['lat_grid']
 lon_grid = grid_data['lon_grid']
 alt_grid = grid_data['alt_grid']

@@ -240,7 +240,7 @@ import numpy as np
 import pandas as pd
 
 omni = pd.read_fwf(
-    Path("../../data/astronomy/input/omni2_low_res/omni2_2024.dat").expanduser(),          # << path
+    Path("./data/astronomy/input/omni2_low_res/omni2_2024.dat").expanduser(),          # << path
     widths=[4, 4, 3, 5, 3, 3, 4, 4, 6, 6, 6, 6,
             6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
             9, 6, 6, 6, 6, 6, 6, 9, 6, 6, 
@@ -249,7 +249,7 @@ omni = pd.read_fwf(
             4, 6, 6, 6, 6, 5], header=None
 )
 omni = pd.concat([omni, pd.read_fwf(
-    Path("../../data/astronomy/input/omni2_low_res/omni2_2023.dat").expanduser(),          # << path
+    Path("./data/astronomy/input/omni2_low_res/omni2_2023.dat").expanduser(),          # << path
     widths=[4, 4, 3, 5, 3, 3, 4, 4, 6, 6, 6, 6,
             6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
             9, 6, 6, 6, 6, 6, 6, 9, 6, 6, 
@@ -291,7 +291,7 @@ omni = (omni
 # ---------------------------------------------------------------------
 
 # --- a)  Swarm-B neutral density for 2024 -----------------------------
-swarm_folder = "../../data/astronomy/input/swarmb"           #  << your path
+swarm_folder = "./data/astronomy/input/swarmb"           #  << your path
 swarm = load_swarmb_density_year(swarm_folder, 2024)
 
 # average everything to the *nearest* whole hour

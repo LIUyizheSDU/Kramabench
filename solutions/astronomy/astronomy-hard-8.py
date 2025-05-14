@@ -27,13 +27,13 @@ def load_omni_file(filepath, column_name):
     return df
 
 # Load Kp Index (divide by 10)
-kp_df = load_omni_file("../../data/astronomy/input/omni2/omni2_Kp_Index.lst", "Kp")
+kp_df = load_omni_file("./data/astronomy/input/omni2/omni2_Kp_Index.lst", "Kp")
 kp_df["Kp"] /= 10.0
 kp_df = kp_df.resample('h').mean()
 print(f"kp_df rows: {kp_df.shape[0]}")
 
 # Load Solar Wind Dynamic Pressure
-p_dyn_df = load_omni_file("../../data/astronomy/input/omni2/omni2_Flow_Pressure.lst", "Pdyn")
+p_dyn_df = load_omni_file("./data/astronomy/input/omni2/omni2_Flow_Pressure.lst", "Pdyn")
 p_dyn_df = p_dyn_df.resample('h').mean()
 print(f"Pdyn rows: {p_dyn_df.shape[0]}")
 
@@ -41,7 +41,7 @@ print(f"Pdyn rows: {p_dyn_df.shape[0]}")
 # 2. Load Swarm Alpha ACCACAL Data
 # ---------------------------
 
-cdf = cdflib.CDF("../../data/astronomy/input/swarm/SW_OPER_ACCACAL_2__20240511T000000_20240511T235959_0304.cdf")
+cdf = cdflib.CDF("./data/astronomy/input/swarm/SW_OPER_ACCACAL_2__20240511T000000_20240511T235959_0304.cdf")
 
 # Extract time and acceleration components
 timestamp = cdf.varget("time")
