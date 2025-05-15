@@ -36,7 +36,7 @@ class BaselineLLMSystemGPT4oNaive(BaselineLLMSystem):
 class BaselineLLMSystemGPTo3FewShot(BaselineLLMSystem):
     def __init__(self, verbose=False, *args, **kwargs):
         super().__init__(
-            model="gpt-o3",
+            model="o3",
             name="BaselineLLMSystemGPTo3FewShot",
             variance="few_shot",
             verbose=verbose,
@@ -47,7 +47,7 @@ class BaselineLLMSystemGPTo3FewShot(BaselineLLMSystem):
 class BaselineLLMSystemGPTo3OneShot(BaselineLLMSystem):
     def __init__(self, verbose=False, *args, **kwargs):
         super().__init__(
-            model="gpt-o3",
+            model="o3",
             name="BaselineLLMSystemGPTo3OneShot",
             variance="one_shot",
             verbose=verbose,
@@ -58,7 +58,7 @@ class BaselineLLMSystemGPTo3OneShot(BaselineLLMSystem):
 class BaselineLLMSystemGPTo3Naive(BaselineLLMSystem):
     def __init__(self, verbose=False, *args, **kwargs):
         super().__init__(
-            model="gpt-o3",
+            model="o3",
             name="BaselineLLMSystemGPTo3Naive",
             variance="one_shot",
             verbose=verbose,

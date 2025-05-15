@@ -14,7 +14,7 @@ from openai import OpenAI
 from together import Together
 import PyPDF2
 
-OpenAIModelList = ["gpt-4o", "gpt-4o-mini", "gpt-4o-v", "gpt-4o-mini-v", "gpt-o3"]
+OpenAIModelList = ["gpt-4o", "gpt-4o-mini", "gpt-4o-v", "gpt-4o-mini-v", "o3"]
 TogetherModelList = ["google/gemma-2b-it", "meta-llama/Llama-2-13b-chat-hf", "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B","google/gemma-3-27b-it", "deepseek-ai/DeepSeek-R1", "Qwen/Qwen2.5-Coder-32B-Instruct", "meta-llama/Llama-3.3-70B-Instruct-Turbo"]
 
 def get_api_key(key: str) -> str:
@@ -45,7 +45,7 @@ class Generator():
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
+                # temperature=0.0,
                 max_tokens=4000,
             )
             return response.choices[0].message.content
@@ -75,7 +75,7 @@ class Generator():
                 result = self.client.chat.completions.create(
                     model=self.model,
                     messages=messages,
-                    temperature=0.2,
+                    # temperature=0.2,
                 )
                 
                 break # break out of while loop if no error
