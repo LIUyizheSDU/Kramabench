@@ -9,7 +9,7 @@ case_df = clinical_df[clinical_df['Case_excluded'] == 'No']
 case_df = case_df[case_df['Histologic_type'].isin(['Endometrioid','Serous'])]
 print("Tumor cases:", len(case_df))
 
-tmb_df = pd.read_excel('../input/1-s2.0-S0092867420301070-mmc7.xlsx', sheet_name=["B-APM subtypes"])['B-APM subtypes']
+tmb_df = pd.read_excel(data_path+'/1-s2.0-S0092867420301070-mmc7.xlsx', sheet_name=["B-APM subtypes"])['B-APM subtypes']
 # find the idx where APP_Z_score is max
 min_idx = tmb_df.loc[tmb_df['APP_Z_score'].idxmin()]['idx']
 
