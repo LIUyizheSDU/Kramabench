@@ -17,7 +17,7 @@ import numpy as np
 
 np.random.seed(42)  # Set the random seed for reproducibility
 
-domain = "legal"  # Specify the domain
+domain = "biomedical"  # Specify the domain
 FILE_BUDGET = 10  # Maximum number of files per task
 SAMPLE_SIZE = 6  # Number of tasks to randomly select
 
@@ -36,18 +36,7 @@ for task_id in list(tasks.keys()):
 # Randomly select 6 tasks
 # selected_tasks = np.random.choice(list(tasks.keys()), size=SAMPLE_SIZE, replace=False)
 # already_done = ['astronomy-easy-1', 'astronomy-easy-3', 'astronomy-easy-6', 'astronomy-hard-9', 'astronomy-hard-10', 'astronomy-hard-11']
-already_done = [
-    "legal-easy-3",
-    "legal-hard-7",
-    "legal-easy-12",
-    "legal-hard-16",
-    "legal-hard-18",
-    "legal-easy-19",
-    "legal-hard-22",
-    "legal-hard-24",
-    "legal-easy-25",
-    "legal-hard-30",
-]
+already_done = [t for t in tasks.keys() if "easy-9" not in t]
 
 selected_tasks = [x for x in list(tasks.keys()) if x not in already_done]
 
@@ -55,13 +44,13 @@ selected_tasks = [x for x in list(tasks.keys()) if x not in already_done]
 output_dir = f"dr-input/{domain}/"
 os.makedirs(output_dir, exist_ok=True)
 # remove all subfolders in dr-input/{domain}/
-for root, dirs, files in os.walk(output_dir):
-    for dir in dirs:
-        dir_path = os.path.join(root, dir)
-        if dir_path != output_dir:  # Avoid removing the main output directory
-            if len([x for x in already_done if x in dir_path]) == 0:
-                print(f"Removing directory: {dir_path}")
-                os.system(f"rm -rf {dir_path}")
+# for root, dirs, files in os.walk(output_dir):
+#     for dir in dirs:
+#         dir_path = os.path.join(root, dir)
+#         if dir_path != output_dir:  # Avoid removing the main output directory
+#             if len([x for x in already_done if x in dir_path]) == 0:
+#                 print(f"Removing directory: {dir_path}")
+#                 os.system(f"rm -rf {dir_path}")
 
 
 # Create a new JSON file with the selected tasks
@@ -105,14 +94,19 @@ for task_id in selected_tasks:
     # If there are less than 10 files, randomly select from all domain files
     budget_remaining = FILE_BUDGET - len(selected_files)
     while budget_remaining > 0:
-        additional_files = np.random.choice(all_files, size=budget_remaining, replace=False)
-
+        if len(all_files) < budget_remaining:
+            additional_files = all_files
+            budget_remaining = 0
+            FILE_BUDGET = len(os.listdir(task_dir))
+        else:
+            additional_files = np.random.choice(all_files, size=budget_remaining, replace=False)
+            budget_remaining = FILE_BUDGET - len(os.listdir(task_dir))
+    
         for file_str in additional_files:
             dst_file = os.path.join(task_dir, os.path.basename(file_str))
             os.system(f"cp '{str(file_str)}' {task_dir}")
 
         # sometimes you might copy one of selected_files again
-        budget_remaining = FILE_BUDGET - len(os.listdir(task_dir))
         print("\tSampling additional files:", len(additional_files))
         print("\tThere are in the folder:", len(os.listdir(task_dir)))
         print("\tBudget remaining:", budget_remaining)

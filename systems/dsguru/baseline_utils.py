@@ -26,7 +26,7 @@ def call_gpt(messages, model):
             result = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0.2,
+                # temperature=0.2,
             )
             
             break # break out of while loop if no error
