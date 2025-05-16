@@ -1131,8 +1131,8 @@
         "id": "wildfire-hard-19-8",
         "step": "Perform a UDF join: Keep only rows where Type == 'Rain', precipitation is greater than 0.05 inches, and the station lies inside the fire area: compute the geodesic distance between the station and the fire coordinates and require distance <= sqrt(hectares/100) km (~= radius of the fire's 1-km narrowest diameter assumption).",
         "query": "What columns from the fine grained weather data and the fire data respectively are we using to join these data space-wise?",
-        "answer": "",
-        "answer_type": ["LocationLat", "LocationLng", "latitude", "longitude"],
+        "answer": ["LocationLat", "LocationLng", "latitude", "longitude"],
+        "answer_type": "list_exact",
         "data_sources": ""
       },
       {
