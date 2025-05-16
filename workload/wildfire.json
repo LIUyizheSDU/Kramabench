@@ -45,8 +45,8 @@
         "id": "wildfire-easy-1-5",
         "step": "After scanning all windows, report the start date, end date, and total acres burned for the window with the maximum three-month burn total (and optionally print the rows themselves).",
         "query": "What are the start and end dates and total acres burned for the period with the highest cumulative acres burned?\nExpected answer: {'Start Date': 'YYYY-MM', 'End Date': 'YYYY-MM', 'Total Acres Burned': 123456.789}",
-        "answer": "{'Start Date': 'YYYY-MM', 'End Date': 'YYYY-MM', 'Total Acres Burned': 123456.789, 'Period Data': DataFrame}",
-        "answer_type": "{\"Start Date\": \"2015-06\", 'End Date': \"2015-08\", \"Total Acres Burned\": 7805421}\"",
+        "answer": "{\"Start Date\": \"2015-06\", 'End Date': \"2015-08\", \"Total Acres Burned\": 7805421}\"",
+        "answer_type": "string_exact",
         "data_sources": ["noaa_wildfires_monthly_stats.csv"]      
       }
     ]
