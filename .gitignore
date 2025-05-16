@@ -9,6 +9,7 @@ __pycache__/
 test_outputs/
 system_scratch/
 data/*/raw/
+results/*/response_cache
 # C extensions
 *.so
 
