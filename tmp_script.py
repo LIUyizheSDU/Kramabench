@@ -1,31 +1,44 @@
 # Read all json files from results/deep-research/astronomy
-
 import os
 import json
-
+import pandas as pd
 
 # open workload
 n_subtasks = 0
 
-for domain in ['astronomy','archeology', 'legal', 'environment', 'biomedical', 'wildfire']:
-    with open(f'workload/{domain}.json', 'r') as f:
-        try:
-            workload = json.load(f)
-        except json.JSONDecodeError as e:
-            print(f"Error decoding JSON in {domain}.json: {e}")
-            continue
+path = 'results/BaselineLLMSystemGPTo3FewShot_subset'
+fpaths = [f for f in os.listdir(path)]
 
-    domain_subtasks = 0
-    for task in workload:
-        assert 'answer_type' in task.keys(), f"{task['id']} has no answer type!"
-        for subtask in task['subtasks']:
-            assert 'answer_type' in subtask.keys(), f"{subtask['id']} has no answer type!"
-            n_subtasks += 1
-            domain_subtasks += 1
-    print(f"Domain: {domain}, Number of subtasks: {domain_subtasks}")
+overall_runtimes = []
+for fpath in fpaths:
+    df = pd.read_csv(os.path.join(path, fpath))
+    domain = fpath.split('_')[0]
+    runtimes = df[df['metric']=='runtime']['value'].values.astype(float)
+    print(f"Domain: {domain}, Average runtime (s): {runtimes.mean():.2f} seconds, Average runtime (min): {runtimes.mean()/60:.2f} minutes")
+    overall_runtimes.extend(list(runtimes))
 
-print(f"Total number of subtasks: {n_subtasks}")
-raise NotImplementedError("Check if all tasks have answer types")
+print(f"Overall average runtime (s): {sum(overall_runtimes)/len(overall_runtimes):.2f} seconds, Overall average runtime (min): {sum(overall_runtimes)/len(overall_runtimes)/60:.2f} minutes")
+
+# for domain in ['astronomy','archeology', 'legal', 'environment', 'biomedical', 'wildfire']:
+#     with open(f'workload/{domain}.json', 'r') as f:
+#         try:
+#             workload = json.load(f)
+#         except json.JSONDecodeError as e:
+#             print(f"Error decoding JSON in {domain}.json: {e}")
+#             continue
+
+#     domain_subtasks = 0
+#     for task in workload:
+#         assert 'answer_type' in task.keys(), f"{task['id']} has no answer type!"
+#         for subtask in task['subtasks']:
+#             assert 'answer_type' in subtask.keys(), f"{subtask['id']} has no answer type!"
+#             n_subtasks += 1
+#             domain_subtasks += 1
+#     print(f"Domain: {domain}, Number of subtasks: {domain_subtasks}")
+
+# print(f"Total number of subtasks: {n_subtasks}")
+# raise NotImplementedError("Check if all tasks have answer types")
+
 # fpaths = [f for f in os.listdir(f'results/deep-research/{domain}') if f.endswith('.json')]
 # parent_results = []
 # for fpath in fpaths:

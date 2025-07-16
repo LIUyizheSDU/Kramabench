@@ -10,6 +10,7 @@ test_outputs/
 system_scratch/
 results/*/response_cache/
 data/*/raw/
+tmp_script.py
 # C extensions
 *.so
 
