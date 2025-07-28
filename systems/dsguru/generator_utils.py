@@ -27,38 +27,54 @@ def get_api_key(key: str) -> str:
     return os.environ[key]
 
 
-class Generator():
-    def __init__(self, model: str, verbose=False):
+import re
+
+class Generator:
+    TOK_TAG = "[TOKENS_USED:"  # sentinel to make parsing easy
+
+    def __init__(self, model: str, verbose: bool = False):
         self.model = model
         if model in OpenAIModelList:
             self.client = OpenAI(api_key=get_api_key("OPENAI_API_KEY"))
         elif model in TogetherModelList:
             self.client = Together(api_key=get_api_key("TOGETHER_API_KEY"))
-
+        else:
+            raise ValueError(f"Unsupported model: {model}")
         self.verbose = verbose
 
     def generate(self, prompt: str) -> str:
         if self.verbose:
             print(f"Generating with {self.model}")
             print(f"Prompt: {prompt}")
+
+        # Updated this function to record the number of tokens used in the response
+        # TODO: Handle Claude models
+        # --- OpenAI ---
         if isinstance(self.client, OpenAI):
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                # temperature=0.0,
                 max_tokens=4000,
             )
-            return response.choices[0].message.content
+            content = response.choices[0].message.content
+            total_tokens = response.usage.total_tokens
+
+        # --- Together ---
         elif isinstance(self.client, Together):
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=4000,
             )
-            return response.choices[0].message.content
+            content = response.choices[0].message.content
+            total_tokens = response.usage.total_tokens
+
         else:
-            raise Exception(f"Unsupported model: {self.model}")
-        
+            raise RuntimeError(f"Unsupported client type: {type(self.client)}")
+
+        # Append the token tag on its own line so normal consumers ignore it
+        return f"{content}\n\n{self.TOK_TAG}{total_tokens}]"
+
 
     # GV: This function is the call_gpt function from the baseline_utils.py file. But for Ollama we substitute it
     def __call__(self, messages):

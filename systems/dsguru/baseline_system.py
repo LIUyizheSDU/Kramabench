@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 
 sys.path.append("./")
 
@@ -51,6 +52,13 @@ class BaselineLLMSystem(System):
             self.output_dir = os.path.join(
                 os.getcwd(), "testresults"
             )  # Default output directory
+
+        # Ablation studies: add additional parameters
+        if number_sampled_rows := kwargs.get("number_sampled_rows"): self.number_sampled_rows = number_sampled_rows
+        else: self.number_sampled_rows = 100
+        if max_tries := kwargs.get("max_tries"): self.max_tries = max_tries
+        else: self.max_tries = 5
+
         self.question_output_dir = None  # to be set in run()
         self.question_intermediate_dir = None  # to be set in run()
 
@@ -83,9 +91,25 @@ class BaselineLLMSystem(System):
             data_string += f"\nFile name: {file_name}\n"
             data_string += f"Column data types: {data.dtypes}\n"
             data_string += "Table:\n"
-            data_string += get_table_string(data, row_limit=100)
+            data_string += get_table_string(data, row_limit=self.number_sampled_rows)
             data_string += "\n" + "=" * 20 + "\n"
         return data_string
+
+    def parse_token_used(generated: str) -> tuple[str, int | None]:
+        """
+        Split the generator output into (clean_text, token_count).
+
+        If the token tag is missing or malformed, token_count is None.
+        """
+        # Look for the sentinel at the end
+        m = re.search(r"\[TOKENS_USED:(\d+)]\s*$", generated)
+        if not m:
+            return generated, None
+
+        tokens = int(m.group(1))
+        # Strip the sentinel (and any trailing whitespace/newlines)
+        text = generated[: m.start()].rstrip()
+        return text, tokens
 
     def generate_error_handling_prompt(
         self, code_fp: str, error_fp: str, output_fp: str
@@ -198,6 +222,15 @@ class BaselineLLMSystem(System):
             f.write(response)
         if self.verbose:
             print(f"{self.name}: Response saved to {response_fp}")
+
+        # Parse token count and clean the response
+        response, token_count = self.parse_token_used(response)
+        if self.verbose:
+            print(f"{self.name}: Response token count: {token_count}")
+        # Save the token count to a file
+        token_fp = os.path.join(self.question_output_dir, "token_count.txt")
+        with open(token_fp, "w") as f:
+            f.write(str(token_count))
 
         # Assume the step-by-step plan is fixed after the first try
         if try_number == 0:
@@ -411,7 +444,7 @@ class BaselineLLMSystem(System):
         answer = None
         pipeline_code = None
 
-        for try_number in range(5):
+        for try_number in range(self.max_tries):
             messages.append({"role": "user", "content": prompt})
             # Get the model's response
             response = self.llm(messages)
@@ -445,7 +478,7 @@ class BaselineLLMSystem(System):
         if answer is None or pipeline_code is None:
             answer = {
                 "id": "main-task",
-                "answer": "Pipeline not successful after 5 tries.",
+                "answer": f"Pipeline not successful after {self.max_tries} tries.",
             }
             output_dict = {"explanation": answer, "pipeline_code": ""}
         return output_dict

@@ -235,3 +235,89 @@ class BaselineLLMSystemGemma3Naive(BaselineLLMSystem):
                          supply_data_snippet=False, 
                          *args, 
                          **kwargs)
+
+### Ablation studies: Varied number of tries for the same model
+class BaselineLLMSystemGPTo3FewShot_10Tries(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_10Tries",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            max_tries=10,  # Increase max tries for this variant
+            *args, **kwargs
+        )
+
+class BaselineLLMSystemGPTo3FewShot_15Tries(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_15Tries",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            max_tries=15,  # Increase max tries for this variant
+            *args, **kwargs
+        )
+
+class BaselineLLMSystemGPTo3FewShot_20Tries(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_20Tries",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            max_tries=20,  # Increase max tries for this variant
+            *args, **kwargs
+        )
+
+# Ablation studies: Varied number of sampled rows for the same model
+class BaselineLLMSystemGPTo3FewShot_50Rows(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_50Rows",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            number_sampled_rows=50,  # Use 50 rows for this variant
+            *args, **kwargs
+        )
+
+class BaselineLLMSystemGPTo3FewShot_200Rows(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_200Rows",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            number_sampled_rows=200,  # Use 200 rows for this variant
+            *args, **kwargs
+        )
+
+class BaselineLLMSystemGPTo3FewShot_500Rows(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_500Rows",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            number_sampled_rows=500,  # Use 500 rows for this variant
+            *args, **kwargs
+        )
+
+class BaselineLLMSystemGPTo3FewShot_1000Rows(BaselineLLMSystem):
+    def __init__(self, verbose=False, *args, **kwargs):
+        super().__init__(
+            model="o3-2025-04-16",
+            name="BaselineLLMSystemGPTo3FewShot_1000Rows",
+            variance="few_shot",
+            verbose=verbose,
+            supply_data_snippet=True,
+            number_sampled_rows=1000,  # Use 1000 rows for this variant
+            *args, **kwargs
+        )
