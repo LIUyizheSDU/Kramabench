@@ -28,36 +28,22 @@ class BaselineLLMSystem(System):
         self.llm = Generator(model, verbose=self.verbose)
 
         # Initialize directories for output and intermediate files
-        if variance := kwargs.get("variance"):
-            self.variance = variance
-        else:
-            self.variance = "one_shot"  # Default variance
+        self.variance = kwargs.get("variance", "one_shot")
         # variance has to be one_shot or few_shot
         assert self.variance in [
             "one_shot",
             "few_shot",
         ], f"Invalid variance: {self.variance}. Must be one_shot or few_shot."
 
-        if supply_data_snippet := kwargs.get("supply_data_snippet"):
-            self.supply_data_snippet = supply_data_snippet
-        else:
-            self.supply_data_snippet = False
-
+        self.supply_data_snippet = kwargs.get("supply_data_snippet", False)        
         self.verbose = kwargs.get("verbose", False)
+       
         self.debug = False
-        # Set the output directory
-        if output_dir := kwargs.get("output_dir"):
-            self.output_dir = output_dir
-        else:
-            self.output_dir = os.path.join(
-                os.getcwd(), "testresults"
-            )  # Default output directory
+        self.output_dir = kwargs.get("output_dir", os.path.join(os.getcwd(), "testresults")
 
         # Ablation studies: add additional parameters
-        if number_sampled_rows := kwargs.get("number_sampled_rows"): self.number_sampled_rows = number_sampled_rows
-        else: self.number_sampled_rows = 100
-        if max_tries := kwargs.get("max_tries"): self.max_tries = max_tries
-        else: self.max_tries = 5
+        self.number_sampled_rows = kwargs.get("number_sampled_rows", 100)
+        self.max_tries = kwargs.get("max_tries", 5)
 
         self.question_output_dir = None  # to be set in run()
         self.question_intermediate_dir = None  # to be set in run()
@@ -151,11 +137,8 @@ class BaselineLLMSystem(System):
         :return: Prompt string
         """
         # Generate the RAG plan
-<<<<<<< HEAD
-=======
         # TODO: use process_dataset() to get the data
         # get the file names from the dataset directory
->>>>>>> 711f481 (Added use_deepresearch_subset to invoke benchmark on subset of files. WIP for workload JSON update)
         if len(subset_files):
             file_names = subset_files
             for f in file_names:
