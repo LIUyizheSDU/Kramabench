@@ -91,7 +91,7 @@ def main():
     parser.add_argument("--use_deepresearch_subset", action="store_true", default=False, help="Whether to use the subset of files from deepresearch experiments. Default: False")
     parser.add_argument("--verbose", action="store_true", default=False, help="Verbose logging. Default: False")
     parser.add_argument("--run_subtasks", action="store_true", help="Run subtasks if set. Default: False")
-    parser.add_argument("--no_pipeline_eval", action="store_false", help="Skip pipeline design and implementation evaluation (which uses API calls). Default: False")
+    parser.add_argument("--no_pipeline_eval", action="store_true", help="Skip pipeline design and implementation evaluation (which uses API calls). Default: True")
     args = parser.parse_args()
 
     system_name = args.sut
@@ -198,8 +198,8 @@ def main():
 
     aggregated_df.to_csv(aggregated_results_path, index=False)
 
-    print("Done. Aggregated results:")
-    print(aggregated_df[aggregated_df["workload"] == workload_name])
+    # print("Done. Aggregated results:")
+    # print(aggregated_df[aggregated_df["workload"] == workload_name])
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import logging
 import os
 import time
 import ollama
-
+import anthropic
 from openai import OpenAI
 
 # from tenacity import retry, stop_after_attempt, wait_exponential
@@ -16,6 +16,7 @@ import PyPDF2
 
 OpenAIModelList = ["gpt-4o", "gpt-4o-mini", "gpt-4o-v", "gpt-4o-mini-v", "o3-2025-04-16"]
 TogetherModelList = ["google/gemma-2b-it", "meta-llama/Llama-2-13b-chat-hf", "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B","google/gemma-3-27b-it", "deepseek-ai/DeepSeek-R1", "Qwen/Qwen2.5-Coder-32B-Instruct", "meta-llama/Llama-3.3-70B-Instruct-Turbo"]
+ClaudeModelList = ["claude-3-7-sonnet-latest", "claude-3-5-haiku-latest", "claude-3-5-sonnet-latest"]
 
 def get_api_key(key: str) -> str:
     # get API key from environment or throw an exception if it's not set
@@ -38,6 +39,8 @@ class Generator:
             self.client = OpenAI(api_key=get_api_key("OPENAI_API_KEY"))
         elif model in TogetherModelList:
             self.client = Together(api_key=get_api_key("TOGETHER_API_KEY"))
+        elif model in ClaudeModelList:
+            self.client = anthropic.Anthropic(api_key=get_api_key("ANTHROPIC_API_KEY"))
         else:
             raise ValueError(f"Unsupported model: {model}")
         self.verbose = verbose
@@ -68,7 +71,14 @@ class Generator:
             )
             content = response.choices[0].message.content
             total_tokens = response.usage.total_tokens
-
+        # --- Claude ---
+        elif isinstance(self.client, anthropic.Anthropic):
+            response = self.client.messages.create(
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}], # temperature is 0 by default
+                max_tokens=4000,
+            )
+            return response.content[0].text
         else:
             raise RuntimeError(f"Unsupported client type: {type(self.client)}")
 
@@ -85,20 +95,31 @@ class Generator:
         fatal_reason = None
         while retry_count < max_retries:
             try:
-                ################### use to be openai.Completion.create(), now ChatCompletion ###################
-                ################### also parameters are different, now messages=, used to be prompt= ###################
-                # note deployment_id=... not model=...
-                result = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    # temperature=0.2,
-                )
+                if self.model in ClaudeModelList:
+                    claude_messages = []
+                    for msg in messages:
+                        if msg['role'] == 'user':
+                            claude_messages.append({"role": "user", "content": msg['content']})
+                        elif msg['role'] == 'assistant':
+                            claude_messages.append({"role": "assistant", "content": msg['content']})
+                        # skip system messages
+                    messages = claude_messages
+                    result = self.client.messages.create(
+                        model=self.model,
+                        messages=messages,
+                        max_tokens=4000,
+                    )
+                else:
+                    result = self.client.chat.completions.create(
+                        model=self.model,
+                        messages=messages,
+                    )
                 
                 break # break out of while loop if no error
             
             except Exception as e:
                 print(f"An error occurred: {e}.")
-                if "context_length_exceeded" in f"{e}":
+                if "context_length_exceeded" in f"{e}" or "too long" in f"{e}":
                     fatal = True
                     fatal_reason = f"{e}"
                     break
@@ -115,8 +136,14 @@ class Generator:
             res = "Max retries reached. Skipping..."
         else:
             try:
-                res = result.choices[0].message.content
-                total_tokens = result.usage.total_tokens
+                if self.model in ClaudeModelList:
+                    res = result.content[0].text
+                    input_tokens = result.usage.input_tokens
+                    output_tokens = result.usage.output_tokens
+                    total_tokens = input_tokens + output_tokens
+                else: 
+                    res = result.choices[0].message.content
+                    total_tokens = result.usage.total_tokens
                 res = f"{res}\n\n{self.TOK_TAG}{total_tokens}]"
             except Exception as e:
                 print("Error:", e)
