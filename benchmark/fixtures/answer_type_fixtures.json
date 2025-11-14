@@ -5,7 +5,7 @@
     },
     {
         "name": "string_approximate",
-        "metrics": ["string_bootstrap"]
+        "metrics": ["llm_paraphrase"]
     },
     {
         "name": "numeric_exact",
