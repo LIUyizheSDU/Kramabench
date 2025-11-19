@@ -25,5 +25,5 @@ class LLMInterface:
         raise NotImplementedError("LLMInterface: This method should be implemented by the subclass!")
 
     @abstractmethod
-    def evaluate_data_pipeline(self, understanding_filepath: str | os.PathLike, sut_generated_pipeline: str, task: Dict) -> List[bool]:
+    def evaluate_data_pipeline(self, sut_generated_pipeline: str, task: Dict) ->  Tuple[List[bool] | None, int, int, int]:
         raise NotImplementedError("LLMInterface: This method should be implemented by the subclass!")
