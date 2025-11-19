@@ -14,12 +14,11 @@ from typing import Dict, List
 from benchmark.benchmark_api import System
 import argparse
 import threading
-import ast
 import time
 
 from dotenv import load_dotenv
 from text_inspector_tool import TextInspectorTool
-from tools import list_filepaths, list_input_filepaths
+from tools import list_filepaths, list_input_filepaths, CRITIQUE_AGENT_PROMPT_TEMPLATE
 
 from smolagents import (
     CodeAgent,
@@ -28,7 +27,7 @@ from smolagents import (
 )
 load_dotenv()
 
-class SmolagentsDeepResearch(System):
+class SmolagentsReflexion(System):
     def __init__(self, model: str, name="example", *args, **kwargs):
         super().__init__(name, *args, **kwargs)
         self.dataset_directory = None  # TODO(SUT engineer): Update me
@@ -139,6 +138,30 @@ class SmolagentsDeepResearch(System):
         logger = AgentLogger(level=self.verbosity_level, log_file=logger_path)
         #############################################
         
+        critique_agent = ToolCallingAgent(
+            model=self.llm_reason,
+            tools=[TextInspectorTool(self.llm_reason, self.text_limit), AnswerInspectorTool(self.llm_reason), list_filepaths],
+            max_steps=1,
+            verbosity_level=self.verbosity_level,
+            logger=logger,
+            planning_interval=self.planning_interval,
+            name="critique_agent",
+            description="""
+                An independent agent that acts as a critical reviewer for each step in a multi-step agent workflow.
+
+                The critique_agent evaluates the most recent plan and corresponding tool output (observation) 
+                produced by a primary agent, such as a CodeAgent. It provides constructive feedback, flags 
+                issues, and suggests improvements or next actions without directly modifying the environment.
+
+                This agent is intended to serve as a lightweight oversight mechanism in agentic systems, helping 
+                to improve reliability, reduce errors, and promote clearer reasoning in autonomous workflows.
+
+                Invoke this agent after each step of the primary agent to ensure that the actions taken are appropriate and well-reasoned.
+            """,
+            provide_run_summary=True,
+        )
+        critique_agent.prompt_templates["managed_agent"]["task"] += CRITIQUE_AGENT_PROMPT_TEMPLATE
+
         manager_agent = CodeAgent(
             model=self.llm_code,
             planner_model=self.llm_reason,
@@ -148,6 +171,7 @@ class SmolagentsDeepResearch(System):
             additional_authorized_imports=["*"],
             planning_interval=self.planning_interval,
             logger=logger,
+            managed_agents=[critique_agent],
         )
 
         return manager_agent
@@ -228,8 +252,8 @@ def main():
     ]
 
     # Process each question
-    out_dir = os.path.join(current_dir, "../../testresults/run2")
-    smolagents_dr = SmolagentsDeepResearch(
+    out_dir = os.path.join(current_dir, "../../testresults/reflexion")
+    smolagents_dr = SmolagentsReflexion(
         model="claude-3-7-sonnet-latest", output_dir=out_dir, verbose=True
     )
     for question in questions:

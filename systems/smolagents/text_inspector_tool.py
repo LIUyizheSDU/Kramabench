@@ -25,7 +25,7 @@ This tool handles the following file extensions: [".html", ".htm", ".xlsx", ".pp
         super().__init__()
         self.model = model
         self.text_limit = text_limit
-        from .mdconvert import MarkdownConverter
+        from mdconvert import MarkdownConverter
 
         self.md_converter = MarkdownConverter()
 
