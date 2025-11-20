@@ -20,8 +20,9 @@ import time
 from dotenv import load_dotenv
 from .text_inspector_tool import TextInspectorTool
 from .answer_inspector_tool import AnswerInspectorTool
-from .tools import write_file, list_input_filepaths, get_csv_metadata, summarize_dataframe, CRITIQUE_AGENT_PROMPT_TEMPLATE, CRITIQUE_AGENT_SYSTEM_PROMPT
+from .tools import write_file, list_input_filepaths, get_csv_metadata, summarize_dataframe
 from .smolagents_utils import parse_token_counts
+from .smolagents_prompts import CRITIQUE_AGENT_PROMPT_TEMPLATE, CRITIQUE_AGENT_SYSTEM_PROMPT, REFLEXION_TASK_PROMPT_TEMPLATE
 
 from smolagents import (
     CodeAgent,
@@ -230,22 +231,14 @@ class SmolagentsReflexion(System):
         dataset_name = query_id.split("-")[0]
         answer_path = os.path.join(self.question_intermediate_dir, f"answer.txt")
         pipeline_code_path = os.path.join(self.question_intermediate_dir, f"pipeline_code.py")
-        task = f"""
-            Workload name: {dataset_name}
-            dataset_directory = {os.path.join(os.getcwd(), 'data', dataset_name, 'input')}
-            Answer the question: {query}; Use the {dataset_name} dataset. 
-            
-            If you see unusual or unexpected intermediate results, use the critique agent to evaluate the step and provide feedback.
-            IMPORTANT: Pass along the dataset path to the critique agent so it can access the data files if needed.
-            DO NOT assume the correctness of the intermediate results and final results. Be skeptical and ensure they are correct by cross-checking with the dataset.
-            Especially, if you see missing or incomplete intermediate results (e.g., nan or 0.0), question yourself if it's a coding issue, a logic design issue, or an actual data issue.
-            After every step, ask yourself if every step is necessary and if the final answer is correct.
-            **Report the final answer (just the answer, no explanation needed) AND the complete code pipeline used to get there in your final response, by following the instructions below.**
-            IMPORTANT (use the given write_file tool): 
-            - Write your final answer to {answer_path}
-            - Write your complete code pipeline to {pipeline_code_path}
-            You can end the task after writing the files.
-        """
+        task = REFLEXION_TASK_PROMPT_TEMPLATE.format(
+            dataset_name=dataset_name,
+            dataset_directory=os.path.join(os.getcwd(), 'data', dataset_name, 'input'),
+            query=query,
+            subset_files=subset_files,
+            answer_path=answer_path,
+            pipeline_code_path=pipeline_code_path,
+        )
         start_time = time.time()
         agent = self.create_agent(task_id=query_id)
         _ = agent.run(task)

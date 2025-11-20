@@ -20,6 +20,7 @@ import time
 from dotenv import load_dotenv
 from .text_inspector_tool import TextInspectorTool
 from .tools import list_input_filepaths, write_file, get_csv_metadata, summarize_dataframe
+from .smolagents_prompts import PDT_TASK_PROMPT_TEMPLATE, DECOMPOSER_PROMPT_TEMPLATE, DECOMPOSER_DESCRIPTION, EXECUTOR_DESCRIPTION, EXECUTOR_PROMPT_TEMPLATE, EXECUTOR_PROMPT_TEMPLATE_LAST_STEP
 from .smolagents_utils import parse_token_counts
 
 from smolagents import (
@@ -113,69 +114,6 @@ class SmolagentsPDT(System):
             trace = f.read()
         inp, out = parse_token_counts(trace)
         return {"input_tokens": inp, "output_tokens": out}
-    
-    def _parse_output(self, output: str, query_id: str) -> (str, str):
-        """
-        Parse the output from the agent to extract the answer and pipeline code.
-        Write intermediate logs to file.
-        :param output: str
-        :param query_id: str
-        :return: (answer, pipeline_code)
-        """
-        # Parse the output to extract the final answer and pipeline code
-        try:
-            # Case 1: agent already returned a dict-like object
-            if isinstance(output, dict):
-                output_dict = output
-            else:
-                # Coerce to string in case it's something like a custom object
-                output_str = str(output)
-
-                # Try to find the first {...} block (non-greedy) in the text
-                match = re.search(r"\{.*?\}", output_str, re.DOTALL)
-                if not match:
-                    raise ValueError("No JSON-like object found in agent output.")
-
-                obj_str = match.group(0)
-
-                # First try strict JSON
-                try:
-                    output_dict = json.loads(obj_str)
-                except json.JSONDecodeError:
-                    # Fallback: many LLMs emit Python dict reprs with single quotes
-                    try:
-                        output_dict = ast.literal_eval(obj_str)
-                        if not isinstance(output_dict, dict):
-                            raise ValueError("Parsed object is not a dict.")
-                    except Exception as inner_e:
-                        raise ValueError(
-                            f"Failed to parse as JSON or Python dict: {inner_e}"
-                        ) from inner_e
-
-            # Extract fields with sensible fallbacks / alternative keys
-            answer = (
-                output_dict.get("explanation")
-                or output_dict.get("answer")
-                or "No explanation found."
-            )
-            pipeline_code = (
-                output_dict.get("pipeline_code")
-                or output_dict.get("code")
-                or "No pipeline code found."
-            )
-
-        except Exception as e:
-            print_error(f"Failed to parse output JSON: {e}\nRaw output:\n{output}")
-            answer = "Failed to parse output."
-            pipeline_code = "N/A"
-        
-        # Write results to file
-        with open(os.path.join(self.question_intermediate_dir, f"answer.txt"), "w") as f:
-            f.write(answer)
-        with open(os.path.join(self.question_intermediate_dir, f"pipeline_code.py"), "w") as f:
-            f.write(pipeline_code)
-
-        return answer, pipeline_code
 
     def create_pdt_agents(self, task_id: str):
 
@@ -191,21 +129,7 @@ class SmolagentsPDT(System):
             logger=logger,
             planning_interval=self.planning_interval,
             name="decomposer_agent",
-            description=(
-                "Given a user task and a high-level PLAN from the planner_agent, "
-                "this agent decomposes the plan into a small sequence of atomic subtasks "
-                "that a code executor can implement. It MUST output a JSON list of subtasks "
-                "with the schema:\n\n"
-                "[\n"
-                "  {\"id\": 1, \"description\": \"...\", \"depends_on\": []},\n"
-                "  {\"id\": 2, \"description\": \"...\", \"depends_on\": [1]},\n"
-                "  ...\n"
-                "]\n\n"
-                "Each description should be concrete enough to be implemented in Python "
-                "with access to the workload dataset.\n\n"
-                "The list MUST contain between 1 and 5 subtasks (inclusive). "
-                "If more than 5 steps seem necessary, merge related steps."
-            ),
+            description= DECOMPOSER_DESCRIPTION,
             provide_run_summary=True,
         )
 
@@ -224,14 +148,7 @@ class SmolagentsPDT(System):
             planning_interval=self.planning_interval,
             logger=logger,
             name="executor_agent",
-            description=(
-                "A Python-executing agent that solves a SINGLE subtask at a time. "
-                "Given the global task, the high-level plan, and the current subtask "
-                "description, it should write and run Python code over the workload "
-                "dataset to complete that subtask. It should print intermediate results, "
-                "and return a concise textual summary of what was done and the key outputs. "
-                "Use write_file tool to record the end-to-end code pipeline and final answer."
-            ),
+            description= EXECUTOR_DESCRIPTION,
         )
 
         return decomposer_agent, executor_agent
@@ -242,29 +159,10 @@ class SmolagentsPDT(System):
         Returns a dict with the plan, subtasks, subtask_outputs, and final_answer.
         """
         # ---- 1) Decomposer: JSON subtasks ----
-        decomposer_prompt = f"""
-            You are the decomposer_agent in a Planner → Subtask Decomposer → Tool/Code Executor architecture.
-
-            Workload name: {workload_name}
-
-            User task:
-            {task_prompt}
-
-            Decompose this into a sequence of atomic subtasks that a code agent can execute.
-            Each subtask should:
-            - be as independent and concrete as possible,
-            - be implementable by executing Python over the workload data,
-            - have explicit dependencies.
-            - 5 is the MAX number of subtasks you can create. 
-
-            STRICTLY output valid JSON with this schema and nothing else:
-
-            [
-            {{"id": 1, "description": "...", "depends_on": []}},
-            {{"id": 2, "description": "...", "depends_on": [1]}},
-            ...
-            ]
-        """
+        decomposer_prompt = DECOMPOSER_PROMPT_TEMPLATE.format(
+            workload_name=workload_name,
+            task_prompt=task_prompt,
+        )
         raw_subtasks = decomposer_agent.run(decomposer_prompt)
         token_counts = self._get_token_counts(task_id)
         # Try to parse JSON (you can add more robust cleaning if needed)
@@ -304,41 +202,19 @@ class SmolagentsPDT(System):
             ]
             deps_text = "\n".join(deps_summaries) if deps_summaries else "None yet."
 
-            executor_prompt = f"""
-            You are the executor_agent in a Planner → Decomposer → Executor (PDT) architecture.
-
-            Global workload name: {workload_name}
-
-            Global user task:
-            {task_prompt}
-
-            You are now executing Subtask {sid}.
-
-            Subtask {sid} description:
-            \"\"\"{desc}\"\"\"
-
-            Summaries of completed dependency subtasks:
-            {deps_text}
-
-            Your job:
-            - Focus ONLY on Subtask {sid}.
-            - Use Python code (and the available tools) to complete this subtask over the workload dataset.
-            - Print intermediate results for debugging and verification.
-            - At the end, return a concise textual summary of:
-            - What you did
-            - Key intermediate results
-            - Any important caveats or assumptions
-
-            Return only the answer (no explanation).
-            """
+            executor_prompt = EXECUTOR_PROMPT_TEMPLATE.format(
+                workload_name=workload_name,
+                task_prompt=task_prompt,
+                sid=sid,
+                desc=desc,
+                deps_text=deps_text,
+            )
 
             if sid == last_id:
-                executor_prompt += f"""
-                IMPORTANT: This is the FINAL subtask. After completing it, you MUST write the final answer and complete code pipeline to files using the write_file tool.
-                - Write your final answer to {answer_path}
-                - Write your complete code pipeline to {pipeline_code_path}
-                You can end the task after writing the files.
-                """
+                executor_prompt += EXECUTOR_PROMPT_TEMPLATE_LAST_STEP.format(
+                    answer_path=answer_path,
+                    pipeline_code_path=pipeline_code_path,
+                )
             subtask_output = executor_agent.run(executor_prompt)
             subtask_outputs[sid] = subtask_output
             agent_token_counts = self._get_token_counts(task_id)
@@ -392,14 +268,12 @@ class SmolagentsPDT(System):
             try:
                 decomposer_agent, executor_agent = self.create_pdt_agents(query_id)
 
-                task_prompt = f"""
-                Workload name: {dataset_name}
-                dataset_directory = {dataset_directory}
-                Answer the question: {query}; Use the {dataset_name} dataset.
-
-                You are part of a Planner → Subtask Decomposer → Tool/Code Executor (PDT) architecture.
-                Your role will be determined by the orchestrator calling you (decomposer_agent, executor_agent).
-                """
+                task_prompt = PDT_TASK_PROMPT_TEMPLATE.format(
+                    dataset_name=dataset_name,
+                    dataset_directory=dataset_directory,
+                    query=query,
+                    subset_files=subset_files,
+                )
 
                 pdt_result = self.run_pdt_pipeline(
                     decomposer_agent,
