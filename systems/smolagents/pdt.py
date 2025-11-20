@@ -248,7 +248,8 @@ class SmolagentsPDT(System):
                 "Given the global task, the high-level plan, and the current subtask "
                 "description, it should write and run Python code over the workload "
                 "dataset to complete that subtask. It should print intermediate results, "
-                "and return a concise textual summary of what was done and the key outputs."
+                "and return a concise textual summary of what was done and the key outputs. "
+                "Use write_file tool to record the end-to-end code pipeline and final answer."
             ),
         )
 
