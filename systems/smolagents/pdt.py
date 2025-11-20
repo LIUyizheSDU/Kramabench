@@ -395,7 +395,7 @@ class SmolagentsPDT(System):
             "high_level_plan": pdt_result["high_level_plan"],
             "subtasks": pdt_result["subtasks"],
             "subtask_outputs": pdt_result["subtask_outputs"],
-            "final_answer": pdt_result["final_answer"],
+            "explanation": pdt_result["final_answer"],
         }
         print(results)
         return results
