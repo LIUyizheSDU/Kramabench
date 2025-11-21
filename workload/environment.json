@@ -3029,7 +3029,7 @@
         "id": "environment-hard-12",
         "query": "Which Boston Harbor beach had the highest number of samples that failed to meet swimming standards when there was no rainfall in the preceding three days? A sample meets the standard if it contains fewer than 104 counts of Enterococcus per 100 milliliters of water.",
         "answer": "Wollaston Beach",
-        "answer_type": "numeric_exact",
+        "answer_type": "string_approximate",
         "runtime": 0.5,
         "data_sources": [
             "boston-harbor-beaches.txt",
@@ -3168,14 +3168,14 @@
                 "step": "Filter for rows where the '3-Day Rain' value equals 0 (no rainfall during the preceding three days).",
                 "query": "How many '3-Day Rain' occurrences were observed at each beach?",
                 "answer": [
-                    1932,
-                    861,
-                    340,
-                    369,
-                    744,
-                    389,
-                    640,
-                    2592
+                    3708,
+                    1520,
+                    1719,
+                    748,
+                    685,
+                    769,
+                    1240,
+                    5024
                 ],
                 "answer_type": "list_exact",
                 "data_sources": [
