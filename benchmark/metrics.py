@@ -96,7 +96,7 @@ class F1(Metric):
                                 break
                     elif isinstance(t, float):
                         pp = str_to_float(p) if isinstance(p, str) else p
-                        if abs(pp - t) / abs(t) < 0.000001:
+                        if abs(pp - t) / abs(t) < 0.000001 or abs(pp * 100 - t) / abs(t) < 0.000001: # Handles percentage sign discrepancy
                             found = True
                             break
                     elif p == t:
@@ -154,7 +154,7 @@ class F1Approximate(Metric):
                                 break
                     else:
                         pp = str_to_float(p) if isinstance(p, str) else p
-                        if 1/ (1 + abs(pp - t) / abs(t)) < 0.1:
+                        if abs(pp - t) / abs(t) < 0.01 or abs(pp * 100 - t) / abs(t): # Handles percentage discrepancy
                             found = True
                             break
                 if found:
@@ -294,7 +294,8 @@ class Success(Metric):
                 if isinstance(predicted, str):
                     predicted = str_to_float(predicted)
                 rea = abs(predicted - target) / abs(target)
-                return (rea < 0.000001, 0, 0, 0)
+                rea_percent = abs(predicted * 100 - target) / abs(target)
+                return (rea < 0.000001 or rea_percent < 0.000001, 0, 0, 0)
             elif isinstance(target, str) and isinstance(predicted, str):
                 return (int(predicted.strip().lower() == target.strip().lower()), 0, 0, 0)
             elif isinstance(target, str) and (isinstance(predicted, float) or isinstance(predicted, int)):
