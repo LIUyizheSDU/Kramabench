@@ -19,93 +19,6 @@ def write_file(path: str, content: str) -> str:
         f.write(content)
     return f"written to {path}"
 
-@tool                                                                                                                                                    
-def process_beach_data(file_path:str) -> pd.DataFrame:
-    """
-    Processes a beach datasheet CSV file to extract relevant data.
-    Args:
-        file_path (str): Path to the beach datasheet CSV file.
-    Returns:
-        pd.DataFrame: A DataFrame containing processed data with columns:
-            - beach
-            - date
-            - one_day_rain
-            - enterococcus
-            - sampling_location
-    """                                                                                                                                                           
-    # Extract beach name from file path                                                                                                                                                        
-    beach_name = file_path.split('/')[-1].replace('_datasheet.csv', '').replace('_', ' ').title()                                                                                              
-    if beach_name == "Pleasure Bay And Castle Island Beach":                                                                                                                                   
-        beach_name = "Pleasure Bay and Castle Island Beach"                                                                                                                                    
-                                                                                                                                                                                                
-    # Load the datasheet - skip the first 2 rows which contain metadata                                                                                                                        
-    df = pd.read_csv(file_path, skiprows=2, header=0)                                                                                                                                          
-                                                                                                                                                                                                
-    # List to store processed records                                                                                                                                                          
-    processed_records = []                                                                                                                                                                     
-                                                                                                                                                                                                
-    # Process each row                                                                                                                                                                         
-    for _, row in df.iterrows():                                                                                                                                                               
-        date = row['Date']                                                                                                                                                                     
-                                                                                                                                                                                                
-        # Convert one_day_rain to float, handle errors                                                                                                                                         
-        try:                                                                                                                                                                                   
-            one_day_rain = pd.to_numeric(row['1-Day Rain'], errors='coerce')                                                                                                                   
-            if pd.isna(one_day_rain):                                                                                                                                                          
-                one_day_rain = 0.0                                                                                                                                                             
-        except:                                                                                                                                                                                
-            one_day_rain = 0.0                                                                                                                                                                 
-                                                                                                                                                                                                
-        # Find all Enterococcus columns (could be multiple sampling locations)                                                                                                                 
-        enterococcus_cols = [col for col in df.columns if col.startswith('Enterococcus')]                                                                                                      
-        tag_cols = [col for col in df.columns if col.startswith('Tag')]                                                                                                                        
-                                                                                                                                                                                                
-        # Process each Enterococcus measurement                                                                                                                                                
-        for i, e_col in enumerate(enterococcus_cols):                                                                                                                                          
-            # Get corresponding tag column if available                                                                                                                                        
-            tag_col = tag_cols[i] if i < len(tag_cols) else None                                                                                                                               
-                                                                                                                                                                                                
-            # Get enterococcus value                                                                                                                                                           
-            enterococcus_str = row[e_col]                                                                                                                                                      
-                                                                                                                                                                                                
-            # Skip if value is missing                                                                                                                                                         
-            if pd.isna(enterococcus_str):                                                                                                                                                      
-                continue                                                                                                                                                                       
-                                                                                                                                                                                                
-            # Get tag value                                                                                                                                                                    
-            tag = row[tag_col] if tag_col and pd.notna(row[tag_col]) else None                                                                                                                 
-                                                                                                                                                                                                
-            # Process enterococcus value based on tag                                                                                                                                          
-            try:                                                                                                                                                                               
-                enterococcus_str = str(enterococcus_str).strip()                                                                                                                               
-                if tag == '<':                                                                                                                                                                 
-                    # For values labeled '< x', replace with x/2                                                                                                                               
-                    enterococcus_value = float(enterococcus_str)                                                                                                                         
-                elif tag == '>':                                                                                                                                                               
-                    # For values labeled '> x', replace with x                                                                                                                                 
-                    enterococcus_value = float(enterococcus_str)                                                                                                                               
-                else:                                                                                                                                                                          
-                    # For plain numbers, use as is                                                                                                                                             
-                    enterococcus_value = float(enterococcus_str)                                                                                                                               
-                                                                                                                                                                                                
-                # Add record to processed list                                                                                                                                                 
-                processed_records.append({                                                                                                                                                     
-                    'beach': beach_name,                                                                                                                                                       
-                    'date': date,                                                                                                                                                              
-                    'one_day_rain': one_day_rain,                                                                                                                                              
-                    'enterococcus': enterococcus_value,                                                                                                                                        
-                    'sampling_location': f"Location_{i+1}"  # Simple location identifier                                                                                                       
-                })                                                                                                                                                                             
-            except:                                                                                                                                                                            
-                # Skip invalid values                                                                                                                                                          
-                continue                                                                                                                                                                       
-                                                                                                                                                                                                
-    # Create dataframe from processed records                                                                                                                                                  
-    result_df = pd.DataFrame(processed_records)                                                                                                                                                
-    print(f"Processed {len(result_df)} samples from {beach_name}, {len(result_df[result_df['enterococcus'] > 104])} exceedances")                                                                                                                             
-                                                                                                                                                                                                
-    return result_df
-
 @tool
 def list_filepaths(dataset_directory:str) -> list[str]:
    """
@@ -118,7 +31,6 @@ def list_filepaths(dataset_directory:str) -> list[str]:
    Returns:
         list[str]: A list of file paths for all files in the dataset directory.
    """
-   #dataset_directory = f"/Users/eylai/Projects/KramaBench/data/{workload}/input/"
    filepaths = []
    for root, _, files in os.walk(dataset_directory):
        for file in files:

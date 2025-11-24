@@ -20,6 +20,10 @@ SINGLE_AGENT_TASK_PROMPT_TEMPLATE = """
             - Write your complete code pipeline to {pipeline_code_path}
             - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
             You can end the task after writing the files.
+            IMPORTANT: Never generate plots. Do NOT import matplotlib or any visualization library.
+            Do NOT call any plotting functions (plt.figure, plt.plot, plt.show, seaborn, plotly, etc).
+            The environment is headless and will crash if graphical code is used.
+            Return ONLY numerical or textual results.
         """
 
 REFLEXION_TASK_PROMPT_TEMPLATE = """
@@ -40,6 +44,10 @@ REFLEXION_TASK_PROMPT_TEMPLATE = """
             - Write your complete code pipeline to {pipeline_code_path}
             - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
             You can end the task after writing the files.
+            IMPORTANT: Never generate plots. Do NOT import matplotlib or any visualization library.
+            Do NOT call any plotting functions (plt.figure, plt.plot, plt.show, seaborn, plotly, etc).
+            The environment is headless and will crash if graphical code is used.
+            Return ONLY numerical or textual results.
         """
 
 CRITIQUE_AGENT_SYSTEM_PROMPT = """
@@ -75,6 +83,10 @@ PDT_TASK_PROMPT_TEMPLATE = dedent("""
                 You are part of a Planner → Subtask Decomposer → Tool/Code Executor (PDT) architecture.
                 Your role will be determined by the orchestrator calling you (decomposer_agent, executor_agent).
                 If the subset files is not empty, use only those files to answer the question; otherwise, you have to figure out which files to use on your own.
+                IMPORTANT: Never generate plots. Do NOT import matplotlib or any visualization library.
+                Do NOT call any plotting functions (plt.figure, plt.plot, plt.show, seaborn, plotly, etc).
+                The environment is headless and will crash if graphical code is used.
+                Return ONLY numerical or textual results.
                 """)
 
 DECOMPOSER_PROMPT_TEMPLATE = dedent("""
@@ -135,6 +147,10 @@ EXECUTOR_PROMPT_TEMPLATE_LAST_STEP = dedent("""
                 - Write your complete code pipeline to {pipeline_code_path}
                 - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
                 You can end the task after writing the files.
+                IMPORTANT: Never generate plots. Do NOT import matplotlib or any visualization library.
+                Do NOT call any plotting functions (plt.figure, plt.plot, plt.show, seaborn, plotly, etc).
+                The environment is headless and will crash if graphical code is used.
+                Return ONLY numerical or textual results.
                 """)
 
 DECOMPOSER_DESCRIPTION = (
