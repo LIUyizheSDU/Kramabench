@@ -34,6 +34,7 @@ load_dotenv()
 class SmolagentsPDT(System):
     def __init__(self, model: str, name="example", *args, **kwargs):
         super().__init__(name, *args, **kwargs)
+        self.name = name
         self.dataset_directory = None  # TODO(SUT engineer): Update me
         self.model = model # claude-3-7-sonnet-latest
         custom_role_conversions = {"tool-call": "assistant", "tool-response": "user"}
@@ -231,6 +232,82 @@ class SmolagentsPDT(System):
             "token_usage": token_counts["input_tokens"] + token_counts["output_tokens"],
             "token_usage_input": token_counts["input_tokens"],
             "token_usage_output": token_counts["output_tokens"],
+        }
+
+    def robust_pdt_pipeline(
+        self,
+        decomposer_agent,
+        executor_agent,
+        task_prompt: str,
+        workload_name: str,
+        task_id: str,
+        max_retry: int = 10,
+    ) -> Dict:
+        """
+        Robust wrapper around run_pdt_pipeline that retries the whole
+        Planner -> Decomposer -> Executor pipeline when Anthropic / LiteLLM
+        throws an InternalServerError (5xx).
+
+        On success: returns the same dict as run_pdt_pipeline.
+        On total failure: returns a structured SYSTEM_ERROR dict with zero token usage.
+        """
+        base_backoff = 1.0  # seconds
+        last_error = None
+
+        for attempt in range(1, max_retry + 1):
+            try:
+                # Your original logic lives here
+                return self.run_pdt_pipeline(
+                    decomposer_agent=decomposer_agent,
+                    executor_agent=executor_agent,
+                    task_prompt=task_prompt,
+                    workload_name=workload_name,
+                    task_id=task_id,
+                )
+
+            except Exception as e:
+                last_error = e
+                # Use your existing logging helper if available
+                try:
+                    print_error(
+                        f"[{self.name}] InternalServerError on "
+                        f"attempt {attempt}/{max_retry}: {e}"
+                    )
+                except NameError:
+                    print(
+                        f"[{self.name}] InternalServerError on "
+                        f"attempt {attempt}/{max_retry}: {e}"
+                    )
+
+                if attempt == max_retry:
+                    break
+
+                # Exponential backoff with jitter: 1, 2, 4, 8, ... (capped at 30s)
+                sleep_secs = base_backoff * (2 ** (attempt - 1))
+                sleep_secs = min(sleep_secs, 30.0)
+                sleep_secs += random.uniform(0, 0.5)
+                time.sleep(sleep_secs)
+
+        # If we get here, all retries for InternalServerError failed
+        err_msg = (
+            "SYSTEM_ERROR: Anthropic internal server error after "
+            f"{max_retry} retries in PDT pipeline."
+        )
+        try:
+            print_error(
+                f"[PDT] {err_msg} Last error for task_id={task_id}: {last_error}"
+            )
+        except NameError:
+            print(f"[PDT] {err_msg} Last error for task_id={task_id}: {last_error}")
+
+        return {
+            "subtasks": [],
+            "subtask_outputs": {},
+            "final_answer": err_msg,
+            "error": str(last_error) if last_error else "Unknown Anthropic internal error.",
+            "token_usage": 0,
+            "token_usage_input": 0,
+            "token_usage_output": 0,
         }
 
     def process_dataset(self, dataset_directory: str | os.PathLike) -> None:

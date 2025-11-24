@@ -35,6 +35,7 @@ load_dotenv()
 class SmolagentsReflexion(System):
     def __init__(self, model: str, name="example", *args, **kwargs):
         super().__init__(name, *args, **kwargs)
+        self.name = name
         self.dataset_directory = None  # TODO(SUT engineer): Update me
         self.model = model # claude-3-7-sonnet-latest
         custom_role_conversions = {"tool-call": "assistant", "tool-response": "user"}
