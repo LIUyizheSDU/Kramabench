@@ -18,6 +18,7 @@ SINGLE_AGENT_TASK_PROMPT_TEMPLATE = """
             IMPORTANT (use the given write_file tool): 
             - Write your final answer to {answer_path}
             - Write your complete code pipeline to {pipeline_code_path}
+            - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
             You can end the task after writing the files.
         """
 
@@ -37,6 +38,7 @@ REFLEXION_TASK_PROMPT_TEMPLATE = """
             IMPORTANT (use the given write_file tool): 
             - Write your final answer to {answer_path}
             - Write your complete code pipeline to {pipeline_code_path}
+            - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
             You can end the task after writing the files.
         """
 
@@ -131,6 +133,7 @@ EXECUTOR_PROMPT_TEMPLATE_LAST_STEP = dedent("""
                 IMPORTANT: This is the FINAL subtask. After completing it, you MUST write the final answer and complete code pipeline to files using the write_file tool.
                 - Write your final answer to {answer_path}
                 - Write your complete code pipeline to {pipeline_code_path}
+                - DO NOT write anything else besides using the write_file tool. E.g., NO intermediate results should be written.
                 You can end the task after writing the files.
                 """)
 

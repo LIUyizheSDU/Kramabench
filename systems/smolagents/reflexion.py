@@ -205,6 +205,52 @@ class SmolagentsReflexion(System):
 
         return manager_agent
 
+    def robust_run(self, agent, task: str, max_retry: int = 10):
+        """
+        Run agent.run(task) with retries on litellm.InternalServerError
+        (e.g., Anthropic 5xx). Returns the agent output or None if all
+        retries fail.
+
+        Other exceptions are treated as non-retryable and re-raised.
+        """
+        base_backoff = 1.0  # seconds
+        last_error = None
+
+        for attempt in range(1, max_retry + 1):
+            try:
+                return agent.run(task)
+
+            except Exception as e:
+                last_error = e
+                # Use your existing logging helper if available
+                try:
+                    print_error(
+                        f"[{self.name}] InternalServerError on "
+                        f"attempt {attempt}/{max_retry}: {e}"
+                    )
+                except NameError:
+                    print(
+                        f"[{self.name}] InternalServerError on "
+                        f"attempt {attempt}/{max_retry}: {e}"
+                    )
+
+                if attempt == max_retry:
+                    break
+
+                # Exponential backoff with jitter
+                sleep_secs = base_backoff * (2 ** (attempt - 1))  # 1, 2, 4, 8, ...
+                sleep_secs = min(sleep_secs, 30.0)                # cap at 30s
+                sleep_secs += random.uniform(0, 0.5)
+                time.sleep(sleep_secs)
+
+        # All retries exhausted
+        try:
+            print_error(f"[{self.name}] Failed after {max_retry} retries: {last_error}")
+        except NameError:
+            print(f"[{self.name}] Failed after {max_retry} retries: {last_error}")
+
+        return None
+    
     def process_dataset(self, dataset_directory: str | os.PathLike) -> None:
         # read files based on the dataset_directory, could be pdf, csv, etc.
         # store the data in a dictionary
@@ -218,7 +264,7 @@ class SmolagentsReflexion(System):
                     self.dataset[file] = pd.read_csv(os.path.join(dataset_directory, file))
                 except Exception as e:
                     print_warning(f"Failed to read {file}: {e}")
-                    
+
     @typechecked
     def serve_query(self, query: str, query_id: str = "default_name-0", subset_files:List[str]=[]) -> Dict:
         """
@@ -244,7 +290,7 @@ class SmolagentsReflexion(System):
         )
         start_time = time.time()
         agent = self.create_agent(task_id=query_id)
-        _ = agent.run(task)
+        _ = self.robust_run(agent, task, max_retry=5)
         runtime = time.time() - start_time
 
         answer, pipeline_code = self._get_output(answer_path, pipeline_code_path)
