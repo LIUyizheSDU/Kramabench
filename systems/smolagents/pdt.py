@@ -54,6 +54,10 @@ class SmolagentsPDT(System):
             self.llm_reason = LiteLLMModel(**reason_model_params) # Reasoning model can be set to a different one
         else: self.llm_reason = LiteLLMModel(**model_params) # same as code model
         self.verbose = kwargs.get("verbose", False)
+        if self.verbose:
+            self.verbosity_level = 2
+        else:
+            self.verbosity_level = -1
        
         self.debug = False
         self.output_dir = kwargs.get("output_dir", os.path.join(os.getcwd(), "testresults"))
@@ -61,7 +65,6 @@ class SmolagentsPDT(System):
         self.number_sampled_rows = kwargs.get("number_sampled_rows", 100)
         self.max_steps = kwargs.get("max_steps", 10)
         self.text_limit = kwargs.get("text_limit", 100000)
-        self.verbosity_level = kwargs.get("verbosity_level", 2)
         self.planning_interval = kwargs.get("planning_interval", 4)
 
         self.question_output_dir = None  # to be set in run()
