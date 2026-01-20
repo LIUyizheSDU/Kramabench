@@ -305,7 +305,8 @@ class TestCacheMerge(CacheTestBase):
         all_results_by_id = {}
         for result in worker0_results + worker1_results:
             all_results_by_id[result["task_id"]] = result
-            benchmark._merge_worker_caches(f"workload/{workload_name}.json", results_dir, all_results_by_id)
+        
+        benchmark._merge_worker_caches(f"workload/{workload_name}.json", results_dir, all_results_by_id)
         
         # Verify central cache was created
         central_caches = [f for f in os.listdir(cache_dir) if "_worker" not in f]

@@ -68,8 +68,6 @@ class Executor:
             self.workload = json.load(f)
         if tasks_subset is not None:
             self.workload = [task for task in self.workload if task["id"] in tasks_subset]
-        self.num_queries = len(self.workload)
-        self.cur_query_id = 0
         self.results_directory = results_directory
         self.workload_path = workload_path
         self.verbose = verbose
@@ -492,7 +490,7 @@ class Benchmark:
         
         # Merge worker caches into central cache
         if self.cache_system_output:           
-            #Merge per-worker cache files into a single central cache file.
+            # Merge per-worker cache files into a single central cache file.
             self._merge_worker_caches(workload_path, results_directory, results_by_id)
         
 

@@ -98,7 +98,7 @@ if __name__ == "__main__":
         }
         
 
-        # wait a random short time to simulate processing
+        # Log that the query is being served when verbose mode is enabled
         if self.verbose:
             print(f"DummySystem: Serving query {query_id}")
         
