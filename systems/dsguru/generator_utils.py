@@ -45,6 +45,26 @@ class Generator:
             raise ValueError(f"Unsupported model: {model}")
         self.verbose = verbose
 
+    def __getstate__(self):
+        """Exclude non-picklable client from serialization."""
+        state = self.__dict__.copy()
+        # Remove the unpicklable client object
+        state.pop('client', None)
+        return state
+
+    def __setstate__(self, state):
+        """Restore state and re-initialize the client after deserialization."""
+        self.__dict__.update(state)
+        # Re-initialize the client
+        if self.model in OpenAIModelList:
+            self.client = OpenAI(api_key=get_api_key("OPENAI_API_KEY"))
+        elif self.model in TogetherModelList:
+            self.client = Together(api_key=get_api_key("TOGETHER_API_KEY"))
+        elif self.model in ClaudeModelList:
+            self.client = anthropic.Anthropic(api_key=get_api_key("ANTHROPIC_API_KEY"))
+        else:
+            raise ValueError(f"Unsupported model: {self.model}")
+
     # GV: This function is the call_gpt function from the baseline_utils.py file. But for Ollama we substitute it
     def __call__(self, messages):
         self.total_tokens = 0
@@ -125,8 +145,21 @@ class OllamaGenerator(Generator):
                 ):
         super().__init__(model, verbose)
         self.model = model
+        self.server_url = server_url
         self.client = ollama.Client(host=server_url)
 
+    def __getstate__(self):
+        """Exclude non-picklable client from serialization."""
+        state = self.__dict__.copy()
+        # Remove the unpicklable client object
+        state.pop('client', None)
+        return state
+
+    def __setstate__(self, state):
+        """Restore state and re-initialize the client after deserialization."""
+        self.__dict__.update(state)
+        # Re-initialize the client with the stored server_url
+        self.client = ollama.Client(host=self.server_url)
 
     def __call__(self, messages):
 
