@@ -117,10 +117,8 @@ def find_number_rows(table, token_limit = 900):
         return 1
     return n_row
 
-if __name__ == "__main__":
-    # Example usage
-    prompt = [
-        {"role": "user", "content": "Hello, how are you?"}
-    ]
-    response = call_gpt(prompt)
-    print("Response:", response)
+def preview_text(s: str, max_lines: int) -> str:
+    lines = s.splitlines()
+    head = lines[:max_lines]
+    more = f"\n... ({max(0, len(lines) - max_lines)} more lines)" if len(lines) > max_lines else ""
+    return "\n".join(head) + more

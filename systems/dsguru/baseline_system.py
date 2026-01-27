@@ -2,6 +2,7 @@
 import os
 import sys
 import re
+import fnmatch
 sys.path.append("./")
 from benchmark.benchmark_utils import print_error, print_warning
 
@@ -13,7 +14,7 @@ from typing import Dict, List
 
 from benchmark.benchmark_api import System
 from .baseline_prompts import QUESTION_PROMPT, QUESTION_PROMPT_NO_DATA
-from .baseline_utils import get_table_string, clean_nan, extract_code
+from .baseline_utils import get_table_string, clean_nan, extract_code, preview_text
 from .generator_utils import Generator, OllamaGenerator
 
 
@@ -38,7 +39,7 @@ class BaselineLLMSystem(System):
 
         self.supply_data_snippet = kwargs.get("supply_data_snippet", False)        
         self.verbose = kwargs.get("verbose", False)
-       
+
         self.debug = False
         self.output_dir = kwargs.get("output_dir", os.path.join(os.getcwd(), "testresults"))
 
@@ -70,16 +71,44 @@ class BaselineLLMSystem(System):
         Naively read the first 10 rows of each data source.
         :return: Data as a string
         """
+        rows = getattr(self, "number_sampled_rows", 10)
         data_string = ""
         for file_name in filenames:
-            data = self.dataset[file_name]
-            if self.verbose:
-                print_warning(f"{self.name}: Reading {file_name}...")
             data_string += f"\nFile name: {file_name}\n"
-            data_string += f"Column data types: {data.dtypes}\n"
-            data_string += "Table:\n"
-            data_string += get_table_string(data, row_limit=self.number_sampled_rows)
+
+            if file_name not in self.dataset:
+                data_string += "Status: not loaded in dataset.\n" + "=" * 20 + "\n"
+                continue
+
+            data = self.dataset[file_name]
+
+            # Case 1: Pandas DataFrame
+            if isinstance(data, pd.DataFrame):
+                data_string += f"Type: table (pandas.DataFrame)\n"
+                data_string += f"Column data types:\n{data.dtypes}\n"
+                data_string += "Table:\n"
+                try:
+                    data_string += get_table_string(data, row_limit=rows)
+                except Exception:
+                    # Very defensive: fallback to DataFrame.head() string if helper fails
+                    data_string += str(data.head(rows))
+                data_string += "\n" + "=" * 20 + "\n"
+                continue
+
+            # Case 2: Plain text
+            if isinstance(data, str):
+                data_string += "Type: text\n"
+                data_string += "Preview (first lines):\n"
+                data_string += preview_text(data, max_lines=rows)
+                data_string += "\n" + "=" * 20 + "\n"
+                continue
+
+            # Fallback: unknown object type
+            data_string += f"Type: {type(data).__name__}\n"
+            data_string += f"String preview:\n{str(data)[:1000]}"
+            data_string += ("\n... (truncated)" if len(str(data)) > 1000 else "")
             data_string += "\n" + "=" * 20 + "\n"
+
         return data_string
 
     def generate_error_handling_prompt(
@@ -125,12 +154,26 @@ class BaselineLLMSystem(System):
         # TODO: use process_dataset() to get the data
         # get the file names from the dataset directory
         if len(subset_files):
-            file_names = subset_files
-            for f in file_names:
-                assert f in self.dataset.keys(), f"File {f} is not in dataset!"
+            file_names = []
+            all_file_names = list(self.dataset.keys())
+            for pattern in subset_files:
+                # print(self.dataset.keys())
+                # assert f in self.dataset.keys(), f"File {f} is not in dataset!"
+                # Relaxed the assertion to a warning
+                matching = [
+                    f
+                    for f in all_file_names
+                    if fnmatch.fnmatch(f, pattern)
+                    or fnmatch.fnmatch(os.path.basename(f), os.path.basename(pattern))
+                ]
+                if len(matching) == 0:
+                    print(f"WARNING: File {pattern} is not in dataset!")
+                else:  # only extend if there are matches
+                    file_names.extend(matching)
         else:
             file_names = list(self.dataset.keys())
 
+        print(f"Using {len(file_names)} files for the prompt: {file_names}")
         data = self.get_input_data(file_names)
 
         file_paths = [os.path.join(self.dataset_directory, file) for file in file_names]
@@ -286,6 +329,11 @@ class BaselineLLMSystem(System):
         try:
             with open(json_fp, "r") as f:
                 answer = json.load(f)
+            # Check if items in answer are not dicts
+            for step in answer:
+                if isinstance(step, list) or isinstance(step, str):
+                    print(f"ERROR: {self.name}: ** ERRORS ** answer is not a dict: {step}")
+                    return self._format_answer_on_fail(answer, f"** ERRORS ** answer is not a dict: {step}")
         except json.JSONDecodeError as e:
             print(f"ERROR: {self.name}: ** ERRORS ** decoding answer JSON: {e}")
             return {"id": "main-task", "answer": "SUT failed to answer this question."}
@@ -494,21 +542,51 @@ class BaselineLLMSystem(System):
         self.dataset_directory = dataset_directory
         self.dataset = {}
         # read the files
-        for file in os.listdir(dataset_directory):
-            if file.endswith(".csv"):
+        for dirpath, _, filenames in os.walk(dataset_directory):
+            for fname in filenames:
+                rel_path = os.path.relpath(os.path.join(dirpath, fname), dataset_directory)
+                file_path = os.path.join(dirpath, fname)
+
+                #print(f"Loading file: {file_path}")
+
+                if fname.lower().endswith(".csv"):
+                    try:
+                        self.dataset[rel_path] = pd.read_csv(
+                            file_path,
+                            engine="python",
+                            on_bad_lines="skip",
+                        )
+                        continue
+                    except UnicodeDecodeError:
+                        try:
+                            self.dataset[rel_path] = pd.read_csv(
+                                file_path,
+                                engine="python",
+                                on_bad_lines="skip",
+                                encoding="latin-1",
+                            )
+                            continue
+                        except Exception:
+                            pass
+                    except Exception:
+                        pass
+
+                # Try generic text read
                 try:
-                    self.dataset[file] = pd.read_csv(
-                        os.path.join(dataset_directory, file),
-                        engine="python",
-                        on_bad_lines="skip",
-                    )
-                except UnicodeDecodeError:
-                    self.dataset[file] = pd.read_csv(
-                        os.path.join(dataset_directory, file),
-                        engine="python",
-                        on_bad_lines="skip",
-                        encoding="latin-1",
-                    )
+                    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                        self.dataset[rel_path] = f.read()
+                    continue
+                except Exception:
+                    pass
+
+                # Try binary read
+                try:
+                    with open(file_path, "rb") as f:
+                        self.dataset[rel_path] = f.read()
+                    continue
+                except Exception as e:
+                    print(f"Error reading {file_path}: {e}")
+                    self.dataset[rel_path] = ""  # Mark as failed
 
     @typechecked
     def serve_query(self, query: str, query_id: str = "default_name-0", subset_files:List[str]=[]) -> Dict:

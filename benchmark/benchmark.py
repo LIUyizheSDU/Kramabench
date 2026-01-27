@@ -6,6 +6,7 @@ import logging
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 from benchmark.benchmark_utils import print_info
 from typeguard import typechecked
 from typing import Any, Dict, List, Tuple, Optional
@@ -17,6 +18,29 @@ from benchmark.metrics import metric_factory
 
 logging.basicConfig(level=logging.WARNING)
 
+def extract_timestamp(file_path, basename):
+    filename = os.path.basename(file_path)
+    # Remove the file extension (e.g., ".json") if present
+    if filename.lower().endswith(".json"):
+        filename = filename[:-5]
+    # Expect filenames like:
+    #   "{basename}_YYYYMMDD_HHMMSS"
+    #   "{basename}_worker{id}_YYYYMMDD_HHMMSS"
+    # In both cases, the last two underscore-separated parts are the timestamp.
+    parts = filename.split("_")
+    if len(parts) < 3:
+        raise ValueError(f"Unexpected cache filename format: {filename}")
+    timestamp_str = "_".join(parts[-2:])
+    return datetime.datetime.strptime(timestamp_str, "%Y%m%d_%H%M%S")
+
+def get_most_recent_cache(cache_dir: str | os.PathLike, basename: str) -> Optional[str | os.PathLike]:
+    pattern = os.path.join(cache_dir, f"{basename}_*.json")
+    files = [f for f in glob.glob(pattern) if "worker" not in f]
+    if not files:
+        return None
+    files.sort(key=lambda f: extract_timestamp(f, basename), reverse=True)
+    return files[0]
+
 class Executor:
     def __init__(
             self,
@@ -27,10 +51,14 @@ class Executor:
             run_subtasks: bool=False,
             use_deepresearch_subset: bool = False,
             use_truth_subset: bool = False,
+            system_output_dir: Optional[str | os.PathLike] = None,
+            tasks_subset: Optional[List[str]] = None,
+            worker_id: Optional[int] = None,
             verbose=False
         ):
         """
         `workload_path` is a json file containing workloads.
+        `worker_id` is used for per-worker cache files when running in parallel.
         """
         self.system = system
         self.system_name = system_name
@@ -38,8 +66,8 @@ class Executor:
             raise Exception("Executor __init__ error: System.process_dataset was not called.")
         with open(workload_path) as f:
             self.workload = json.load(f)
-        self.num_queries = len(self.workload)
-        self.cur_query_id = 0
+        if tasks_subset is not None:
+            self.workload = [task for task in self.workload if task["id"] in tasks_subset]
         self.results_directory = results_directory
         self.workload_path = workload_path
         self.verbose = verbose
@@ -48,6 +76,8 @@ class Executor:
         self.use_truth_subset = use_truth_subset
         if self.use_deepresearch_subset and self.use_truth_subset:
             raise ValueError("Cannot use both deepresearch_subset and truth_subset.")
+        self.system_output_dir = system_output_dir
+        self.worker_id = worker_id
 
 
     def run_task(self, task: Dict[str, Any], parent_task_query: Optional[str]=None) -> Dict[str, str | Dict | List]:
@@ -106,73 +136,66 @@ class Executor:
                 subresponse = self.run_task(task=subtask, parent_task_query=task["query"])
                 response["subresponses"].append(subresponse)
         response["runtime"] = end_time - start_time
-        return response
-    
-    def run_next_task(self):
-        """
-        Iterator model to run all tasks in this test workload.
-        """
-        if self.cur_query_id >= self.num_queries:
-            return None
-        result = self.run_task(self.workload[self.cur_query_id], parent_task_query=None)
-        self.cur_query_id += 1
-        return result
-    
-    def reset_task_iterator(self):
-        self.cur_query_id = 0
-    
-    def _get_most_recent_cache(self, basename: str) -> Optional[str | os.PathLike]:
-        pattern = os.path.join(self.results_directory, f"response_cache/{basename}_*.json")
-        files = glob.glob(pattern)
-        if not files:
-            return None
-        def extract_timestamp(file_path):
-            filename = os.path.basename(file_path)
-            timestamp_str = filename.replace(f"{basename}_", "").replace(".json", "")
-            return datetime.datetime.strptime(timestamp_str, "%Y%m%d_%H%M%S")
-        files.sort(key=lambda f: extract_timestamp(f), reverse=True)
-        return files[0]
-    
+        return response    
+        
     def run_workload(self, use_system_cache: bool = True, cache_system_output: bool = True) -> List[Dict[str, Any]]:
         """
-        Runs all the tasks in the given workload.
-        Results are cached under self.results_directory/output_cache.
-        Note that the cache content here are the raw response dicts, not
+        Runs tasks in the given workload or a provided subset.
+        Workers read from central cache but write to per-worker cache files.
+        Note that the cache content here are the raw response dicts, not 
         evaluation results.
         """
         
-        
         workload_filename = os.path.basename(self.workload_path)
         basename, ext = os.path.splitext(workload_filename)
+        
+        task_ids = [task.get("id") for task in self.workload]
+        results_by_id: Dict[str, Dict[str, Any]] = {}
+
         if use_system_cache:
-            cache_path = self._get_most_recent_cache(basename=basename)
+            cache_dir = os.path.join(self.results_directory, "response_cache")
+            cache_path = get_most_recent_cache(cache_dir=cache_dir, basename=basename)
             if cache_path:
                 with open(cache_path, 'r') as f:
                     results = json.load(f)
-                if self.verbose:
-                    print(f"Using cached output {cache_path}...")
-                return results
+                results_by_id = {r.get("task_id"): r for r in results if r.get("task_id") in task_ids}
+                if len(results_by_id) == len(task_ids):
+                    if self.verbose:
+                        print(f"Using cached output {cache_path}...")
+                    return [results_by_id[tid] for tid in task_ids]
+                else:
+                    if self.verbose:
+                        print(f"Partial cache found at {cache_path}, running uncached tasks...")
+
+        missing_tasks = [t for t in task_ids if t not in results_by_id.keys()]
             
-        if self.verbose:
+        if self.verbose and missing_tasks:
             print(f"------------- Running workload at {self.workload_path} ----------------")
 
         results = []
-        while True:
-            result = self.run_next_task()
-            if result is None:
-                break
-            results.append(result)
-        
-        if cache_system_output:
+        for task_id in missing_tasks:
+            task_dict = next(t for t in self.workload if t["id"] == task_id)
+            result = self.run_task(task_dict, parent_task_query=None)
+            results_by_id[task_id] = result
+
+
+        # Write to per-worker cache
+        if cache_system_output and missing_tasks:
+            worker_suffix = f"_worker{self.worker_id}" if self.worker_id is not None else ""
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            new_filename = f"{basename}_{timestamp}{ext}"
-            cache_dir = cache_path = os.path.join(self.results_directory, f"response_cache")
+            cache_filename = f"{basename}{worker_suffix}_{timestamp}{ext}"
+            cache_dir = os.path.join(self.results_directory, "response_cache")
             os.makedirs(cache_dir, exist_ok=True)
-            cache_path = os.path.join(cache_dir, new_filename)
-            with open(cache_path, 'w') as f:
+            worker_cache_path = os.path.join(cache_dir, cache_filename)
+            
+            # Only cache the newly computed results
+            new_results = [results_by_id[tid] for tid in missing_tasks]
+            with open(worker_cache_path, 'w') as f:
                 if self.verbose:
-                    print(f"Caching output at {cache_path}...")
-                json.dump(results, f, indent=2)
+                    print(f"Worker {self.worker_id} caching {len(new_results)} results to {cache_filename}")
+                json.dump(new_results, f, indent=2)
+
+        results = [results_by_id[tid] for tid in task_ids]
 
         return results
 
@@ -211,6 +234,7 @@ class Evaluator:
         self.run_subtasks = run_subtasks
         self.evaluate_pipeline = evaluate_pipeline
     
+    @staticmethod
     def _normalize_string(s: str) -> str:
         """Normalize a string by removing spaces, punctuation, and making it lowercase."""
         return re.sub(r'[^a-z0-9]', '', s.lower())
@@ -347,12 +371,14 @@ class Benchmark:
             run_subtasks: bool = False,
             use_deepresearch_subset = False,
             evaluate_pipeline = False,
-            use_truth_subset = False
+            use_truth_subset = False,
+            num_workers: int = 8
     ):
         systems_module = __import__("systems")
         system_class_ = getattr(systems_module, system_name)
         self.system_name = system_name
         self.system = system_class_(verbose=verbose, output_dir=system_output_directory)
+        self.system_output_dir = system_output_directory
         self.use_system_cache = use_system_cache
         self.cache_system_output = cache_system_output
         self.task_fixture_directory = task_fixture_directory
@@ -361,7 +387,46 @@ class Benchmark:
         self.use_deepresearch_subset = use_deepresearch_subset
         self.evaluate_pipeline = evaluate_pipeline
         self.use_truth_subset = use_truth_subset
+        self.num_workers = max(1, int(num_workers))
     
+    def _merge_worker_caches(self, workload_path: str | os.PathLike, results_directory: str | os.PathLike, results_by_id: Dict[str, Dict[str, Any]]) -> None:
+        basename = os.path.splitext(os.path.basename(workload_path))[0]
+        cache_dir = os.path.join(results_directory, "response_cache")
+        
+        central_cache_by_id: Dict[str, Dict[str, Any]] = {}
+        cache_path = get_most_recent_cache(cache_dir, basename)
+        if cache_path:
+            try:
+                with open(cache_path, 'r') as f:
+                    cached_results = json.load(f)
+                central_cache_by_id = {r.get("task_id"): r for r in cached_results}
+            except Exception as e:
+                logging.warning(f"Failed to load central cache: {e}")
+        
+        # Merge with new results
+        central_cache_by_id.update(results_by_id)
+        
+        # Write merged results to new central cache
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        central_cache_path = os.path.join(cache_dir, f"{basename}_{timestamp}.json")
+        
+        all_results = list(central_cache_by_id.values())
+        with open(central_cache_path, 'w') as f:
+            if self.verbose:
+                print(f"Merged {len(all_results)} results into central cache: {central_cache_path}")
+            json.dump(all_results, f, indent=2)
+        
+        # Clean up worker cache files
+        for fname in os.listdir(cache_dir):
+            if fname.startswith(basename) and "_worker" in fname:
+                worker_cache_path = os.path.join(cache_dir, fname)
+                try:
+                    os.remove(worker_cache_path)
+                    if self.verbose:
+                        print(f"Cleaned up worker cache: {fname}")
+                except Exception as e:
+                    logging.warning(f"Failed to remove worker cache {fname}: {e}")        
+
     def run_benchmark(
             self,
             dataset_directory: str | os.PathLike,
@@ -374,17 +439,69 @@ class Benchmark:
         self.system.process_dataset(dataset_directory)
         processing_time = time.time() - processing_time
         print(f"Processing time: {processing_time:.2f} seconds")
-        executor = Executor(
-            system_name=self.system_name,
-            system=self.system,
-            workload_path=workload_path,
-            results_directory=results_directory,
-            verbose=verbose,
-            run_subtasks=self.run_subtasks,
-            use_deepresearch_subset=self.use_deepresearch_subset,
-            use_truth_subset=self.use_truth_subset
-        )
-        results = executor.run_workload(use_system_cache=self.use_system_cache, cache_system_output=self.cache_system_output)
+
+        with open(workload_path) as f:
+            full_workload = json.load(f)
+        task_ids = [task["id"] for task in full_workload]
+        num_workers = self.num_workers
+        if self.verbose:
+            print(f"Partitioning {len(task_ids)} tasks across {num_workers} workers...")
+        
+        # Round-robin partition
+        partitions: List[List[str]] = [[] for _ in range(num_workers)]
+        for idx, tid in enumerate(task_ids):
+            partitions[idx % num_workers].append(tid)
+        partitions = [p for p in partitions if len(p) > 0]
+
+        # Create system copies for each worker
+        systems = [self.system]
+        for i in range(1, len(partitions)):
+            systems.append(copy.deepcopy(self.system))
+
+        # Define worker function for parallel execution
+        def _run_executor_partition(args):
+            idx, partition, system = args
+            if self.verbose:
+                print(f"Executor {idx+1}/{len(partitions)} processing {len(partition)} tasks...")
+            executor = Executor(
+                system=system,
+                system_name=self.system_name,
+                workload_path=workload_path,
+                results_directory=results_directory,
+                verbose=verbose,
+                run_subtasks=self.run_subtasks,
+                use_deepresearch_subset=self.use_deepresearch_subset,
+                use_truth_subset=self.use_truth_subset,
+                system_output_dir=self.system_output_dir,
+                tasks_subset=partition,
+                worker_id=idx
+            )
+            return executor.run_workload(use_system_cache=self.use_system_cache, cache_system_output=self.cache_system_output)
+        
+        # Run all executor partitions in parallel
+        if self.verbose:
+            print(f"Running {len(partitions)} executors in parallel...")
+        results_by_id: Dict[str, Dict[str, Any]] = {}
+        with ThreadPoolExecutor(max_workers=len(partitions)) as executor:
+            worker_args = [(idx, partitions[idx], systems[idx]) for idx in range(len(partitions))]
+            for partition_results in executor.map(_run_executor_partition, worker_args):
+                for result in partition_results:
+                    results_by_id[result["task_id"]] = result
+        
+        # Merge worker caches into central cache
+        if self.cache_system_output:           
+            # Merge per-worker cache files into a single central cache file.
+            self._merge_worker_caches(workload_path, results_directory, results_by_id)
+        
+
+        # Assemble results in original workload order
+        results: List[Dict[str, Any]] = []
+        for task_id in task_ids:
+            if task_id in results_by_id:
+                results.append(results_by_id[task_id])
+            else:
+                logging.warning(f"Missing result for task_id {task_id}")
+        
         # Add processing time to each result
         for task_result in results:
             try:
