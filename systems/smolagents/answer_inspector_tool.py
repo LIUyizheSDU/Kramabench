@@ -1,5 +1,5 @@
-from smolagents import Tool
-from smolagents.models import Model
+from .smolagents_lib import Tool
+from .smolagents_lib.models import Model
 
 
 class AnswerInspectorTool(Tool):
@@ -27,7 +27,7 @@ This tool will analyze the answer for accuracy, completeness, and reasoning flaw
         self.model = model
 
     def forward(self, generated_answer: str, original_question: str | None = None) -> str:
-        from smolagents.models import MessageRole
+        from .smolagents_lib.models import MessageRole
 
         user_prompt = (
             "Please critique the following agent answer. Identify any flaws, assumptions, missing information, or improvements. "

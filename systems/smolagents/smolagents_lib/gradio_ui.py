@@ -19,11 +19,11 @@ import shutil
 from pathlib import Path
 from typing import Generator
 
-from smolagents.agent_types import AgentAudio, AgentImage, AgentText
-from smolagents.agents import MultiStepAgent, PlanningStep
-from smolagents.memory import ActionStep, FinalAnswerStep
-from smolagents.models import ChatMessageStreamDelta
-from smolagents.utils import _is_package_available
+from .agent_types import AgentAudio, AgentImage, AgentText
+from .agents import MultiStepAgent, PlanningStep
+from .memory import ActionStep, FinalAnswerStep
+from .models import ChatMessageStreamDelta
+from .utils import _is_package_available
 
 
 def get_step_footnote_content(step_log: ActionStep | PlanningStep, step_name: str) -> str:

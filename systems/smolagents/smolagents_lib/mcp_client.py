@@ -21,7 +21,7 @@ import warnings
 from types import TracebackType
 from typing import TYPE_CHECKING, Any
 
-from smolagents.tools import Tool
+from .tools import Tool
 
 
 __all__ = ["MCPClient"]

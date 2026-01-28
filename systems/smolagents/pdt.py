@@ -24,13 +24,13 @@ from .smolagents_prompts import PDT_TASK_PROMPT_TEMPLATE, DECOMPOSER_PROMPT_TEMP
 from .smolagents_system import Smolagents
 from .smolagents_utils import parse_token_counts
 
-from smolagents import (
+from .smolagents_lib import (
     CodeAgent,
     LiteLLMModel,
     ToolCallingAgent,
     AgentLogger
 )
-from smolagents.monitoring import LogLevel
+from .smolagents_lib.monitoring import LogLevel
 load_dotenv()
 
 class SmolagentsPDT(Smolagents):

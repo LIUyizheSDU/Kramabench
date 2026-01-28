@@ -2,7 +2,7 @@ import os
 import sys
 import re
 
-from smolagents.monitoring import LogLevel
+from .smolagents_lib.monitoring import LogLevel
 sys.path.append("./")
 from benchmark.benchmark_utils import print_error, print_warning
 
@@ -27,7 +27,7 @@ from .smolagents_utils import parse_token_counts
 from .smolagents_prompts import CRITIQUE_AGENT_PROMPT_TEMPLATE, CRITIQUE_AGENT_SYSTEM_PROMPT, REFLEXION_TASK_PROMPT_TEMPLATE
 from .smolagents_system import Smolagents
 
-from smolagents import (
+from .smolagents_lib import (
     CodeAgent,
     LiteLLMModel,
     AgentLogger,

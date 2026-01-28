@@ -32,7 +32,7 @@ from typing import TYPE_CHECKING, Any
 
 
 if TYPE_CHECKING:
-    from smolagents.memory import AgentLogger
+    from .memory import AgentLogger
 
 
 __all__ = ["AgentError"]

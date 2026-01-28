@@ -19,8 +19,8 @@ import os
 
 from dotenv import load_dotenv
 
-from smolagents import CodeAgent, InferenceClientModel, LiteLLMModel, Model, OpenAIServerModel, Tool, TransformersModel
-from smolagents.default_tools import TOOL_MAPPING
+from . import CodeAgent, InferenceClientModel, LiteLLMModel, Model, OpenAIServerModel, Tool, TransformersModel
+from .default_tools import TOOL_MAPPING
 
 
 leopard_prompt = "How many seconds would it take for a leopard at full speed to run through Pont des Arts?"

@@ -1,5 +1,5 @@
-from smolagents import tool
-from smolagents.tools import Tool
+from .smolagents_lib import tool
+from .smolagents_lib.tools import Tool
 import os
 import pandas as pd
 from typing import List, Optional, Union, Dict

@@ -2,7 +2,7 @@ import os
 import sys
 from benchmark.benchmark_utils import print_error, print_warning
 from typing import List
-from smolagents.models import LiteLLMModel
+from .smolagents_lib.models import LiteLLMModel
 
 sys.path.append("./")
 

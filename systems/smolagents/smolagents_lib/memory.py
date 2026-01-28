@@ -2,16 +2,16 @@ from dataclasses import asdict, dataclass
 from logging import getLogger
 from typing import TYPE_CHECKING, Any, TypedDict
 
-from smolagents.models import ChatMessage, MessageRole
-from smolagents.monitoring import AgentLogger, LogLevel, Timing, TokenUsage
-from smolagents.utils import AgentError, make_json_serializable
+from .models import ChatMessage, MessageRole
+from .monitoring import AgentLogger, LogLevel, Timing, TokenUsage
+from .utils import AgentError, make_json_serializable
 
 
 if TYPE_CHECKING:
     import PIL.Image
 
-    from smolagents.models import ChatMessage
-    from smolagents.monitoring import AgentLogger
+    from .models import ChatMessage
+    from .monitoring import AgentLogger
 
 
 logger = getLogger(__name__)
