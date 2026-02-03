@@ -75,9 +75,10 @@ def extract_timestamp(file_path, basename):
     return datetime.datetime.strptime(timestamp_str, "%Y%m%d_%H%M%S")
 
 
-def merge_worker_caches(
-    cache_dir, basename: str, results_by_id: Dict[str, Dict[str, Any]], verbose=False
-) -> None:
+def merge_task_caches(cache_dir, basename: str, verbose=False, cleanup=True) -> None:
+    """Merge individual task cache files into a single central cache file.
+    For each task_id, only the most recent cache file (by timestamp) is loaded and merged.
+    """
 
     central_cache_by_id: Dict[str, Dict[str, Any]] = {}
     cache_path = get_most_recent_cache(cache_dir, basename)
@@ -89,8 +90,38 @@ def merge_worker_caches(
         except Exception as e:
             logging.warning(f"Failed to load central cache: {e}")
 
-    # Merge with new results
-    central_cache_by_id.update(results_by_id)
+    # Group task cache files by task_id and identify latest timestamp for each
+    task_id_to_latest = {}  # task_id -> (filename, timestamp)
+
+    for fname in os.listdir(cache_dir):
+        if "_task" not in fname:
+            continue
+
+        cache_file_path = os.path.join(cache_dir, fname)
+        with open(cache_file_path, "r") as f:
+            task_results = json.load(f)
+
+        if isinstance(task_results, list):
+            task_results = task_results[0]
+        task_id = task_results.get("task_id")  # TODO make sure this is not a list
+        timestamp = extract_timestamp(fname, basename)
+
+        update_cache = False
+        if task_id not in task_id_to_latest:
+            task_id_to_latest[task_id] = (fname, timestamp)
+            update_cache = True
+        else:
+            existing_timestamp = task_id_to_latest[task_id][1]
+            if timestamp > existing_timestamp:
+                task_id_to_latest[task_id] = (fname, timestamp)
+                update_cache = True
+
+        if update_cache:
+            central_cache_by_id[task_id] = task_results
+            if cleanup:
+                os.remove(cache_file_path)
+                if verbose:
+                    print(f"Cleaned up task cache: {fname}")
 
     # Write merged results to new central cache
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -103,17 +134,6 @@ def merge_worker_caches(
                 f"Merged {len(all_results)} results into central cache: {central_cache_path}"
             )
         json.dump(all_results, f, indent=2)
-
-    # Clean up worker cache files
-    for fname in os.listdir(cache_dir):
-        if fname.startswith(basename) and "_worker" in fname:
-            worker_cache_path = os.path.join(cache_dir, fname)
-            try:
-                os.remove(worker_cache_path)
-                if verbose:
-                    print(f"Cleaned up worker cache: {fname}")
-            except Exception as e:
-                logging.warning(f"Failed to remove worker cache {fname}: {e}")
 
 
 def get_most_recent_cache(
