@@ -6,7 +6,7 @@ import logging
 import os
 import re
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from benchmark.benchmark_utils import print_info
 from typeguard import typechecked
 from typing import Any, Dict, List, Tuple, Optional
@@ -33,11 +33,52 @@ def extract_timestamp(file_path, basename):
     timestamp_str = "_".join(parts[-2:])
     return datetime.datetime.strptime(timestamp_str, "%Y%m%d_%H%M%S")
 
+def merge_worker_caches(cache_dir, basename: str, results_by_id: Dict[str, Dict[str, Any]], verbose=False) -> None:
+    
+    central_cache_by_id: Dict[str, Dict[str, Any]] = {}
+    cache_path = get_most_recent_cache(cache_dir, basename)
+    if cache_path:
+        try:
+            with open(cache_path, 'r') as f:
+                cached_results = json.load(f)
+            central_cache_by_id = {r.get("task_id"): r for r in cached_results}
+        except Exception as e:
+            logging.warning(f"Failed to load central cache: {e}")
+    
+    # Merge with new results
+    central_cache_by_id.update(results_by_id)
+    
+    # Write merged results to new central cache
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    central_cache_path = os.path.join(cache_dir, f"{basename}_{timestamp}.json")
+    
+    all_results = list(central_cache_by_id.values())
+    with open(central_cache_path, 'w') as f:
+        if verbose:
+            print(f"Merged {len(all_results)} results into central cache: {central_cache_path}")
+        json.dump(all_results, f, indent=2)
+    
+    # Clean up worker cache files
+    for fname in os.listdir(cache_dir):
+        if fname.startswith(basename) and "_worker" in fname:
+            worker_cache_path = os.path.join(cache_dir, fname)
+            try:
+                os.remove(worker_cache_path)
+                if verbose:
+                    print(f"Cleaned up worker cache: {fname}")
+            except Exception as e:
+                logging.warning(f"Failed to remove worker cache {fname}: {e}")     
+
 def get_most_recent_cache(cache_dir: str | os.PathLike, basename: str) -> Optional[str | os.PathLike]:
     pattern = os.path.join(cache_dir, f"{basename}_*.json")
     files = [f for f in glob.glob(pattern) if "worker" not in f]
     if not files:
-        return None
+        # If there are no main cache files but there are some worker cache files, we merge them 
+        worker_pattern = os.path.join(cache_dir, f"{basename}_worker*_*.json")
+        worker_files = glob.glob(worker_pattern)
+        if worker_files:
+            merge_worker_caches(cache_dir, basename, {}, verbose=False)
+            return get_most_recent_cache(cache_dir, basename)
     files.sort(key=lambda f: extract_timestamp(f, basename), reverse=True)
     return files[0]
 
@@ -92,6 +133,7 @@ class Executor:
         }
         """
         if self.verbose:
+            print_info("Worker " + str(self.worker_id) if self.worker_id is not None else "0", end=" ")
             print_info(f"task_id: {task['id']}")
             print_info(f"query: {task['query']}\n\n")
         if parent_task_query is not None:
@@ -388,44 +430,43 @@ class Benchmark:
         self.evaluate_pipeline = evaluate_pipeline
         self.use_truth_subset = use_truth_subset
         self.num_workers = max(1, int(num_workers))
-    
-    def _merge_worker_caches(self, workload_path: str | os.PathLike, results_directory: str | os.PathLike, results_by_id: Dict[str, Dict[str, Any]]) -> None:
-        basename = os.path.splitext(os.path.basename(workload_path))[0]
-        cache_dir = os.path.join(results_directory, "response_cache")
+       
+    @staticmethod
+    def _run_executor_partition(
+        idx: int,
+        partition: List[str],
+        system: System,
+        system_name: str,
+        workload_path: str | os.PathLike,
+        results_directory: str | os.PathLike,
+        verbose: bool,
+        run_subtasks: bool,
+        use_deepresearch_subset: bool,
+        use_truth_subset: bool,
+        system_output_dir: Optional[str | os.PathLike],
+        use_system_cache: bool,
+        cache_system_output: bool,
+        num_partitions: int
+    ):
+        """Static worker function for parallel execution - must be picklable for ProcessPoolExecutor to work"""
         
-        central_cache_by_id: Dict[str, Dict[str, Any]] = {}
-        cache_path = get_most_recent_cache(cache_dir, basename)
-        if cache_path:
-            try:
-                with open(cache_path, 'r') as f:
-                    cached_results = json.load(f)
-                central_cache_by_id = {r.get("task_id"): r for r in cached_results}
-            except Exception as e:
-                logging.warning(f"Failed to load central cache: {e}")
+        if verbose:
+            print(f"Executor {idx+1}/{num_partitions} processing {len(partition)} tasks...")
         
-        # Merge with new results
-        central_cache_by_id.update(results_by_id)
-        
-        # Write merged results to new central cache
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        central_cache_path = os.path.join(cache_dir, f"{basename}_{timestamp}.json")
-        
-        all_results = list(central_cache_by_id.values())
-        with open(central_cache_path, 'w') as f:
-            if self.verbose:
-                print(f"Merged {len(all_results)} results into central cache: {central_cache_path}")
-            json.dump(all_results, f, indent=2)
-        
-        # Clean up worker cache files
-        for fname in os.listdir(cache_dir):
-            if fname.startswith(basename) and "_worker" in fname:
-                worker_cache_path = os.path.join(cache_dir, fname)
-                try:
-                    os.remove(worker_cache_path)
-                    if self.verbose:
-                        print(f"Cleaned up worker cache: {fname}")
-                except Exception as e:
-                    logging.warning(f"Failed to remove worker cache {fname}: {e}")        
+        executor = Executor(
+            system=system,
+            system_name=system_name,
+            workload_path=workload_path,
+            results_directory=results_directory,
+            verbose=verbose,
+            run_subtasks=run_subtasks,
+            use_deepresearch_subset=use_deepresearch_subset,
+            use_truth_subset=use_truth_subset,
+            system_output_dir=system_output_dir,
+            tasks_subset=partition,
+            worker_id=idx
+        )
+        return executor.run_workload(use_system_cache=use_system_cache, cache_system_output=cache_system_output)
 
     def run_benchmark(
             self,
@@ -443,6 +484,7 @@ class Benchmark:
         with open(workload_path) as f:
             full_workload = json.load(f)
         task_ids = [task["id"] for task in full_workload]
+        task_ids = sorted(task_ids, key=lambda x: int(x.split('-')[-1]))
         num_workers = self.num_workers
         if self.verbose:
             print(f"Partitioning {len(task_ids)} tasks across {num_workers} workers...")
@@ -458,42 +500,31 @@ class Benchmark:
         for i in range(1, len(partitions)):
             systems.append(copy.deepcopy(self.system))
 
-        # Define worker function for parallel execution
-        def _run_executor_partition(args):
-            idx, partition, system = args
-            if self.verbose:
-                print(f"Executor {idx+1}/{len(partitions)} processing {len(partition)} tasks...")
-            executor = Executor(
-                system=system,
-                system_name=self.system_name,
-                workload_path=workload_path,
-                results_directory=results_directory,
-                verbose=verbose,
-                run_subtasks=self.run_subtasks,
-                use_deepresearch_subset=self.use_deepresearch_subset,
-                use_truth_subset=self.use_truth_subset,
-                system_output_dir=self.system_output_dir,
-                tasks_subset=partition,
-                worker_id=idx
-            )
-            return executor.run_workload(use_system_cache=self.use_system_cache, cache_system_output=self.cache_system_output)
         
         # Run all executor partitions in parallel
         if self.verbose:
             print(f"Running {len(partitions)} executors in parallel...")
         results_by_id: Dict[str, Dict[str, Any]] = {}
-        with ThreadPoolExecutor(max_workers=len(partitions)) as executor:
-            worker_args = [(idx, partitions[idx], systems[idx]) for idx in range(len(partitions))]
-            for partition_results in executor.map(_run_executor_partition, worker_args):
+        with ProcessPoolExecutor(max_workers=len(partitions)) as executor:
+            worker_args = [
+                (idx, partitions[idx], systems[idx], self.system_name, workload_path,
+                 results_directory, verbose, self.run_subtasks, self.use_deepresearch_subset,
+                 self.use_truth_subset, self.system_output_dir, self.use_system_cache,
+                 self.cache_system_output, len(partitions))
+                for idx in range(len(partitions))
+            ]
+            for partition_results in executor.map(self._run_executor_partition, *zip(*worker_args)):
                 for result in partition_results:
                     results_by_id[result["task_id"]] = result
         
         # Merge worker caches into central cache
         if self.cache_system_output:           
             # Merge per-worker cache files into a single central cache file.
-            self._merge_worker_caches(workload_path, results_directory, results_by_id)
+            cache_dir = os.path.join(results_directory, "response_cache")
+            workload_filename = os.path.basename(workload_path)
+            basename, ext = os.path.splitext(workload_filename)
+            merge_worker_caches(cache_dir, basename, results_by_id, verbose=self.verbose)
         
-
         # Assemble results in original workload order
         results: List[Dict[str, Any]] = []
         for task_id in task_ids:

@@ -16,14 +16,11 @@ class Smolagents(System):
     def __init__(self, model: str, name="baseline", *args, **kwargs):
         super().__init__(name, *args, **kwargs)
         self.model = model
-        print_warning("This system is a placeholder! Only use it with pre-computed cache results.")
 
     def process_dataset(self, dataset_directory: str | os.PathLike) -> None:
-        print_warning("This system is a placeholder! Only use it with pre-computed cache results.")
         self.dataset_directory = dataset_directory
 
     def serve_query(self, query: str, query_id: str, subset_files: List[str]) -> dict:
-        print_warning("This system is a placeholder! Only use it with pre-computed cache results.")
         return { "answer": "This is a placeholder answer."}
 
     def __getstate__(self):

@@ -26,14 +26,14 @@ def generate_key_functionalities_for_workload(workload_filepath: str | os.PathLi
             break
 
 
-def print_error(text: str):
+def print_error(text: str, end: str = "\n"):
     """ Print text in red color to indicate an error."""
-    print(f"\033[91m{text}\033[0m")
+    print(f"\033[91m{text}\033[0m", end=end)
 
-def print_info(text: str):
+def print_info(text: str, end: str = "\n"):
     """ Print text in green color to indicate success."""
-    print(f"\033[92m{text}\033[0m")
+    print(f"\033[92m{text}\033[0m", end=end)
 
-def print_warning(text: str):
+def print_warning(text: str, end: str = "\n"):
     """ Print text in yellow color to indicate a warning."""
-    print(f"\033[93m{text}\033[0m")
+    print(f"\033[93m{text}\033[0m", end=end)

@@ -1170,7 +1170,7 @@ class ToolCallingAgent(MultiStepAgent):
         **kwargs,
     ):
         prompt_templates = prompt_templates or yaml.safe_load(
-            importlib.resources.files("smolagents.prompts").joinpath("toolcalling_agent.yaml").read_text()
+            (Path(__file__).parent / "prompts" / "toolcalling_agent.yaml").read_text()
         )
         super().__init__(
             tools=tools,
@@ -1450,11 +1450,11 @@ class CodeAgent(MultiStepAgent):
         self._use_structured_outputs_internally = use_structured_outputs_internally
         if use_structured_outputs_internally:
             prompt_templates = prompt_templates or yaml.safe_load(
-                importlib.resources.files("smolagents.prompts").joinpath("structured_code_agent.yaml").read_text()
+                (Path(__file__).parent / "prompts" / "structured_code_agent.yaml").read_text()
             )
         else:
             prompt_templates = prompt_templates or yaml.safe_load(
-                importlib.resources.files("smolagents.prompts").joinpath("code_agent.yaml").read_text()
+                (Path(__file__).parent / "prompts" / "code_agent.yaml").read_text()
             )
         if grammar and use_structured_outputs_internally:
             raise ValueError("You cannot use 'grammar' and 'use_structured_outputs_internally' at the same time.")
@@ -1484,11 +1484,21 @@ class CodeAgent(MultiStepAgent):
         match self.executor_type:
             case "e2b" | "docker":
                 if self.managed_agents:
-                    raise Exception("Managed agents are not yet supported with remote code execution.")
+                    raise Exception(
+                        "Managed agents are not yet supported with remote code execution."
+                    )
                 if self.executor_type == "e2b":
-                    return E2BExecutor(self.additional_authorized_imports, self.logger, **self.executor_kwargs)
+                    return E2BExecutor(
+                        self.additional_authorized_imports,
+                        self.logger,
+                        **self.executor_kwargs,
+                    )
                 else:
-                    return DockerExecutor(self.additional_authorized_imports, self.logger, **self.executor_kwargs)
+                    return DockerExecutor(
+                        self.additional_authorized_imports,
+                        self.logger,
+                        **self.executor_kwargs,
+                    )
             case "local":
                 return LocalPythonExecutor(
                     self.additional_authorized_imports,
