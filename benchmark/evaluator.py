@@ -162,7 +162,11 @@ class Evaluator:
         """
         all_eval_results = []
         for task_idx, task in enumerate(self.workload):
-            results = self._evaluate_result_for_task(responses[task_idx], task, evaluate_pipeline=self.evaluate_pipeline)
+            try:
+                results = self._evaluate_result_for_task(responses[task_idx], task, evaluate_pipeline=self.evaluate_pipeline)
+            except Exception as e:
+                logging.warning(f"evaluate_results: task_id {task['id']} - failed to evaluate results: {e}.")
+                results = []
             all_eval_results.extend(results)
         # TODO: Implement workload-wise code understanding evaluation.
         return all_eval_results
