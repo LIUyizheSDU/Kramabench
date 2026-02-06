@@ -163,7 +163,8 @@ class Evaluator:
         all_eval_results = []
         for task_idx, task in enumerate(self.workload):
             try:
-                results = self._evaluate_result_for_task(responses[task_idx], task, evaluate_pipeline=self.evaluate_pipeline)
+                response = [r for r in responses if r["task_id"] == task["id"]][0]
+                results = self._evaluate_result_for_task(response, task, evaluate_pipeline=self.evaluate_pipeline)
             except Exception as e:
                 logging.warning(f"evaluate_results: task_id {task['id']} - failed to evaluate results: {e}.")
                 results = []
