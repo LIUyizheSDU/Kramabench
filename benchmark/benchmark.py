@@ -118,21 +118,20 @@ class Benchmark:
                 with open(cache_path, "r") as f:
                     results = json.load(f)
                 # Patched to filter cached results by task_ids in current workload, in case of overlapping workloads with different task_ids
-                # This is because per workload cache files got messed up and had overlapping task_ids across workloads, so this is a safeguard to avoid using wrong cached results
                 cached_results_by_id = {r.get("task_id"): r for r in results if basename in r.get("task_id", "")}
                 missing_tasks = [
                     tid for tid in task_ids if tid not in cached_results_by_id
                 ]
-                #if not missing_tasks:
-                if self.verbose:
-                    print(f"Using cached output {cache_path}...")
-                    task_ids = []
-                #else:
-                #    if self.verbose:
-                #        print(
-                #            f"Partial cache found at {cache_path}, running uncached tasks..."
-                #        )
-                #        task_ids = missing_tasks
+                if not missing_tasks:
+                    if self.verbose:
+                        print(f"Using cached output {cache_path}...")
+                        task_ids = []
+                else:
+                   if self.verbose:
+                       print(
+                           f"Partial cache found at {cache_path}, running uncached tasks..."
+                       )
+                       task_ids = missing_tasks
 
         if len(missing_tasks):
             systems_module = __import__("systems")
