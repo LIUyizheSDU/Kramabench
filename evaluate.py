@@ -14,7 +14,7 @@ def aggregate_results(system_name, results_df):
     workload_results = []
 
     for (workload, metric), group in results_df.groupby(["workload", "metric"]):
-        if metric in ['code', 'model_output']:
+        if metric in ['code', 'model_output', 'exit_code', 'stderr']:
             continue
         group_dropped_na = group.dropna()
         if metric == "success":
