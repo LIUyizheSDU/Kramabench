@@ -106,6 +106,8 @@ def merge_task_caches(
     for fname in os.listdir(task_cache_dir):
         if "_task" not in fname:
             continue
+        if not fname.startswith(f"{basename}_task_"):
+            continue
 
         cache_file_path = os.path.join(task_cache_dir, fname)
         with open(cache_file_path, "r") as f:
