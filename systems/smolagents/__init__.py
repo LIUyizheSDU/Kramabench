@@ -1,1 +1,1 @@
-from .smoalgents_system_variations import *
+from .smolagents_system_variations import *

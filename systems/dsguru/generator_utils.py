@@ -17,7 +17,7 @@ import PyPDF2
 
 OpenAIModelList = ["gpt-4o", "gpt-4o-mini", "gpt-4o-v", "gpt-4o-mini-v", "o3-2025-04-16"]
 TogetherModelList = ["google/gemma-2b-it", "meta-llama/Llama-2-13b-chat-hf", "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B","google/gemma-3-27b-it", "deepseek-ai/DeepSeek-R1", "Qwen/Qwen2.5-Coder-32B-Instruct", "meta-llama/Llama-3.3-70B-Instruct-Turbo"]
-ClaudeModelList = ["claude-3-7-sonnet-latest", "claude-3-5-haiku-latest", "claude-3-5-sonnet-latest"]
+ClaudeModelList = ["claude-sonnet-4-5-20250929", "claude-3-7-sonnet-latest", "claude-3-5-haiku-latest", "claude-3-5-sonnet-latest"]
 
 def get_api_key(key: str) -> str:
     # get API key from environment or throw an exception if it's not set
@@ -44,6 +44,26 @@ class Generator:
         else:
             raise ValueError(f"Unsupported model: {model}")
         self.verbose = verbose
+
+    def __getstate__(self):
+        """Exclude non-picklable client from serialization."""
+        state = self.__dict__.copy()
+        # Remove the unpicklable client object
+        state.pop('client', None)
+        return state
+
+    def __setstate__(self, state):
+        """Restore state and re-initialize the client after deserialization."""
+        self.__dict__.update(state)
+        # Re-initialize the client
+        if self.model in OpenAIModelList:
+            self.client = OpenAI(api_key=get_api_key("OPENAI_API_KEY"))
+        elif self.model in TogetherModelList:
+            self.client = Together(api_key=get_api_key("TOGETHER_API_KEY"))
+        elif self.model in ClaudeModelList:
+            self.client = anthropic.Anthropic(api_key=get_api_key("ANTHROPIC_API_KEY"))
+        else:
+            raise ValueError(f"Unsupported model: {self.model}")
 
     # GV: This function is the call_gpt function from the baseline_utils.py file. But for Ollama we substitute it
     def __call__(self, messages):
@@ -125,8 +145,21 @@ class OllamaGenerator(Generator):
                 ):
         super().__init__(model, verbose)
         self.model = model
+        self.server_url = server_url
         self.client = ollama.Client(host=server_url)
 
+    def __getstate__(self):
+        """Exclude non-picklable client from serialization."""
+        state = self.__dict__.copy()
+        # Remove the unpicklable client object
+        state.pop('client', None)
+        return state
+
+    def __setstate__(self, state):
+        """Restore state and re-initialize the client after deserialization."""
+        self.__dict__.update(state)
+        # Re-initialize the client with the stored server_url
+        self.client = ollama.Client(host=self.server_url)
 
     def __call__(self, messages):
 
