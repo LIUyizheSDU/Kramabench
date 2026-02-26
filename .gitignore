@@ -1,8 +1,12 @@
+# Evaluation scripts
+scripts/evaluation/
+
 # MacOS junk
 .DS_Store
 # obscured workloads and datasets
 workload/*obscured*
 data/*obscured*
+results_*/
 
 # data/environment/
 # Byte-compiled / optimized / DLL files

@@ -65,14 +65,39 @@ The main benchmark repository contains the following folders:
 
 ## Installation
 
+### Prerequisites
+- Python 3.10 or higher
+- pip or conda for package management
+
+### Basic Installation (to run the evaluation harness)
+
 ```bash
 git clone https://github.com/<you>/KramaBench.git
 cd KramaBench
-
-# create env & install deps
 python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt   # numpy, pandas, tqdm, openai-sdk, …
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install .
+```
+
+### Optional Dependencies
+
+KramaBench uses a modular dependency system. Install only what you need:
+
+**For running the single- and multi-agent systems baselines**:
+```bash
+pip install ".[baselines]"
+```
+Includes: litellm, anthropic, ollama, together, PyPDF2
+
+**For development and testing**:
+```bash
+pip install ".[dev]"
+```
+Includes: pytest, ruff
+
+**Install everything**:
+```bash
+pip install ".[all]"
 ```
 
 ## Quick-start — run the benchmark
@@ -82,8 +107,7 @@ The **evaluation harness** is a single script:
 ```bash
 python evaluate.py \
   --sut YourSUT            \  # label for this run
-  --dataset_name legal          \  # domain to test
-  --workload_filename legal.json \
+  --workload legal          \  # domain to test
   --verbose
 ```
 
@@ -92,8 +116,7 @@ Key CLI flags (see `--help`):
 | Flag                  | Default                       | Purpose                                                    |
 | --------------------- | ----------------------------- | ---------------------------------------------------------- |
 | `--sut`               | `YourSUT` | Arbitrary name for your System Under Test (SUT).           |
-| `--dataset_name`      | `legal`                       | Must match the domain contained in the workload file.      |
-| `--workload_filename` | `legal.json`             | Which set of tasks to execute.                             |
+| `--workload`          | `legal`                       | Must match the domain contained in the workload file.      |
 | `--use_system_cache`  | *(false)*                     | Re-use previous system outputs if they exist.              |
 | `--skip_subtasks`     | *(false)*                     | Evaluate only the final answer (faster, but less insight). |
 

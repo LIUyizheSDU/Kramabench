@@ -3,9 +3,8 @@ import os
 import sys
 import re
 import fnmatch
-from benchmark.benchmark_utils import print_error, print_warning
-
 sys.path.append("./")
+from benchmark.benchmark_utils import print_error, print_warning
 
 import json
 import pandas as pd
